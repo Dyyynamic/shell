@@ -1,4 +1,5 @@
 import QtQuick
+import "../utils"
 
 Rectangle {
     id: widget
@@ -12,18 +13,18 @@ Rectangle {
     radius: height / 2
     color: {
         if (widget.pressed) {
-            Qt.lighter(palette.window, 3)
+            Qt.lighter(Colors.md3.background, 3)
         } else {
             if (widget.hovered) {
-                Qt.lighter(palette.window, 2.5)
+                Qt.lighter(Colors.md3.background, 2.5)
             } else {
-                Qt.lighter(palette.window, 2)
+                Qt.lighter(Colors.md3.background, 2)
             }
         }
     }
 
-    implicitHeight: 32
-    implicitWidth: content.implicitWidth + 16
+    implicitWidth: content.width + 16
+    height: 32
 
     Row {
         id: content

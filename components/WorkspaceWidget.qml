@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell.Hyprland
+import "../utils"
 
 Widget {
     id: workspaceWidget
@@ -42,12 +43,12 @@ Widget {
                     radius: width / 2
                     color: {
                         if (workspaceItem.modelData.active)
-                            return palette.windowText;
+                            return Colors.md3.on_background;
                         if (workspaceItem.hovered)
-                            return Qt.darker(palette.windowText, 1.25);
+                            return Qt.darker(Colors.md3.on_background, 1.25);
                         if (workspaceItem.modelData.toplevels.values.length > 0)
-                            return Qt.darker(palette.windowText, 1.75);
-                        return Qt.darker(palette.windowText, 2.5);
+                            return Qt.darker(Colors.md3.on_background, 1.75);
+                        return Qt.darker(Colors.md3.on_background, 2.5);
                     }
 
                     Behavior on color {

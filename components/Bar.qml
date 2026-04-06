@@ -1,7 +1,7 @@
 import Quickshell
 import Quickshell.Widgets
 import QtQuick
-import "components"
+import "../utils"
 
 Scope {
     Variants {
@@ -13,7 +13,7 @@ Scope {
             required property var modelData
 
             screen: modelData
-            color: contentItem.palette.window
+            color: Colors.md3.background
 
             anchors {
                 top: true
@@ -21,7 +21,7 @@ Scope {
                 right: true
             }
 
-            implicitHeight: 40
+            height: 40
 
             WrapperItem {
                 anchors.fill: parent
@@ -37,8 +37,13 @@ Scope {
                     }
                     StatusWidget {
                         anchors.right: parent.right
+                        onClicked: () => quickMenu.open = !quickMenu.open
                     }
                 }
+            }
+
+            QuickMenu {
+                id: quickMenu
             }
         }
     }

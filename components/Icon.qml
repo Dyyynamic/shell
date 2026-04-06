@@ -1,18 +1,23 @@
 import QtQuick
+import "../utils"
 
 Item {
-    property alias icon: textItem.text
+    id: root
 
-    width: 20
-    height: 20
+    property alias icon: icon.text
+    property alias color: icon.color
+    property int size: 20
+
+    width: size
+    height: size
 
     Text {
-        id: textItem
+        id: icon
         anchors.centerIn: parent
 
         font.family: "NotoSans Nerd Font Propo"
         font.bold: true
-        font.pixelSize: 16
-        color: palette.windowText
+        font.pixelSize: root.size * 0.8
+        color: Colors.md3.on_background
     }
 }
