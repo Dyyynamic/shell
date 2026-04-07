@@ -117,6 +117,11 @@ PopupWindow {
                     CustomSlider {
                         icon: ""
                         Layout.fillWidth: true
+                        value: Brightness.value
+
+                        onMoved: {
+                            Brightness.setBrightness(parseInt(value));
+                        }
                     }
                 }
 
