@@ -34,8 +34,8 @@ ColumnLayout {
             implicitHeight: 32
             text: ""
             onClicked: {
-                grid.month = (grid.month - 1 + 12) % 12
-                grid.year = grid.year - (grid.month === 11 ? 1 : 0)
+                grid.month = (grid.month - 1 + 12) % 12;
+                grid.year = grid.year - (grid.month === 11 ? 1 : 0);
             }
 
             background: Rectangle {
@@ -62,8 +62,8 @@ ColumnLayout {
             implicitHeight: 32
             text: ""
             onClicked: {
-                grid.month = (grid.month + 1) % 12
-                grid.year = grid.year + (grid.month === 0 ? 1 : 0)
+                grid.month = (grid.month + 1) % 12;
+                grid.year = grid.year + (grid.month === 0 ? 1 : 0);
             }
 
             background: Rectangle {
@@ -84,50 +84,52 @@ ColumnLayout {
         }
     }
 
-    DayOfWeekRow {
+    ColumnLayout {
         Layout.fillWidth: true
-        locale: calendar.locale
 
-        delegate: Text {
-            text: {
-                let days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-                return days[model.day]
+        DayOfWeekRow {
+            Layout.fillWidth: true
+            locale: calendar.locale
+            implicitHeight: 32
+
+            delegate: Text {
+                text: {
+                    let days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+                    return days[model.day];
+                }
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                color: Colors.md3.on_background
             }
-            font.bold: true
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            width: 40
-            color: Colors.md3.on_background
         }
-    }
 
-    MonthGrid {
-        id: grid
+        MonthGrid {
+            id: grid
 
-        Layout.fillWidth: true
-        locale: calendar.locale
+            Layout.fillWidth: true
+            locale: calendar.locale
 
-        delegate: Item {
-            implicitWidth: 40
-            implicitHeight: 40
+            delegate: Item {
+                implicitWidth: 32
+                implicitHeight: 32
 
-            Rectangle {
-                anchors.centerIn: parent
-                width: 32
-                height: 32
-                radius: 16
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: 32
+                    height: 32
+                    radius: 16
 
-                visible: model.today
-                color: Colors.md3.primary
-            }
+                    visible: model.today
+                    color: Colors.md3.primary
+                }
 
-            Text {
-                anchors.centerIn: parent
-                text: model.day
+                Text {
+                    anchors.centerIn: parent
+                    text: model.day
 
-                color: model.today ? Colors.md3.on_primary
-                      : model.month === grid.month ? Colors.md3.on_background
-                      : Qt.darker(Colors.md3.on_background, 2)
+                    color: model.today ? Colors.md3.on_primary : model.month === grid.month ? Colors.md3.on_background : Qt.darker(Colors.md3.on_background, 2)
+                }
             }
         }
     }

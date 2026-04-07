@@ -12,13 +12,13 @@ Slider {
     to: 100
     value: 50
 
-    implicitHeight: 32
+    implicitHeight: 38
 
     background: ClippingRectangle {
         x: slider.leftPadding
         y: slider.height / 2 - height / 2
         width: slider.availableWidth
-        height: 32
+        height: 30
         radius: 8
         color: Colors.md3.on_secondary
 
@@ -36,7 +36,7 @@ Slider {
         y: slider.height / 2 - height / 2
 
         width: 12
-        height: 48
+        height: 46
         radius: 6
         color: Colors.md3.primary
 

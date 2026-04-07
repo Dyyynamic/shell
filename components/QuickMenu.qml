@@ -85,14 +85,8 @@ PopupWindow {
                     }
                 }
 
-                Rectangle {
-                    Layout.fillWidth: true
-                    implicitHeight: 1
-                    color: Qt.lighter(Colors.md3.background, 2)
-                }
-
                 ColumnLayout {
-                    spacing: 20
+                    spacing: 10
 
                     CustomSlider {
                         icon: {
@@ -124,12 +118,6 @@ PopupWindow {
                         icon: ""
                         Layout.fillWidth: true
                     }
-                }
-
-                Rectangle {
-                    Layout.fillWidth: true
-                    implicitHeight: 1
-                    color: Qt.lighter(Colors.md3.background, 2)
                 }
 
                 ColumnLayout {
@@ -193,12 +181,6 @@ PopupWindow {
                     }
                 }
 
-                Rectangle {
-                    Layout.fillWidth: true
-                    implicitHeight: 1
-                    color: Qt.lighter(Colors.md3.background, 2)
-                }
-
                 Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -209,12 +191,6 @@ PopupWindow {
                         size: 80
                         anchors.centerIn: parent
                     }
-                }
-
-                Rectangle {
-                    Layout.fillWidth: true
-                    implicitHeight: 1
-                    color: Qt.lighter(Colors.md3.background, 2)
                 }
 
                 CustomCalendar {}

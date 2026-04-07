@@ -11,11 +11,11 @@ Rectangle {
     property bool checked: false
     property bool hovered: false
 
-    property int margin: 16
+    property int margin: 14
 
     signal clicked
 
-    height: 56
+    height: 52
     radius: 20
     color: {
         if (button.checked) {
@@ -39,7 +39,6 @@ Rectangle {
     }
 
     Column {
-        spacing: 2
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: button.margin * 2 + button.iconSize
