@@ -1,3 +1,4 @@
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Controls
 import "../utils"
@@ -13,11 +14,11 @@ Slider {
 
     implicitHeight: 32
 
-    background: Rectangle {
+    background: ClippingRectangle {
         x: slider.leftPadding
         y: slider.height / 2 - height / 2
         width: slider.availableWidth
-        height: 28
+        height: 32
         radius: 8
         color: Colors.md3.on_secondary
 
@@ -26,7 +27,7 @@ Slider {
             width: slider.visualPosition * parent.width
             height: parent.height
             color: Colors.md3.primary
-            radius: 8
+            radius: 0
         }
     }
 
@@ -35,7 +36,7 @@ Slider {
         y: slider.height / 2 - height / 2
 
         width: 12
-        height: 40
+        height: 48
         radius: 6
         color: Colors.md3.primary
 
@@ -45,7 +46,7 @@ Slider {
 
     Icon {
         id: icon
-        color: Colors.md3.on_background
+        color: slider.value / slider.to > 0.97 ? Colors.md3.on_primary : Colors.md3.on_background
         size: 16
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right

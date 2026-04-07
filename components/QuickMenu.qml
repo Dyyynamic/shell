@@ -5,6 +5,7 @@ import Quickshell.Io
 import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import "../utils"
 
 PopupWindow {
@@ -12,31 +13,36 @@ PopupWindow {
     property bool open: false
     property var margin: 10
 
+    property bool nightLightEnabled: false
+    property bool darkModeEnabled: false
+
     visible: open
 
     anchor.window: bar
     anchor.rect.x: parentWindow.width - width - margin
     anchor.rect.y: parentWindow.height + margin
-    width: 400
-    implicitHeight: background.implicitHeight
+    width: 450
+    height: screen.height - parentWindow.height - margin * 2
     color: "transparent"
 
     Rectangle {
         id: background
         width: parent.width
+        height: parent.height
         radius: 20
         color: Colors.md3.background
         border.color: Qt.lighter(Colors.md3.background, 1.5)
-        implicitHeight: wrapper.implicitHeight
 
         WrapperItem {
             id: wrapper
             width: parent.width
+            height: parent.height
             margin: 20
 
             ColumnLayout {
                 spacing: 20
                 width: parent.width
+                height: parent.height
 
                 RowLayout {
                     spacing: 10
@@ -86,9 +92,9 @@ PopupWindow {
                 }
 
                 ColumnLayout {
-                    spacing: 10
+                    spacing: 20
 
-                    Slider {
+                    CustomSlider {
                         icon: {
                             if (!Pipewire.defaultAudioSink)
                                 return "";
@@ -114,7 +120,7 @@ PopupWindow {
                             objects: [Pipewire.defaultAudioSink]
                         }
                     }
-                    Slider {
+                    CustomSlider {
                         icon: ""
                         Layout.fillWidth: true
                     }
@@ -147,13 +153,16 @@ PopupWindow {
                                     return "󰤟";
                                 return "󰤯";
                             }
-                            text: Network.name ? Network.name : "Network"
+                            iconSize: 24
+                            text: "Network"
+                            subtext: Network.name ? Network.name : ""
                             checked: Network.enabled
                             onClicked: Network.toggle()
                         }
                         ToggleButton {
                             Layout.fillWidth: true
                             icon: "󰂯"
+                            iconSize: 24
                             text: "Bluetooth"
                             checked: Bluetooth.defaultAdapter.enabled
                             onClicked: Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled
@@ -166,19 +175,49 @@ PopupWindow {
                         ToggleButton {
                             Layout.fillWidth: true
                             icon: ""
+                            iconSize: 24
                             text: "Night Light"
+                            subtext: quickMenu.nightLightEnabled ? "Active" : "Auto"
                             checked: quickMenu.nightLightEnabled
                             onClicked: quickMenu.nightLightEnabled = !quickMenu.nightLightEnabled
                         }
                         ToggleButton {
                             Layout.fillWidth: true
                             icon: ""
+                            iconSize: 24
                             text: "Dark Mode"
+                            subtext: quickMenu.darkModeEnabled ? "Dark" : "Light"
                             checked: quickMenu.darkModeEnabled
                             onClicked: quickMenu.darkModeEnabled = !quickMenu.darkModeEnabled
                         }
                     }
                 }
+
+                Rectangle {
+                    Layout.fillWidth: true
+                    implicitHeight: 1
+                    color: Qt.lighter(Colors.md3.background, 2)
+                }
+
+                Item {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+                    Icon {
+                        icon: "󰂚"
+                        color: Qt.darker(Colors.md3.on_background, 3)
+                        size: 80
+                        anchors.centerIn: parent
+                    }
+                }
+
+                Rectangle {
+                    Layout.fillWidth: true
+                    implicitHeight: 1
+                    color: Qt.lighter(Colors.md3.background, 2)
+                }
+
+                CustomCalendar {}
             }
         }
     }

@@ -6,16 +6,17 @@ Rectangle {
 
     property alias icon: icon.icon
     property alias text: label.text
+    property alias subtext: sublabel.text
     property alias iconSize: icon.size
     property bool checked: false
     property bool hovered: false
 
-    property int margin: 14
+    property int margin: 16
 
     signal clicked
 
-    height: 48
-    radius: height / 2
+    height: 56
+    radius: 20
     color: {
         if (button.checked) {
             Colors.md3.primary;
@@ -37,16 +38,28 @@ Rectangle {
         anchors.leftMargin: button.margin
     }
 
-    Text {
-        id: label
-        text: ""
-        color: button.checked ? Colors.md3.on_primary : Colors.md3.on_background
+    Column {
+        spacing: 2
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: button.margin * 2 + button.iconSize
-        elide: Text.ElideRight
-        width: parent.width - label.anchors.leftMargin - button.margin
+
+        Text {
+            id: label
+            text: ""
+            font.pixelSize: 14
+            color: button.checked ? Colors.md3.on_primary : Colors.md3.on_background
+            elide: Text.ElideRight
+        }
+        Text {
+            id: sublabel
+            text: ""
+            font.pixelSize: 12
+            color: button.checked ? Colors.md3.on_primary : Colors.md3.on_background
+            elide: Text.ElideRight
+        }
     }
+
 
     MouseArea {
         anchors.fill: parent
