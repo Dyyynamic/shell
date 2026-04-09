@@ -46,7 +46,11 @@ Slider {
 
     Icon {
         id: icon
-        color: slider.value / slider.to > 0.97 ? Colors.md3.on_primary : Colors.md3.on_background
+        color: {
+            if (slider.value / slider.to > 0.97)
+                return Colors.md3.on_primary;
+            return Colors.md3.on_background;
+        }
         size: 16
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right

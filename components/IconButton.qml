@@ -15,15 +15,11 @@ Rectangle {
     height: 40
     radius: height / 2
     color: {
-        if (button.pressed) {
-            Qt.lighter(Colors.md3.background, 3);
-        } else {
-            if (button.hovered) {
-                Qt.lighter(Colors.md3.background, 2.5);
-            } else {
-                Qt.lighter(Colors.md3.background, 2);
-            }
-        }
+        if (button.pressed)
+            return Qt.lighter(Colors.md3.background, 3);
+        if (button.hovered)
+            return Qt.lighter(Colors.md3.background, 2.5);
+        return Qt.lighter(Colors.md3.background, 2);
     }
 
     Icon {

@@ -27,7 +27,7 @@ Scope {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                network.enabled = this.text.trim() === "enabled";
+                network.enabled = text.trim() === "enabled";
             }
         }
     }
@@ -38,7 +38,7 @@ Scope {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                let lines = this.text.trim().split("\n");
+                let lines = text.trim().split("\n");
                 network.name = "";
                 network.signal = 0;
 

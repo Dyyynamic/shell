@@ -5,7 +5,6 @@ import Quickshell.Io
 import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import "../utils"
 
 PopupWindow {
@@ -22,7 +21,7 @@ PopupWindow {
     anchor.rect.x: parentWindow.width - width - margin
     anchor.rect.y: parentWindow.height + margin
     width: 450
-    height: screen.height - parentWindow.height - margin * 2
+    implicitHeight: screen.height - parentWindow.height - margin * 2
     color: "transparent"
 
     Rectangle {
@@ -72,14 +71,14 @@ PopupWindow {
                             icon: ""
                             onClicked: () => {
                                 quickMenu.open = false;
-                                betterControl.startDetached()
+                                betterControl.startDetached();
                             }
                         }
                         IconButton {
                             icon: ""
                             onClicked: () => {
                                 quickMenu.open = false;
-                                powerMenu.running = true
+                                powerMenu.running = true;
                             }
                         }
                     }
@@ -104,7 +103,11 @@ PopupWindow {
 
                         from: 0
                         to: 1
-                        value: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio.volume : 0
+                        value: {
+                            if (Pipewire.defaultAudioSink)
+                                return Pipewire.defaultAudioSink.audio.volume;
+                            return 0;
+                        }
                         onMoved: {
                             if (Pipewire.defaultAudioSink)
                                 Pipewire.defaultAudioSink.audio.volume = value;
@@ -186,16 +189,9 @@ PopupWindow {
                     }
                 }
 
-                Item {
+                NotificationList {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-
-                    Icon {
-                        icon: "󰂚"
-                        color: Qt.darker(Colors.md3.on_background, 3)
-                        size: 80
-                        anchors.centerIn: parent
-                    }
                 }
 
                 CustomCalendar {}
@@ -219,7 +215,7 @@ PopupWindow {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                let [uptime, idle] = this.text.split(" ");
+                let [uptime, idle] = text.split(" ");
 
                 let hours = Math.floor(uptime / 3600);
                 let minutes = Math.floor((uptime % 3600) / 60);

@@ -70,15 +70,11 @@ ColumnLayout {
                 anchors.fill: parent
                 radius: 16
                 color: {
-                    if (nextMonthButton.pressed) {
-                        Qt.lighter(Colors.md3.background, 3);
-                    } else {
-                        if (nextMonthButton.hovered) {
-                            Qt.lighter(Colors.md3.background, 2.5);
-                        } else {
-                            Qt.lighter(Colors.md3.background, 2);
-                        }
-                    }
+                    if (nextMonthButton.pressed)
+                        return Qt.lighter(Colors.md3.background, 3);
+                    if (nextMonthButton.hovered)
+                        return Qt.lighter(Colors.md3.background, 2.5);
+                    return Qt.lighter(Colors.md3.background, 2);
                 }
             }
         }
@@ -128,7 +124,13 @@ ColumnLayout {
                     anchors.centerIn: parent
                     text: model.day
 
-                    color: model.today ? Colors.md3.on_primary : model.month === grid.month ? Colors.md3.on_background : Qt.darker(Colors.md3.on_background, 2)
+                    color: {
+                        if (model.today)
+                            return Colors.md3.on_primary;
+                        if (model.month === grid.month)
+                            return Colors.md3.on_background;
+                        return Qt.darker(Colors.md3.on_background, 2);
+                    }
                 }
             }
         }
