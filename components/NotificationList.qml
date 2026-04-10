@@ -4,6 +4,34 @@ import QtQuick.Layouts
 import "../utils"
 
 Item {
+    id: root
+
+    property var groupedNotifications: {
+        let groups = {};
+
+        for (let notif of NotificationStore.notifications.values) {
+            let key = notif.appName;
+            if (!groups[key]) {
+                groups[key] = [];
+            }
+            groups[key].push(notif);
+        }
+
+        // Convert to array of { app, notifications, latest }
+        return Object.keys(groups).map(app => {
+            let list = groups[app];
+
+            // Sort by newest first
+            list.sort((a, b) => b.time - a.time);
+
+            return {
+                app: app,
+                notifications: list,
+                latest: list[0]
+            };
+        });
+    }
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 10
@@ -45,11 +73,11 @@ Item {
             spacing: 10
             clip: true
 
-            model: NotificationStore.notifications
+            model: root.groupedNotifications
 
-            delegate: NotificationItem {
-                required property Notification modelData
-                notification: modelData
+            delegate: NotificationGroup {
+                required property var modelData
+                notifs: modelData
             }
         }
     }
