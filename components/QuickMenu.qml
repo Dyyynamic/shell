@@ -118,6 +118,7 @@ PopupWindow {
                         }
                     }
                     CustomSlider {
+                        visible: Brightness.backlight
                         icon: ""
                         Layout.fillWidth: true
                         value: Brightness.value

@@ -9,6 +9,7 @@ Scope {
 
     property int value: 100
     property int max: 100
+    property bool backlight: false
 
     function setBrightness(value: int) {
         brightness.value = value;
@@ -26,7 +27,7 @@ Scope {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                brightness.max = parseInt(text)
+                brightness.max = parseInt(text);
             }
         }
     }
@@ -37,8 +38,19 @@ Scope {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                let newValue = parseInt(parseInt(text) / brightness.max * 100)
+                let newValue = parseInt(parseInt(text) / brightness.max * 100);
                 brightness.value = newValue;
+            }
+        }
+    }
+
+    Process {
+        id: backlightExists
+        command: ["brightnessctl", "--class", "backlight", "info"]
+        running: true
+        stdout: StdioCollector {
+            onStreamFinished: {
+                brightness.backlight = text.trim() !== "";
             }
         }
     }
