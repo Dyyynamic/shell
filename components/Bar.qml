@@ -44,6 +44,7 @@ Scope {
 
             QuickMenu {
                 id: quickMenu
+                bar: bar
             }
         }
     }
