@@ -29,8 +29,9 @@ PanelWindow {
     }
     margins.top: bar.height
     exclusionMode: ExclusionMode.Ignore
-    width: 450
+    implicitWidth: 450
     color: "transparent"
+    screen: bar.screen
 
     WrapperItem {
         width: parent.width

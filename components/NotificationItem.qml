@@ -4,9 +4,22 @@ import QtQuick.Layouts
 import "../utils"
 
 Flickable {
-    id: swipe
+    id: item
 
     required property var notification
+
+    property bool showExpandButton: false
+    property bool expanded: false
+    property string expandLabel: ""
+
+    property alias radius: content.radius
+    property alias topLeftRadius: content.topLeftRadius
+    property alias topRightRadius: content.topRightRadius
+    property alias bottomLeftRadius: content.bottomLeftRadius
+    property alias bottomRightRadius: content.bottomRightRadius
+
+    signal expandClicked()
+    signal dismissed()
 
     width: parent.width
     implicitHeight: content.implicitHeight
@@ -15,7 +28,7 @@ Flickable {
 
     onDragEnded: {
         if (Math.abs(contentX) > 30) {
-            swipe.notification.dismiss();
+            dismissed()
         }
     }
 
@@ -29,26 +42,57 @@ Flickable {
         WrapperItem {
             id: wrapper
             margin: 14
+            width: parent.width
 
-            ColumnLayout {
-                RowLayout {
-                    Text {
-                        text: swipe.notification.summary
-                        color: Colors.md3.on_background
-                        font.pixelSize: 14
-                        font.bold: true
-                    }
-                    Text {
-                        text: Qt.formatTime(new Date(swipe.notification.time), "hh:mm")
-                        color: Colors.md3.on_background
-                        font.pixelSize: 12
+            RowLayout {
+                spacing: 14
+
+                ClippingRectangle {
+                    implicitWidth: 56
+                    implicitHeight: 56
+                    radius: width / 2
+
+                    visible: !!item.notification.image
+
+                    Image {
+                        source: item.notification.image
+                        anchors.fill: parent
                     }
                 }
-                Text {
-                    text: swipe.notification.body
-                    color: Colors.md3.on_background
-                    font.pixelSize: 14
-                    wrapMode: Text.WordWrap
+
+                ColumnLayout {
+                    RowLayout {
+                        Text {
+                            Layout.fillWidth: true
+                            elide: Text.ElideRight
+                            text: item.notification.summary
+                            color: Colors.md3.on_background
+                            font.pixelSize: 14
+                            font.bold: true
+                        }
+
+                        Text {
+                            text: Qt.formatTime(new Date(item.notification.time), "hh:mm")
+                            color: Colors.md3.on_background
+                            font.pixelSize: 12
+                        }
+
+                        NotifExpandButton {
+                            visible: item.showExpandButton
+                            icon: item.expanded ? "" : ""
+                            label: item.expandLabel
+                            onClicked: item.expandClicked()
+                        }
+                    }
+                    Text {
+                        Layout.fillWidth: true
+                        wrapMode: Text.WordWrap
+                        maximumLineCount: 2
+                        elide: Text.ElideRight
+                        text: item.notification.body
+                        color: Colors.md3.on_background
+                        font.pixelSize: 14
+                    }
                 }
             }
         }

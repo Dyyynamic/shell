@@ -4,6 +4,9 @@ import QtQuick
 import "../utils"
 
 Scope {
+    id: root
+    property string mainMonitor: Quickshell.env("MAIN_MONITOR")
+
     Variants {
         model: Quickshell.screens
 
@@ -21,7 +24,7 @@ Scope {
                 right: true
             }
 
-            height: 40
+            implicitHeight: 40
 
             WrapperItem {
                 anchors.fill: parent
@@ -45,6 +48,13 @@ Scope {
             QuickMenu {
                 id: quickMenu
                 bar: bar
+            }
+
+            // Show if the screen is the main monitor
+            NotificationPopupStack {
+                id: notificationPopupStack
+                bar: bar
+                visible: bar.modelData.name === root.mainMonitor
             }
         }
     }

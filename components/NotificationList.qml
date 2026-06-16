@@ -1,10 +1,11 @@
-import Quickshell.Services.Notifications
 import QtQuick
 import QtQuick.Layouts
 import "../utils"
 
 Item {
     id: root
+
+    property var expandedGroups: ({})
 
     property var groupedNotifications: {
         let groups = {};
@@ -27,7 +28,8 @@ Item {
             return {
                 app: app,
                 notifications: list,
-                latest: list[0]
+                latest: list[0],
+                expanded: false
             };
         });
     }
@@ -78,6 +80,12 @@ Item {
             delegate: NotificationGroup {
                 required property var modelData
                 notifs: modelData
+
+                expanded: root.expandedGroups[modelData.app] ?? false
+
+                onExpandedChanged: {
+                    root.expandedGroups[modelData.app] = expanded
+                }
             }
         }
     }

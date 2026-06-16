@@ -3,8 +3,6 @@ import Quickshell.Io
 import "../utils"
 
 Widget {
-    onClicked: () => swaync.startDetached()
-
     Text {
         width: contentWidth + 8
         horizontalAlignment: Text.AlignHCenter
@@ -13,10 +11,5 @@ Widget {
         font.bold: true
         font.pixelSize: 16
         color: Colors.md3.on_background
-    }
-
-    Process {
-        id: swaync
-        command: ["swaync-client", "-t", "-sw"]
     }
 }

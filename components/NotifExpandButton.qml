@@ -9,9 +9,10 @@ Rectangle {
     property alias label: label.text
     property bool hovered: false
     property bool pressed: false
-    property var onClicked: undefined
 
     property int iconSize: 12
+
+    signal clicked
 
     width: content.width + 16
     height: 20
@@ -49,6 +50,6 @@ Rectangle {
         onExited: button.hovered = false
         onPressed: button.pressed = true
         onReleased: button.pressed = false
-        onClicked: button.onClicked && button.onClicked()
+        onClicked: button.clicked()
     }
 }
