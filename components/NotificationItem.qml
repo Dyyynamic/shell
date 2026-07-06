@@ -1,36 +1,18 @@
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import "../utils"
 
-Flickable {
+Item {
     id: item
 
     required property var notification
 
-    property bool showExpandButton: false
-    property bool expanded: false
-    property string expandLabel: ""
-
-    property alias radius: content.radius
-    property alias topLeftRadius: content.topLeftRadius
-    property alias topRightRadius: content.topRightRadius
-    property alias bottomLeftRadius: content.bottomLeftRadius
-    property alias bottomRightRadius: content.bottomRightRadius
-
-    signal expandClicked()
     signal dismissed()
 
     width: parent.width
     implicitHeight: content.implicitHeight
-
-    flickableDirection: Flickable.HorizontalFlick
-
-    onDragEnded: {
-        if (Math.abs(contentX) > 30) {
-            dismissed()
-        }
-    }
 
     Rectangle {
         id: content
@@ -77,11 +59,34 @@ Flickable {
                             font.pixelSize: 12
                         }
 
-                        NotifExpandButton {
-                            visible: item.showExpandButton
-                            icon: item.expanded ? "" : ""
-                            label: item.expandLabel
-                            onClicked: item.expandClicked()
+                        Button {
+                            id: dismissButton
+
+                            text: ""
+                            flat: true
+                            implicitWidth: 22
+                            implicitHeight: 22
+
+                            onClicked: {
+                                item.notification.dismiss()
+                                item.dismissed()
+                            }
+
+                            background: Rectangle {
+                                anchors.fill: parent
+                                radius: 16
+                                color: {
+                                    if (dismissButton.pressed) {
+                                        Qt.lighter(Colors.md3.background, 3);
+                                    } else {
+                                        if (dismissButton.hovered) {
+                                            Qt.lighter(Colors.md3.background, 2.5);
+                                        } else {
+                                            Qt.lighter(Colors.md3.background, 2);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     Text {
