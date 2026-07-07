@@ -6,4 +6,4 @@
 
 - Refactor / clean-up
 - Add battery indicator
-- Close side-panel when clicking outside
+- Add keyboard shortcut for side-panel
