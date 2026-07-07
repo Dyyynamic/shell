@@ -2,6 +2,7 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Bluetooth
 import Quickshell.Io
+import Quickshell.Services.UPower
 import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
@@ -17,6 +18,10 @@ PanelWindow {
 
     property bool nightLightEnabled: false
     property bool darkModeEnabled: false
+
+    property var battery: UPower.devices.values.find(device => {
+        return device.isLaptopBattery;
+    })
 
     property bool transitioning: false
 
@@ -109,10 +114,30 @@ PanelWindow {
                                     icon: "󰣇"
                                     size: 24
                                 }
-                                Text {
-                                    id: uptimeText
-                                    color: Colors.md3.on_background
-                                    font.pixelSize: 14
+                                ColumnLayout {
+                                    spacing: 0
+                                    Text {
+                                        id: uptimeText
+                                        color: Colors.md3.on_background
+                                        font.pixelSize: 14
+                                    }
+                                    Text {
+                                        visible: !!menu.battery
+
+                                        text: {
+                                            const percentage = `${Math.round(menu.battery.percentage * 100)}`;
+
+                                            if (menu.battery.state == UPowerDeviceState.Charging)
+                                                return `${percentage}% Charging`;
+
+                                            if (menu.battery.state == UPowerDeviceState.FullyCharged)
+                                                return `${percentage}% Full`;
+
+                                            return `${percentage}%`;
+                                        }
+                                        color: Colors.md3.on_background
+                                        font.pixelSize: 12
+                                    }
                                 }
                             }
 

@@ -5,5 +5,4 @@
 ## TODO
 
 - Refactor / clean-up
-- Add battery indicator
 - Add keyboard shortcut for side-panel
