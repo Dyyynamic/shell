@@ -5,8 +5,28 @@ import "../utils"
 Item {
     id: root
 
-    property var notifications: {
-        return [...NotificationStore.notifications.values].reverse();
+    function removeNotification(id) {
+        for (let i = 0; i < notificationModel.count; i++) {
+            if (notificationModel.get(i).notification.id === id) {
+                notificationModel.remove(i);
+                break;
+            }
+        }
+    }
+
+    Connections {
+        target: NotificationStore
+
+        function onNotificationReceived(notification) {
+            // Insert at top of list
+            notificationModel.insert(0, {
+                notification: notification
+            });
+        }
+    }
+
+    ListModel {
+        id: notificationModel
     }
 
     ColumnLayout {
@@ -21,7 +41,7 @@ Item {
         }
 
         Item {
-            visible: root.notifications.length === 0
+            visible: notificationModel.count === 0
             Layout.fillWidth: true
             Layout.fillHeight: true
 
@@ -44,19 +64,29 @@ Item {
 
         ListView {
             id: notificationList
-            visible: root.notifications.length > 0
+            visible: notificationModel.count > 0
             Layout.fillWidth: true
             Layout.fillHeight: true
             spacing: 10
             clip: true
 
-            model: root.notifications
+            displaced: Transition {
+                NumberAnimation {
+                    properties: "y"
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+            }
+
+            model: notificationModel
 
             delegate: NotificationItem {
                 required property var modelData
 
                 notification: modelData
                 width: ListView.view.width
+
+                onClosed: root.removeNotification(notification.id)
             }
         }
     }

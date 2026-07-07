@@ -1,3 +1,4 @@
+import Quickshell
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
@@ -8,9 +9,12 @@ Item {
     id: item
 
     required property var notification
+    property bool closing: false
 
-    signal dismissed()
+    signal dismissed
+    signal closed
 
+    opacity: closing ? 0 : 1
     width: parent.width
     implicitHeight: content.implicitHeight
 
@@ -43,6 +47,8 @@ Item {
                 }
 
                 ColumnLayout {
+                    Layout.alignment: Qt.AlignTop
+
                     RowLayout {
                         Text {
                             Layout.fillWidth: true
@@ -68,6 +74,7 @@ Item {
                             implicitHeight: 22
 
                             onClicked: {
+                                item.closing = true;
                                 item.notification.dismiss()
                                 item.dismissed()
                             }
@@ -101,5 +108,25 @@ Item {
                 }
             }
         }
+    }
+
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.OutCubic
+            onRunningChanged: {
+                if (!running) {
+                    // Release lock after animation is finished
+                    lock.locked = false
+                    item.closed()
+                }
+            }
+        }
+    }
+
+    RetainableLock {
+        id: lock
+        object: item.notification
+        locked: true
     }
 }

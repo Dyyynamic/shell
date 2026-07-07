@@ -5,11 +5,12 @@ Rectangle {
 
     required property var notification
 
-    property bool closing: false
-    opacity: closing ? 0 : 1
     width: parent.width
     height: item.height
     color: "transparent"
+
+    opacity: 0
+    x: width
 
     signal expired
 
@@ -17,16 +18,21 @@ Rectangle {
         id: item
         notification: popup.notification
 
-        onDismissed: {
-            popup.closing = true;
+        onClosed: {
+            popup.expired();
         }
+    }
+
+    Component.onCompleted: {
+        popup.opacity = 1
+        popup.x = 0
     }
 
     Timer {
         interval: 3000
         running: true
         onTriggered: {
-            popup.closing = true;
+            item.closing = true;
         }
     }
 
@@ -34,11 +40,13 @@ Rectangle {
         NumberAnimation {
             duration: 200
             easing.type: Easing.OutCubic
-            onRunningChanged: {
-                if (!running) {
-                    popup.expired();
-                }
-            }
+        }
+    }
+
+    Behavior on x {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.OutCubic
         }
     }
 }

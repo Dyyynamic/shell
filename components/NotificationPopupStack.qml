@@ -12,18 +12,21 @@ PanelWindow {
 
     anchors {
         top: true
-        bottom: true
         right: true
+        bottom: true
     }
-    margins.top: bar.height + margin
-    margins.bottom: margin
-    margins.right: margin
+    margins.top: bar.height
     exclusionMode: ExclusionMode.Ignore
+    implicitHeight: listView.contentHeight + margin * 2
     implicitWidth: 400
     color: "transparent"
     screen: bar.screen
 
-    mask: Region {}
+    // Make everything click-through except the list-view, which scales
+    // according to it's content height
+    mask: Region {
+        item: listView
+    }
 
     function removePopup(id) {
         for (let i = 0; i < popupModel.count; i++) {
@@ -48,22 +51,42 @@ PanelWindow {
         id: popupModel
     }
 
-    ListView {
-        id: listView
+    Item {
         anchors.fill: parent
-        interactive: false
-        model: popupModel
+        anchors.rightMargin: root.margin
+        anchors.topMargin: root.margin
+        anchors.bottomMargin: root.margin
 
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        spacing: 10
+        ListView {
+            id: listView
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: parent.top
+            }
+            height: contentHeight
+            interactive: false
+            model: popupModel
 
-        delegate: NotificationPopup {
-            required property var modelData
-            notification: modelData
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            spacing: 10
 
-            onExpired: {
-                root.removePopup(notification.id);
+            displaced: Transition {
+                NumberAnimation {
+                    properties: "y"
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+            }
+
+            delegate: NotificationPopup {
+                required property var modelData
+                notification: modelData
+
+                onExpired: {
+                    root.removePopup(notification.id);
+                }
             }
         }
     }

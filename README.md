@@ -4,4 +4,5 @@
 
 ## TODO
 
-- Refactor / clean up this whole mess
+- Add notification click for action
+- Add battery indicator
