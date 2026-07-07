@@ -5,6 +5,8 @@ import "../utils"
 Item {
     id: root
 
+    signal notificationActivated
+
     function removeNotification(id) {
         for (let i = 0; i < notificationModel.count; i++) {
             if (notificationModel.get(i).notification.id === id) {
@@ -22,6 +24,10 @@ Item {
             notificationModel.insert(0, {
                 notification: notification
             });
+        }
+
+        function onNotificationClosed(notification) {
+            root.removeNotification(notification.id);
         }
     }
 
@@ -87,6 +93,7 @@ Item {
                 width: ListView.view.width
 
                 onClosed: root.removeNotification(notification.id)
+                onActivated: root.notificationActivated()
             }
         }
     }

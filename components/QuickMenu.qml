@@ -227,6 +227,8 @@ PanelWindow {
                     NotificationList {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
+
+                        onNotificationActivated: menu.open = false
                     }
 
                     CustomCalendar {}

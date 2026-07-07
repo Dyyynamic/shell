@@ -4,5 +4,6 @@
 
 ## TODO
 
-- Add notification click for action
+- Refactor / clean-up
 - Add battery indicator
+- Close side-panel when clicking outside

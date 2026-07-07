@@ -11,14 +11,18 @@ Singleton {
 
     signal notificationReceived(var notification)
 
+    signal notificationClosed(var notification)
+
     NotificationServer {
         id: notifServer
+
+        actionsSupported: true
 
         onNotification: notif => {
             notif.time = Date.now();
             notif.tracked = true;
+            notif.closed.connect(() => root.notificationClosed(notif));
             root.notificationReceived(notif);
-            console.log("Store: notif received")
         }
     }
 }

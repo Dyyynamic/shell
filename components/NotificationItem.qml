@@ -13,6 +13,7 @@ Item {
 
     signal dismissed
     signal closed
+    signal activated
 
     opacity: closing ? 0 : 1
     width: parent.width
@@ -22,8 +23,44 @@ Item {
         id: content
         width: parent.width
         implicitHeight: wrapper.implicitHeight
-        color: Qt.lighter(Colors.md3.background, 2)
+        color: {
+            if (item.notification.actions.length == 0)
+                return Qt.lighter(Colors.md3.background, 2);
+            if (pressed)
+                return Qt.lighter(Colors.md3.background, 3);
+            if (hovered)
+                return Qt.lighter(Colors.md3.background, 2.5);
+            else
+                return Qt.lighter(Colors.md3.background, 2);
+        }
         radius: 12
+
+        property bool hovered: false
+        property bool pressed: false
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onEntered: content.hovered = true
+            onExited: content.hovered = false
+            onPressed: content.pressed = true
+            onReleased: content.pressed = false
+            onClicked: {
+                if (item.notification.actions.length > 0) {
+                    const action = item.notification.actions[0];
+
+                    // If resident is false, the notification will be dismissed
+                    if (!item.notification.resident) {
+                        item.closing = true;
+                        item.dismissed();
+                    }
+
+                    item.notification.actions[0].invoke();
+                    item.activated();
+                }
+            }
+        }
 
         WrapperItem {
             id: wrapper
@@ -75,23 +112,20 @@ Item {
 
                             onClicked: {
                                 item.closing = true;
-                                item.notification.dismiss()
-                                item.dismissed()
+                                item.notification.dismiss();
+                                item.dismissed();
                             }
 
                             background: Rectangle {
                                 anchors.fill: parent
                                 radius: 16
                                 color: {
-                                    if (dismissButton.pressed) {
-                                        Qt.lighter(Colors.md3.background, 3);
-                                    } else {
-                                        if (dismissButton.hovered) {
-                                            Qt.lighter(Colors.md3.background, 2.5);
-                                        } else {
-                                            Qt.lighter(Colors.md3.background, 2);
-                                        }
-                                    }
+                                    if (dismissButton.pressed)
+                                        return Qt.lighter(Colors.md3.background, 3);
+                                    if (dismissButton.hovered)
+                                        return Qt.lighter(Colors.md3.background, 2.5);
+                                    else
+                                        return Qt.lighter(Colors.md3.background, 2);
                                 }
                             }
                         }
@@ -117,8 +151,8 @@ Item {
             onRunningChanged: {
                 if (!running) {
                     // Release lock after animation is finished
-                    lock.locked = false
-                    item.closed()
+                    lock.locked = false;
+                    item.closed();
                 }
             }
         }

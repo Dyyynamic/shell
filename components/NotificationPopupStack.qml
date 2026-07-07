@@ -45,6 +45,10 @@ PanelWindow {
                 notification: notification
             });
         }
+
+        function onNotificationClosed(notification) {
+            root.removePopup(notification.id);
+        }
     }
 
     ListModel {
