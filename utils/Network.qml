@@ -11,6 +11,20 @@ Scope {
     property string name: ""
     property int signal: 0
 
+    property string icon: {
+        if (!enabled)
+            return "󰤮";
+        if (signal > 80)
+            return "󰤨";
+        if (signal > 60)
+            return "󰤥";
+        if (signal > 40)
+            return "󰤢";
+        if (signal > 20)
+            return "󰤟";
+        return "󰤯";
+    }
+
     function toggle() {
         toggleWifi.running = true;
         network.enabled = !network.enabled;

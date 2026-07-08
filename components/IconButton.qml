@@ -1,26 +1,17 @@
 import QtQuick
+import QtQuick.Controls
 import "../utils"
 
-Rectangle {
+Button {
     id: button
 
-    property alias icon: icon.icon
-    property bool hovered: false
-    property bool pressed: false
-    property var onClicked: undefined
+    property alias iconText: icon.icon
 
+    property int size: 40
     property int iconSize: 20
 
-    width: 40
-    height: 40
-    radius: height / 2
-    color: {
-        if (button.pressed)
-            return Qt.lighter(Colors.md3.background, 3);
-        if (button.hovered)
-            return Qt.lighter(Colors.md3.background, 2.5);
-        return Qt.lighter(Colors.md3.background, 2);
-    }
+    implicitWidth: size
+    implicitHeight: size
 
     Icon {
         id: icon
@@ -29,13 +20,22 @@ Rectangle {
         size: button.iconSize
     }
 
-    MouseArea {
+    background: Rectangle {
         anchors.fill: parent
-        hoverEnabled: true
-        onEntered: button.hovered = true
-        onExited: button.hovered = false
-        onPressed: button.pressed = true
-        onReleased: button.pressed = false
-        onClicked: button.onClicked && button.onClicked()
+        radius: width / 2
+        color: {
+            if (button.pressed)
+                return Qt.lighter(Colors.md3.background, 3);
+            if (button.hovered)
+                return Qt.lighter(Colors.md3.background, 2.5);
+            return Qt.lighter(Colors.md3.background, 2);
+        }
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 200
+                easing.type: Easing.OutCubic
+            }
+        }
     }
 }

@@ -1,28 +1,45 @@
 import QtQuick
+import QtQuick.Controls
 import "../utils"
 
-Rectangle {
+Button {
     id: button
 
-    property alias icon: icon.icon
-    property alias text: label.text
-    property alias subtext: sublabel.text
+    property alias title: label.text
+    property alias subtitle: sublabel.text
+    property alias iconText: icon.icon
     property alias iconSize: icon.size
-    property bool checked: false
-    property bool hovered: false
 
     property int margin: 14
 
-    signal clicked
+    checkable: true
+    implicitHeight: 52
 
-    height: 52
-    radius: 20
-    color: {
-        if (button.checked)
-            return Colors.md3.primary;
-        if (button.hovered)
-            return Qt.lighter(Colors.md3.background, 2.5);
-        return Qt.lighter(Colors.md3.background, 2);
+    background: Rectangle {
+        anchors.fill: parent
+        radius: 20
+        color: {
+            if (button.checked) {
+                if (button.pressed)
+                    return Qt.lighter(Colors.md3.primary, 1.2);
+                if (button.hovered)
+                    return Qt.lighter(Colors.md3.primary, 1.1);
+                return Colors.md3.primary;
+            }
+
+            if (button.pressed)
+                return Qt.lighter(Colors.md3.background, 3);
+            if (button.hovered)
+                return Qt.lighter(Colors.md3.background, 2.5);
+            return Qt.lighter(Colors.md3.background, 2);
+        }
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 200
+                easing.type: Easing.OutCubic
+            }
+        }
     }
 
     Icon {
@@ -45,7 +62,6 @@ Rectangle {
 
         Text {
             id: label
-            text: ""
             font.pixelSize: 14
             color: {
                 if (button.checked)
@@ -56,7 +72,6 @@ Rectangle {
         }
         Text {
             id: sublabel
-            text: ""
             font.pixelSize: 12
             color: {
                 if (button.checked)
@@ -65,13 +80,5 @@ Rectangle {
             }
             elide: Text.ElideRight
         }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true
-        onEntered: button.hovered = true
-        onExited: button.hovered = false
-        onClicked: button.clicked()
     }
 }

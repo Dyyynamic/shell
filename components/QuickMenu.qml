@@ -1,9 +1,7 @@
 import Quickshell
 import Quickshell.Widgets
-import Quickshell.Bluetooth
 import Quickshell.Io
 import Quickshell.Services.UPower
-import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
 import "../utils"
@@ -14,14 +12,7 @@ PanelWindow {
     required property var bar
 
     property bool open: false
-    property var margin: 10
-
-    property bool nightLightEnabled: false
-    property bool darkModeEnabled: false
-
-    property var battery: UPower.devices.values.find(device => {
-        return device.isLaptopBattery;
-    })
+    property int margin: 10
 
     property bool transitioning: false
 
@@ -41,7 +32,6 @@ PanelWindow {
 
     MouseArea {
         anchors.fill: parent
-
         onClicked: menu.open = false
     }
 
@@ -81,6 +71,7 @@ PanelWindow {
                 Behavior on opacity {
                     NumberAnimation {
                         duration: 200
+                        easing.type: Easing.OutCubic
                         onRunningChanged: menu.transitioning = running
                     }
                 }
@@ -104,172 +95,13 @@ PanelWindow {
                         width: parent.width
                         height: parent.height
 
-                        RowLayout {
-                            spacing: 10
-
-                            RowLayout {
-                                spacing: 10
-
-                                Icon {
-                                    icon: "󰣇"
-                                    size: 24
-                                }
-                                ColumnLayout {
-                                    spacing: 0
-                                    Text {
-                                        id: uptimeText
-                                        color: Colors.md3.on_background
-                                        font.pixelSize: 14
-                                    }
-                                    Text {
-                                        visible: !!menu.battery
-
-                                        text: {
-                                            const percentage = `${Math.round(menu.battery.percentage * 100)}`;
-
-                                            if (menu.battery.state == UPowerDeviceState.Charging)
-                                                return `${percentage}% Charging`;
-
-                                            if (menu.battery.state == UPowerDeviceState.FullyCharged)
-                                                return `${percentage}% Full`;
-
-                                            return `${percentage}%`;
-                                        }
-                                        color: Colors.md3.on_background
-                                        font.pixelSize: 12
-                                    }
-                                }
-                            }
-
-                            Item {
-                                Layout.fillWidth: true
-                            }
-
-                            RowLayout {
-                                spacing: 10
-
-                                IconButton {
-                                    icon: ""
-                                    onClicked: () => {
-                                        menu.open = false;
-                                        betterControl.startDetached();
-                                    }
-                                }
-                                IconButton {
-                                    icon: ""
-                                    onClicked: () => {
-                                        menu.open = false;
-                                        powerMenu.running = true;
-                                    }
-                                }
-                            }
+                        QuickMenuHeader {
+                            onMenuClosed: menu.open = false
                         }
 
-                        ColumnLayout {
-                            spacing: 10
+                        QuickMenuSliders {}
 
-                            CustomSlider {
-                                icon: {
-                                    if (!Pipewire.defaultAudioSink)
-                                        return "";
-                                    if (Pipewire.defaultAudioSink.audio.muted)
-                                        return "";
-                                    if (Pipewire.defaultAudioSink.audio.volume > 0.67)
-                                        return "";
-                                    if (Pipewire.defaultAudioSink.audio.volume > 0.33)
-                                        return "";
-                                    return "";
-                                }
-                                Layout.fillWidth: true
-
-                                from: 0
-                                to: 1
-                                value: {
-                                    if (Pipewire.defaultAudioSink)
-                                        return Pipewire.defaultAudioSink.audio.volume;
-                                    return 0;
-                                }
-                                onMoved: {
-                                    if (Pipewire.defaultAudioSink)
-                                        Pipewire.defaultAudioSink.audio.volume = value;
-                                }
-
-                                PwObjectTracker {
-                                    objects: [Pipewire.defaultAudioSink]
-                                }
-                            }
-                            CustomSlider {
-                                visible: Brightness.backlight
-                                icon: ""
-                                Layout.fillWidth: true
-                                value: Brightness.value
-
-                                onMoved: {
-                                    Brightness.setBrightness(parseInt(value));
-                                }
-                            }
-                        }
-
-                        ColumnLayout {
-                            spacing: 10
-
-                            RowLayout {
-                                spacing: 10
-
-                                ToggleButton {
-                                    Layout.fillWidth: true
-                                    icon: {
-                                        if (!Network.enabled)
-                                            return "󰤮";
-                                        if (Network.signal > 80)
-                                            return "󰤨";
-                                        if (Network.signal > 60)
-                                            return "󰤥";
-                                        if (Network.signal > 40)
-                                            return "󰤢";
-                                        if (Network.signal > 20)
-                                            return "󰤟";
-                                        return "󰤯";
-                                    }
-                                    iconSize: 24
-                                    text: "Network"
-                                    subtext: Network.name ? Network.name : ""
-                                    checked: Network.enabled
-                                    onClicked: Network.toggle()
-                                }
-                                ToggleButton {
-                                    Layout.fillWidth: true
-                                    icon: "󰂯"
-                                    iconSize: 24
-                                    text: "Bluetooth"
-                                    checked: Bluetooth.defaultAdapter.enabled
-                                    onClicked: Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled
-                                }
-                            }
-
-                            RowLayout {
-                                spacing: 10
-
-                                ToggleButton {
-                                    Layout.fillWidth: true
-                                    icon: ""
-                                    iconSize: 24
-                                    text: "Night Light"
-                                    subtext: menu.nightLightEnabled ? "Active" : "Auto"
-                                    checked: menu.nightLightEnabled
-                                    onClicked: menu.nightLightEnabled = !menu.nightLightEnabled
-                                }
-                                ToggleButton {
-                                    Layout.fillWidth: true
-                                    icon: ""
-                                    iconSize: 24
-                                    text: "Dark Mode"
-                                    subtext: menu.darkModeEnabled ? "Dark" : "Light"
-                                    checked: menu.darkModeEnabled
-                                    onClicked: menu.darkModeEnabled = !menu.darkModeEnabled
-                                }
-                            }
-                        }
+                        QuickMenuToggles {}
 
                         NotificationList {
                             Layout.fillWidth: true
@@ -282,40 +114,6 @@ PanelWindow {
                     }
                 }
             }
-        }
-    }
-
-    Process {
-        id: powerMenu
-        command: ["walker", "--provider", "menus:system"]
-    }
-
-    Process {
-        id: betterControl
-        command: ["better-control"]
-    }
-
-    Process {
-        id: uptime
-        command: ["cat", "/proc/uptime"]
-        running: true
-        stdout: StdioCollector {
-            onStreamFinished: {
-                let [uptime, idle] = text.split(" ");
-
-                let hours = Math.floor(uptime / 3600);
-                let minutes = Math.floor((uptime % 3600) / 60);
-                uptimeText.text = `Up ${hours}h, ${minutes}m`;
-            }
-        }
-    }
-
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            uptime.running = true;
         }
     }
 }

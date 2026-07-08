@@ -1,9 +1,10 @@
 import QtQuick
+import Quickshell.Services.Notifications
 
 Rectangle {
     id: popup
 
-    required property var notification
+    required property Notification notification
 
     width: parent.width
     height: item.height
@@ -12,28 +13,24 @@ Rectangle {
     opacity: 0
     x: width
 
-    signal expired
+    signal exitFinished
 
     NotificationItem {
         id: item
         notification: popup.notification
 
-        onClosed: {
-            popup.expired();
-        }
+        onExitFinished: popup.exitFinished()
     }
 
     Component.onCompleted: {
-        popup.opacity = 1
-        popup.x = 0
+        popup.opacity = 1;
+        popup.x = 0;
     }
 
     Timer {
         interval: 3000
         running: true
-        onTriggered: {
-            item.closing = true;
-        }
+        onTriggered: item.exit()
     }
 
     Behavior on opacity {

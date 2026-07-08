@@ -27,55 +27,25 @@ ColumnLayout {
             Layout.fillWidth: true
         }
 
-        Button {
+        IconButton {
             id: prevMonthButton
 
-            implicitWidth: 32
-            implicitHeight: 32
-            text: ""
+            size: 32
+            iconText: ""
             onClicked: {
                 grid.month = (grid.month - 1 + 12) % 12;
                 grid.year = grid.year - (grid.month === 11 ? 1 : 0);
             }
-
-            background: Rectangle {
-                anchors.fill: parent
-                radius: 16
-                color: {
-                    if (prevMonthButton.pressed) {
-                        Qt.lighter(Colors.md3.background, 3);
-                    } else {
-                        if (prevMonthButton.hovered) {
-                            Qt.lighter(Colors.md3.background, 2.5);
-                        } else {
-                            Qt.lighter(Colors.md3.background, 2);
-                        }
-                    }
-                }
-            }
         }
 
-        Button {
+        IconButton {
             id: nextMonthButton
 
-            implicitWidth: 32
-            implicitHeight: 32
-            text: ""
+            size: 32
+            iconText: ""
             onClicked: {
                 grid.month = (grid.month + 1) % 12;
                 grid.year = grid.year + (grid.month === 0 ? 1 : 0);
-            }
-
-            background: Rectangle {
-                anchors.fill: parent
-                radius: 16
-                color: {
-                    if (nextMonthButton.pressed)
-                        return Qt.lighter(Colors.md3.background, 3);
-                    if (nextMonthButton.hovered)
-                        return Qt.lighter(Colors.md3.background, 2.5);
-                    return Qt.lighter(Colors.md3.background, 2);
-                }
             }
         }
     }

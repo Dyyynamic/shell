@@ -8,7 +8,7 @@ PanelWindow {
 
     required property var bar
 
-    property var margin: 10
+    property int margin: 10
 
     anchors {
         top: true
@@ -44,10 +44,6 @@ PanelWindow {
             popupModel.append({
                 notification: notification
             });
-        }
-
-        function onNotificationClosed(notification) {
-            root.removePopup(notification.id);
         }
     }
 
@@ -88,9 +84,7 @@ PanelWindow {
                 required property var modelData
                 notification: modelData
 
-                onExpired: {
-                    root.removePopup(notification.id);
-                }
+                onExitFinished: root.removePopup(notification.id)
             }
         }
     }

@@ -25,10 +25,6 @@ Item {
                 notification: notification
             });
         }
-
-        function onNotificationClosed(notification) {
-            root.removeNotification(notification.id);
-        }
     }
 
     ListModel {
@@ -92,8 +88,9 @@ Item {
                 notification: modelData
                 width: ListView.view.width
 
-                onClosed: root.removeNotification(notification.id)
+                // onClosed: root.removeNotification(notification.id)
                 onActivated: root.notificationActivated()
+                onAboutToDestroy: root.removeNotification(notification.id)
             }
         }
     }

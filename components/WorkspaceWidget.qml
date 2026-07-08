@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import Quickshell.Hyprland
 import "../utils"
 
@@ -17,22 +18,16 @@ Widget {
                 return ws.monitor.name === workspaceWidget.screen.name;
             })
 
-            Item {
+            Button {
                 id: workspaceItem
                 required property var modelData
 
                 height: 32
                 width: 20
 
-                property var hovered: false
+                background: null
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: workspaceItem.hovered = true
-                    onExited: workspaceItem.hovered = false
-                    onClicked: workspaceItem.modelData.activate()
-                }
+                onClicked: workspaceItem.modelData.activate()
 
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -53,21 +48,21 @@ Widget {
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: 150
+                            duration: 200
                             easing.type: Easing.OutCubic
                         }
                     }
 
                     Behavior on width {
                         NumberAnimation {
-                            duration: 150
+                            duration: 200
                             easing.type: Easing.OutCubic
                         }
                     }
 
                     Behavior on height {
                         NumberAnimation {
-                            duration: 150
+                            duration: 200
                             easing.type: Easing.OutCubic
                         }
                     }

@@ -35,13 +35,24 @@ Slider {
         x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
         y: slider.height / 2 - height / 2
 
-        width: 12
+        width: {
+            if (slider.pressed) return 12;
+            if (slider.hovered) return 14;
+            return 12;
+        }
         height: 46
         radius: 6
         color: Colors.md3.primary
 
         border.color: Colors.md3.background
         border.width: 4
+
+        Behavior on width {
+            NumberAnimation {
+                duration: 100
+                easing.type: Easing.OutCubic
+            }
+        }
     }
 
     Icon {

@@ -6,16 +6,16 @@ Rectangle {
 
     default property alias contentData: content.data
 
-    property bool hovered: false
-    property bool pressed: false
-    property var onClicked: undefined
+    property bool clickable: false
+
+    signal clicked
 
     radius: height / 2
     color: {
-        if (widget.pressed) {
+        if (mouseArea.pressed) {
             Qt.lighter(Colors.md3.background, 3)
         } else {
-            if (widget.hovered) {
+            if (mouseArea.containsMouse) {
                 Qt.lighter(Colors.md3.background, 2.5)
             } else {
                 Qt.lighter(Colors.md3.background, 2)
@@ -32,19 +32,19 @@ Rectangle {
     }
 
     MouseArea {
+        id: mouseArea
+
         anchors.fill: parent
-        hoverEnabled: !!widget.onClicked
-        acceptedButtons: widget.onClicked ? Qt.AllButtons : Qt.NoButton
-        onEntered: widget.hovered = true
-        onExited: widget.hovered = false
-        onPressed: widget.pressed = true
-        onReleased: widget.pressed = false
-        onClicked: widget.onClicked && widget.onClicked()
+
+        enabled: widget.clickable
+        hoverEnabled: true
+
+        onClicked: widget.clicked()
     }
 
     Behavior on color {
         ColorAnimation {
-            duration: 150
+            duration: 200
             easing.type: Easing.OutCubic
         }
     }

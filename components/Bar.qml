@@ -5,7 +5,7 @@ import "../utils"
 
 Scope {
     id: root
-    property string mainMonitor: Quickshell.env("MAIN_MONITOR")
+    property string mainMonitor: Quickshell.env("MAIN_MONITOR") || ""
 
     Variants {
         model: Quickshell.screens
@@ -35,9 +35,11 @@ Scope {
                         anchors.left: parent.left
                         screen: bar.modelData
                     }
+
                     ClockWidget {
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
+
                     StatusWidget {
                         anchors.right: parent.right
                         onClicked: () => quickMenu.open = !quickMenu.open
@@ -54,7 +56,9 @@ Scope {
             NotificationPopupStack {
                 id: notificationPopupStack
                 bar: bar
-                visible: bar.modelData.name === root.mainMonitor
+                // Show on the main monitor if MAIN_MONITOR is set,
+                // otherwise show on all monitors
+                visible: !root.mainMonitor || bar.modelData.name === root.mainMonitor
             }
         }
     }

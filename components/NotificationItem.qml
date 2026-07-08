@@ -1,23 +1,25 @@
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Services.Notifications
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import "../utils"
 
 Item {
     id: item
 
-    required property var notification
-    property bool closing: false
+    required property Notification notification
 
-    signal dismissed
-    signal closed
+    signal exitFinished
     signal activated
+    signal aboutToDestroy
 
-    opacity: closing ? 0 : 1
     width: parent.width
     implicitHeight: content.implicitHeight
+
+    function exit() {
+        exitAnimation.start();
+    }
 
     Rectangle {
         id: content
@@ -52,8 +54,7 @@ Item {
 
                     // If resident is false, the notification will be dismissed
                     if (!item.notification.resident) {
-                        item.closing = true;
-                        item.dismissed();
+                        item.exit();
                     }
 
                     item.notification.actions[0].invoke();
@@ -102,34 +103,16 @@ Item {
                             font.pixelSize: 12
                         }
 
-                        Button {
+                        IconButton {
                             id: dismissButton
 
-                            text: ""
-                            flat: true
-                            implicitWidth: 22
-                            implicitHeight: 22
+                            iconText: ""
+                            size: 22
 
-                            onClicked: {
-                                item.closing = true;
-                                item.notification.dismiss();
-                                item.dismissed();
-                            }
-
-                            background: Rectangle {
-                                anchors.fill: parent
-                                radius: 16
-                                color: {
-                                    if (dismissButton.pressed)
-                                        return Qt.lighter(Colors.md3.background, 3);
-                                    if (dismissButton.hovered)
-                                        return Qt.lighter(Colors.md3.background, 2.5);
-                                    else
-                                        return Qt.lighter(Colors.md3.background, 2);
-                                }
-                            }
+                            onClicked: item.notification.dismiss()
                         }
                     }
+
                     Text {
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
@@ -144,17 +127,16 @@ Item {
         }
     }
 
-    Behavior on opacity {
-        NumberAnimation {
-            duration: 200
-            easing.type: Easing.OutCubic
-            onRunningChanged: {
-                if (!running) {
-                    // Release lock after animation is finished
-                    lock.locked = false;
-                    item.closed();
-                }
-            }
+    NumberAnimation {
+        id: exitAnimation
+        target: item
+        property: "opacity"
+        to: 0
+        duration: 200
+        easing.type: Easing.OutCubic
+        onFinished: {
+            lock.locked = false;
+            item.exitFinished();
         }
     }
 
@@ -162,5 +144,8 @@ Item {
         id: lock
         object: item.notification
         locked: true
+
+        onDropped: item.exit()
+        onAboutToDestroy: item.aboutToDestroy()
     }
 }
