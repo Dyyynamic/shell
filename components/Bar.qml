@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Hyprland
 import QtQuick
 import "../utils"
 
@@ -52,13 +53,23 @@ Scope {
                 bar: bar
             }
 
-            // Show if the screen is the main monitor
             NotificationPopupStack {
                 id: notificationPopupStack
                 bar: bar
                 // Show on the main monitor if MAIN_MONITOR is set,
                 // otherwise show on all monitors
                 visible: !root.mainMonitor || bar.modelData.name === root.mainMonitor
+            }
+
+            GlobalShortcut {
+                name: "toggleQuickMenu"
+                description: "Toggle Quick Menu"
+                onPressed: {
+                    // Show on the focused monitor
+                    if (Hyprland.focusedMonitor.name === bar.modelData.name) {
+                        quickMenu.open = !quickMenu.open;
+                    }
+                }
             }
         }
     }

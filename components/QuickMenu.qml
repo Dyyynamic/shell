@@ -1,7 +1,5 @@
 import Quickshell
 import Quickshell.Widgets
-import Quickshell.Io
-import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
 import "../utils"

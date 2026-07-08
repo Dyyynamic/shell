@@ -26,7 +26,7 @@ Item {
         width: parent.width
         implicitHeight: wrapper.implicitHeight
         color: {
-            if (item.notification.actions.length == 0)
+            if (item.notification.actions.length === 0)
                 return Qt.lighter(Colors.md3.background, 2);
             if (pressed)
                 return Qt.lighter(Colors.md3.background, 3);

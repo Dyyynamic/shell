@@ -15,17 +15,17 @@ Scope {
     property string description: {
         const percentage = `${Math.round(value * 100)}`;
 
-        if (state == UPowerDeviceState.Charging)
+        if (state === UPowerDeviceState.Charging)
             return `${percentage}% Charging`;
 
-        if (state == UPowerDeviceState.FullyCharged)
+        if (state === UPowerDeviceState.FullyCharged)
             return `${percentage}% Full`;
 
         return `${percentage}%`;
     }
 
     property string icon: {
-        if (state == UPowerDeviceState.Charging || state == UPowerDeviceState.FullyCharged)
+        if (state === UPowerDeviceState.Charging || state === UPowerDeviceState.FullyCharged)
             return "";
         if (value > 0.8)
             return "";
