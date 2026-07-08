@@ -26,6 +26,7 @@ ColumnLayout {
             iconText: "󰂯"
             iconSize: 24
             title: "Bluetooth"
+            subtitle: Bluetooth.deviceName
             checked: Bluetooth.enabled
             onClicked: Bluetooth.toggle()
         }
