@@ -7,7 +7,13 @@ import Quickshell.Services.Notifications
 Singleton {
     id: root
 
+    property bool doNotDisturb: false
+
     signal notificationReceived(Notification notification)
+
+    function toggleDoNotDisturb() {
+        doNotDisturb = !doNotDisturb;
+    }
 
     NotificationServer {
         id: notifServer

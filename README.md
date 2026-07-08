@@ -5,4 +5,4 @@
 ## TODO
 
 - Implement Mpris player
-- Replace Dark Mode with Do Not Disturb
+- Add clear button to notification list

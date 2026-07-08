@@ -41,6 +41,8 @@ PanelWindow {
         target: NotificationStore
 
         function onNotificationReceived(notification) {
+            if (NotificationStore.doNotDisturb) return;
+
             popupModel.append({
                 notification: notification
             });

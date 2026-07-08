@@ -6,7 +6,6 @@ ColumnLayout {
 
     // Temporary
     property bool nightLightEnabled: false
-    property bool darkModeEnabled: false
 
     spacing: 10
 
@@ -46,12 +45,12 @@ ColumnLayout {
         }
         ToggleButton {
             Layout.fillWidth: true
-            iconText: ""
+            iconText: NotificationStore.doNotDisturb ? "󰂛" : "󰂚"
             iconSize: 24
-            title: "Dark Mode"
-            subtitle: quickMenuToggles.darkModeEnabled ? "Dark" : "Light"
-            checked: quickMenuToggles.darkModeEnabled
-            onClicked: quickMenuToggles.darkModeEnabled = !quickMenuToggles.darkModeEnabled
+            title: "Do Not Disturb"
+            subtitle: NotificationStore.doNotDisturb ? "On" : "Off"
+            checked: NotificationStore.doNotDisturb
+            onClicked: NotificationStore.toggleDoNotDisturb()
         }
     }
 }
