@@ -115,6 +115,10 @@ PanelWindow {
 
                             QuickMenuToggles {}
 
+                            // MediaPlayer {
+                            //     visible: PlayerStore.playerCount > 0 && PlayerStore.lastPlayedPlayer
+                            // }
+
                             NotificationList {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true

@@ -59,13 +59,17 @@ Item {
         }
 
         Item {
+            id: content
+
             Layout.fillWidth: true
             Layout.fillHeight: true
+
+            property bool hasContent: NotificationStore.count > 0 || PlayerStore.hasActivePlayer
 
             Item {
                 anchors.fill: parent
 
-                opacity: NotificationStore.count === 0 ? 1 : 0
+                opacity: !content.hasContent ? 1 : 0
 
                 Behavior on opacity {
                     NumberAnimation {
@@ -98,7 +102,7 @@ Item {
                 spacing: 10
                 clip: true
 
-                opacity: NotificationStore.count > 0 ? 1 : 0
+                opacity: content.hasContent ? 1 : 0
 
                 Behavior on opacity {
                     NumberAnimation {
@@ -121,6 +125,16 @@ Item {
                         to: 0
                         duration: 200
                         easing.type: Easing.OutCubic
+                    }
+                }
+
+                header: Item {
+                    width: parent.width
+                    height: player.height + 10
+
+                    MediaPlayer {
+                        id: player
+                        visible: PlayerStore.hasActivePlayer
                     }
                 }
 

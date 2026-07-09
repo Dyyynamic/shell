@@ -6,6 +6,7 @@ Button {
     id: button
 
     property alias iconText: icon.icon
+    property alias color: background.color
 
     property int size: 40
     property int iconSize: 20
@@ -21,6 +22,7 @@ Button {
     }
 
     background: Rectangle {
+        id: background
         anchors.fill: parent
         radius: width / 2
         color: {
