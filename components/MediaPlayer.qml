@@ -1,6 +1,5 @@
 import Quickshell.Widgets
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell.Services.Mpris
 import "../utils"
@@ -11,20 +10,6 @@ Item {
     implicitWidth: parent.width
     implicitHeight: 128
 
-    function formatTime(seconds) {
-        seconds = Math.floor(seconds);
-
-        const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
-        const remainingSeconds = seconds % 60;
-
-        if (hours > 0) {
-            return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
-        }
-
-        return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-    }
-
     ClippingRectangle {
         anchors.fill: parent
         color: Qt.lighter(Colors.md3.background, 2)
@@ -34,12 +19,13 @@ Item {
             anchors.fill: parent
             source: PlayerStore.lastPlayedPlayer.trackArtUrl
             fillMode: Image.PreserveAspectCrop
+            visible: !!PlayerStore.lastPlayedPlayer.trackArtUrl
         }
 
         Rectangle {
             anchors.fill: parent
             color: Qt.lighter(Colors.md3.background, 2)
-            opacity: 0.75
+            opacity: !!PlayerStore.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
         }
 
         WrapperItem {
@@ -60,6 +46,21 @@ Item {
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectCrop
                         source: PlayerStore.lastPlayedPlayer.trackArtUrl
+                        visible: !!PlayerStore.lastPlayedPlayer.trackArtUrl
+                    }
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: Colors.md3.background
+
+                        visible: !PlayerStore.lastPlayedPlayer.trackArtUrl
+
+                        Icon {
+                            anchors.centerIn: parent
+                            icon: ""
+                            size: 32
+                            color: Colors.md3.on_background
+                        }
                     }
                 }
 
@@ -107,7 +108,7 @@ Item {
                             color: Colors.md3.on_background
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
-                            text: player.formatTime(PlayerStore.lastPlayedPlayer.position)
+                            text: Formatters.formatTime(PlayerStore.lastPlayedPlayer.position)
                         }
 
                         RowLayout {
@@ -163,7 +164,7 @@ Item {
                             color: Colors.md3.on_background
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter
-                            text: player.formatTime(PlayerStore.lastPlayedPlayer.length)
+                            text: Formatters.formatTime(PlayerStore.lastPlayedPlayer.length)
                         }
                     }
                 }
