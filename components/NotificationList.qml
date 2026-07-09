@@ -17,6 +17,7 @@ Item {
                 text: "Notifications"
                 font.pixelSize: 16
                 font.bold: true
+                font.family: "NotoSans Nerd Font Propo"
                 color: Colors.md3.on_background
             }
 
@@ -28,6 +29,8 @@ Item {
                 id: clearButton
 
                 text: "Clear"
+                font.family: "NotoSans Nerd Font Propo"
+                font.pixelSize: 12
                 onClicked: NotificationStore.clear()
 
                 enabled: NotificationStore.count > 0
@@ -89,6 +92,7 @@ Item {
                     }
 
                     Text {
+                        font.family: "NotoSans Nerd Font Propo"
                         text: "No notifications"
                         color: Qt.darker(Colors.md3.on_background, 2)
                     }

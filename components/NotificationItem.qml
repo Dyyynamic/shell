@@ -89,12 +89,14 @@ Item {
                                     "Notification";
                                 }
                             }
+                            font.family: "NotoSans Nerd Font Propo"
                             color: Colors.md3.on_background
                             font.pixelSize: 12
                         }
 
                         Text {
                             text: Qt.formatTime(new Date(item.notification.time), "hh:mm")
+                            font.family: "NotoSans Nerd Font Propo"
                             color: Colors.md3.on_background
                             font.pixelSize: 12
                         }
@@ -114,6 +116,7 @@ Item {
                         elide: Text.ElideRight
                         text: item.notification.summary
                         color: Colors.md3.on_background
+                        font.family: "NotoSans Nerd Font Propo"
                         font.pixelSize: 14
                         font.bold: true
                     }
@@ -125,6 +128,7 @@ Item {
                         elide: Text.ElideRight
                         text: item.notification.body
                         color: Colors.md3.on_background
+                        font.family: "NotoSans Nerd Font Propo"
                         font.pixelSize: 14
                     }
                 }

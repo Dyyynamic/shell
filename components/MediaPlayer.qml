@@ -71,6 +71,7 @@ Item {
                     spacing: 0
 
                     Text {
+                        font.family: "NotoSans Nerd Font Propo"
                         font.pixelSize: 14
                         font.weight: Font.DemiBold
                         Layout.fillWidth: true
@@ -80,6 +81,7 @@ Item {
                     }
 
                     Text {
+                        font.family: "NotoSans Nerd Font Propo"
                         font.pixelSize: 12
                         Layout.fillWidth: true
                         elide: Text.ElideRight
@@ -105,6 +107,7 @@ Item {
                         implicitHeight: 24
 
                         Text {
+                            font.family: "NotoSans Nerd Font Propo"
                             color: Colors.md3.on_background
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
@@ -161,6 +164,7 @@ Item {
                         }
 
                         Text {
+                            font.family: "NotoSans Nerd Font Propo"
                             color: Colors.md3.on_background
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter

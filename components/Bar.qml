@@ -2,6 +2,8 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Hyprland
 import QtQuick
+import QtQuick.Layouts
+
 import "../utils"
 
 Scope {
@@ -41,9 +43,16 @@ Scope {
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
 
-                    StatusWidget {
+                    RowLayout {
                         anchors.right: parent.right
-                        onClicked: () => quickMenu.open = !quickMenu.open
+                        spacing: 4
+
+                        MediaWidget {}
+
+                        StatusWidget {
+                            Layout.preferredWidth: implicitWidth + 8
+                            onClicked: () => quickMenu.open = !quickMenu.open
+                        }
                     }
                 }
             }

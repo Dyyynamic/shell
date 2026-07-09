@@ -1,10 +1,12 @@
+import Quickshell.Widgets
 import QtQuick
 import "../utils"
 
-Rectangle {
+ClippingRectangle {
     id: widget
 
     default property alias contentData: content.data
+    property alias backgroundData: background.data
 
     property bool clickable: false
 
@@ -25,6 +27,11 @@ Rectangle {
 
     implicitWidth: content.width + 16
     height: 32
+
+    Item {
+        id: background
+        anchors.fill: parent
+    }
 
     Row {
         id: content

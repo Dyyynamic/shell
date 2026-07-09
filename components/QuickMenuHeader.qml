@@ -22,12 +22,14 @@ RowLayout {
             Text {
                 id: uptimeText
                 color: Colors.md3.on_background
+                font.family: "NotoSans Nerd Font Propo"
                 font.pixelSize: 14
             }
             Text {
                 visible: Battery.available
                 text: Battery.description
                 color: Colors.md3.on_background
+                font.family: "NotoSans Nerd Font Propo"
                 font.pixelSize: 12
             }
         }

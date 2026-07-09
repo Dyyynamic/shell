@@ -16,6 +16,7 @@ ColumnLayout {
 
         Text {
             text: Qt.formatDate(calendar.currentDate, "MMMM yyyy")
+            font.family: "NotoSans Nerd Font Propo"
             font.bold: true
             font.pixelSize: 16
             color: Colors.md3.on_background
@@ -63,6 +64,7 @@ ColumnLayout {
                     let days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
                     return days[model.day];
                 }
+                font.family: "NotoSans Nerd Font Propo"
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -93,6 +95,7 @@ ColumnLayout {
                 Text {
                     anchors.centerIn: parent
                     text: model.day
+                    font.family: "NotoSans Nerd Font Propo"
 
                     color: {
                         if (model.today)

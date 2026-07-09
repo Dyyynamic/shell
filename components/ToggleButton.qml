@@ -62,6 +62,7 @@ Button {
 
         Text {
             id: label
+            font.family: "NotoSans Nerd Font Propo"
             font.pixelSize: 14
             color: {
                 if (button.checked)
@@ -72,6 +73,7 @@ Button {
         }
         Text {
             id: sublabel
+            font.family: "NotoSans Nerd Font Propo"
             font.pixelSize: 12
             color: {
                 if (button.checked)
