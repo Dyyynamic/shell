@@ -1,7 +1,15 @@
 # Shell
 
-**Custom shell build using [Quickshell](https://quickshell.org)**
+**Custom desktop shell built with [Quickshell](https://quickshell.org)**
 
-## TODO
+Part of my [dotfiles](https://github.com/Dyyynamic/dotfiles) setup for Hyprland on Arch Linux.
 
-- Implement Mpris player
+## Features
+
+- Status bar
+- Notification center
+- System controls
+
+## To-Do
+
+- Implement MPRIS player
