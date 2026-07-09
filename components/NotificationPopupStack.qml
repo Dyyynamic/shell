@@ -18,7 +18,7 @@ PanelWindow {
     margins.top: bar.height
     exclusionMode: ExclusionMode.Ignore
     implicitHeight: listView.contentHeight + margin * 2
-    implicitWidth: 400
+    implicitWidth: 400 + margin * 2
     color: "transparent"
     screen: bar.screen
 
@@ -59,9 +59,7 @@ PanelWindow {
 
     Item {
         anchors.fill: parent
-        anchors.rightMargin: root.margin
-        anchors.topMargin: root.margin
-        anchors.bottomMargin: root.margin
+        anchors.margins: root.margin
 
         ListView {
             id: listView

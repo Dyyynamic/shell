@@ -9,6 +9,7 @@ Item {
     id: item
 
     required property Notification notification
+    property alias radius: content.radius
 
     signal activated
 

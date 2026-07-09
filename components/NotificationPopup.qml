@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import Quickshell.Services.Notifications
 
 Rectangle {
@@ -14,6 +15,16 @@ Rectangle {
     x: width
 
     signal expired
+
+    RectangularShadow {
+        anchors.fill: parent
+        radius: item.radius
+        color: "black"
+        opacity: 0.5
+        offset.y: 2
+        blur: 10
+        z: -1
+    }
 
     NotificationItem {
         id: item

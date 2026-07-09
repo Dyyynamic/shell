@@ -2,6 +2,7 @@ import Quickshell
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import "../utils"
 
 PanelWindow {
@@ -55,13 +56,9 @@ PanelWindow {
             rightMargin: menu.margin
             bottomMargin: menu.margin
 
-            Rectangle {
-                id: background
-                width: parent.width
+            Item {
                 height: parent.height
-                radius: 20
-                color: Colors.md3.background
-                border.color: Qt.lighter(Colors.md3.background, 1.5)
+                width: parent.width
 
                 opacity: menu.open ? 1 : 0
                 x: menu.open ? 0 : width
@@ -82,33 +79,51 @@ PanelWindow {
                     }
                 }
 
-                WrapperItem {
-                    id: wrapper
-                    width: parent.width
-                    height: parent.height
-                    margin: 20
+                RectangularShadow {
+                    anchors.fill: parent
+                    radius: background.radius
+                    color: "black"
+                    opacity: 0.75
+                    offset.y: 2
+                    blur: 20
+                    z: -1
+                }
 
-                    ColumnLayout {
-                        spacing: 20
+                Rectangle {
+                    id: background
+                    anchors.fill: parent
+                    radius: 20
+                    color: Colors.md3.background
+                    border.color: Qt.lighter(Colors.md3.background, 1.5)
+
+                    WrapperItem {
+                        id: wrapper
                         width: parent.width
                         height: parent.height
+                        margin: 20
 
-                        QuickMenuHeader {
-                            onMenuClosed: menu.open = false
+                        ColumnLayout {
+                            spacing: 20
+                            width: parent.width
+                            height: parent.height
+
+                            QuickMenuHeader {
+                                onMenuClosed: menu.open = false
+                            }
+
+                            QuickMenuSliders {}
+
+                            QuickMenuToggles {}
+
+                            NotificationList {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+
+                                onNotificationActivated: menu.open = false
+                            }
+
+                            CustomCalendar {}
                         }
-
-                        QuickMenuSliders {}
-
-                        QuickMenuToggles {}
-
-                        NotificationList {
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-
-                            onNotificationActivated: menu.open = false
-                        }
-
-                        CustomCalendar {}
                     }
                 }
             }
