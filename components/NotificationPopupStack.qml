@@ -23,7 +23,7 @@ PanelWindow {
     screen: bar.screen
 
     // Make everything click-through except the list-view, which scales
-    // according to it's content height
+    // according to its content height
     mask: Region {
         item: listView
     }
@@ -46,6 +46,10 @@ PanelWindow {
             popupModel.append({
                 notification: notification
             });
+        }
+
+        function onNotificationClosed(notification) {
+            removePopup(notification.id);
         }
     }
 
@@ -70,8 +74,6 @@ PanelWindow {
             interactive: false
             model: popupModel
 
-            Layout.fillWidth: true
-            Layout.fillHeight: true
             spacing: 10
 
             displaced: Transition {
@@ -82,11 +84,20 @@ PanelWindow {
                 }
             }
 
+            remove: Transition {
+                NumberAnimation {
+                    properties: "opacity"
+                    to: 0
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+            }
+
             delegate: NotificationPopup {
                 required property var modelData
                 notification: modelData
 
-                onExitFinished: root.removePopup(notification.id)
+                onExpired: root.removePopup(notification.id)
             }
         }
     }

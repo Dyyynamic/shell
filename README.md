@@ -5,4 +5,3 @@
 ## TODO
 
 - Implement Mpris player
-- Add clear button to notification list

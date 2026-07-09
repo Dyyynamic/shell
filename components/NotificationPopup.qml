@@ -13,13 +13,11 @@ Rectangle {
     opacity: 0
     x: width
 
-    signal exitFinished
+    signal expired
 
     NotificationItem {
         id: item
         notification: popup.notification
-
-        onExitFinished: popup.exitFinished()
     }
 
     Component.onCompleted: {
@@ -30,7 +28,7 @@ Rectangle {
     Timer {
         interval: 3000
         running: true
-        onTriggered: item.exit()
+        onTriggered: popup.expired()
     }
 
     Behavior on opacity {

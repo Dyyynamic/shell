@@ -10,16 +10,10 @@ Item {
 
     required property Notification notification
 
-    signal exitFinished
     signal activated
-    signal aboutToDestroy
 
     width: parent.width
     implicitHeight: content.implicitHeight
-
-    function exit() {
-        exitAnimation.start();
-    }
 
     Rectangle {
         id: content
@@ -52,12 +46,7 @@ Item {
                 if (item.notification.actions.length > 0) {
                     const action = item.notification.actions[0];
 
-                    // If resident is false, the notification will be dismissed
-                    if (!item.notification.resident) {
-                        item.exit();
-                    }
-
-                    item.notification.actions[0].invoke();
+                    action.invoke();
                     item.activated();
                 }
             }
@@ -125,27 +114,5 @@ Item {
                 }
             }
         }
-    }
-
-    NumberAnimation {
-        id: exitAnimation
-        target: item
-        property: "opacity"
-        to: 0
-        duration: 200
-        easing.type: Easing.OutCubic
-        onFinished: {
-            lock.locked = false;
-            item.exitFinished();
-        }
-    }
-
-    RetainableLock {
-        id: lock
-        object: item.notification
-        locked: true
-
-        onDropped: item.exit()
-        onAboutToDestroy: item.aboutToDestroy()
     }
 }
