@@ -55,22 +55,23 @@ Item {
 
         WrapperItem {
             id: wrapper
-            margin: 14
+            margin: 12
             width: parent.width
 
             RowLayout {
-                spacing: 14
+                spacing: 12
 
                 ClippingRectangle {
-                    implicitWidth: 56
-                    implicitHeight: 56
+                    implicitWidth: 64
+                    implicitHeight: 64
                     radius: width / 2
 
                     visible: !!item.notification.image
 
                     Image {
-                        source: item.notification.image
                         anchors.fill: parent
+                        source: item.notification.image
+                        fillMode: Image.PreserveAspectCrop
                     }
                 }
 
@@ -81,10 +82,15 @@ Item {
                         Text {
                             Layout.fillWidth: true
                             elide: Text.ElideRight
-                            text: item.notification.summary
+                            text: {
+                                if (item.notification.appName) {
+                                    item.notification.appName;
+                                } else {
+                                    "Notification";
+                                }
+                            }
                             color: Colors.md3.on_background
-                            font.pixelSize: 14
-                            font.bold: true
+                            font.pixelSize: 12
                         }
 
                         Text {
@@ -97,10 +103,19 @@ Item {
                             id: dismissButton
 
                             iconText: ""
-                            size: 22
+                            size: 20
 
                             onClicked: item.notification.dismiss()
                         }
+                    }
+
+                    Text {
+                        Layout.fillWidth: true
+                        elide: Text.ElideRight
+                        text: item.notification.summary
+                        color: Colors.md3.on_background
+                        font.pixelSize: 14
+                        font.bold: true
                     }
 
                     Text {
