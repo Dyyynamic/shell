@@ -12,4 +12,4 @@ Part of my [dotfiles](https://github.com/Dyyynamic/dotfiles) setup for Hyprland 
 
 ## To-Do
 
-- Implement MPRIS player
+- Implement Night Light
