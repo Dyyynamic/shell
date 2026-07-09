@@ -86,13 +86,9 @@ Item {
                         color: Colors.md3.on_background
                     }
 
-                    Slider {
+                    CustomSlider {
                         id: progress
-                        Layout.fillWidth: true
 
-                        implicitHeight: 40
-
-                        from: 0
                         to: PlayerStore.lastPlayedPlayer.length
                         value: pressed ? value : PlayerStore.lastPlayedPlayer.position
 
@@ -100,45 +96,6 @@ Item {
                             if (!pressed && PlayerStore.lastPlayedPlayer) {
                                 PlayerStore.lastPlayedPlayer.position = value;
                             }
-                        }
-
-                        background: Item {
-                            x: progress.leftPadding
-                            y: progress.height / 2 - height / 2
-                            width: progress.availableWidth
-                            height: 4
-
-                            Rectangle {
-                                x: 0
-                                width: progress.visualPosition * parent.width - 6
-                                height: parent.height
-                                radius: height / 2
-                                color: Colors.md3.primary
-                            }
-
-                            Rectangle {
-                                x:  progress.visualPosition * parent.width + 8
-                                width: parent.width - x
-                                height: parent.height
-                                radius: height / 2
-                                color: Colors.md3.on_secondary
-                            }
-                        }
-
-                        handle: Rectangle {
-                            x: progress.leftPadding + progress.visualPosition * (progress.availableWidth - width)
-                            y: progress.height / 2 - height / 2
-
-                            width: {
-                                if (progress.pressed)
-                                    return 4;
-                                if (progress.hovered)
-                                    return 6;
-                                return 4;
-                            }
-                            height: 24
-                            radius: width / 2
-                            color: Colors.md3.primary
                         }
                     }
 

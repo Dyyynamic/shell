@@ -7,6 +7,10 @@ ColumnLayout {
     spacing: 10
 
     CustomSlider {
+        trackHeight: 30
+        trackRadius: 8
+        handleHeight: 38
+
         icon: Volume.icon
         Layout.fillWidth: true
 
@@ -17,6 +21,10 @@ ColumnLayout {
     }
 
     CustomSlider {
+        trackHeight: 30
+        trackRadius: 8
+        handleHeight: 38
+
         visible: Brightness.backlight
         icon: ""
         Layout.fillWidth: true
