@@ -50,6 +50,13 @@ RowLayout {
             }
         }
         IconButton {
+            iconText: ""
+            onClicked: () => {
+                quickMenuHeader.menuClosed();
+                hyprlock.running = true;
+            }
+        }
+        IconButton {
             iconText: ""
             onClicked: () => {
                 quickMenuHeader.menuClosed();
@@ -66,6 +73,11 @@ RowLayout {
     Process {
         id: betterControl
         command: ["better-control"]
+    }
+
+    Process {
+        id : hyprlock
+        command: ["hyprlock"]
     }
 
     Process {
