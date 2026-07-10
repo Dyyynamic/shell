@@ -132,13 +132,17 @@ Item {
                     }
                 }
 
-                header: Item {
-                    width: parent.width
-                    height: player.height + 10
+                header: PlayerStore.hasActivePlayer ? playerComponent : null
 
-                    MediaPlayer {
-                        id: player
-                        visible: PlayerStore.hasActivePlayer
+                Component {
+                    id: playerComponent
+                    Item {
+                        width: parent.width
+                        height: player.height + 10
+
+                        MediaPlayer {
+                            id: player
+                        }
                     }
                 }
 

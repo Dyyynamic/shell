@@ -47,7 +47,10 @@ Scope {
                         anchors.right: parent.right
                         spacing: 4
 
-                        MediaWidget {}
+                        Loader {
+                            active: PlayerStore.hasActivePlayer
+                            sourceComponent: MediaWidget {}
+                        }
 
                         StatusWidget {
                             Layout.preferredWidth: implicitWidth + 8
