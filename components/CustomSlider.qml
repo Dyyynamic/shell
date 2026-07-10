@@ -31,6 +31,8 @@ Slider {
     Layout.fillWidth: true
     implicitHeight: 40
 
+    focusPolicy: Qt.NoFocus
+
     background: ClippingRectangle {
         x: slider.leftPadding
         y: slider.height / 2 - height / 2

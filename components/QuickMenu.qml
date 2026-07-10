@@ -16,6 +16,7 @@ PanelWindow {
     property bool transitioning: false
 
     visible: open || transitioning
+    focusable: visible
 
     anchors {
         top: true
@@ -128,5 +129,11 @@ PanelWindow {
                 }
             }
         }
+    }
+
+    Shortcut {
+        sequence: "Escape"
+        enabled: menu.open
+        onActivated: menu.open = false
     }
 }

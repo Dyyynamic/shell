@@ -15,6 +15,8 @@ Button {
     checkable: true
     implicitHeight: 52
 
+    focusPolicy: Qt.NoFocus
+
     background: Rectangle {
         anchors.fill: parent
         radius: 20

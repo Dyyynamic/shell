@@ -38,6 +38,8 @@ Item {
 
                 opacity: NotificationStore.count > 0 ? 1 : 0.5
 
+                focusPolicy: Qt.NoFocus
+
                 background: Rectangle {
                     implicitHeight: 32
                     implicitWidth: 72
