@@ -1,10 +1,10 @@
 import QtQuick
-import Quickshell.Io
 import "../utils"
 
 Widget {
+    horizontalPadding: 12
+
     Text {
-        width: contentWidth + 8
         horizontalAlignment: Text.AlignHCenter
         text: Time.time
         font.family: "NotoSans Nerd Font Propo"

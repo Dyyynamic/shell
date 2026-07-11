@@ -8,34 +8,35 @@ ClippingRectangle {
     default property alias contentData: content.data
     property alias backgroundData: background.data
 
+    property int horizontalPadding: 8
     property bool clickable: false
 
     signal clicked
 
-    radius: height / 2
-    color: {
-        if (mouseArea.pressed) {
-            Qt.lighter(Colors.md3.background, 3)
-        } else {
-            if (mouseArea.containsMouse) {
-                Qt.lighter(Colors.md3.background, 2.5)
-            } else {
-                Qt.lighter(Colors.md3.background, 2)
-            }
-        }
-    }
+    implicitHeight: 32
+    implicitWidth: content.implicitWidth + horizontalPadding * 2
 
-    implicitWidth: content.width + 16
-    height: 32
+    radius: height / 2
+
+    color: {
+        if (mouseArea.pressed)
+            return Qt.lighter(Colors.md3.background, 3);
+        if (mouseArea.containsMouse)
+            return Qt.lighter(Colors.md3.background, 2.5);
+        return Qt.lighter(Colors.md3.background, 2);
+    }
 
     Item {
         id: background
         anchors.fill: parent
     }
 
-    Row {
+    Item {
         id: content
         anchors.centerIn: parent
+
+        implicitHeight: childrenRect.height
+        implicitWidth: childrenRect.width
     }
 
     MouseArea {
