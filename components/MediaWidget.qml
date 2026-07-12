@@ -3,6 +3,8 @@ import QtQuick.Layouts
 import "../utils"
 
 Widget {
+    id: root
+
     backgroundData: [
         Image {
             anchors.fill: parent

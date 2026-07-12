@@ -2,7 +2,7 @@ import QtQuick.Layouts
 import "../utils"
 
 ColumnLayout {
-    id: quickMenuSliders
+    id: root
 
     spacing: 10
 

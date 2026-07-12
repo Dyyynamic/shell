@@ -2,6 +2,8 @@ import QtQuick
 import "../utils"
 
 Widget {
+    id: root
+
     horizontalPadding: 12
 
     Text {

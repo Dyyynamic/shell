@@ -1,5 +1,4 @@
 import Quickshell
-import QtQuick.Layouts
 import QtQuick
 import "../utils"
 
@@ -8,7 +7,7 @@ PanelWindow {
 
     required property var bar
 
-    property int margin: 10
+    readonly property int margin: 10
 
     anchors {
         top: true
@@ -49,7 +48,7 @@ PanelWindow {
         }
 
         function onNotificationClosed(notification) {
-            removePopup(notification.id);
+            root.removePopup(notification.id);
         }
     }
 

@@ -1,4 +1,3 @@
-import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.Notifications
 import QtQuick
@@ -6,10 +5,12 @@ import QtQuick.Layouts
 import "../utils"
 
 Item {
-    id: item
+    id: root
 
     required property Notification notification
-    property alias radius: content.radius
+
+    readonly property int radius: 12
+    readonly property bool hasActions: root.notification.actions.length > 0
 
     signal activated
 
@@ -20,36 +21,37 @@ Item {
         id: content
         width: parent.width
         implicitHeight: wrapper.implicitHeight
+        radius: root.radius
+
         color: {
-            if (item.notification.actions.length === 0)
-                return Qt.lighter(Colors.md3.background, 2);
-            if (pressed)
-                return Qt.lighter(Colors.md3.background, 3);
-            if (hovered)
-                return Qt.lighter(Colors.md3.background, 2.5);
-            else
-                return Qt.lighter(Colors.md3.background, 2);
+            if (mouseArea.pressed)
+                return Qt.lighter(Colors.md3.background, 3.5);
+            if (mouseArea.containsMouse)
+                return Qt.lighter(Colors.md3.background, 2.75);
+            return Qt.lighter(Colors.md3.background, 2);
         }
-        radius: 12
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 200
+                easing: Easing.OutCubic
+            }
+        }
 
         property bool hovered: false
         property bool pressed: false
 
         MouseArea {
+            id: mouseArea
+
             anchors.fill: parent
+            enabled: root.hasActions
             hoverEnabled: true
 
-            onEntered: content.hovered = true
-            onExited: content.hovered = false
-            onPressed: content.pressed = true
-            onReleased: content.pressed = false
             onClicked: {
-                if (item.notification.actions.length > 0) {
-                    const action = item.notification.actions[0];
-
-                    action.invoke();
-                    item.activated();
-                }
+                const action = root.notification.actions[0];
+                action.invoke();
+                root.activated();
             }
         }
 
@@ -66,11 +68,11 @@ Item {
                     implicitHeight: 64
                     radius: width / 2
 
-                    visible: !!item.notification.image
+                    visible: !!root.notification.image
 
                     Image {
                         anchors.fill: parent
-                        source: item.notification.image
+                        source: root.notification.image
                         fillMode: Image.PreserveAspectCrop
                     }
                 }
@@ -83,8 +85,8 @@ Item {
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                             text: {
-                                if (item.notification.appName) {
-                                    item.notification.appName;
+                                if (root.notification.appName) {
+                                    root.notification.appName;
                                 } else {
                                     "Notification";
                                 }
@@ -95,7 +97,7 @@ Item {
                         }
 
                         Text {
-                            text: Qt.formatTime(new Date(item.notification.time), "hh:mm")
+                            text: Qt.formatTime(new Date(root.notification.time), "hh:mm")
                             font.family: "NotoSans Nerd Font Propo"
                             color: Colors.md3.on_background
                             font.pixelSize: 12
@@ -107,14 +109,14 @@ Item {
                             iconText: ""
                             size: 20
 
-                            onClicked: item.notification.dismiss()
+                            onClicked: root.notification.dismiss()
                         }
                     }
 
                     Text {
                         Layout.fillWidth: true
                         elide: Text.ElideRight
-                        text: item.notification.summary
+                        text: root.notification.summary
                         color: Colors.md3.on_background
                         font.family: "NotoSans Nerd Font Propo"
                         font.pixelSize: 14
@@ -126,7 +128,7 @@ Item {
                         wrapMode: Text.WordWrap
                         maximumLineCount: 2
                         elide: Text.ElideRight
-                        text: item.notification.body
+                        text: root.notification.body
                         color: Colors.md3.on_background
                         font.family: "NotoSans Nerd Font Propo"
                         font.pixelSize: 14

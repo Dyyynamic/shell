@@ -6,13 +6,13 @@ import QtQuick.Effects
 import "../utils"
 
 PanelWindow {
-    id: menu
+    id: root
 
     required property var bar
 
-    property bool open: false
-    property int margin: 10
+    readonly property int margin: 10
 
+    property bool open: false
     property bool transitioning: false
 
     visible: open || transitioning
@@ -32,7 +32,7 @@ PanelWindow {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: menu.open = false
+        onClicked: root.open = false
     }
 
     Item {
@@ -53,22 +53,22 @@ PanelWindow {
         WrapperItem {
             width: parent.width
             height: parent.height
-            topMargin: menu.margin
-            rightMargin: menu.margin
-            bottomMargin: menu.margin
+            topMargin: root.margin
+            rightMargin: root.margin
+            bottomMargin: root.margin
 
             Item {
                 height: parent.height
                 width: parent.width
 
-                opacity: menu.open ? 1 : 0
-                x: menu.open ? 0 : width
+                opacity: root.open ? 1 : 0
+                x: root.open ? 0 : width
 
                 Behavior on opacity {
                     NumberAnimation {
                         duration: 200
                         easing.type: Easing.OutCubic
-                        onRunningChanged: menu.transitioning = running
+                        onRunningChanged: root.transitioning = running
                     }
                 }
 
@@ -76,7 +76,7 @@ PanelWindow {
                     NumberAnimation {
                         duration: 200
                         easing.type: Easing.OutQuad
-                        onRunningChanged: menu.transitioning = running
+                        onRunningChanged: root.transitioning = running
                     }
                 }
 
@@ -109,7 +109,7 @@ PanelWindow {
                             height: parent.height
 
                             QuickMenuHeader {
-                                onMenuClosed: menu.open = false
+                                onMenuClosed: root.open = false
                             }
 
                             QuickMenuSliders {}
@@ -120,7 +120,7 @@ PanelWindow {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
 
-                                onNotificationActivated: menu.open = false
+                                onNotificationActivated: root.open = false
                             }
 
                             CustomCalendar {}
@@ -133,7 +133,7 @@ PanelWindow {
 
     Shortcut {
         sequence: "Escape"
-        enabled: menu.open
-        onActivated: menu.open = false
+        enabled: root.open
+        onActivated: root.open = false
     }
 }

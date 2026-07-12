@@ -5,28 +5,26 @@ import Quickshell.Widgets
 import "../utils"
 
 Widget {
-    id: workspaceWidget
+    id: root
 
     required property var screen
 
-    property var workspaces: Hyprland.workspaces.values.filter(ws => {
+    readonly property var workspaces: Hyprland.workspaces.values.filter(ws => {
         if (!ws.monitor)
             return false;
         // filter out special workspaces
         if (ws.id < 0)
             return false;
-        return ws.monitor.name === workspaceWidget.screen.name;
+        return ws.monitor.name === root.screen.name;
     })
-
-    property int activeIndex: workspaces.findIndex(ws => ws.active)
-
-    property int itemWidth: 24
+    readonly property int activeIndex: workspaces.findIndex(ws => ws.active)
+    readonly property int itemWidth: 24
 
     horizontalPadding: 4
 
     Row {
         Repeater {
-            model: workspaceWidget.workspaces
+            model: root.workspaces
 
             Button {
                 id: workspaceItem
@@ -35,8 +33,8 @@ Widget {
 
                 onClicked: workspaceItem.modelData.activate()
 
-                height: workspaceWidget.itemWidth
-                width: workspaceWidget.itemWidth
+                height: root.itemWidth
+                width: root.itemWidth
 
                 background: Rectangle {
                     anchors.fill: parent
@@ -44,9 +42,9 @@ Widget {
 
                     color: {
                         if (workspaceItem.pressed)
-                            return Qt.lighter(Colors.md3.background, 3);
+                            return Qt.lighter(Colors.md3.background, 3.5);
                         if (workspaceItem.hovered)
-                            return Qt.lighter(Colors.md3.background, 2.5);
+                            return Qt.lighter(Colors.md3.background, 2.75);
                         return Qt.lighter(Colors.md3.background, 2);
                     }
 
@@ -76,9 +74,9 @@ Widget {
     }
 
     ClippingRectangle {
-        x: workspaceWidget.activeIndex * workspaceWidget.itemWidth
-        width: workspaceWidget.itemWidth
-        height: workspaceWidget.itemWidth
+        x: root.activeIndex * root.itemWidth
+        width: root.itemWidth
+        height: root.itemWidth
         radius: height / 2
         color: Colors.md3.primary
 
@@ -90,18 +88,18 @@ Widget {
         }
 
         Row {
-            x: -workspaceWidget.activeIndex * workspaceWidget.itemWidth
+            x: -root.activeIndex * root.itemWidth
 
             Repeater {
-                model: workspaceWidget.workspaces
+                model: root.workspaces
 
                 Item {
                     id: textItem
                     required property var modelData
                     required property int index
 
-                    height: workspaceWidget.itemWidth
-                    width: workspaceWidget.itemWidth
+                    height: root.itemWidth
+                    width: root.itemWidth
 
                     Text {
                         anchors.centerIn: parent

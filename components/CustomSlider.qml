@@ -5,15 +5,15 @@ import QtQuick.Layouts
 import "../utils"
 
 Slider {
-    id: slider
+    id: root
 
     property int trackHeight: 4
     property int trackRadius: trackHeight / 2
     property int handleHeight: 24
     property int handleWidth: {
-        if (slider.pressed)
+        if (root.pressed)
             return 4;
-        if (slider.hovered)
+        if (root.hovered)
             return 6;
         return 4;
     }
@@ -34,55 +34,55 @@ Slider {
     focusPolicy: Qt.NoFocus
 
     background: ClippingRectangle {
-        x: slider.leftPadding
-        y: slider.height / 2 - height / 2
-        width: slider.availableWidth
-        height: slider.trackHeight
+        x: root.leftPadding
+        y: root.height / 2 - height / 2
+        width: root.availableWidth
+        height: root.trackHeight
 
         color: "transparent"
-        radius: slider.trackRadius
+        radius: root.trackRadius
 
         ClippingRectangle {
             id: leftRect
 
             x: 0
-            width: slider.handleCenter - slider.handleWidth / 2 - slider.handleGap
+            width: root.handleCenter - root.handleWidth / 2 - root.handleGap
             height: parent.height
             color: Colors.md3.primary
 
             Icon {
-                icon: slider.icon
-                size: slider.iconSize
+                icon: root.icon
+                size: root.iconSize
                 color: Colors.md3.on_primary
-                x: slider.width - slider.trackHeight / 2 - size / 2
-                y: slider.trackHeight / 2 - size / 2
+                x: root.width - root.trackHeight / 2 - size / 2
+                y: root.trackHeight / 2 - size / 2
             }
         }
 
         ClippingRectangle {
             id: rightRect
 
-            x: slider.handleCenter + slider.handleWidth / 2 + slider.handleGap
+            x: root.handleCenter + root.handleWidth / 2 + root.handleGap
             width: parent.width - x
             height: parent.height
             color: Colors.md3.on_secondary
 
             Icon {
-                icon: slider.icon
-                size: slider.iconSize
+                icon: root.icon
+                size: root.iconSize
                 color: Colors.md3.on_background
-                x: rightRect.width - slider.trackHeight / 2 - size / 2
-                y: slider.trackHeight / 2 - size / 2
+                x: rightRect.width - root.trackHeight / 2 - size / 2
+                y: root.trackHeight / 2 - size / 2
             }
         }
     }
 
     handle: Rectangle {
-        x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
-        y: slider.height / 2 - height / 2
+        x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
+        y: root.height / 2 - height / 2
 
-        width: slider.handleWidth
-        height: slider.handleHeight
+        width: root.handleWidth
+        height: root.handleHeight
         radius: width / 2
         color: Colors.md3.primary
     }

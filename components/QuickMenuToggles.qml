@@ -2,7 +2,7 @@ import QtQuick.Layouts
 import "../utils"
 
 ColumnLayout {
-    id: quickMenuToggles
+    id: root
 
     // Temporary
     property bool nightLightEnabled: false
@@ -40,9 +40,9 @@ ColumnLayout {
             iconText: ""
             iconSize: 24
             title: "Night Light"
-            subtitle: quickMenuToggles.nightLightEnabled ? "Active" : "Auto"
-            checked: quickMenuToggles.nightLightEnabled
-            onClicked: quickMenuToggles.nightLightEnabled = !quickMenuToggles.nightLightEnabled
+            subtitle: root.nightLightEnabled ? "Active" : "Auto"
+            checked: root.nightLightEnabled
+            onClicked: root.nightLightEnabled = !root.nightLightEnabled
         }
         ToggleButton {
             Layout.fillWidth: true

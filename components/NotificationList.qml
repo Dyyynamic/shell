@@ -47,9 +47,9 @@ Item {
 
                     color: {
                         if (clearButton.pressed)
-                            return Qt.lighter(Colors.md3.background, 3);
+                            return Qt.lighter(Colors.md3.background, 3.5);
                         if (clearButton.hovered)
-                            return Qt.lighter(Colors.md3.background, 2.5);
+                            return Qt.lighter(Colors.md3.background, 2.75);
                         return Qt.lighter(Colors.md3.background, 2);
                     }
 
@@ -66,10 +66,12 @@ Item {
         Item {
             id: content
 
+            readonly property bool hasContent: {
+                return NotificationStore.count > 0 || PlayerStore.hasActivePlayer;
+            }
+
             Layout.fillWidth: true
             Layout.fillHeight: true
-
-            property bool hasContent: NotificationStore.count > 0 || PlayerStore.hasActivePlayer
 
             Item {
                 anchors.fill: parent

@@ -8,7 +8,8 @@ import "../utils"
 
 Scope {
     id: root
-    property string mainMonitor: Quickshell.env("MAIN_MONITOR") || ""
+
+    readonly property string mainMonitor: Quickshell.env("MAIN_MONITOR") || ""
 
     Variants {
         model: Quickshell.screens

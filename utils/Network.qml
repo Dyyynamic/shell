@@ -4,8 +4,8 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-Scope {
-    id: network
+Singleton {
+    id: root
 
     property bool enabled: false
     property string name: ""
@@ -27,12 +27,12 @@ Scope {
 
     function toggle() {
         toggleWifi.running = true;
-        network.enabled = !network.enabled;
+        root.enabled = !root.enabled;
     }
 
     Process {
         id: toggleWifi
-        command: ["nmcli", "radio", "wifi", network.enabled ? "off" : "on"]
+        command: ["nmcli", "radio", "wifi", root.enabled ? "off" : "on"]
     }
 
     Process {
@@ -41,7 +41,7 @@ Scope {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                network.enabled = text.trim() === "enabled";
+                root.enabled = text.trim() === "enabled";
             }
         }
     }
@@ -53,14 +53,14 @@ Scope {
         stdout: StdioCollector {
             onStreamFinished: {
                 let lines = text.trim().split("\n");
-                network.name = "";
-                network.signal = 0;
+                root.name = "";
+                root.signal = 0;
 
                 for (let line of lines) {
                     let [active, ssid, signal] = line.split(":");
                     if (active.trim() === "yes") {
-                        network.name = ssid.trim();
-                        network.signal = parseInt(signal.trim());
+                        root.name = ssid.trim();
+                        root.signal = parseInt(signal.trim());
                         break;
                     }
                 }

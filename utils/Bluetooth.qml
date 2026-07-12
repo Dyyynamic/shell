@@ -3,15 +3,16 @@ pragma Singleton
 import Quickshell
 import Quickshell.Bluetooth
 
-Scope {
-    id: bluetooth
+Singleton {
+    id: root
 
-    property BluetoothAdapter adapter: Bluetooth.defaultAdapter
-    property bool enabled: adapter.enabled
-    property string deviceName: adapter.devices.values.find(device => device.connected)?.name ?? ""
+    readonly property BluetoothAdapter adapter: Bluetooth.defaultAdapter
+    readonly property bool enabled: adapter.enabled
+    readonly property string deviceName: {
+        return adapter.devices.values.find(device => device.connected)?.name ?? ""
+    }
 
     function toggle() {
         adapter.enabled = !adapter.enabled;
-        console.log(Bluetooth.defaultAdapter.devices);
     }
 }

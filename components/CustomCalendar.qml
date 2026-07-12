@@ -1,21 +1,23 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import "../utils"
 
 ColumnLayout {
-    id: calendar
+    id: root
+
+    readonly property var locale: Qt.locale("sv_SE")
+    readonly property date currentDate: new Date()
 
     spacing: 10
-
-    property var locale: Qt.locale("sv_SE")
-    property date currentDate: new Date()
 
     RowLayout {
         spacing: 10
 
         Text {
-            text: Qt.formatDate(calendar.currentDate, "MMMM yyyy")
+            text: Qt.formatDate(root.currentDate, "MMMM yyyy")
             font.family: "NotoSans Nerd Font Propo"
             font.bold: true
             font.pixelSize: 16
@@ -56,13 +58,15 @@ ColumnLayout {
 
         DayOfWeekRow {
             Layout.fillWidth: true
-            locale: calendar.locale
+            locale: root.locale
             implicitHeight: 32
 
             delegate: Text {
+                required property var modelData
+
                 text: {
                     let days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-                    return days[model.day];
+                    return days[modelData.day];
                 }
                 font.family: "NotoSans Nerd Font Propo"
                 font.bold: true
@@ -76,9 +80,13 @@ ColumnLayout {
             id: grid
 
             Layout.fillWidth: true
-            locale: calendar.locale
+            locale: root.locale
 
             delegate: Item {
+                id: dayItem
+
+                required property var modelData
+
                 implicitWidth: 32
                 implicitHeight: 32
 
@@ -88,19 +96,19 @@ ColumnLayout {
                     height: 32
                     radius: 16
 
-                    visible: model.today
+                    visible: dayItem.modelData.today
                     color: Colors.md3.primary
                 }
 
                 Text {
                     anchors.centerIn: parent
-                    text: model.day
+                    text: dayItem.modelData.day
                     font.family: "NotoSans Nerd Font Propo"
 
                     color: {
-                        if (model.today)
+                        if (dayItem.modelData.today)
                             return Colors.md3.on_primary;
-                        if (model.month === grid.month)
+                        if (dayItem.modelData.month === grid.month)
                             return Colors.md3.on_background;
                         return Qt.darker(Colors.md3.on_background, 2);
                     }

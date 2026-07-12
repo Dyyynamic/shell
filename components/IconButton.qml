@@ -3,7 +3,7 @@ import QtQuick.Controls
 import "../utils"
 
 Button {
-    id: button
+    id: root
 
     property alias iconText: icon.icon
     property alias color: background.color
@@ -20,7 +20,7 @@ Button {
         id: icon
         anchors.centerIn: parent
         color: Colors.md3.on_background
-        size: button.iconSize
+        size: root.iconSize
     }
 
     background: Rectangle {
@@ -28,10 +28,10 @@ Button {
         anchors.fill: parent
         radius: width / 2
         color: {
-            if (button.pressed)
-                return Qt.lighter(Colors.md3.background, 3);
-            if (button.hovered)
-                return Qt.lighter(Colors.md3.background, 2.5);
+            if (root.pressed)
+                return Qt.lighter(Colors.md3.background, 3.5);
+            if (root.hovered)
+                return Qt.lighter(Colors.md3.background, 2.75);
             return Qt.lighter(Colors.md3.background, 2);
         }
 

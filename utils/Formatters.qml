@@ -1,8 +1,11 @@
 pragma Singleton
 
+import Quickshell
 import QtQuick
 
-QtObject {
+Singleton {
+    id: root
+
     function formatTime(seconds) {
         seconds = Math.floor(seconds);
 

@@ -3,7 +3,7 @@ import QtQuick
 import "../utils"
 
 ClippingRectangle {
-    id: widget
+    id: root
 
     default property alias contentData: content.data
     property alias backgroundData: background.data
@@ -20,9 +20,9 @@ ClippingRectangle {
 
     color: {
         if (mouseArea.pressed)
-            return Qt.lighter(Colors.md3.background, 3);
+            return Qt.lighter(Colors.md3.background, 3.5);
         if (mouseArea.containsMouse)
-            return Qt.lighter(Colors.md3.background, 2.5);
+            return Qt.lighter(Colors.md3.background, 2.75);
         return Qt.lighter(Colors.md3.background, 2);
     }
 
@@ -43,11 +43,10 @@ ClippingRectangle {
         id: mouseArea
 
         anchors.fill: parent
-
-        enabled: widget.clickable
+        enabled: root.clickable
         hoverEnabled: true
 
-        onClicked: widget.clicked()
+        onClicked: root.clicked()
     }
 
     Behavior on color {

@@ -4,21 +4,21 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-Scope {
-    id: brightness
+Singleton {
+    id: root
 
     property int value: 100
     property int max: 100
     property bool backlight: false
 
     function setBrightness(value: int) {
-        brightness.value = value;
+        root.value = value;
         setBrightness.running = true;
     }
 
     Process {
         id: setBrightness
-        command: ["brightnessctl", "--class", "backlight", "set", `${brightness.value}%`]
+        command: ["brightnessctl", "--class", "backlight", "set", `${root.value}%`]
     }
 
     Process {
@@ -27,7 +27,7 @@ Scope {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                brightness.max = parseInt(text);
+                root.max = parseInt(text);
             }
         }
     }
@@ -38,8 +38,8 @@ Scope {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                let newValue = parseInt(parseInt(text) / brightness.max * 100);
-                brightness.value = newValue;
+                let newValue = parseInt(parseInt(text) / root.max * 100);
+                root.value = newValue;
             }
         }
     }
@@ -50,7 +50,7 @@ Scope {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                brightness.backlight = text.trim() !== "";
+                root.backlight = text.trim() !== "";
             }
         }
     }

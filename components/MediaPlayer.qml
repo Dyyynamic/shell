@@ -5,7 +5,7 @@ import Quickshell.Services.Mpris
 import "../utils"
 
 Item {
-    id: player
+    id: root
 
     implicitWidth: parent.width
     implicitHeight: 128
@@ -122,13 +122,6 @@ Item {
                                 size: 32
                                 iconSize: 32
                                 iconText: "󰒮"
-                                color: {
-                                    if (pressed)
-                                        return "#40ffffff";
-                                    if (hovered)
-                                        return "#20ffffff";
-                                    return "transparent";
-                                }
                                 onClicked: PlayerStore.lastPlayedPlayer.previous()
                             }
                             IconButton {
@@ -139,26 +132,12 @@ Item {
                                         return "󰏤";
                                     return "󰐊";
                                 }
-                                color: {
-                                    if (pressed)
-                                        return "#40ffffff";
-                                    if (hovered)
-                                        return "#20ffffff";
-                                    return "transparent";
-                                }
                                 onClicked: PlayerStore.lastPlayedPlayer.togglePlaying()
                             }
                             IconButton {
                                 size: 32
                                 iconSize: 32
                                 iconText: "󰒭"
-                                color: {
-                                    if (pressed)
-                                        return "#40ffffff";
-                                    if (hovered)
-                                        return "#20ffffff";
-                                    return "transparent";
-                                }
                                 onClicked: PlayerStore.lastPlayedPlayer.next()
                             }
                         }

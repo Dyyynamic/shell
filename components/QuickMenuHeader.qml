@@ -4,11 +4,11 @@ import QtQuick.Layouts
 import "../utils"
 
 RowLayout {
-    id: quickMenuHeader
-
-    spacing: 10
+    id: root
 
     signal menuClosed
+
+    spacing: 10
 
     RowLayout {
         spacing: 10
@@ -45,21 +45,21 @@ RowLayout {
         IconButton {
             iconText: ""
             onClicked: () => {
-                quickMenuHeader.menuClosed();
+                root.menuClosed();
                 betterControl.startDetached();
             }
         }
         IconButton {
             iconText: ""
             onClicked: () => {
-                quickMenuHeader.menuClosed();
+                root.menuClosed();
                 hyprlock.running = true;
             }
         }
         IconButton {
             iconText: ""
             onClicked: () => {
-                quickMenuHeader.menuClosed();
+                root.menuClosed();
                 powerMenu.running = true;
             }
         }
@@ -76,7 +76,7 @@ RowLayout {
     }
 
     Process {
-        id : hyprlock
+        id: hyprlock
         command: ["hyprlock"]
     }
 

@@ -3,16 +3,15 @@ pragma Singleton
 import Quickshell
 import Quickshell.Services.Pipewire
 
-Scope {
-    id: volume
+Singleton {
+    id: root
 
-    property PwNode sink: Pipewire.defaultAudioSink
+    readonly property PwNode sink: Pipewire.defaultAudioSink
+    readonly property bool available: !!sink
+    readonly property bool muted: sink.audio.muted ?? false
+    readonly property real value: sink.audio.volume ?? 0
 
-    property bool available: !!sink
-    property bool muted: sink.audio.muted ?? false
-    property real value: sink.audio.volume ?? 0
-
-    property string icon: {
+    readonly property string icon: {
         if (!available)
             return "";
         if (muted)
@@ -32,6 +31,6 @@ Scope {
     }
 
     PwObjectTracker {
-        objects: [volume.sink]
+        objects: [root.sink]
     }
 }

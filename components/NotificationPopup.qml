@@ -3,9 +3,11 @@ import QtQuick.Effects
 import Quickshell.Services.Notifications
 
 Rectangle {
-    id: popup
+    id: root
 
     required property Notification notification
+
+    signal expired
 
     width: parent.width
     height: item.height
@@ -13,8 +15,6 @@ Rectangle {
 
     opacity: 0
     x: width
-
-    signal expired
 
     RectangularShadow {
         anchors.fill: parent
@@ -28,18 +28,18 @@ Rectangle {
 
     NotificationItem {
         id: item
-        notification: popup.notification
+        notification: root.notification
     }
 
     Component.onCompleted: {
-        popup.opacity = 1;
-        popup.x = 0;
+        root.opacity = 1;
+        root.x = 0;
     }
 
     Timer {
         interval: 3000
         running: true
-        onTriggered: popup.expired()
+        onTriggered: root.expired()
     }
 
     Behavior on opacity {

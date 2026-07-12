@@ -3,14 +3,14 @@ import QtQuick.Controls
 import "../utils"
 
 Button {
-    id: button
+    id: root
 
     property alias title: label.text
     property alias subtitle: sublabel.text
     property alias iconText: icon.icon
     property alias iconSize: icon.size
 
-    property int margin: 14
+    readonly property int margin: 14
 
     checkable: true
     implicitHeight: 52
@@ -21,18 +21,18 @@ Button {
         anchors.fill: parent
         radius: 20
         color: {
-            if (button.checked) {
-                if (button.pressed)
+            if (root.checked) {
+                if (root.pressed)
                     return Qt.lighter(Colors.md3.primary, 1.2);
-                if (button.hovered)
+                if (root.hovered)
                     return Qt.lighter(Colors.md3.primary, 1.1);
                 return Colors.md3.primary;
             }
 
-            if (button.pressed)
-                return Qt.lighter(Colors.md3.background, 3);
-            if (button.hovered)
-                return Qt.lighter(Colors.md3.background, 2.5);
+            if (root.pressed)
+                return Qt.lighter(Colors.md3.background, 3.5);
+            if (root.hovered)
+                return Qt.lighter(Colors.md3.background, 2.75);
             return Qt.lighter(Colors.md3.background, 2);
         }
 
@@ -47,27 +47,27 @@ Button {
     Icon {
         id: icon
         color: {
-            if (button.checked)
+            if (root.checked)
                 return Colors.md3.on_primary;
             return Colors.md3.on_background;
         }
-        size: button.iconSize
+        size: root.iconSize
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: button.margin
+        anchors.leftMargin: root.margin
     }
 
     Column {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: button.margin * 2 + button.iconSize
+        anchors.leftMargin: root.margin * 2 + root.iconSize
 
         Text {
             id: label
             font.family: "NotoSans Nerd Font Propo"
             font.pixelSize: 14
             color: {
-                if (button.checked)
+                if (root.checked)
                     return Colors.md3.on_primary;
                 return Colors.md3.on_background;
             }
@@ -78,7 +78,7 @@ Button {
             font.family: "NotoSans Nerd Font Propo"
             font.pixelSize: 12
             color: {
-                if (button.checked)
+                if (root.checked)
                     return Colors.md3.on_primary;
                 return Colors.md3.on_background;
             }

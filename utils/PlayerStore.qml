@@ -9,10 +9,11 @@ import QtQml.Models
 Singleton {
     id: root
 
-    property var players: Mpris.players
-    property int playerCount: Mpris.players.values.length
     property MprisPlayer lastPlayedPlayer: null
-    property bool hasActivePlayer: playerCount > 0 && lastPlayedPlayer
+
+    readonly property var players: Mpris.players
+    readonly property int playerCount: Mpris.players.values.length
+    readonly property bool hasActivePlayer: playerCount > 0 && lastPlayedPlayer
 
     function updateLastPlayedPlayer(player: MprisPlayer) {
         if (player.playbackState === MprisPlaybackState.Playing) {

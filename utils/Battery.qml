@@ -3,16 +3,20 @@ pragma Singleton
 import Quickshell
 import Quickshell.Services.UPower
 
-Scope {
-    property UPowerDevice battery: UPower.devices.values.find(device => {
+Singleton {
+    id: root
+
+    readonly property UPowerDevice battery: UPower.devices.values.find(device => {
         return device.isLaptopBattery;
     })
 
-    property bool available: !!battery
-    property real value: battery ? battery.percentage : 0
-    property UPowerDeviceState state: battery ? battery.state : UPowerDeviceState.Empty
+    readonly property bool available: !!battery
+    readonly property real value: battery ? battery.percentage : 0
+    readonly property UPowerDeviceState state: {
+        return battery ? battery.state : UPowerDeviceState.Empty
+    }
 
-    property string description: {
+    readonly property string description: {
         const percentage = `${Math.round(value * 100)}`;
 
         if (state === UPowerDeviceState.Charging)
@@ -24,7 +28,7 @@ Scope {
         return `${percentage}%`;
     }
 
-    property string icon: {
+    readonly property string icon: {
         if (state === UPowerDeviceState.Charging || state === UPowerDeviceState.FullyCharged)
             return "";
         if (value > 0.8)

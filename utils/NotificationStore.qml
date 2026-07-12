@@ -7,9 +7,10 @@ import Quickshell.Services.Notifications
 Singleton {
     id: root
 
-    property alias notifications: notifServer.trackedNotifications
-    property int count: notifServer.trackedNotifications.values.length
     property bool doNotDisturb: false
+
+    readonly property alias notifications: notifServer.trackedNotifications
+    readonly property int count: notifServer.trackedNotifications.values.length
 
     signal notificationReceived(Notification notification)
     signal notificationClosed(Notification notification)
