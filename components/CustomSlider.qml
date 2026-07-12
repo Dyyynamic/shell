@@ -85,5 +85,12 @@ Slider {
         height: root.handleHeight
         radius: width / 2
         color: Colors.md3.primary
+
+        Behavior on width {
+            NumberAnimation {
+                duration: 100
+                easing.type: Easing.OutCubic
+            }
+        }
     }
 }
