@@ -13,11 +13,16 @@ ColumnLayout {
 
     spacing: 10
 
+    function reset() {
+        grid.month = root.currentDate.getMonth();
+        grid.year = root.currentDate.getFullYear();
+    }
+
     RowLayout {
         spacing: 10
 
         Text {
-            text: Qt.formatDate(root.currentDate, "MMMM yyyy")
+            text: Qt.formatDate(new Date(grid.year, grid.month), "MMMM yyyy")
             font.family: "NotoSans Nerd Font Propo"
             font.bold: true
             font.pixelSize: 16
@@ -28,6 +33,26 @@ ColumnLayout {
 
         Item {
             Layout.fillWidth: true
+        }
+
+        IconButton {
+            id: resetButton
+
+            property bool shown: grid.month !== root.currentDate.getMonth() || grid.year !== root.currentDate.getFullYear()
+
+            opacity: shown ? 1 : 0
+            enabled: shown
+
+            size: 32
+            iconText: ""
+            onClicked: root.reset()
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+            }
         }
 
         IconButton {

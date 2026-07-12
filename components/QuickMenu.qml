@@ -30,6 +30,9 @@ PanelWindow {
     color: "transparent"
     screen: bar.screen
 
+    onVisibleChanged: if (!visible)
+        calendar.reset()
+
     MouseArea {
         anchors.fill: parent
         onClicked: root.open = false
@@ -123,7 +126,9 @@ PanelWindow {
                                 onNotificationActivated: root.open = false
                             }
 
-                            CustomCalendar {}
+                            CustomCalendar {
+                                id: calendar
+                            }
                         }
                     }
                 }
