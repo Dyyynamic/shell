@@ -7,8 +7,19 @@ import "../utils"
 Item {
     id: root
 
+    property alias pressed: mouseArea.pressed
+    property alias hovered: mouseArea.containsMouse
+
     implicitWidth: parent.width
     implicitHeight: 128
+
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        enabled: PlayerStore.lastPlayedPlayer.canRaise
+        hoverEnabled: true
+        onClicked: PlayerStore.lastPlayedPlayer.raise()
+    }
 
     ClippingRectangle {
         anchors.fill: parent
@@ -24,8 +35,21 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            color: Qt.lighter(Colors.md3.background, 2)
+            color: {
+                if (root.pressed)
+                    return Qt.lighter(Colors.md3.background, 3.5);
+                if (root.hovered)
+                    return Qt.lighter(Colors.md3.background, 2.75);
+                return Qt.lighter(Colors.md3.background, 2);
+            }
             opacity: !!PlayerStore.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+            }
         }
 
         WrapperItem {
@@ -122,6 +146,15 @@ Item {
                                 size: 32
                                 iconSize: 32
                                 iconText: "󰒮"
+
+                                color: {
+                                    if (pressed)
+                                        return "#40ffffff";
+                                    if (hovered)
+                                        return "#20ffffff";
+                                    return "transparent";
+                                }
+
                                 onClicked: PlayerStore.lastPlayedPlayer.previous()
                             }
                             IconButton {
@@ -132,12 +165,30 @@ Item {
                                         return "󰏤";
                                     return "󰐊";
                                 }
+
+                                color: {
+                                    if (pressed)
+                                        return "#40ffffff";
+                                    if (hovered)
+                                        return "#20ffffff";
+                                    return "transparent";
+                                }
+
                                 onClicked: PlayerStore.lastPlayedPlayer.togglePlaying()
                             }
                             IconButton {
                                 size: 32
                                 iconSize: 32
                                 iconText: "󰒭"
+
+                                color: {
+                                    if (pressed)
+                                        return "#40ffffff";
+                                    if (hovered)
+                                        return "#20ffffff";
+                                    return "transparent";
+                                }
+
                                 onClicked: PlayerStore.lastPlayedPlayer.next()
                             }
                         }

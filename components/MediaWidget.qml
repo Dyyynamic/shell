@@ -5,6 +5,9 @@ import "../utils"
 Widget {
     id: root
 
+    clickable: PlayerStore.lastPlayedPlayer.canRaise
+    onClicked: PlayerStore.lastPlayedPlayer.raise()
+
     backgroundData: [
         Image {
             anchors.fill: parent
@@ -14,8 +17,21 @@ Widget {
         },
         Rectangle {
             anchors.fill: parent
-            color: Qt.lighter(Colors.md3.background, 2)
+            color: {
+                if (root.pressed)
+                    return Qt.lighter(Colors.md3.background, 3.5)
+                if (root.hovered)
+                    return Qt.lighter(Colors.md3.background, 2.75)
+                return Qt.lighter(Colors.md3.background, 2)
+            }
             opacity: !!PlayerStore.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+            }
         }
     ]
 
