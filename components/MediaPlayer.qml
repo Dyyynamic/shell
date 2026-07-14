@@ -74,7 +74,7 @@ Item {
 
                     Rectangle {
                         anchors.fill: parent
-                        color: Theme.base
+                        color: Theme.surface
 
                         visible: !PlayerStore.lastPlayedPlayer.trackArtUrl
 
