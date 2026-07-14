@@ -7,7 +7,7 @@ PanelWindow {
 
     required property var bar
 
-    readonly property int margin: 10
+    readonly property int margin: Theme.spacingSmall
 
     anchors {
         top: true
@@ -71,7 +71,7 @@ PanelWindow {
             interactive: false
             model: popupModel
 
-            spacing: 10
+            spacing: Theme.spacingSmall
 
             displaced: Transition {
                 NumberAnimation {

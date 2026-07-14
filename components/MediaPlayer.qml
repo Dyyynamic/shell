@@ -53,10 +53,10 @@ Item {
 
         WrapperItem {
             anchors.fill: parent
-            margin: 10
+            margin: Theme.spacingMedium
 
             RowLayout {
-                spacing: 10
+                spacing: Theme.spacingMedium
 
                 ClippingRectangle {
                     Layout.fillHeight: true
@@ -140,7 +140,7 @@ Item {
 
                         RowLayout {
                             anchors.centerIn: parent
-                            spacing: 8
+                            spacing: Theme.spacingSmall
 
                             IconButton {
                                 size: 32

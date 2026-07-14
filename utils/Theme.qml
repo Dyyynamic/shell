@@ -41,8 +41,14 @@ Singleton {
     readonly property int animationEasing: Easing.OutCubic
 
     // Radii
-    readonly property real radiusLarge: 20
-    readonly property real radiusMedium: 16
-    readonly property real radiusSmall: 12
-    readonly property real radiusTiny: 8
+    readonly property int radiusLarge: 20
+    readonly property int radiusMedium: 16
+    readonly property int radiusSmall: 12
+    readonly property int radiusTiny: 8
+
+    // Spacing
+    readonly property int spacingLarge: 16
+    readonly property int spacingMedium: 12
+    readonly property int spacingSmall: 8
+    readonly property int spacingTiny: 4
 }

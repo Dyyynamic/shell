@@ -18,13 +18,13 @@ Widget {
     }
 
     ColumnLayout {
-        spacing: 10
+        spacing: Theme.spacingSmall
 
         RowLayout {
-            spacing: 10
+            spacing: Theme.spacingSmall
 
             WrapperItem {
-                margin: 5
+                margin: Theme.spacingTiny
 
                 Text {
                     text: Qt.formatDate(new Date(grid.year, grid.month), "MMMM yyyy")

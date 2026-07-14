@@ -10,7 +10,7 @@ Button {
     property alias iconText: icon.icon
     property alias iconSize: icon.size
 
-    readonly property int margin: 14
+    readonly property int margin: (height - iconSize) / 2
 
     checkable: true
     implicitHeight: 52

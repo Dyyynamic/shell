@@ -10,7 +10,7 @@ Widget {
     signal notificationActivated
 
     ColumnLayout {
-        spacing: 10
+        spacing: Theme.spacingSmall
 
         Item {
             id: content
@@ -36,7 +36,7 @@ Widget {
 
                 ColumnLayout {
                     anchors.centerIn: parent
-                    spacing: 10
+                    spacing: Theme.spacingSmall
 
                     Icon {
                         Layout.alignment: Qt.AlignHCenter
@@ -60,7 +60,7 @@ Widget {
                 id: notificationList
 
                 anchors.fill: parent
-                spacing: 10
+                spacing: Theme.spacingSmall
                 clip: true
 
                 opacity: content.hasContent ? 1 : 0
@@ -95,7 +95,7 @@ Widget {
                     id: playerComponent
                     Item {
                         width: parent.width
-                        height: player.height + 10
+                        height: player.height + Theme.spacingSmall
 
                         MediaPlayer {
                             id: player
@@ -118,7 +118,7 @@ Widget {
 
         RowLayout {
             WrapperItem {
-                margin: 5
+                margin: Theme.spacingTiny
 
                 Text {
                     text: `${NotificationStore.count} notification${NotificationStore.count !== 1 ? 's' : ''}`

@@ -12,10 +12,10 @@ Widget {
     backgroundColor: "transparent"
 
     RowLayout {
-        spacing: 10
+        spacing: Theme.spacingSmall
 
         RowLayout {
-            spacing: 10
+            spacing: Theme.spacingSmall
 
             Icon {
                 icon: "󰣇"
@@ -44,7 +44,7 @@ Widget {
         }
 
         RowLayout {
-            spacing: 10
+            spacing: Theme.spacingSmall
 
             IconButton {
                 color: {

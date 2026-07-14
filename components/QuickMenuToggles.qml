@@ -9,7 +9,7 @@ Widget {
     property bool nightLightEnabled: false
 
     ColumnLayout {
-        spacing: 10
+        spacing: Theme.spacingSmall
 
         CustomSlider {
             trackHeight: 30
@@ -41,7 +41,7 @@ Widget {
         }
 
         RowLayout {
-            spacing: 10
+            spacing: Theme.spacingSmall
 
             ToggleButton {
                 Layout.fillWidth: true
@@ -64,7 +64,7 @@ Widget {
         }
 
         RowLayout {
-            spacing: 10
+            spacing: Theme.spacingSmall
 
             ToggleButton {
                 Layout.fillWidth: true

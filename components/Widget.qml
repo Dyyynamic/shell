@@ -7,8 +7,8 @@ Item {
 
     default property alias contentData: content.data
 
-    property int contentMargin: 10
-    property int contentBottomMargin: 10
+    property int contentMargin: Theme.spacingSmall
+    property int contentBottomMargin: Theme.spacingSmall
     property color backgroundColor: Theme.surface
 
     implicitWidth: content.implicitWidth

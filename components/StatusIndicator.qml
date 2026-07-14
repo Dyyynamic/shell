@@ -7,7 +7,7 @@ Indicator {
     clickable: true
 
     Row {
-        spacing: 8
+        spacing: Theme.spacingSmall
 
         Icon {
             id: network

@@ -65,10 +65,10 @@ Item {
         id: content
 
         anchors.fill: parent
-        margin: 12
+        margin: Theme.spacingMedium
 
         RowLayout {
-            spacing: 12
+            spacing: Theme.spacingMedium
 
             ClippingRectangle {
                 Layout.alignment: Qt.AlignTop
@@ -144,7 +144,7 @@ Item {
 
                 RowLayout {
                     Layout.fillWidth: true
-                    spacing: 5
+                    spacing: Theme.spacingTiny
 
                     visible: root.actions.length > 0
 

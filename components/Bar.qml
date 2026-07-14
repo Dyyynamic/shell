@@ -31,7 +31,7 @@ Scope {
 
             WrapperItem {
                 anchors.fill: parent
-                margin: 4
+                margin: Theme.spacingTiny
 
                 Item {
                     WorkspaceIndicator {
@@ -45,7 +45,7 @@ Scope {
 
                     RowLayout {
                         anchors.right: parent.right
-                        spacing: 4
+                        spacing: Theme.spacingTiny
 
                         Loader {
                             active: PlayerStore.hasActivePlayer

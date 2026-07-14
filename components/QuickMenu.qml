@@ -10,7 +10,7 @@ PanelWindow {
 
     required property var bar
 
-    readonly property int margin: 10
+    readonly property int margin: Theme.spacingSmall
 
     property bool open: false
     property bool transitioning: false
@@ -103,10 +103,10 @@ PanelWindow {
 
                 WrapperItem {
                     anchors.fill: parent
-                    margin: 10
+                    margin: Theme.spacingMedium
 
                     ColumnLayout {
-                        spacing: 10
+                        spacing: Theme.spacingMedium
                         width: parent.width
                         height: parent.height
 
