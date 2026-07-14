@@ -8,7 +8,6 @@ Singleton {
     id: root
 
     property int value: 100
-    property int max: 100
     property bool backlight: false
 
     function setBrightness(value: int) {
@@ -22,31 +21,8 @@ Singleton {
     }
 
     Process {
-        id: getMax
-        command: ["brightnessctl", "--class", "backlight", "max"]
-        running: true
-        stdout: StdioCollector {
-            onStreamFinished: {
-                root.max = parseInt(text);
-            }
-        }
-    }
-
-    Process {
-        id: getBrightness
-        command: ["brightnessctl", "--class", "backlight", "get"]
-        running: true
-        stdout: StdioCollector {
-            onStreamFinished: {
-                let newValue = parseInt(parseInt(text) / root.max * 100);
-                root.value = newValue;
-            }
-        }
-    }
-
-    Process {
         id: backlightExists
-        command: ["brightnessctl", "--class", "backlight", "info"]
+        command: ["brightnessctl", "--class", "backlight"]
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
@@ -55,13 +31,22 @@ Singleton {
         }
     }
 
-    Timer {
-        interval: 1000
+    Process {
+        command: ["udevadm", "monitor", "--subsystem-match=backlight", "--udev"]
         running: true
-        repeat: true
-        onTriggered: {
-            getMax.running = true;
-            getBrightness.running = true;
+        stdout: SplitParser {
+            onRead: updateBrightness.running = true
+        }
+    }
+
+    Process {
+        id: updateBrightness
+        command: ["brightnessctl", "-m"]
+        running: true
+        stdout: StdioCollector {
+            onStreamFinished: {
+                root.value = this.text.split(",")[3].replace("%", "");
+            }
         }
     }
 }
