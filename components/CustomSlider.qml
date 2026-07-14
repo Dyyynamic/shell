@@ -65,7 +65,7 @@ Slider {
             x: root.handleCenter + root.handleWidth / 2 + root.handleGap
             width: parent.width - x
             height: parent.height
-            color: Theme.overlayHigh
+            color: Theme.accentDark
 
             Icon {
                 icon: root.icon

@@ -7,15 +7,20 @@ import "../utils"
 Singleton {
     id: root
 
+    function colorMix(color1, color2, factor) {
+        return Qt.tint(color1, Qt.rgba(color2.r, color2.g, color2.b, factor))
+    }
+
     // Colors
     readonly property color base: Colors.md3.background
 
-    readonly property color surface: Qt.lighter(base, 1.35)
-    readonly property color overlay: Qt.lighter(base, 2)
-    readonly property color overlayHigh: Qt.lighter(base, 2.5)
+    readonly property color surface: colorMix(base, text, 0.035)
+    readonly property color overlay: colorMix(base, text, 0.1)
+    readonly property color overlayHigh: colorMix(base, text, 0.25)
 
     readonly property color accent: Colors.md3.primary
-    readonly property color outline: Qt.lighter(base, 2)
+    readonly property color accentDark: colorMix(accent, base, 0.75)
+    readonly property color outline: colorMix(base, text, 0.1)
 
     // Multipliers
     readonly property real hoverMultiplier: 1.25
@@ -26,7 +31,7 @@ Singleton {
 
     // Text colors
     readonly property color text: Colors.md3.on_background
-    readonly property color textSecondary: Qt.darker(Colors.md3.on_background, 2)
+    readonly property color textSecondary: colorMix(text, base, 0.45)
     readonly property color textAccent: Colors.md3.on_primary
 
     // Font

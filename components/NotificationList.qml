@@ -138,6 +138,7 @@ Widget {
                 text: "Clear"
                 font.family: Theme.fontFamily
                 font.pixelSize: Theme.fontSizeTiny
+                palette.buttonText: Theme.text
                 onClicked: NotificationStore.clear()
 
                 enabled: NotificationStore.count > 0
