@@ -56,7 +56,7 @@ Item {
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
-                            easing: Easing.OutCubic
+                            easing.type: Easing.OutCubic
                         }
                     }
                 }

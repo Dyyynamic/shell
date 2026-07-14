@@ -28,7 +28,10 @@ Singleton {
     NotificationServer {
         id: notifServer
 
+        imageSupported: true
         actionsSupported: true
+        actionIconsSupported: true
+        persistenceSupported: true
 
         onNotification: notif => {
             notif.time = Date.now();

@@ -13,3 +13,4 @@ Part of my [dotfiles](https://github.com/Dyyynamic/dotfiles) setup for Hyprland 
 ## To-Do
 
 - Implement Night Light
+- Add sub-menus for network, bluetooth and audio

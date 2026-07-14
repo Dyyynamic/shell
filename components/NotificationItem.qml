@@ -2,6 +2,7 @@ import Quickshell.Widgets
 import Quickshell.Services.Notifications
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import "../utils"
 
 Item {
@@ -10,7 +11,16 @@ Item {
     required property Notification notification
 
     readonly property int radius: 12
-    readonly property bool hasActions: root.notification.actions.length > 0
+    readonly property var defaultAction: {
+        return root.notification.actions.find(action => {
+            return action.identifier === "default";
+        });
+    }
+    readonly property var actions: {
+        return root.notification.actions.filter(action => {
+            return action.identifier !== "default";
+        });
+    }
 
     signal activated
 
@@ -34,7 +44,7 @@ Item {
         Behavior on color {
             ColorAnimation {
                 duration: 200
-                easing: Easing.OutCubic
+                easing.type: Easing.OutCubic
             }
         }
 
@@ -45,12 +55,11 @@ Item {
             id: mouseArea
 
             anchors.fill: parent
-            enabled: root.hasActions
+            enabled: !!root.defaultAction
             hoverEnabled: true
 
             onClicked: {
-                const action = root.notification.actions[0];
-                action.invoke();
+                root.defaultAction.invoke();
                 root.activated();
             }
         }
@@ -64,6 +73,7 @@ Item {
                 spacing: 12
 
                 ClippingRectangle {
+                    Layout.alignment: Qt.AlignTop
                     implicitWidth: 64
                     implicitHeight: 64
                     radius: width / 2
@@ -132,6 +142,56 @@ Item {
                         color: Colors.md3.on_background
                         font.family: "NotoSans Nerd Font Propo"
                         font.pixelSize: 14
+                    }
+
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: 5
+
+                        visible: root.actions.length > 0
+
+                        Repeater {
+                            model: root.actions
+
+                            Button {
+                                id: defaultActionButton
+
+                                required property var modelData
+
+                                Layout.fillWidth: true
+                                Layout.preferredWidth: parent.width / root.actions.length
+
+                                icon.name: root.notification.hasActionIcons ? modelData.identifier : ""
+                                text: root.notification.hasActionIcons ? "" : modelData.text
+                                font.family: "NotoSans Nerd Font Propo"
+                                font.pixelSize: 12
+                                implicitHeight: 30
+                                padding: 8
+
+                                background: Rectangle {
+                                    color: {
+                                        if (defaultActionButton.pressed)
+                                            return Qt.lighter(Colors.md3.background, 4.25);
+                                        if (defaultActionButton.hovered)
+                                            return Qt.lighter(Colors.md3.background, 3.5);
+                                        return Qt.lighter(Colors.md3.background, 2.75);
+                                    }
+                                    radius: 10
+
+                                    Behavior on color {
+                                        ColorAnimation {
+                                            duration: 200
+                                            easing.type: Easing.OutCubic
+                                        }
+                                    }
+                                }
+
+                                onClicked: {
+                                    modelData.invoke();
+                                    root.activated();
+                                }
+                            }
+                        }
                     }
                 }
             }
