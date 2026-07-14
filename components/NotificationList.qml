@@ -29,8 +29,8 @@ Widget {
 
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.OutCubic
+                        duration: Theme.animationDuration
+                        easing.type: Theme.animationEasing
                     }
                 }
 
@@ -67,16 +67,16 @@ Widget {
 
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.OutCubic
+                        duration: Theme.animationDuration
+                        easing.type: Theme.animationEasing
                     }
                 }
 
                 displaced: Transition {
                     NumberAnimation {
                         properties: "y"
-                        duration: 200
-                        easing.type: Easing.OutCubic
+                        duration: Theme.animationDuration
+                        easing.type: Theme.animationEasing
                     }
                 }
 
@@ -84,8 +84,8 @@ Widget {
                     NumberAnimation {
                         property: "opacity"
                         to: 0
-                        duration: 200
-                        easing.type: Easing.OutCubic
+                        duration: Theme.animationDuration
+                        easing.type: Theme.animationEasing
                     }
                 }
 
@@ -162,8 +162,8 @@ Widget {
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: 200
-                            easing.type: Easing.OutCubic
+                            duration: Theme.animationDuration
+                            easing.type: Theme.animationEasing
                         }
                     }
                 }

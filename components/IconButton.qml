@@ -26,7 +26,7 @@ Button {
     background: Rectangle {
         id: background
         anchors.fill: parent
-        radius: width / 2
+        radius: height / 2
         color: {
             if (root.pressed)
                 return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
@@ -37,8 +37,8 @@ Button {
 
         Behavior on color {
             ColorAnimation {
-                duration: 200
-                easing.type: Easing.OutCubic
+                duration: Theme.animationDuration
+                easing.type: Theme.animationEasing
             }
         }
     }

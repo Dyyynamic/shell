@@ -17,7 +17,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: root.backgroundColor
-        radius: 15
+        radius: Theme.radiusMedium
     }
 
     WrapperItem {

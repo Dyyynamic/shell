@@ -28,8 +28,8 @@ Indicator {
 
             Behavior on color {
                 ColorAnimation {
-                    duration: 200
-                    easing.type: Easing.OutCubic
+                    duration: Theme.animationDuration
+                    easing.type: Theme.animationEasing
                 }
             }
         }

@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Effects
 import Quickshell.Services.Notifications
+import "../utils"
 
-Rectangle {
+Item {
     id: root
 
     required property Notification notification
@@ -11,7 +12,6 @@ Rectangle {
 
     width: parent.width
     height: item.height
-    color: "transparent"
 
     opacity: 0
     x: width
@@ -44,15 +44,15 @@ Rectangle {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: 200
-            easing.type: Easing.OutCubic
+            duration: Theme.animationDuration
+            easing.type: Theme.animationEasing
         }
     }
 
     Behavior on x {
         NumberAnimation {
-            duration: 200
-            easing.type: Easing.OutCubic
+            duration: Theme.animationDuration
+            easing.type: Theme.animationEasing
         }
     }
 }

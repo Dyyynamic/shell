@@ -23,7 +23,7 @@ Item {
 
     ClippingRectangle {
         anchors.fill: parent
-        radius: 12
+        radius: Theme.radiusSmall
 
         Image {
             anchors.fill: parent
@@ -45,8 +45,8 @@ Item {
 
             Behavior on color {
                 ColorAnimation {
-                    duration: 200
-                    easing.type: Easing.OutCubic
+                    duration: Theme.animationDuration
+                    easing.type: Theme.animationEasing
                 }
             }
         }
@@ -62,7 +62,7 @@ Item {
                     Layout.fillHeight: true
                     Layout.preferredWidth: height
 
-                    radius: 10
+                    radius: Theme.radiusTiny
 
                     Image {
                         id: cover

@@ -69,16 +69,16 @@ PanelWindow {
 
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.OutCubic
+                        duration: Theme.animationDuration
+                        easing.type: Theme.animationEasing
                         onRunningChanged: root.transitioning = running
                     }
                 }
 
                 Behavior on x {
                     NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.OutQuad
+                        duration: Theme.animationDuration
+                        easing.type: Theme.animationEasing
                         onRunningChanged: root.transitioning = running
                     }
                 }
@@ -96,41 +96,39 @@ PanelWindow {
                 Rectangle {
                     id: background
                     anchors.fill: parent
-                    radius: 20
+                    radius: Theme.radiusLarge
                     color: Theme.base
                     border.color: Theme.outline
+                }
 
-                    WrapperItem {
-                        id: wrapper
+                WrapperItem {
+                    anchors.fill: parent
+                    margin: 10
+
+                    ColumnLayout {
+                        spacing: 10
                         width: parent.width
                         height: parent.height
-                        margin: 10
 
-                        ColumnLayout {
-                            spacing: 10
-                            width: parent.width
-                            height: parent.height
+                        QuickMenuHeader {
+                            Layout.fillWidth: true
+                            onMenuClosed: root.open = false
+                        }
 
-                            QuickMenuHeader {
-                                Layout.fillWidth: true
-                                onMenuClosed: root.open = false
-                            }
+                        QuickMenuToggles {
+                            Layout.fillWidth: true
+                        }
 
-                            QuickMenuToggles {
-                                Layout.fillWidth: true
-                            }
+                        NotificationList {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
 
-                            NotificationList {
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
+                            onNotificationActivated: root.open = false
+                        }
 
-                                onNotificationActivated: root.open = false
-                            }
-
-                            CustomCalendar {
-                                id: calendar
-                                Layout.fillWidth: true
-                            }
+                        CustomCalendar {
+                            id: calendar
+                            Layout.fillWidth: true
                         }
                     }
                 }

@@ -55,8 +55,8 @@ Widget {
 
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.OutCubic
+                        duration: Theme.animationDuration
+                        easing.type: Theme.animationEasing
                     }
                 }
             }
@@ -126,7 +126,7 @@ Widget {
                         anchors.centerIn: parent
                         width: 32
                         height: 32
-                        radius: 16
+                        radius: height / 2
 
                         visible: dayItem.modelData.today
                         color: Theme.accent

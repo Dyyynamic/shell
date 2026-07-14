@@ -19,7 +19,7 @@ Button {
 
     background: Rectangle {
         anchors.fill: parent
-        radius: 20
+        radius: Theme.radiusLarge
         color: {
             if (root.checked) {
                 if (root.pressed)
@@ -38,8 +38,8 @@ Button {
 
         Behavior on color {
             ColorAnimation {
-                duration: 200
-                easing.type: Easing.OutCubic
+                duration: Theme.animationDuration
+                easing.type: Theme.animationEasing
             }
         }
     }

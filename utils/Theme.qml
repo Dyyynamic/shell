@@ -34,4 +34,15 @@ Singleton {
     readonly property int fontSize: 16
     readonly property int fontSizeSmall: 14
     readonly property int fontSizeTiny: 12
+
+    // Animations
+    readonly property int animationDuration: 200
+    readonly property int animationDurationFast: 100
+    readonly property int animationEasing: Easing.OutCubic
+
+    // Radii
+    readonly property real radiusLarge: 20
+    readonly property real radiusMedium: 16
+    readonly property real radiusSmall: 12
+    readonly property real radiusTiny: 8
 }

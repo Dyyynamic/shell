@@ -88,8 +88,8 @@ Slider {
 
         Behavior on width {
             NumberAnimation {
-                duration: 100
-                easing.type: Easing.OutCubic
+                duration: Theme.animationDurationFast
+                easing.type: Theme.animationEasing
             }
         }
     }

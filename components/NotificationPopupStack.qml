@@ -76,8 +76,8 @@ PanelWindow {
             displaced: Transition {
                 NumberAnimation {
                     properties: "y"
-                    duration: 200
-                    easing.type: Easing.OutCubic
+                    duration: Theme.animationDuration
+                    easing.type: Theme.animationEasing
                 }
             }
 
@@ -85,8 +85,8 @@ PanelWindow {
                 NumberAnimation {
                     properties: "opacity"
                     to: 0
-                    duration: 200
-                    easing.type: Easing.OutCubic
+                    duration: Theme.animationDuration
+                    easing.type: Theme.animationEasing
                 }
             }
 

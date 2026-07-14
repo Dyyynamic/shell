@@ -13,7 +13,7 @@ Widget {
 
         CustomSlider {
             trackHeight: 30
-            trackRadius: 8
+            trackRadius: Theme.radiusTiny
             handleHeight: 38
 
             icon: Volume.icon
@@ -27,7 +27,7 @@ Widget {
 
         CustomSlider {
             trackHeight: 30
-            trackRadius: 8
+            trackRadius: Theme.radiusTiny
             handleHeight: 38
 
             visible: Brightness.backlight
