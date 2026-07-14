@@ -23,17 +23,17 @@ Button {
         color: {
             if (root.checked) {
                 if (root.pressed)
-                    return Qt.lighter(Colors.md3.primary, 1.2);
+                    return Qt.lighter(Theme.accent, Theme.accentPressedMultiplier);
                 if (root.hovered)
-                    return Qt.lighter(Colors.md3.primary, 1.1);
-                return Colors.md3.primary;
+                    return Qt.lighter(Theme.accent, Theme.accentHoverMultiplier);
+                return Theme.accent;
             }
 
             if (root.pressed)
-                return Qt.lighter(Colors.md3.background, 3.5);
+                return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
             if (root.hovered)
-                return Qt.lighter(Colors.md3.background, 2.75);
-            return Qt.lighter(Colors.md3.background, 2);
+                return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+            return Theme.overlay;
         }
 
         Behavior on color {
@@ -48,8 +48,8 @@ Button {
         id: icon
         color: {
             if (root.checked)
-                return Colors.md3.on_primary;
-            return Colors.md3.on_background;
+                return Theme.textAccent;
+            return Theme.text;
         }
         size: root.iconSize
         anchors.verticalCenter: parent.verticalCenter
@@ -64,23 +64,23 @@ Button {
 
         Text {
             id: label
-            font.family: "NotoSans Nerd Font Propo"
-            font.pixelSize: 14
+            font.family: Theme.fontFamily
+            font.pixelSize: Theme.fontSizeSmall
             color: {
                 if (root.checked)
-                    return Colors.md3.on_primary;
-                return Colors.md3.on_background;
+                    return Theme.textAccent;
+                return Theme.text;
             }
             elide: Text.ElideRight
         }
         Text {
             id: sublabel
-            font.family: "NotoSans Nerd Font Propo"
-            font.pixelSize: 12
+            font.family: Theme.fontFamily
+            font.pixelSize: Theme.fontSizeTiny
             color: {
                 if (root.checked)
-                    return Colors.md3.on_primary;
-                return Colors.md3.on_background;
+                    return Theme.textAccent;
+                return Theme.text;
             }
             elide: Text.ElideRight
         }

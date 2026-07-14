@@ -23,7 +23,6 @@ Item {
 
     ClippingRectangle {
         anchors.fill: parent
-        color: Qt.lighter(Colors.md3.background, 2)
         radius: 12
 
         Image {
@@ -37,10 +36,10 @@ Item {
             anchors.fill: parent
             color: {
                 if (root.pressed)
-                    return Qt.lighter(Colors.md3.background, 3.5);
+                    return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
                 if (root.hovered)
-                    return Qt.lighter(Colors.md3.background, 2.75);
-                return Qt.lighter(Colors.md3.background, 2);
+                    return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                return Theme.overlay;
             }
             opacity: !!PlayerStore.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
 
@@ -75,7 +74,7 @@ Item {
 
                     Rectangle {
                         anchors.fill: parent
-                        color: Colors.md3.background
+                        color: Theme.base
 
                         visible: !PlayerStore.lastPlayedPlayer.trackArtUrl
 
@@ -83,7 +82,7 @@ Item {
                             anchors.centerIn: parent
                             icon: ""
                             size: 32
-                            color: Colors.md3.on_background
+                            color: Theme.text
                         }
                     }
                 }
@@ -95,22 +94,22 @@ Item {
                     spacing: 0
 
                     Text {
-                        font.family: "NotoSans Nerd Font Propo"
-                        font.pixelSize: 14
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
                         font.weight: Font.DemiBold
                         Layout.fillWidth: true
                         elide: Text.ElideRight
                         text: PlayerStore.lastPlayedPlayer.trackTitle
-                        color: Colors.md3.on_background
+                        color: Theme.text
                     }
 
                     Text {
-                        font.family: "NotoSans Nerd Font Propo"
-                        font.pixelSize: 12
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeTiny
                         Layout.fillWidth: true
                         elide: Text.ElideRight
                         text: PlayerStore.lastPlayedPlayer.trackArtist
-                        color: Colors.md3.on_background
+                        color: Theme.text
                     }
 
                     CustomSlider {
@@ -131,8 +130,9 @@ Item {
                         implicitHeight: 24
 
                         Text {
-                            font.family: "NotoSans Nerd Font Propo"
-                            color: Colors.md3.on_background
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeTiny
+                            color: Theme.text
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
                             text: Formatters.formatTime(PlayerStore.lastPlayedPlayer.position)
@@ -194,8 +194,9 @@ Item {
                         }
 
                         Text {
-                            font.family: "NotoSans Nerd Font Propo"
-                            color: Colors.md3.on_background
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeTiny
+                            color: Theme.text
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter
                             text: Formatters.formatTime(PlayerStore.lastPlayedPlayer.length)

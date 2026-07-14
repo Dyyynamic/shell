@@ -4,7 +4,7 @@ import Quickshell.Hyprland
 import Quickshell.Widgets
 import "../utils"
 
-Widget {
+Indicator {
     id: root
 
     required property var screen
@@ -42,10 +42,10 @@ Widget {
 
                     color: {
                         if (workspaceItem.pressed)
-                            return Qt.lighter(Colors.md3.background, 3.5);
+                            return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
                         if (workspaceItem.hovered)
-                            return Qt.lighter(Colors.md3.background, 2.75);
-                        return Qt.lighter(Colors.md3.background, 2);
+                            return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                        return Theme.overlay;
                     }
 
                     Behavior on color {
@@ -60,13 +60,13 @@ Widget {
                     anchors.centerIn: parent
                     horizontalAlignment: Text.AlignHCenter
                     text: workspaceItem.index + 1
-                    font.family: "NotoSans Nerd Font Propo"
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSize
                     font.bold: true
-                    font.pixelSize: 16
                     color: {
                         if (workspaceItem.modelData.toplevels.values.length > 0)
-                            return Colors.md3.on_background;
-                        return Qt.darker(Colors.md3.on_background, 1.5);
+                            return Theme.text;
+                        return Theme.textSecondary;
                     }
                 }
             }
@@ -78,7 +78,7 @@ Widget {
         width: root.itemWidth
         height: root.itemWidth
         radius: height / 2
-        color: Colors.md3.primary
+        color: Theme.accent
 
         Behavior on x {
             NumberAnimation {
@@ -105,10 +105,10 @@ Widget {
                         anchors.centerIn: parent
                         horizontalAlignment: Text.AlignHCenter
                         text: textItem.index + 1
-                        font.family: "NotoSans Nerd Font Propo"
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSize
                         font.bold: true
-                        font.pixelSize: 16
-                        color: Colors.md3.on_primary;
+                        color: Theme.textAccent
                     }
                 }
             }

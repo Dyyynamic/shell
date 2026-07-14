@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import "../utils"
 
-Widget {
+Indicator {
     id: root
 
     clickable: PlayerStore.lastPlayedPlayer.canRaise
@@ -19,10 +19,10 @@ Widget {
             anchors.fill: parent
             color: {
                 if (root.pressed)
-                    return Qt.lighter(Colors.md3.background, 3.5)
+                    return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
                 if (root.hovered)
-                    return Qt.lighter(Colors.md3.background, 2.75)
-                return Qt.lighter(Colors.md3.background, 2)
+                    return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                return Theme.overlay;
             }
             opacity: !!PlayerStore.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
 
@@ -43,10 +43,10 @@ Widget {
         Text {
             horizontalAlignment: Text.AlignHCenter
             text: PlayerStore.lastPlayedPlayer.trackTitle
-            font.family: "NotoSans Nerd Font Propo"
+            font.family: Theme.fontFamily
+            font.pixelSize: Theme.fontSize
             font.bold: true
-            font.pixelSize: 16
-            color: Colors.md3.on_background
+            color: Theme.text
             elide: Text.ElideRight
             Layout.maximumWidth: 200
         }

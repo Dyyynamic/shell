@@ -20,7 +20,7 @@ Scope {
             required property var modelData
 
             screen: modelData
-            color: Colors.md3.background
+            color: Theme.base
 
             anchors {
                 top: true
@@ -35,12 +35,12 @@ Scope {
                 margin: 4
 
                 Item {
-                    WorkspaceWidget {
+                    WorkspaceIndicator {
                         anchors.left: parent.left
                         screen: bar.modelData
                     }
 
-                    ClockWidget {
+                    ClockIndicator {
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
 
@@ -50,10 +50,10 @@ Scope {
 
                         Loader {
                             active: PlayerStore.hasActivePlayer
-                            sourceComponent: MediaWidget {}
+                            sourceComponent: MediaIndicator {}
                         }
 
-                        StatusWidget {
+                        StatusIndicator {
                             Layout.preferredWidth: implicitWidth + 8
                             onClicked: () => quickMenu.open = !quickMenu.open
                         }

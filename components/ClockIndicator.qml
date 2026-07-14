@@ -1,7 +1,7 @@
 import QtQuick
 import "../utils"
 
-Widget {
+Indicator {
     id: root
 
     horizontalPadding: 12
@@ -9,9 +9,9 @@ Widget {
     Text {
         horizontalAlignment: Text.AlignHCenter
         text: Time.time
-        font.family: "NotoSans Nerd Font Propo"
+        font.family: Theme.fontFamily
+        font.pixelSize: Theme.fontSize
         font.bold: true
-        font.pixelSize: 16
-        color: Colors.md3.on_background
+        color: Theme.text
     }
 }

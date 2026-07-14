@@ -1,67 +1,16 @@
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import "../utils"
 
-Item {
+Widget {
     id: root
 
     signal notificationActivated
 
     ColumnLayout {
-        anchors.fill: parent
         spacing: 10
-
-        RowLayout {
-            Text {
-                text: "Notifications"
-                font.pixelSize: 16
-                font.bold: true
-                font.family: "NotoSans Nerd Font Propo"
-                color: Colors.md3.on_background
-            }
-
-            Item {
-                Layout.fillWidth: true
-            }
-
-            Button {
-                id: clearButton
-
-                text: "Clear"
-                font.family: "NotoSans Nerd Font Propo"
-                font.pixelSize: 12
-                onClicked: NotificationStore.clear()
-
-                enabled: NotificationStore.count > 0
-                hoverEnabled: NotificationStore.count > 0
-
-                opacity: NotificationStore.count > 0 ? 1 : 0.5
-
-                focusPolicy: Qt.NoFocus
-
-                background: Rectangle {
-                    implicitHeight: 32
-                    implicitWidth: 72
-                    radius: height / 2
-
-                    color: {
-                        if (clearButton.pressed)
-                            return Qt.lighter(Colors.md3.background, 3.5);
-                        if (clearButton.hovered)
-                            return Qt.lighter(Colors.md3.background, 2.75);
-                        return Qt.lighter(Colors.md3.background, 2);
-                    }
-
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                            easing.type: Easing.OutCubic
-                        }
-                    }
-                }
-            }
-        }
 
         Item {
             id: content
@@ -90,15 +39,19 @@ Item {
                     spacing: 10
 
                     Icon {
+                        Layout.alignment: Qt.AlignHCenter
                         icon: "󰂚"
-                        color: Qt.darker(Colors.md3.on_background, 2)
+                        color: Theme.textSecondary
                         size: 80
                     }
 
                     Text {
-                        font.family: "NotoSans Nerd Font Propo"
+                        Layout.alignment: Qt.AlignHCenter
+
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeTiny
                         text: "No notifications"
-                        color: Qt.darker(Colors.md3.on_background, 2)
+                        color: Theme.textSecondary
                     }
                 }
             }
@@ -159,6 +112,60 @@ Item {
                     width: ListView.view.width
 
                     onActivated: root.notificationActivated()
+                }
+            }
+        }
+
+        RowLayout {
+            WrapperItem {
+                margin: 5
+
+                Text {
+                    text: `${NotificationStore.count} notification${NotificationStore.count !== 1 ? 's' : ''}`
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeTiny
+                    color: Theme.text
+                }
+            }
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            Button {
+                id: clearButton
+
+                text: "Clear"
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeTiny
+                onClicked: NotificationStore.clear()
+
+                enabled: NotificationStore.count > 0
+                hoverEnabled: NotificationStore.count > 0
+
+                opacity: NotificationStore.count > 0 ? 1 : 0.5
+
+                focusPolicy: Qt.NoFocus
+
+                background: Rectangle {
+                    implicitHeight: 32
+                    implicitWidth: 72
+                    radius: height / 2
+
+                    color: {
+                        if (clearButton.pressed)
+                            return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
+                        if (clearButton.hovered)
+                            return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                        return Theme.overlay;
+                    }
+
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                            easing.type: Easing.OutCubic
+                        }
+                    }
                 }
             }
         }

@@ -97,27 +97,28 @@ PanelWindow {
                     id: background
                     anchors.fill: parent
                     radius: 20
-                    color: Colors.md3.background
-                    border.color: Qt.lighter(Colors.md3.background, 1.5)
+                    color: Theme.base
+                    border.color: Theme.outline
 
                     WrapperItem {
                         id: wrapper
                         width: parent.width
                         height: parent.height
-                        margin: 20
+                        margin: 10
 
                         ColumnLayout {
-                            spacing: 20
+                            spacing: 10
                             width: parent.width
                             height: parent.height
 
                             QuickMenuHeader {
+                                Layout.fillWidth: true
                                 onMenuClosed: root.open = false
                             }
 
-                            QuickMenuSliders {}
-
-                            QuickMenuToggles {}
+                            QuickMenuToggles {
+                                Layout.fillWidth: true
+                            }
 
                             NotificationList {
                                 Layout.fillWidth: true
@@ -128,6 +129,7 @@ PanelWindow {
 
                             CustomCalendar {
                                 id: calendar
+                                Layout.fillWidth: true
                             }
                         }
                     }

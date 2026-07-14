@@ -1,7 +1,7 @@
 import QtQuick
 import "../utils"
 
-Widget {
+Indicator {
     id: root
 
     clickable: true

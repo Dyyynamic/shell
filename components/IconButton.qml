@@ -19,7 +19,7 @@ Button {
     Icon {
         id: icon
         anchors.centerIn: parent
-        color: Colors.md3.on_background
+        color: Theme.text
         size: root.iconSize
     }
 
@@ -29,10 +29,10 @@ Button {
         radius: width / 2
         color: {
             if (root.pressed)
-                return Qt.lighter(Colors.md3.background, 3.5);
+                return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
             if (root.hovered)
-                return Qt.lighter(Colors.md3.background, 2.75);
-            return Qt.lighter(Colors.md3.background, 2);
+                return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+            return Theme.overlay;
         }
 
         Behavior on color {

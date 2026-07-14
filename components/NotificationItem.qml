@@ -35,10 +35,10 @@ Item {
 
         color: {
             if (mouseArea.pressed)
-                return Qt.lighter(Colors.md3.background, 3.5);
+                return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
             if (mouseArea.containsMouse)
-                return Qt.lighter(Colors.md3.background, 2.75);
-            return Qt.lighter(Colors.md3.background, 2);
+                return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+            return Theme.overlay;
         }
 
         Behavior on color {
@@ -101,16 +101,16 @@ Item {
                                     "Notification";
                                 }
                             }
-                            font.family: "NotoSans Nerd Font Propo"
-                            color: Colors.md3.on_background
-                            font.pixelSize: 12
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeTiny
+                            color: Theme.text
                         }
 
                         Text {
                             text: Qt.formatTime(new Date(root.notification.time), "hh:mm")
-                            font.family: "NotoSans Nerd Font Propo"
-                            color: Colors.md3.on_background
-                            font.pixelSize: 12
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeTiny
+                            color: Theme.text
                         }
 
                         IconButton {
@@ -127,9 +127,9 @@ Item {
                         Layout.fillWidth: true
                         elide: Text.ElideRight
                         text: root.notification.summary
-                        color: Colors.md3.on_background
-                        font.family: "NotoSans Nerd Font Propo"
-                        font.pixelSize: 14
+                        color: Theme.text
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
                         font.bold: true
                     }
 
@@ -139,9 +139,9 @@ Item {
                         maximumLineCount: 2
                         elide: Text.ElideRight
                         text: root.notification.body
-                        color: Colors.md3.on_background
-                        font.family: "NotoSans Nerd Font Propo"
-                        font.pixelSize: 14
+                        color: Theme.text
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
                     }
 
                     RowLayout {
@@ -163,18 +163,18 @@ Item {
 
                                 icon.name: root.notification.hasActionIcons ? modelData.identifier : ""
                                 text: root.notification.hasActionIcons ? "" : modelData.text
-                                font.family: "NotoSans Nerd Font Propo"
-                                font.pixelSize: 12
+                                font.family: Theme.fontFamily
+                                font.pixelSize: Theme.fontSizeTiny
                                 implicitHeight: 30
                                 padding: 8
 
                                 background: Rectangle {
                                     color: {
                                         if (defaultActionButton.pressed)
-                                            return Qt.lighter(Colors.md3.background, 4.25);
+                                            return Qt.lighter(Theme.overlayHigh, Theme.pressedMultiplier);
                                         if (defaultActionButton.hovered)
-                                            return Qt.lighter(Colors.md3.background, 3.5);
-                                        return Qt.lighter(Colors.md3.background, 2.75);
+                                            return Qt.lighter(Theme.overlayHigh, Theme.hoverMultiplier);
+                                        return Theme.overlayHigh;
                                     }
                                     radius: 10
 

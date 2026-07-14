@@ -15,9 +15,9 @@ Item {
         id: icon
         anchors.centerIn: parent
 
-        font.family: "NotoSans Nerd Font Propo"
-        font.bold: true
+        font.family: Theme.fontFamily
         font.pixelSize: root.size * 0.8
-        color: Colors.md3.on_background
+        font.bold: true
+        color: Theme.text
     }
 }

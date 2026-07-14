@@ -3,64 +3,91 @@ import QtQuick
 import QtQuick.Layouts
 import "../utils"
 
-RowLayout {
+Widget {
     id: root
 
     signal menuClosed
 
-    spacing: 10
+    contentBottomMargin: 0
+    backgroundColor: "transparent"
 
     RowLayout {
         spacing: 10
 
-        Icon {
-            icon: "󰣇"
-            size: 24
-        }
-        ColumnLayout {
-            spacing: 0
-            Text {
-                id: uptimeText
-                color: Colors.md3.on_background
-                font.family: "NotoSans Nerd Font Propo"
-                font.pixelSize: 14
-            }
-            Text {
-                visible: Battery.available
-                text: Battery.description
-                color: Colors.md3.on_background
-                font.family: "NotoSans Nerd Font Propo"
-                font.pixelSize: 12
-            }
-        }
-    }
+        RowLayout {
+            spacing: 10
 
-    Item {
-        Layout.fillWidth: true
-    }
-
-    RowLayout {
-        spacing: 10
-
-        IconButton {
-            iconText: ""
-            onClicked: () => {
-                root.menuClosed();
-                betterControl.startDetached();
+            Icon {
+                icon: "󰣇"
+                size: 24
+            }
+            ColumnLayout {
+                spacing: 0
+                Text {
+                    id: uptimeText
+                    color: Theme.text
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                }
+                Text {
+                    visible: Battery.available
+                    text: Battery.description
+                    color: Theme.text
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeTiny
+                }
             }
         }
-        IconButton {
-            iconText: ""
-            onClicked: () => {
-                root.menuClosed();
-                hyprlock.running = true;
-            }
+
+        Item {
+            Layout.fillWidth: true
         }
-        IconButton {
-            iconText: ""
-            onClicked: () => {
-                root.menuClosed();
-                powerMenu.running = true;
+
+        RowLayout {
+            spacing: 10
+
+            IconButton {
+                color: {
+                    if (this.pressed)
+                        return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                    if (this.hovered)
+                        return Theme.overlay;
+                    return Theme.base;
+                }
+
+                iconText: ""
+                onClicked: () => {
+                    root.menuClosed();
+                    betterControl.startDetached();
+                }
+            }
+            IconButton {
+                color: {
+                    if (this.pressed)
+                        return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                    if (this.hovered)
+                        return Theme.overlay;
+                    return Theme.base;
+                }
+                iconText: ""
+                onClicked: () => {
+                    root.menuClosed();
+                    hyprlock.running = true;
+                }
+            }
+            IconButton {
+                color: {
+                    if (this.pressed)
+                        return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                    if (this.hovered)
+                        return Theme.overlay;
+                    return Theme.base;
+                }
+                iconText: ""
+                onClicked: () => {
+                    root.menuClosed();
+                    powerMenu.running = true;
+                }
             }
         }
     }
