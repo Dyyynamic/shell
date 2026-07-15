@@ -14,4 +14,3 @@ Part of my [dotfiles](https://github.com/Dyyynamic/dotfiles) setup for Hyprland 
 
 - Implement Night Light
 - Add sub-menus for network and bluetooth
-- Update network using Quickshell.Networking

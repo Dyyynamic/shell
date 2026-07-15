@@ -6,15 +6,15 @@ import Quickshell.Services.UPower
 Singleton {
     id: root
 
-    readonly property UPowerDevice battery: UPower.devices.values.find(device => {
-        return device.isLaptopBattery;
-    })
+    readonly property UPowerDevice battery: {
+        return UPower.devices.values.find(device => {
+            return device.isLaptopBattery;
+        }) ?? null;
+    }
 
     readonly property bool available: !!battery
     readonly property real value: battery ? battery.percentage : 0
-    readonly property UPowerDeviceState state: {
-        return battery ? battery.state : UPowerDeviceState.Empty
-    }
+    readonly property var state: battery?.state ?? UPowerDeviceState.Empty
 
     readonly property string description: {
         const percentage = `${Math.round(value * 100)}`;

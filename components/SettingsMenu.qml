@@ -31,7 +31,7 @@ Item {
 
                 from: 0
                 to: 1
-                value: Audio.defaultSink.audio.volume
+                value: Audio.defaultSink?.audio.volume ?? 0
                 onMoved: Audio.defaultSink.audio.volume = value
             }
 
