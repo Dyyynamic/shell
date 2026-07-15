@@ -71,7 +71,15 @@ PanelWindow {
                     NumberAnimation {
                         duration: Theme.animationDuration
                         easing.type: Theme.animationEasing
-                        onRunningChanged: root.transitioning = running
+                        onRunningChanged: {
+                            root.transitioning = running;
+
+                            // Close the menu only if the animation has finished
+                            // and the menu is closed
+                            if (!running && !root.open) {
+                                settings.closeSilent();
+                            }
+                        }
                     }
                 }
 
@@ -110,13 +118,15 @@ PanelWindow {
                         width: parent.width
                         height: parent.height
 
-                        QuickMenuHeader {
+                        ControlCenterHeader {
                             Layout.fillWidth: true
-                            onMenuClosed: root.open = false
+                            onCloseRequested: root.open = false
                         }
 
-                        QuickMenuToggles {
+                        ControlCenterSettings {
+                            id: settings
                             Layout.fillWidth: true
+                            onCloseRequested: root.open = false
                         }
 
                         NotificationList {

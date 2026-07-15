@@ -29,7 +29,7 @@ Slider {
     value: 50
 
     Layout.fillWidth: true
-    implicitHeight: 40
+    implicitHeight: handleHeight
 
     focusPolicy: Qt.NoFocus
 

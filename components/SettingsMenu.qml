@@ -2,31 +2,49 @@ import QtQuick
 import QtQuick.Layouts
 import "../utils"
 
-Widget {
+Item {
     id: root
+
+    implicitHeight: content.implicitHeight
 
     // Temporary
     property bool nightLightEnabled: false
 
+    signal volumeMenuRequested
+
     ColumnLayout {
+        id: content
+
+        width: parent.width
         spacing: Theme.spacingSmall
 
-        CustomSlider {
-            trackHeight: 30
-            trackRadius: Theme.radiusTiny
-            handleHeight: 38
+        RowLayout {
+            spacing: Theme.spacingSmall
 
-            icon: Volume.icon
-            Layout.fillWidth: true
+            CustomSlider {
+                trackHeight: 32
+                trackRadius: Theme.radiusTiny
+                handleHeight: 38
 
-            from: 0
-            to: 1
-            value: Volume.value
-            onMoved: Volume.setVolume(value)
+                icon: Audio.icon(Audio.defaultSink)
+                Layout.fillWidth: true
+
+                from: 0
+                to: 1
+                value: Audio.defaultSink.audio.volume
+                onMoved: Audio.defaultSink.audio.volume = value
+            }
+
+            IconButton {
+                iconText: ""
+                size: 32
+
+                onClicked: root.volumeMenuRequested()
+            }
         }
 
         CustomSlider {
-            trackHeight: 30
+            trackHeight: 32
             trackRadius: Theme.radiusTiny
             handleHeight: 38
 
@@ -50,7 +68,7 @@ Widget {
                 title: "Network"
                 subtitle: Network.name
                 checked: Network.enabled
-                onClicked: Network.toggle()
+                onToggled: Network.toggle()
             }
             ToggleButton {
                 Layout.fillWidth: true
@@ -59,7 +77,7 @@ Widget {
                 title: "Bluetooth"
                 subtitle: Bluetooth.deviceName
                 checked: Bluetooth.enabled
-                onClicked: Bluetooth.toggle()
+                onToggled: Bluetooth.toggle()
             }
         }
 
@@ -73,7 +91,7 @@ Widget {
                 title: "Night Light"
                 subtitle: root.nightLightEnabled ? "Active" : "Auto"
                 checked: root.nightLightEnabled
-                onClicked: root.nightLightEnabled = !root.nightLightEnabled
+                onToggled: root.nightLightEnabled = !root.nightLightEnabled
             }
             ToggleButton {
                 Layout.fillWidth: true
@@ -82,7 +100,7 @@ Widget {
                 title: "Do Not Disturb"
                 subtitle: NotificationStore.doNotDisturb ? "On" : "Off"
                 checked: NotificationStore.doNotDisturb
-                onClicked: NotificationStore.toggleDoNotDisturb()
+                onToggled: NotificationStore.toggleDoNotDisturb()
             }
         }
     }

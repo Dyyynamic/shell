@@ -54,14 +54,14 @@ Scope {
 
                         StatusIndicator {
                             Layout.preferredWidth: implicitWidth + 8
-                            onClicked: () => quickMenu.open = !quickMenu.open
+                            onClicked: () => controlCenter.open = !controlCenter.open
                         }
                     }
                 }
             }
 
-            QuickMenu {
-                id: quickMenu
+            ControlCenter {
+                id: controlCenter
                 bar: bar
             }
 
@@ -74,12 +74,12 @@ Scope {
             }
 
             GlobalShortcut {
-                name: "toggleQuickMenu"
-                description: "Toggle Quick Menu"
+                name: "toggleControlCenter"
+                description: "Toggle Control Center"
                 onPressed: {
                     // Show on the focused monitor
                     if (Hyprland.focusedMonitor.name === bar.modelData.name) {
-                        quickMenu.open = !quickMenu.open;
+                        controlCenter.open = !controlCenter.open;
                     }
                 }
             }

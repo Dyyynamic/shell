@@ -24,7 +24,7 @@ Widget {
             spacing: Theme.spacingSmall
 
             WrapperItem {
-                margin: Theme.spacingTiny
+                margin: Theme.spacingSmall
 
                 Text {
                     text: Qt.formatDate(new Date(grid.year, grid.month), "MMMM yyyy")

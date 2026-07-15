@@ -12,7 +12,7 @@ Indicator {
     readonly property var workspaces: Hyprland.workspaces.values.filter(ws => {
         if (!ws.monitor)
             return false;
-        // filter out special workspaces
+        // Filter out special workspaces
         if (ws.id < 0)
             return false;
         return ws.monitor.name === root.screen.name;

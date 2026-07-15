@@ -6,7 +6,7 @@ import "../utils"
 Widget {
     id: root
 
-    signal menuClosed
+    signal closeRequested
 
     contentBottomMargin: 0
     backgroundColor: "transparent"
@@ -57,7 +57,7 @@ Widget {
 
                 iconText: ""
                 onClicked: () => {
-                    root.menuClosed();
+                    root.closeRequested();
                     betterControl.startDetached();
                 }
             }
@@ -71,7 +71,7 @@ Widget {
                 }
                 iconText: ""
                 onClicked: () => {
-                    root.menuClosed();
+                    root.closeRequested();
                     hyprlock.running = true;
                 }
             }
@@ -85,7 +85,7 @@ Widget {
                 }
                 iconText: ""
                 onClicked: () => {
-                    root.menuClosed();
+                    root.closeRequested();
                     powerMenu.running = true;
                 }
             }

@@ -118,7 +118,7 @@ Widget {
 
         RowLayout {
             WrapperItem {
-                margin: Theme.spacingTiny
+                margin: Theme.spacingSmall
 
                 Text {
                     text: `${NotificationStore.count} notification${NotificationStore.count !== 1 ? 's' : ''}`

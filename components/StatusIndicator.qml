@@ -15,7 +15,7 @@ Indicator {
         }
 
         Icon {
-            icon: Volume.icon
+            icon: Audio.icon(Audio.defaultSink)
         }
 
         Loader {

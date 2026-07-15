@@ -91,25 +91,29 @@ Item {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
 
-                    spacing: 0
+                    spacing: Theme.spacingSmall
 
-                    Text {
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
-                        font.weight: Font.DemiBold
-                        Layout.fillWidth: true
-                        elide: Text.ElideRight
-                        text: PlayerStore.lastPlayedPlayer.trackTitle
-                        color: Theme.text
-                    }
+                    ColumnLayout {
+                        spacing: 0
 
-                    Text {
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeTiny
-                        Layout.fillWidth: true
-                        elide: Text.ElideRight
-                        text: PlayerStore.lastPlayedPlayer.trackArtist
-                        color: Theme.text
+                        Text {
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeSmall
+                            font.weight: Font.DemiBold
+                            Layout.fillWidth: true
+                            elide: Text.ElideRight
+                            text: PlayerStore.lastPlayedPlayer.trackTitle
+                            color: Theme.text
+                        }
+
+                        Text {
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeTiny
+                            Layout.fillWidth: true
+                            elide: Text.ElideRight
+                            text: PlayerStore.lastPlayedPlayer.trackArtist
+                            color: Theme.text
+                        }
                     }
 
                     CustomSlider {
