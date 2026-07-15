@@ -34,7 +34,7 @@ Item {
 
             focusPolicy: Qt.NoFocus
 
-            onClicked: toggled()
+            onClicked: root.toggled()
 
             background: Rectangle {
                 anchors.fill: parent
