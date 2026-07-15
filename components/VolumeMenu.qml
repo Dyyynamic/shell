@@ -45,7 +45,25 @@ Item {
             }
         }
 
+        Item {
+            visible: Audio.streams.values.length === 0
+
+            Layout.fillWidth: true
+            Layout.preferredHeight: 50
+
+            Text {
+                anchors.centerIn: parent
+
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeTiny
+                text: "No applications playing audio"
+                color: Theme.textSecondary
+            }
+        }
+
         ListView {
+            visible: Audio.streams.values.length > 0
+
             Layout.fillWidth: true
             Layout.leftMargin: Theme.spacingSmall
             Layout.rightMargin: Theme.spacingSmall
