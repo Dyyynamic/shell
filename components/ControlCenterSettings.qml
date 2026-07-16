@@ -10,12 +10,17 @@ Widget {
     property var settingsMenu: SettingsMenu {
         onVolumeMenuRequested: stackView.push(root.volumeMenu)
         onWifiMenuRequested: stackView.push(root.wifiMenu)
+        onBluetoothMenuRequested: stackView.push(root.bluetoothMenu)
     }
     property var volumeMenu: VolumeMenu {
         onBackRequested: stackView.pop()
         onCloseRequested: root.closeRequested()
     }
     property var wifiMenu: WifiMenu {
+        onBackRequested: stackView.pop()
+        onCloseRequested: root.closeRequested()
+    }
+    property var bluetoothMenu: BluetoothMenu {
         onBackRequested: stackView.pop()
         onCloseRequested: root.closeRequested()
     }

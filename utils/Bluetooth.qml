@@ -7,11 +7,11 @@ Singleton {
     id: root
 
     readonly property BluetoothAdapter adapter: Bluetooth.defaultAdapter
-    readonly property bool enabled: adapter?.enabled ?? false
-    readonly property string deviceName: {
-        return adapter?.devices.values.find(device => {
-            return device.connected;
-        })?.name ?? "";
+
+    readonly property var devices: adapter?.devices.values ?? []
+
+    readonly property var connectedDevices: {
+        return devices.filter(device => device.connected) ?? []
     }
 
     function toggle() {

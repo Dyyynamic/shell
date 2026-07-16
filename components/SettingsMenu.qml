@@ -12,6 +12,7 @@ Item {
 
     signal volumeMenuRequested
     signal wifiMenuRequested
+    signal bluetoothMenuRequested
 
     ColumnLayout {
         id: content
@@ -79,9 +80,18 @@ Item {
                 iconText: "󰂯"
                 iconSize: 24
                 title: "Bluetooth"
-                subtitle: Bluetooth.deviceName
-                checked: Bluetooth.enabled
+                subtitle: {
+                    if (Bluetooth.connectedDevices.length > 1)
+                        return `${Bluetooth.connectedDevices.length} devices`
+                    if (Bluetooth.connectedDevices.length === 1)
+                        return Bluetooth.connectedDevices[0].name
+                    return ""
+                }
+                checked: Bluetooth.adapter?.enabled ?? false
                 onToggled: Bluetooth.toggle()
+
+                navButtonVisible: true
+                onNavButtonClicked: root.bluetoothMenuRequested()
             }
         }
 

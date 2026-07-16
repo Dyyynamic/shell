@@ -16,16 +16,14 @@ Singleton {
     readonly property var networks: wifiDevice?.networks.values ?? []
 
     readonly property WifiNetwork connectedNetwork: {
-        return wifiDevice?.networks.values.find(network => {
-            return network.connected;
-        }) ?? null;
+        return networks.find(network => network.connected) ?? null;
     }
 
     readonly property bool enabled: Networking.wifiEnabled
     readonly property string name: connectedNetwork?.name ?? ""
 
     function icon(network): string {
-        if (!Networking.wifiEnabled)
+        if (!Networking.wifiEnabled || !network)
             return "󰤮";
         if (network.signalStrength > 0.8)
             return "󰤨";

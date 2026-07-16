@@ -26,8 +26,8 @@ Singleton {
     readonly property real hoverMultiplier: 1.25
     readonly property real pressedMultiplier: 1.5
 
-    readonly property real accentHoverMultiplier: 1.1
-    readonly property real accentPressedMultiplier: 1.2
+    readonly property real accentHoverMultiplier: 1.075
+    readonly property real accentPressedMultiplier: 1.15
 
     // Text colors
     readonly property color text: Colors.md3.on_background

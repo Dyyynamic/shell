@@ -4,12 +4,12 @@ import Quickshell.Io
 import "../utils"
 
 SubMenu {
-    title: "Wi-Fi"
-    placeholder: "No saved networks found"
-    model: Wifi.networks
-    footerText: "Wi-Fi Settings"
+    title: "Bluetooth"
+    placeholder: "No saved devices found"
+    model: Bluetooth.devices
+    footerText: "Bluetooth Settings"
 
-    onSettingsRequested: wifiSettings.startDetached()
+    onSettingsRequested: bluetoothSettings.startDetached()
 
     delegate: Item {
         id: networkDelegate
@@ -30,7 +30,7 @@ SubMenu {
                 spacing: Theme.spacingMedium
 
                 Icon {
-                    icon: Wifi.icon(networkDelegate.modelData)
+                    icon: "󰂯"
                 }
 
                 Text {
@@ -62,7 +62,7 @@ SubMenu {
     }
 
     Process {
-        id: wifiSettings
-        command: ["better-control", "--wifi"]
+        id: bluetoothSettings
+        command: ["better-control", "--bluetooth"]
     }
 }
