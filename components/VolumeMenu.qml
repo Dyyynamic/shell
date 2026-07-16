@@ -6,7 +6,7 @@ import "../utils"
 SubMenu {
     title: "Volume"
     placeholder: "No applications playing audio"
-    model: Audio.streams
+    model: Audio.outputStreams
     footerText: "Volume Settings"
 
     onSettingsRequested: volumeSettings.startDetached()
