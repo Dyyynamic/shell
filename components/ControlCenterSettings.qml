@@ -9,8 +9,13 @@ Widget {
 
     property var settingsMenu: SettingsMenu {
         onVolumeMenuRequested: stackView.push(root.volumeMenu)
+        onWifiMenuRequested: stackView.push(root.wifiMenu)
     }
     property var volumeMenu: VolumeMenu {
+        onBackRequested: stackView.pop()
+        onCloseRequested: root.closeRequested()
+    }
+    property var wifiMenu: WifiMenu {
         onBackRequested: stackView.pop()
         onCloseRequested: root.closeRequested()
     }

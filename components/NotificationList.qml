@@ -132,42 +132,12 @@ Widget {
                 Layout.fillWidth: true
             }
 
-            Button {
-                id: clearButton
-
+            RegularButton {
                 text: "Clear"
-                font.family: Theme.fontFamily
                 font.pixelSize: Theme.fontSizeTiny
-                palette.buttonText: Theme.text
-                onClicked: NotificationStore.clear()
-
                 enabled: NotificationStore.count > 0
-                hoverEnabled: NotificationStore.count > 0
-
-                opacity: NotificationStore.count > 0 ? 1 : 0.5
-
-                focusPolicy: Qt.NoFocus
-
-                background: Rectangle {
-                    implicitHeight: 32
-                    implicitWidth: 72
-                    radius: height / 2
-
-                    color: {
-                        if (clearButton.pressed)
-                            return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
-                        if (clearButton.hovered)
-                            return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
-                        return Theme.overlay;
-                    }
-
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: Theme.animationDuration
-                            easing.type: Theme.animationEasing
-                        }
-                    }
-                }
+                implicitWidth: 72
+                onClicked: NotificationStore.clear()
             }
         }
     }

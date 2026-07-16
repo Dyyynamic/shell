@@ -11,6 +11,7 @@ Item {
     property bool nightLightEnabled: false
 
     signal volumeMenuRequested
+    signal wifiMenuRequested
 
     ColumnLayout {
         id: content
@@ -63,12 +64,15 @@ Item {
 
             ToggleButton {
                 Layout.fillWidth: true
-                iconText: Network.icon
+                iconText: Wifi.icon(Wifi.connectedNetwork)
                 iconSize: 24
-                title: "Network"
-                subtitle: Network.name
-                checked: Network.enabled
-                onToggled: Network.toggle()
+                title: "Wi-Fi"
+                subtitle: Wifi.name
+                checked: Wifi.enabled
+                onToggled: Wifi.toggle()
+
+                navButtonVisible: true
+                onNavButtonClicked: root.wifiMenuRequested()
             }
             ToggleButton {
                 Layout.fillWidth: true

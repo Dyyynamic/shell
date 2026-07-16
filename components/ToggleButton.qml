@@ -137,6 +137,8 @@ Item {
 
             focusPolicy: Qt.NoFocus
 
+            onClicked: root.navButtonClicked()
+
             background: Rectangle {
                 anchors.fill: parent
                 radius: Theme.radiusLarge

@@ -10,8 +10,8 @@ Indicator {
         spacing: Theme.spacingSmall
 
         Icon {
-            id: network
-            icon: Network.icon
+            id: wifi
+            icon: Wifi.icon(Wifi.connectedNetwork)
         }
 
         Icon {
