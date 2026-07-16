@@ -42,10 +42,6 @@ SubMenu {
                     elide: Text.ElideRight
                 }
 
-                Item {
-                    Layout.fillWidth: true
-                }
-
                 RegularButton {
                     text: networkDelegate.modelData.connected ? "Disconnect" : "Connect"
                     textColor: Theme.textSecondary

@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Wayland
 import Quickshell.Widgets
 import Quickshell.Hyprland
 import QtQuick
@@ -15,6 +16,7 @@ Scope {
 
         PanelWindow {
             id: bar
+            WlrLayershell.namespace: "qs-bar"
 
             required property var modelData
 

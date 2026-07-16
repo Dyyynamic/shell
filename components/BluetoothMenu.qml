@@ -12,15 +12,15 @@ SubMenu {
     onSettingsRequested: bluetoothSettings.startDetached()
 
     delegate: Item {
-        id: networkDelegate
+        id: bluetoothDelegate
 
         required property var modelData
 
         width: parent.width
-        height: networkContent.implicitHeight
+        height: bluetoothContent.implicitHeight
 
         ColumnLayout {
-            id: networkContent
+            id: bluetoothContent
 
             width: parent.width
 
@@ -35,26 +35,22 @@ SubMenu {
 
                 Text {
                     Layout.fillWidth: true
-                    text: networkDelegate.modelData.name
+                    text: bluetoothDelegate.modelData.name
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSize
                     color: Theme.text
                     elide: Text.ElideRight
                 }
 
-                Item {
-                    Layout.fillWidth: true
-                }
-
                 RegularButton {
-                    text: networkDelegate.modelData.connected ? "Disconnect" : "Connect"
+                    text: bluetoothDelegate.modelData.connected ? "Disconnect" : "Connect"
                     textColor: Theme.textSecondary
                     color: Theme.surface
                     onClicked: {
-                        if (networkDelegate.modelData.connected)
-                            networkDelegate.modelData.disconnect()
+                        if (bluetoothDelegate.modelData.connected)
+                            bluetoothDelegate.modelData.disconnect()
                         else
-                            networkDelegate.modelData.connect()
+                            bluetoothDelegate.modelData.connect()
                     }
                 }
             }

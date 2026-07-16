@@ -1,9 +1,11 @@
 import Quickshell
+import Quickshell.Wayland
 import QtQuick
 import "../utils"
 
 PanelWindow {
     id: root
+    WlrLayershell.namespace: "qs-notifications"
 
     required property var bar
 
