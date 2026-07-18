@@ -72,7 +72,7 @@ Widget {
                 iconText: ""
                 onClicked: () => {
                     root.closeRequested();
-                    hyprlock.running = true;
+                    lockTimer.start();
                 }
             }
             IconButton {
@@ -128,6 +128,14 @@ Widget {
         repeat: true
         onTriggered: {
             uptime.running = true;
+        }
+    }
+
+    Timer {
+        id: lockTimer
+        interval: Theme.animationDuration
+        onTriggered: {
+            hyprlock.running = true;
         }
     }
 }
