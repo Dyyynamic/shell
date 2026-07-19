@@ -7,9 +7,6 @@ Item {
 
     implicitHeight: content.implicitHeight
 
-    // Temporary
-    property bool nightLightEnabled: false
-
     signal volumeMenuRequested
     signal wifiMenuRequested
     signal bluetoothMenuRequested
@@ -82,10 +79,10 @@ Item {
                 title: "Bluetooth"
                 subtitle: {
                     if (Bluetooth.connectedDevices.length > 1)
-                        return `${Bluetooth.connectedDevices.length} devices`
+                        return `${Bluetooth.connectedDevices.length} devices`;
                     if (Bluetooth.connectedDevices.length === 1)
-                        return Bluetooth.connectedDevices[0].name
-                    return ""
+                        return Bluetooth.connectedDevices[0].name;
+                    return "";
                 }
                 checked: Bluetooth.adapter?.enabled ?? false
                 onToggled: Bluetooth.toggle()
@@ -103,9 +100,15 @@ Item {
                 iconText: ""
                 iconSize: 24
                 title: "Night Light"
-                subtitle: root.nightLightEnabled ? "Active" : "Auto"
-                checked: root.nightLightEnabled
-                onToggled: root.nightLightEnabled = !root.nightLightEnabled
+                subtitle: {
+                    if (NightLight.state === "night")
+                        return "On";
+                    if (NightLight.state === "day")
+                        return "Off";
+                    return "Auto";
+                }
+                checked: NightLight.state === "default" || NightLight.state === "night"
+                onToggled: NightLight.nextState()
             }
             ToggleButton {
                 Layout.fillWidth: true

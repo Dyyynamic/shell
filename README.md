@@ -9,8 +9,3 @@ Part of my [dotfiles](https://github.com/Dyyynamic/dotfiles) setup for Hyprland 
 - Status bar
 - Notification center
 - System controls
-
-## To-Do
-
-- Implement Night Light
-- Fix miscellaneous warnings
