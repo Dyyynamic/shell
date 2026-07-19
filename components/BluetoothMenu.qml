@@ -38,6 +38,7 @@ SubMenu {
                     text: bluetoothDelegate.modelData.name
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSize
+                    font.weight: Font.Medium
                     color: Theme.text
                     elide: Text.ElideRight
                 }
@@ -46,6 +47,7 @@ SubMenu {
                     text: bluetoothDelegate.modelData.connected ? "Disconnect" : "Connect"
                     textColor: Theme.textSecondary
                     color: Theme.surface
+                    font.weight: Font.Normal
                     onClicked: {
                         if (bluetoothDelegate.modelData.connected)
                             bluetoothDelegate.modelData.disconnect()

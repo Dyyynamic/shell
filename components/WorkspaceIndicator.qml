@@ -62,7 +62,7 @@ Indicator {
                     text: workspaceItem.index + 1
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSize
-                    font.bold: true
+                    font.weight: Font.Bold
                     color: {
                         if (workspaceItem.modelData.toplevels.values.length > 0)
                             return Theme.text;
@@ -107,7 +107,7 @@ Indicator {
                         text: textItem.index + 1
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSize
-                        font.bold: true
+                        font.weight: Font.Bold
                         color: Theme.textAccent
                     }
                 }

@@ -11,6 +11,7 @@ Button {
 
     font.family: Theme.fontFamily
     font.pixelSize: Theme.fontSizeSmall
+    font.weight: Font.Medium
     palette.buttonText: Theme.text
 
     implicitHeight: 32

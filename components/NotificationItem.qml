@@ -128,7 +128,7 @@ Item {
                     color: Theme.text
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeSmall
-                    font.bold: true
+                    font.weight: Font.DemiBold
                 }
 
                 Text {

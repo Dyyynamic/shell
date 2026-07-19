@@ -38,6 +38,7 @@ SubMenu {
                     text: networkDelegate.modelData.name
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSize
+                    font.weight: Font.Medium
                     color: Theme.text
                     elide: Text.ElideRight
                 }
@@ -46,6 +47,7 @@ SubMenu {
                     text: networkDelegate.modelData.connected ? "Disconnect" : "Connect"
                     textColor: Theme.textSecondary
                     color: Theme.surface
+                    font.weight: Font.Normal
                     onClicked: {
                         if (networkDelegate.modelData.connected)
                             networkDelegate.modelData.disconnect()

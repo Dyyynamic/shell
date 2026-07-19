@@ -103,6 +103,7 @@ Item {
                         Layout.fillWidth: true
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
+                        font.weight: Font.Medium
                         color: {
                             if (root.checked)
                                 return Theme.textAccent;

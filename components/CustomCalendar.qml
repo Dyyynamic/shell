@@ -30,7 +30,7 @@ Widget {
                     text: Qt.formatDate(new Date(grid.year, grid.month), "MMMM yyyy")
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSize
-                    font.bold: true
+                    font.weight: Font.Bold
                     color: Theme.text
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
@@ -101,7 +101,7 @@ Widget {
                     }
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeTiny
-                    font.bold: true
+                    font.weight: Font.DemiBold
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     color: Theme.text
@@ -137,6 +137,7 @@ Widget {
                         text: dayItem.modelData.day
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeTiny
+                        font.weight: dayItem.modelData.today ? Font.DemiBold : Font.Normal
 
                         color: {
                             if (dayItem.modelData.today)

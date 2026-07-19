@@ -28,6 +28,7 @@ Widget {
                     color: Theme.text
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeSmall
+                    font.weight: Font.Medium
                 }
                 Text {
                     visible: Battery.available
