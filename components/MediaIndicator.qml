@@ -19,7 +19,7 @@ Indicator {
             anchors.fill: parent
             color: {
                 if (root.pressed)
-                    return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
+                    return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
                 if (root.hovered)
                     return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
                 return Theme.overlay;

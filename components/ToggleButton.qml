@@ -45,14 +45,14 @@ Item {
                 color: {
                     if (root.checked) {
                         if (toggleButton.pressed)
-                            return Qt.lighter(Theme.accent, Theme.accentPressedMultiplier);
+                            return Qt.lighter(Theme.accent, Theme.accentpressMultiplier);
                         if (toggleButton.hovered)
                             return Qt.lighter(Theme.accent, Theme.accentHoverMultiplier);
                         return Theme.accent;
                     }
 
                     if (toggleButton.pressed)
-                        return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
+                        return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
                     if (toggleButton.hovered)
                         return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
                     return Theme.overlay;
@@ -149,14 +149,14 @@ Item {
                 color: {
                     if (root.checked) {
                         if (navButton.pressed)
-                            return Qt.lighter(Theme.accent, Theme.accentPressedMultiplier);
+                            return Qt.lighter(Theme.accent, Theme.accentpressMultiplier);
                         if (navButton.hovered)
                             return Qt.lighter(Theme.accent, Theme.accentHoverMultiplier);
                         return Theme.accent;
                     }
 
                     if (navButton.pressed)
-                        return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
+                        return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
                     if (navButton.hovered)
                         return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
                     return Theme.overlay;

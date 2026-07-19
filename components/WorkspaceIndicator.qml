@@ -42,7 +42,7 @@ Indicator {
 
                     color: {
                         if (workspaceItem.pressed)
-                            return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
+                            return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
                         if (workspaceItem.hovered)
                             return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
                         return Theme.overlay;

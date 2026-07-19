@@ -50,9 +50,9 @@ Widget {
             IconButton {
                 color: {
                     if (this.pressed)
-                        return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                        return Qt.lighter(Theme.surface, Theme.pressMultiplier);
                     if (this.hovered)
-                        return Theme.overlay;
+                        return Qt.lighter(Theme.surface, Theme.hoverMultiplier);
                     return Theme.base;
                 }
 
@@ -65,9 +65,9 @@ Widget {
             IconButton {
                 color: {
                     if (this.pressed)
-                        return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                        return Qt.lighter(Theme.surface, Theme.pressMultiplier);
                     if (this.hovered)
-                        return Theme.overlay;
+                        return Qt.lighter(Theme.surface, Theme.hoverMultiplier);
                     return Theme.base;
                 }
                 iconText: ""
@@ -79,9 +79,9 @@ Widget {
             IconButton {
                 color: {
                     if (this.pressed)
-                        return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                        return Qt.lighter(Theme.surface, Theme.pressMultiplier);
                     if (this.hovered)
-                        return Theme.overlay;
+                        return Qt.lighter(Theme.surface, Theme.hoverMultiplier);
                     return Theme.base;
                 }
                 iconText: ""

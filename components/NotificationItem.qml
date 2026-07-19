@@ -34,7 +34,7 @@ Item {
 
         color: {
             if (mouseArea.pressed)
-                return Qt.lighter(Theme.overlay, Theme.pressedMultiplier);
+                return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
             if (mouseArea.containsMouse)
                 return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
             return Theme.overlay;
@@ -169,7 +169,7 @@ Item {
                             background: Rectangle {
                                 color: {
                                     if (actionButton.pressed)
-                                        return Qt.lighter(Theme.overlayHigh, Theme.pressedMultiplier);
+                                        return Qt.lighter(Theme.overlayHigh, Theme.pressMultiplier);
                                     if (actionButton.hovered)
                                         return Qt.lighter(Theme.overlayHigh, Theme.hoverMultiplier);
                                     return Theme.overlayHigh;
