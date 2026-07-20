@@ -19,19 +19,19 @@ SubMenu {
         width: parent.width
         height: volumeContent.implicitHeight
 
-        ColumnLayout {
+        RowLayout {
             id: volumeContent
 
             width: parent.width
 
-            spacing: Theme.spacingSmall
+            spacing: Theme.spacingMedium
 
-            RowLayout {
-                spacing: Theme.spacingMedium
+            Icon {
+                icon: ""
+            }
 
-                Icon {
-                    icon: ""
-                }
+            ColumnLayout {
+                spacing: Theme.spacingSmall
 
                 Text {
                     Layout.fillWidth: true
@@ -42,15 +42,19 @@ SubMenu {
                     color: Theme.text
                     elide: Text.ElideRight
                 }
-            }
 
-            CustomSlider {
-                handleHeight: 16
-                from: 0
-                to: 1
-                value: volumeDelegate.modelData.audio.volume
-                onValueChanged: {
-                    volumeDelegate.modelData.audio.volume = value
+                RowLayout {
+                    spacing: Theme.spacingMedium
+
+                    CustomSlider {
+                        handleHeight: 16
+                        from: 0
+                        to: 1
+                        value: volumeDelegate.modelData.audio.volume
+                        onValueChanged: {
+                            volumeDelegate.modelData.audio.volume = value;
+                        }
+                    }
                 }
             }
         }
