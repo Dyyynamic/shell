@@ -33,8 +33,6 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            focusPolicy: Qt.NoFocus
-
             onClicked: root.toggled()
 
             background: Rectangle {
@@ -46,7 +44,7 @@ Item {
                 color: {
                     if (root.checked) {
                         if (toggleButton.pressed)
-                            return Qt.lighter(Theme.accent, Theme.accentpressMultiplier);
+                            return Qt.lighter(Theme.accent, Theme.accentPressMultiplier);
                         if (toggleButton.hovered)
                             return Qt.lighter(Theme.accent, Theme.accentHoverMultiplier);
                         return Theme.accent;
@@ -137,8 +135,6 @@ Item {
             Layout.fillHeight: true
             implicitWidth: 40
 
-            focusPolicy: Qt.NoFocus
-
             onClicked: root.navButtonClicked()
 
             background: Rectangle {
@@ -150,7 +146,7 @@ Item {
                 color: {
                     if (root.checked) {
                         if (navButton.pressed)
-                            return Qt.lighter(Theme.accent, Theme.accentpressMultiplier);
+                            return Qt.lighter(Theme.accent, Theme.accentPressMultiplier);
                         if (navButton.hovered)
                             return Qt.lighter(Theme.accent, Theme.accentHoverMultiplier);
                         return Theme.accent;

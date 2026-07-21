@@ -4,12 +4,11 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import "../utils"
+import "../controlCenter" as ControlCenter
 
 PanelWindow {
     id: root
     WlrLayershell.namespace: "qs-bar"
-
-    signal controlCenterToggleRequested
 
     color: Theme.base
 
@@ -46,7 +45,7 @@ PanelWindow {
 
                 StatusIndicator {
                     Layout.preferredWidth: implicitWidth + 8
-                    onClicked: () => root.controlCenterToggleRequested()
+                    onClicked: () => ControlCenter.Controller.toggle()
                 }
             }
         }

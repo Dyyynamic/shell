@@ -15,8 +15,6 @@ Button {
     implicitWidth: size
     implicitHeight: size
 
-    focusPolicy: Qt.NoFocus
-
     Components.Icon {
         id: icon
         anchors.centerIn: parent

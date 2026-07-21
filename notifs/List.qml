@@ -7,8 +7,6 @@ import "../components" as Components
 Components.Widget {
     id: root
 
-    signal notificationActivated
-
     ColumnLayout {
         spacing: Theme.spacingSmall
 
@@ -108,8 +106,6 @@ Components.Widget {
 
                     notification: modelData
                     width: ListView.view.width
-
-                    onActivated: root.notificationActivated()
                 }
             }
         }

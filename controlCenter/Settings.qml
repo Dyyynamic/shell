@@ -7,24 +7,22 @@ import "settings" as Settings
 Components.Widget {
     id: root
 
-    signal closeRequested
-
     property var settingsMenu: Settings.SettingsMenu {
         onVolumeMenuRequested: stackView.push(root.volumeMenu)
         onWifiMenuRequested: stackView.push(root.wifiMenu)
         onBluetoothMenuRequested: stackView.push(root.bluetoothMenu)
     }
+
     property var volumeMenu: Settings.VolumeMenu {
         onBackRequested: stackView.pop()
-        onCloseRequested: root.closeRequested()
     }
+
     property var wifiMenu: Settings.WifiMenu {
         onBackRequested: stackView.pop()
-        onCloseRequested: root.closeRequested()
     }
+
     property var bluetoothMenu: Settings.BluetoothMenu {
         onBackRequested: stackView.pop()
-        onCloseRequested: root.closeRequested()
     }
 
     property var popEnterAnimation: Transition {
@@ -64,12 +62,6 @@ Components.Widget {
     }
 
     property bool animate: true
-
-    function closeSilent() {
-        animate = false;
-        stackView.pop();
-        animate = true;
-    }
 
     StackView {
         id: stackView

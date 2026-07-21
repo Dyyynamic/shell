@@ -6,20 +6,13 @@ import QtQuick.Layouts
 import QtQuick.Effects
 import "../utils"
 import "../notifs" as Notifs
+import "." as ControlCenter
 
 PanelWindow {
     id: root
     WlrLayershell.namespace: "qs-control-center"
 
-    required property var bar
-
     readonly property int margin: Theme.spacingSmall
-
-    property bool open: false
-    property bool transitioning: false
-
-    visible: open || transitioning
-    focusable: visible
 
     anchors {
         top: true
@@ -27,20 +20,65 @@ PanelWindow {
         left: true
         right: true
     }
-    margins.top: bar.height
+    margins.top: 40 // Bar height
     exclusionMode: ExclusionMode.Ignore
-    implicitWidth: screen.width
     color: "transparent"
-
-    onVisibleChanged: if (!visible)
-        calendar.reset()
 
     MouseArea {
         anchors.fill: parent
-        onClicked: root.open = false
+        onClicked: ControlCenter.Controller.close()
+    }
+
+    property var enterAnimation: ParallelAnimation {
+        NumberAnimation {
+            id: fadeIn
+            target: wrapperItem
+            properties: "opacity"
+            from: 0
+            to: 1
+            easing: Theme.animationEasing
+            duration: Theme.animationDuration
+        }
+
+        NumberAnimation {
+            id: slideIn
+            target: slideTransform
+            properties: "x"
+            from: wrapperItem.width
+            to: 0
+            easing: Theme.animationEasing
+            duration: Theme.animationDuration
+        }
+
+        onFinished: ControlCenter.Controller.transitionFinished()
+    }
+
+    property var exitAnimation: ParallelAnimation {
+        NumberAnimation {
+            id: fadeOut
+            target: wrapperItem
+            properties: "opacity"
+            from: 1
+            to: 0
+            easing: Theme.animationEasing
+            duration: Theme.animationDuration
+        }
+
+        NumberAnimation {
+            id: slideOut
+            target: slideTransform
+            properties: "x"
+            from: 0
+            to: wrapperItem.width
+            easing: Theme.animationEasing
+            duration: Theme.animationDuration
+        }
+
+        onFinished: ControlCenter.Controller.transitionFinished()
     }
 
     WrapperItem {
+        id: wrapperItem
         width: 450
 
         anchors {
@@ -51,37 +89,16 @@ PanelWindow {
 
         margin: root.margin
 
+        // Use a transform since x cannot be animated directly
+        transform: Translate {
+            id: slideTransform
+            x: 0
+        }
+
         Item {
             // Prevent clicks inside the panel from closing it
             MouseArea {
                 anchors.fill: parent
-            }
-
-            opacity: root.open ? 1 : 0
-            x: root.open ? root.margin : width
-
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: Theme.animationDuration
-                    easing.type: Theme.animationEasing
-                    onRunningChanged: {
-                        root.transitioning = running;
-
-                        // Close the menu only if the animation has finished
-                        // and the menu is closed
-                        if (!running && !root.open) {
-                            settings.closeSilent();
-                        }
-                    }
-                }
-            }
-
-            Behavior on x {
-                NumberAnimation {
-                    duration: Theme.animationDuration
-                    easing.type: Theme.animationEasing
-                    onRunningChanged: root.transitioning = running
-                }
             }
 
             RectangularShadow {
@@ -111,36 +128,24 @@ PanelWindow {
                     width: parent.width
                     height: parent.height
 
-                    Header {
+                    ControlCenter.Header {
                         Layout.fillWidth: true
-                        onCloseRequested: root.open = false
                     }
 
-                    Settings {
-                        id: settings
+                    ControlCenter.Settings {
                         Layout.fillWidth: true
-                        onCloseRequested: root.open = false
                     }
 
                     Notifs.List {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-
-                        onNotificationActivated: root.open = false
                     }
 
-                    CustomCalendar {
-                        id: calendar
+                    ControlCenter.Calendar {
                         Layout.fillWidth: true
                     }
                 }
             }
         }
-    }
-
-    Shortcut {
-        sequence: "Escape"
-        enabled: root.open
-        onActivated: root.open = false
     }
 }

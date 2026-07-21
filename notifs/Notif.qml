@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import "../utils"
 import "../components" as Components
+import "../controlCenter" as ControlCenter
 
 Item {
     id: root
@@ -22,8 +23,6 @@ Item {
             return action.identifier !== "default";
         });
     }
-
-    signal activated
 
     width: parent.width
     implicitHeight: content.implicitHeight
@@ -58,7 +57,7 @@ Item {
 
         onClicked: {
             root.defaultAction.invoke();
-            root.activated();
+            ControlCenter.Controller.close();
         }
     }
 
@@ -187,7 +186,7 @@ Item {
 
                             onClicked: {
                                 modelData.invoke();
-                                root.activated();
+                                ControlCenter.Controller.close();
                             }
                         }
                     }

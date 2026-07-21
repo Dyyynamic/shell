@@ -20,8 +20,6 @@ Button {
     hoverEnabled: enabled
     opacity: enabled > 0 ? 1 : 0.5
 
-    focusPolicy: Qt.NoFocus
-
     background: Rectangle {
         id: background
         radius: height / 2

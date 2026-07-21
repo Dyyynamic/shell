@@ -3,11 +3,10 @@ import QtQuick
 import QtQuick.Layouts
 import "../utils"
 import "../components" as Components
+import "." as ControlCenter
 
 Components.Widget {
     id: root
-
-    signal closeRequested
 
     contentBottomMargin: 0
     backgroundColor: "transparent"
@@ -59,7 +58,7 @@ Components.Widget {
 
                 iconText: ""
                 onClicked: () => {
-                    root.closeRequested();
+                    ControlCenter.Controller.close();
                     betterControl.startDetached();
                 }
             }
@@ -73,7 +72,7 @@ Components.Widget {
                 }
                 iconText: ""
                 onClicked: () => {
-                    root.closeRequested();
+                    ControlCenter.Controller.close();
                     lockTimer.start();
                 }
             }
@@ -87,7 +86,7 @@ Components.Widget {
                 }
                 iconText: ""
                 onClicked: () => {
-                    root.closeRequested();
+                    ControlCenter.Controller.close();
                     powerMenu.running = true;
                 }
             }

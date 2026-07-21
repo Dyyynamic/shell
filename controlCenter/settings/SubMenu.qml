@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell.Widgets
 import "../../utils"
 import "../../components" as Components
+import ".." as ControlCenter
 
 Item {
     id: root
@@ -18,7 +19,6 @@ Item {
     implicitHeight: content.implicitHeight
 
     signal backRequested
-    signal closeRequested
     signal settingsRequested
 
     ColumnLayout {
@@ -97,7 +97,7 @@ Item {
             text: "Settings"
             color: Theme.surface
             onClicked: {
-                root.closeRequested();
+                ControlCenter.Controller.close();
                 root.settingsRequested();
             }
         }
