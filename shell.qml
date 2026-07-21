@@ -5,11 +5,12 @@ import QtQuick
 import "bar" as Bar
 import "notifs" as Notifs
 import "controlCenter" as ControlCenter
+import "lock" as Lock
 
 ShellRoot {
     id: root
 
-    readonly property string mainMonitor: Quickshell.env("MAIN_MONITOR") || ""
+    readonly property string mainMonitor: Quickshell.env("MAIN_MONITOR")
 
     Variants {
         model: Quickshell.screens
@@ -38,5 +39,6 @@ ShellRoot {
 
     Component.onCompleted: {
         ControlCenter.Controller.init();
+        Lock.Controller.init();
     }
 }

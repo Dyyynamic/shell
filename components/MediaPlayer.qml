@@ -154,9 +154,9 @@ Item {
 
                                 color: {
                                     if (pressed)
-                                        return "#40ffffff";
+                                        return Qt.alpha(Theme.text, 0.30);
                                     if (hovered)
-                                        return "#20ffffff";
+                                        return Qt.alpha(Theme.text, 0.15);
                                     return "transparent";
                                 }
 
@@ -173,9 +173,9 @@ Item {
 
                                 color: {
                                     if (pressed)
-                                        return "#40ffffff";
+                                        return Qt.alpha(Theme.text, 0.30);
                                     if (hovered)
-                                        return "#20ffffff";
+                                        return Qt.alpha(Theme.text, 0.15);
                                     return "transparent";
                                 }
 
@@ -188,9 +188,9 @@ Item {
 
                                 color: {
                                     if (pressed)
-                                        return "#40ffffff";
+                                        return Qt.alpha(Theme.text, 0.30);
                                     if (hovered)
-                                        return "#20ffffff";
+                                        return Qt.alpha(Theme.text, 0.15);
                                     return "transparent";
                                 }
 

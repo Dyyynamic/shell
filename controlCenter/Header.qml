@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import "../utils"
 import "../components" as Components
+import "../lock" as Lock
 import "." as ControlCenter
 
 Components.Widget {
@@ -73,7 +74,7 @@ Components.Widget {
                 iconText: ""
                 onClicked: () => {
                     ControlCenter.Controller.close();
-                    lockTimer.start();
+                    Lock.Controller.lockWithDelay();
                 }
             }
             Components.IconButton {
@@ -104,11 +105,6 @@ Components.Widget {
     }
 
     Process {
-        id: hyprlock
-        command: ["hyprlock"]
-    }
-
-    Process {
         id: uptime
         command: ["cat", "/proc/uptime"]
         running: true
@@ -129,14 +125,6 @@ Components.Widget {
         repeat: true
         onTriggered: {
             uptime.running = true;
-        }
-    }
-
-    Timer {
-        id: lockTimer
-        interval: Theme.animationDuration
-        onTriggered: {
-            hyprlock.running = true;
         }
     }
 }

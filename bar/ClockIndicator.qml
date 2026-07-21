@@ -8,7 +8,7 @@ Indicator {
 
     Text {
         horizontalAlignment: Text.AlignHCenter
-        text: Time.time
+        text: Qt.formatDateTime(Time.date, "MMM d hh:mm")
         font.family: Theme.fontFamily
         font.pixelSize: Theme.fontSize
         font.weight: Font.Bold

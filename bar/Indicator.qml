@@ -14,6 +14,10 @@ ClippingRectangle {
     property int horizontalPadding: 8
     property bool clickable: false
 
+    property color backgroundColor: Theme.overlay
+    property real backgroundOpacity: 1
+    property bool showBackgroundImage: true
+
     signal clicked
 
     implicitHeight: 32
@@ -21,17 +25,31 @@ ClippingRectangle {
 
     radius: height / 2
 
-    color: {
-        if (pressed)
-            return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
-        if (hovered)
-            return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
-        return Theme.overlay;
-    }
+    color: "transparent"
 
     Item {
         id: background
         anchors.fill: parent
+        visible: root.showBackgroundImage
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: {
+            if (root.pressed)
+                return Qt.lighter(root.backgroundColor, Theme.pressMultiplier);
+            if (root.hovered)
+                return Qt.lighter(root.backgroundColor, Theme.hoverMultiplier);
+            return root.backgroundColor;
+        }
+        opacity: root.backgroundOpacity
+
+        Behavior on color {
+            ColorAnimation {
+                duration: Theme.animationDuration
+                easing.type: Theme.animationEasing
+            }
+        }
     }
 
     Item {
@@ -50,12 +68,5 @@ ClippingRectangle {
         hoverEnabled: true
 
         onClicked: root.clicked()
-    }
-
-    Behavior on color {
-        ColorAnimation {
-            duration: Theme.animationDuration
-            easing.type: Theme.animationEasing
-        }
     }
 }
