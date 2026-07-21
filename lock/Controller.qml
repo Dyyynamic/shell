@@ -19,6 +19,8 @@ Singleton {
     }
 
     function lock() {
+        if (lock.locked) return;
+
         screencopyCmd.running = true;
     }
 
@@ -27,11 +29,15 @@ Singleton {
     }
 
     function lockWithDelay(ms = Theme.animationDuration) {
+        if (lock.locked) return;
+
         lockDelayTimer.interval = ms;
         lockDelayTimer.start();
     }
 
     function lockInstant() {
+        if (lock.locked) return;
+
         lockContext.animate = false;
         screencopyCmd.running = true;
     }
