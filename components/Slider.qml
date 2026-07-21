@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import "../utils"
+import "." as Components
 
 Slider {
     id: root
@@ -50,7 +51,7 @@ Slider {
             height: parent.height
             color: Theme.accent
 
-            Icon {
+            Components.Icon {
                 icon: root.icon
                 size: root.iconSize
                 color: Theme.textAccent
@@ -67,7 +68,7 @@ Slider {
             height: parent.height
             color: Theme.accentDark
 
-            Icon {
+            Components.Icon {
                 icon: root.icon
                 size: root.iconSize
                 color: Theme.text

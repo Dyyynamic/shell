@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import "../utils"
+import "../../utils"
+import "../../components" as Components
 
 Item {
     id: root
@@ -20,7 +21,7 @@ Item {
         RowLayout {
             spacing: Theme.spacingSmall
 
-            CustomSlider {
+            Components.Slider {
                 trackHeight: 32
                 trackRadius: Theme.radiusTiny
                 handleHeight: 38
@@ -34,7 +35,7 @@ Item {
                 onMoved: Audio.defaultSink.audio.volume = value
             }
 
-            IconButton {
+            Components.IconButton {
                 iconText: ""
                 size: 32
 
@@ -42,7 +43,7 @@ Item {
             }
         }
 
-        CustomSlider {
+        Components.Slider {
             trackHeight: 32
             trackRadius: Theme.radiusTiny
             handleHeight: 38
@@ -60,7 +61,7 @@ Item {
         RowLayout {
             spacing: Theme.spacingSmall
 
-            ToggleButton {
+            Components.ToggleButton {
                 Layout.fillWidth: true
                 iconText: Wifi.icon(Wifi.connectedNetwork)
                 iconSize: 24
@@ -72,7 +73,7 @@ Item {
                 navButtonVisible: true
                 onNavButtonClicked: root.wifiMenuRequested()
             }
-            ToggleButton {
+            Components.ToggleButton {
                 Layout.fillWidth: true
                 iconText: "󰂯"
                 iconSize: 24
@@ -95,7 +96,7 @@ Item {
         RowLayout {
             spacing: Theme.spacingSmall
 
-            ToggleButton {
+            Components.ToggleButton {
                 Layout.fillWidth: true
                 iconText: ""
                 iconSize: 24
@@ -110,14 +111,14 @@ Item {
                 checked: NightLight.state === "default" || NightLight.state === "night"
                 onToggled: NightLight.nextState()
             }
-            ToggleButton {
+            Components.ToggleButton {
                 Layout.fillWidth: true
-                iconText: NotificationStore.doNotDisturb ? "󰂛" : "󰂚"
+                iconText: Notifications.doNotDisturb ? "󰂛" : "󰂚"
                 iconSize: 24
                 title: "Do Not Disturb"
-                subtitle: NotificationStore.doNotDisturb ? "On" : "Off"
-                checked: NotificationStore.doNotDisturb
-                onToggled: NotificationStore.toggleDoNotDisturb()
+                subtitle: Notifications.doNotDisturb ? "On" : "Off"
+                checked: Notifications.doNotDisturb
+                onToggled: Notifications.toggleDoNotDisturb()
             }
         }
     }

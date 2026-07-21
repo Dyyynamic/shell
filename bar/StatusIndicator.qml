@@ -1,5 +1,6 @@
 import QtQuick
 import "../utils"
+import "../components" as Components
 
 Indicator {
     id: root
@@ -9,19 +10,19 @@ Indicator {
     Row {
         spacing: Theme.spacingSmall
 
-        Icon {
+        Components.Icon {
             id: wifi
             icon: Wifi.icon(Wifi.connectedNetwork)
         }
 
-        Icon {
+        Components.Icon {
             icon: Audio.icon(Audio.defaultSink)
         }
 
         Loader {
             active: Battery.available
 
-            sourceComponent: Icon {
+            sourceComponent: Components.Icon {
                 icon: Battery.icon
             }
         }

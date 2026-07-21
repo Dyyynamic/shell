@@ -26,7 +26,7 @@ Item {
         z: -1
     }
 
-    NotificationItem {
+    Notif {
         id: item
         notification: root.notification
     }

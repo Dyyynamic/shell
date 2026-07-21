@@ -5,8 +5,9 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import "../utils"
+import "../components" as Components
 
-Widget {
+Components.Widget {
     id: root
 
     readonly property var locale: Qt.locale("sv_SE")
@@ -41,7 +42,7 @@ Widget {
                 Layout.fillWidth: true
             }
 
-            IconButton {
+            Components.IconButton {
                 id: resetButton
 
                 property bool shown: grid.month !== root.currentDate.getMonth() || grid.year !== root.currentDate.getFullYear()
@@ -61,7 +62,7 @@ Widget {
                 }
             }
 
-            IconButton {
+            Components.IconButton {
                 id: prevMonthButton
 
                 size: 32
@@ -72,7 +73,7 @@ Widget {
                 }
             }
 
-            IconButton {
+            Components.IconButton {
                 id: nextMonthButton
 
                 size: 32

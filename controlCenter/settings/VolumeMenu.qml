@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
-import "../utils"
+import "../../utils"
+import "../../components" as Components
 
 SubMenu {
     title: "Volume"
@@ -26,7 +27,7 @@ SubMenu {
 
             spacing: Theme.spacingMedium
 
-            Icon {
+            Components.Icon {
                 icon: ""
             }
 
@@ -46,7 +47,7 @@ SubMenu {
                 RowLayout {
                     spacing: Theme.spacingMedium
 
-                    CustomSlider {
+                    Components.Slider {
                         handleHeight: 16
                         from: 0
                         to: 1

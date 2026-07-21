@@ -1,19 +1,20 @@
 import QtQuick
 import QtQuick.Layouts
 import "../utils"
+import "../components" as Components
 
 Indicator {
     id: root
 
-    clickable: PlayerStore.lastPlayedPlayer.canRaise
-    onClicked: PlayerStore.lastPlayedPlayer.raise()
+    clickable: Players.lastPlayedPlayer.canRaise
+    onClicked: Players.lastPlayedPlayer.raise()
 
     backgroundData: [
         Image {
             anchors.fill: parent
-            source: PlayerStore.lastPlayedPlayer.trackArtUrl
+            source: Players.lastPlayedPlayer.trackArtUrl
             fillMode: Image.PreserveAspectCrop
-            visible: !!PlayerStore.lastPlayedPlayer.trackArtUrl
+            visible: !!Players.lastPlayedPlayer.trackArtUrl
         },
         Rectangle {
             anchors.fill: parent
@@ -24,7 +25,7 @@ Indicator {
                     return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
                 return Theme.overlay;
             }
-            opacity: !!PlayerStore.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
+            opacity: !!Players.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
 
             Behavior on color {
                 ColorAnimation {
@@ -36,13 +37,13 @@ Indicator {
     ]
 
     RowLayout {
-        Icon {
+        Components.Icon {
             icon: ""
         }
 
         Text {
             horizontalAlignment: Text.AlignHCenter
-            text: PlayerStore.lastPlayedPlayer.trackTitle
+            text: Players.lastPlayedPlayer.trackTitle
             font.family: Theme.fontFamily
             font.pixelSize: Theme.fontSize
             font.weight: Font.Bold

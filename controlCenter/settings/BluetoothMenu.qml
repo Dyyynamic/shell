@@ -1,26 +1,27 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
-import "../utils"
+import "../../utils"
+import "../../components" as Components
 
 SubMenu {
-    title: "Wi-Fi"
-    placeholder: "No saved networks found"
-    model: Wifi.networks
-    footerText: "Wi-Fi Settings"
+    title: "Bluetooth"
+    placeholder: "No saved devices found"
+    model: Bluetooth.devices
+    footerText: "Bluetooth Settings"
 
-    onSettingsRequested: wifiSettings.startDetached()
+    onSettingsRequested: bluetoothSettings.startDetached()
 
     delegate: Item {
-        id: networkDelegate
+        id: bluetoothDelegate
 
         required property var modelData
 
         width: parent.width
-        height: networkContent.implicitHeight
+        height: bluetoothContent.implicitHeight
 
         ColumnLayout {
-            id: networkContent
+            id: bluetoothContent
 
             width: parent.width
 
@@ -29,13 +30,13 @@ SubMenu {
             RowLayout {
                 spacing: Theme.spacingMedium
 
-                Icon {
-                    icon: Wifi.icon(networkDelegate.modelData)
+                Components.Icon {
+                    icon: "󰂯"
                 }
 
                 Text {
                     Layout.fillWidth: true
-                    text: networkDelegate.modelData.name
+                    text: bluetoothDelegate.modelData.name
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSize
                     font.weight: Font.Medium
@@ -43,16 +44,16 @@ SubMenu {
                     elide: Text.ElideRight
                 }
 
-                RegularButton {
-                    text: networkDelegate.modelData.connected ? "Disconnect" : "Connect"
+                Components.Button {
+                    text: bluetoothDelegate.modelData.connected ? "Disconnect" : "Connect"
                     textColor: Theme.textSecondary
                     color: Theme.surface
                     font.weight: Font.Normal
                     onClicked: {
-                        if (networkDelegate.modelData.connected)
-                            networkDelegate.modelData.disconnect()
+                        if (bluetoothDelegate.modelData.connected)
+                            bluetoothDelegate.modelData.disconnect()
                         else
-                            networkDelegate.modelData.connect()
+                            bluetoothDelegate.modelData.connect()
                     }
                 }
             }
@@ -60,7 +61,7 @@ SubMenu {
     }
 
     Process {
-        id: wifiSettings
-        command: ["better-control", "--wifi"]
+        id: bluetoothSettings
+        command: ["better-control", "--bluetooth"]
     }
 }

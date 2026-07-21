@@ -8,7 +8,6 @@ PanelWindow {
     WlrLayershell.namespace: "qs-notifications"
 
     required property var bar
-
     readonly property int margin: Theme.spacingSmall
 
     anchors {
@@ -21,7 +20,6 @@ PanelWindow {
     implicitHeight: listView.contentHeight + margin * 2
     implicitWidth: 400 + margin * 2
     color: "transparent"
-    screen: bar.screen
 
     // Make everything click-through except the list-view, which scales
     // according to its content height
@@ -39,10 +37,10 @@ PanelWindow {
     }
 
     Connections {
-        target: NotificationStore
+        target: Notifications
 
         function onNotificationReceived(notification) {
-            if (NotificationStore.doNotDisturb) return;
+            if (Notifications.doNotDisturb) return;
 
             popupModel.append({
                 notification: notification
@@ -92,7 +90,7 @@ PanelWindow {
                 }
             }
 
-            delegate: NotificationPopup {
+            delegate: Popup {
                 required property var modelData
                 notification: modelData
 

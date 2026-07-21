@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 import "../utils"
+import "../notifs" as Notifs
 
 PanelWindow {
     id: root
@@ -30,7 +31,6 @@ PanelWindow {
     exclusionMode: ExclusionMode.Ignore
     implicitWidth: screen.width
     color: "transparent"
-    screen: bar.screen
 
     onVisibleChanged: if (!visible)
         calendar.reset()
@@ -111,18 +111,18 @@ PanelWindow {
                     width: parent.width
                     height: parent.height
 
-                    ControlCenterHeader {
+                    Header {
                         Layout.fillWidth: true
                         onCloseRequested: root.open = false
                     }
 
-                    ControlCenterSettings {
+                    Settings {
                         id: settings
                         Layout.fillWidth: true
                         onCloseRequested: root.open = false
                     }
 
-                    NotificationList {
+                    Notifs.List {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
 

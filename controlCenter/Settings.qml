@@ -1,26 +1,28 @@
 import QtQuick
 import QtQuick.Controls
 import "../utils"
+import "../components" as Components
+import "settings" as Settings
 
-Widget {
+Components.Widget {
     id: root
 
     signal closeRequested
 
-    property var settingsMenu: SettingsMenu {
+    property var settingsMenu: Settings.SettingsMenu {
         onVolumeMenuRequested: stackView.push(root.volumeMenu)
         onWifiMenuRequested: stackView.push(root.wifiMenu)
         onBluetoothMenuRequested: stackView.push(root.bluetoothMenu)
     }
-    property var volumeMenu: VolumeMenu {
+    property var volumeMenu: Settings.VolumeMenu {
         onBackRequested: stackView.pop()
         onCloseRequested: root.closeRequested()
     }
-    property var wifiMenu: WifiMenu {
+    property var wifiMenu: Settings.WifiMenu {
         onBackRequested: stackView.pop()
         onCloseRequested: root.closeRequested()
     }
-    property var bluetoothMenu: BluetoothMenu {
+    property var bluetoothMenu: Settings.BluetoothMenu {
         onBackRequested: stackView.pop()
         onCloseRequested: root.closeRequested()
     }

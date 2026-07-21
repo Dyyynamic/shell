@@ -2,8 +2,9 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import "../utils"
+import "../components" as Components
 
-Widget {
+Components.Widget {
     id: root
 
     signal closeRequested
@@ -17,7 +18,7 @@ Widget {
         RowLayout {
             spacing: Theme.spacingSmall
 
-            Icon {
+            Components.Icon {
                 icon: "󰣇"
                 size: 24
             }
@@ -47,7 +48,7 @@ Widget {
         RowLayout {
             spacing: Theme.spacingSmall
 
-            IconButton {
+            Components.IconButton {
                 color: {
                     if (this.pressed)
                         return Qt.lighter(Theme.surface, Theme.pressMultiplier);
@@ -62,7 +63,7 @@ Widget {
                     betterControl.startDetached();
                 }
             }
-            IconButton {
+            Components.IconButton {
                 color: {
                     if (this.pressed)
                         return Qt.lighter(Theme.surface, Theme.pressMultiplier);
@@ -76,7 +77,7 @@ Widget {
                     lockTimer.start();
                 }
             }
-            IconButton {
+            Components.IconButton {
                 color: {
                     if (this.pressed)
                         return Qt.lighter(Theme.surface, Theme.pressMultiplier);

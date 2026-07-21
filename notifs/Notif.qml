@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import "../utils"
+import "../components" as Components
 
 Item {
     id: root
@@ -111,7 +112,7 @@ Item {
                         color: Theme.text
                     }
 
-                    IconButton {
+                    Components.IconButton {
                         id: dismissButton
 
                         iconText: ""

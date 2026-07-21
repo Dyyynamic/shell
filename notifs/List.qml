@@ -1,10 +1,10 @@
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import "../utils"
+import "../components" as Components
 
-Widget {
+Components.Widget {
     id: root
 
     signal notificationActivated
@@ -16,7 +16,7 @@ Widget {
             id: content
 
             readonly property bool hasContent: {
-                return NotificationStore.count > 0 || PlayerStore.hasActivePlayer;
+                return Notifications.count > 0 || Players.hasActivePlayer;
             }
 
             Layout.fillWidth: true
@@ -38,7 +38,7 @@ Widget {
                     anchors.centerIn: parent
                     spacing: Theme.spacingSmall
 
-                    Icon {
+                    Components.Icon {
                         Layout.alignment: Qt.AlignHCenter
                         icon: "󰂚"
                         color: Theme.textSecondary
@@ -57,8 +57,6 @@ Widget {
             }
 
             ListView {
-                id: notificationList
-
                 anchors.fill: parent
                 spacing: Theme.spacingSmall
                 clip: true
@@ -89,7 +87,7 @@ Widget {
                     }
                 }
 
-                header: PlayerStore.hasActivePlayer ? playerComponent : null
+                header: Players.hasActivePlayer ? playerComponent : null
 
                 Component {
                     id: playerComponent
@@ -97,15 +95,15 @@ Widget {
                         width: parent.width
                         height: player.height + Theme.spacingSmall
 
-                        MediaPlayer {
+                        Components.MediaPlayer {
                             id: player
                         }
                     }
                 }
 
-                model: NotificationStore.notifications
+                model: Notifications.notifications
 
-                delegate: NotificationItem {
+                delegate: Notif {
                     required property var modelData
 
                     notification: modelData
@@ -121,7 +119,7 @@ Widget {
                 margin: Theme.spacingSmall
 
                 Text {
-                    text: `${NotificationStore.count} notification${NotificationStore.count !== 1 ? 's' : ''}`
+                    text: `${Notifications.count} notification${Notifications.count !== 1 ? 's' : ''}`
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.text
@@ -132,12 +130,12 @@ Widget {
                 Layout.fillWidth: true
             }
 
-            RegularButton {
+            Components.Button {
                 text: "Clear"
                 font.pixelSize: Theme.fontSizeTiny
-                enabled: NotificationStore.count > 0
+                enabled: Notifications.count > 0
                 implicitWidth: 72
-                onClicked: NotificationStore.clear()
+                onClicked: Notifications.clear()
             }
         }
     }

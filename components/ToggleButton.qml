@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import "../utils"
+import "." as Components
 
 Item {
     id: root
@@ -84,7 +85,7 @@ Item {
                 anchors.rightMargin: root.margin
                 spacing: root.margin
 
-                Icon {
+                Components.Icon {
                     id: icon
                     color: {
                         if (root.checked)
@@ -170,7 +171,7 @@ Item {
                 }
             }
 
-            Icon {
+            Components.Icon {
                 icon: ""
                 color: {
                     if (root.checked)

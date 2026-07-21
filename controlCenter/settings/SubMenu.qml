@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
-import "../utils"
+import "../../utils"
+import "../../components" as Components
 
 Item {
     id: root
@@ -32,7 +33,7 @@ Item {
             RowLayout {
                 spacing: Theme.spacingSmall
 
-                IconButton {
+                Components.IconButton {
                     iconText: ""
                     onClicked: root.backRequested()
                     size: 32
@@ -91,7 +92,7 @@ Item {
             Layout.rightMargin: Theme.spacingSmall
         }
 
-        RegularButton {
+        Components.Button {
             id: footerButton
             text: "Settings"
             color: Theme.surface

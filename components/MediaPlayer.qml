@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Mpris
 import "../utils"
+import "." as Components
 
 Item {
     id: root
@@ -16,9 +17,9 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        enabled: PlayerStore.lastPlayedPlayer.canRaise
+        enabled: Players.lastPlayedPlayer.canRaise
         hoverEnabled: true
-        onClicked: PlayerStore.lastPlayedPlayer.raise()
+        onClicked: Players.lastPlayedPlayer.raise()
     }
 
     ClippingRectangle {
@@ -27,9 +28,9 @@ Item {
 
         Image {
             anchors.fill: parent
-            source: PlayerStore.lastPlayedPlayer.trackArtUrl
+            source: Players.lastPlayedPlayer.trackArtUrl
             fillMode: Image.PreserveAspectCrop
-            visible: !!PlayerStore.lastPlayedPlayer.trackArtUrl
+            visible: !!Players.lastPlayedPlayer.trackArtUrl
         }
 
         Rectangle {
@@ -41,7 +42,7 @@ Item {
                     return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
                 return Theme.overlay;
             }
-            opacity: !!PlayerStore.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
+            opacity: !!Players.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
 
             Behavior on color {
                 ColorAnimation {
@@ -68,17 +69,17 @@ Item {
                         id: cover
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectCrop
-                        source: PlayerStore.lastPlayedPlayer.trackArtUrl
-                        visible: !!PlayerStore.lastPlayedPlayer.trackArtUrl
+                        source: Players.lastPlayedPlayer.trackArtUrl
+                        visible: !!Players.lastPlayedPlayer.trackArtUrl
                     }
 
                     Rectangle {
                         anchors.fill: parent
                         color: Theme.surface
 
-                        visible: !PlayerStore.lastPlayedPlayer.trackArtUrl
+                        visible: !Players.lastPlayedPlayer.trackArtUrl
 
-                        Icon {
+                        Components.Icon {
                             anchors.centerIn: parent
                             icon: ""
                             size: 32
@@ -102,7 +103,7 @@ Item {
                             font.weight: Font.DemiBold
                             Layout.fillWidth: true
                             elide: Text.ElideRight
-                            text: PlayerStore.lastPlayedPlayer.trackTitle
+                            text: Players.lastPlayedPlayer.trackTitle
                             color: Theme.text
                         }
 
@@ -111,20 +112,20 @@ Item {
                             font.pixelSize: Theme.fontSizeTiny
                             Layout.fillWidth: true
                             elide: Text.ElideRight
-                            text: PlayerStore.lastPlayedPlayer.trackArtist
+                            text: Players.lastPlayedPlayer.trackArtist
                             color: Theme.text
                         }
                     }
 
-                    CustomSlider {
+                    Components.Slider {
                         id: progress
 
-                        to: PlayerStore.lastPlayedPlayer.length
-                        value: pressed ? value : PlayerStore.lastPlayedPlayer.position
+                        to: Players.lastPlayedPlayer.length
+                        value: pressed ? value : Players.lastPlayedPlayer.position
 
                         onPressedChanged: {
-                            if (!pressed && PlayerStore.lastPlayedPlayer) {
-                                PlayerStore.lastPlayedPlayer.position = value;
+                            if (!pressed && Players.lastPlayedPlayer) {
+                                Players.lastPlayedPlayer.position = value;
                             }
                         }
                     }
@@ -139,14 +140,14 @@ Item {
                             color: Theme.text
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
-                            text: Formatters.formatTime(PlayerStore.lastPlayedPlayer.position)
+                            text: Formatters.formatTime(Players.lastPlayedPlayer.position)
                         }
 
                         RowLayout {
                             anchors.centerIn: parent
                             spacing: Theme.spacingSmall
 
-                            IconButton {
+                            Components.IconButton {
                                 size: 32
                                 iconSize: 32
                                 iconText: "󰒮"
@@ -159,13 +160,13 @@ Item {
                                     return "transparent";
                                 }
 
-                                onClicked: PlayerStore.lastPlayedPlayer.previous()
+                                onClicked: Players.lastPlayedPlayer.previous()
                             }
-                            IconButton {
+                            Components.IconButton {
                                 size: 32
                                 iconSize: 32
                                 iconText: {
-                                    if (PlayerStore.lastPlayedPlayer.playbackState === MprisPlaybackState.Playing)
+                                    if (Players.lastPlayedPlayer.playbackState === MprisPlaybackState.Playing)
                                         return "󰏤";
                                     return "󰐊";
                                 }
@@ -178,9 +179,9 @@ Item {
                                     return "transparent";
                                 }
 
-                                onClicked: PlayerStore.lastPlayedPlayer.togglePlaying()
+                                onClicked: Players.lastPlayedPlayer.togglePlaying()
                             }
-                            IconButton {
+                            Components.IconButton {
                                 size: 32
                                 iconSize: 32
                                 iconText: "󰒭"
@@ -193,7 +194,7 @@ Item {
                                     return "transparent";
                                 }
 
-                                onClicked: PlayerStore.lastPlayedPlayer.next()
+                                onClicked: Players.lastPlayedPlayer.next()
                             }
                         }
 
@@ -203,7 +204,7 @@ Item {
                             color: Theme.text
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter
-                            text: Formatters.formatTime(PlayerStore.lastPlayedPlayer.length)
+                            text: Formatters.formatTime(Players.lastPlayedPlayer.length)
                         }
                     }
                 }
@@ -212,11 +213,11 @@ Item {
     }
 
     Timer {
-        running: PlayerStore.lastPlayedPlayer.playbackState == MprisPlaybackState.Playing
+        running: Players.lastPlayedPlayer.playbackState == MprisPlaybackState.Playing
 
         interval: 1000
         repeat: true
 
-        onTriggered: PlayerStore.lastPlayedPlayer.positionChanged()
+        onTriggered: Players.lastPlayedPlayer.positionChanged()
     }
 }

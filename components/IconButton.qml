@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import "../utils"
+import "." as Components
 
 Button {
     id: root
@@ -16,7 +17,7 @@ Button {
 
     focusPolicy: Qt.NoFocus
 
-    Icon {
+    Components.Icon {
         id: icon
         anchors.centerIn: parent
         color: Theme.text
