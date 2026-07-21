@@ -10,6 +10,7 @@ Scope {
     property string currentText: ""
     property bool unlockInProgress: false
     property bool showFailure: false
+    property bool animate: true
 
     // Clear the failure text once the user starts typing
     onCurrentTextChanged: showFailure = false

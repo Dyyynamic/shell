@@ -31,6 +31,11 @@ Singleton {
         lockDelayTimer.start();
     }
 
+    function lockInstant() {
+        lockContext.animate = false;
+        screencopyCmd.running = true;
+    }
+
     Timer {
         id: lockDelayTimer
         interval: Theme.animationDuration
@@ -42,6 +47,10 @@ Singleton {
 
         function lock(): void {
             root.lock();
+        }
+
+        function lockInstant(): void {
+            root.lockInstant();
         }
     }
 

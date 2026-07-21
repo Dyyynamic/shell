@@ -36,8 +36,9 @@ Item {
         property: "opacity"
         from: 1
         to: 0
-        duration: Theme.animationDuration
+        duration: root.context.animate ? Theme.animationDuration : 0
         running: true
+        onFinished: root.context.animate = true
     }
 
     NumberAnimation {
