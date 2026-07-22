@@ -81,7 +81,7 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                color: Qt.alpha("black", 0.25)
+                color: Qt.alpha(Theme.base, 0.15)
             }
         }
 
