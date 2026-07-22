@@ -9,3 +9,4 @@ Part of my [dotfiles](https://github.com/Dyyynamic/dotfiles) setup for Hyprland 
 - Status bar
 - Notification center
 - System controls
+- Lock screen
