@@ -28,7 +28,7 @@ Singleton {
         lock.locked = false;
     }
 
-    function lockWithDelay(ms = Theme.animationDuration) {
+    function lockWithDelay(ms = Theme.animDurationShort) {
         if (lock.locked) return;
 
         lockDelayTimer.interval = ms;
@@ -44,7 +44,7 @@ Singleton {
 
     Timer {
         id: lockDelayTimer
-        interval: Theme.animationDuration
+        interval: Theme.animDurationShort
         onTriggered: root.lock()
     }
 

@@ -20,8 +20,7 @@ PanelWindow {
         left: true
         right: true
     }
-    margins.top: 40 // Bar height
-    exclusionMode: ExclusionMode.Ignore
+    exclusionMode: MarginTypes.Exclusive
     color: "transparent"
 
     MouseArea {
@@ -33,21 +32,21 @@ PanelWindow {
         NumberAnimation {
             id: fadeIn
             target: wrapperItem
-            properties: "opacity"
+            property: "opacity"
             from: 0
             to: 1
-            easing: Theme.animationEasing
-            duration: Theme.animationDuration
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
         }
 
         NumberAnimation {
             id: slideIn
             target: slideTransform
-            properties: "x"
+            property: "x"
             from: wrapperItem.width
             to: 0
-            easing: Theme.animationEasing
-            duration: Theme.animationDuration
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
         }
 
         onFinished: ControlCenter.Controller.transitionFinished()
@@ -57,21 +56,21 @@ PanelWindow {
         NumberAnimation {
             id: fadeOut
             target: wrapperItem
-            properties: "opacity"
+            property: "opacity"
             from: 1
             to: 0
-            easing: Theme.animationEasing
-            duration: Theme.animationDuration
+            duration: Theme.animDurationMedium
+            easing: Theme.animEasing
         }
 
         NumberAnimation {
             id: slideOut
             target: slideTransform
-            properties: "x"
+            property: "x"
             from: 0
             to: wrapperItem.width
-            easing: Theme.animationEasing
-            duration: Theme.animationDuration
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
         }
 
         onFinished: ControlCenter.Controller.transitionFinished()

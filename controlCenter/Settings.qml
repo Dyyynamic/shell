@@ -29,8 +29,8 @@ Components.Widget {
         XAnimator {
             from: -root.width
             to: 0
-            duration: Theme.animationDuration
-            easing: Theme.animationEasing
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
         }
     }
 
@@ -38,8 +38,8 @@ Components.Widget {
         XAnimator {
             from: 0
             to: root.width
-            duration: Theme.animationDuration
-            easing: Theme.animationEasing
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
         }
     }
 
@@ -47,8 +47,8 @@ Components.Widget {
         XAnimator {
             from: root.width
             to: 0
-            duration: Theme.animationDuration
-            easing: Theme.animationEasing
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
         }
     }
 
@@ -56,8 +56,8 @@ Components.Widget {
         XAnimator {
             from: 0
             to: -root.width
-            duration: Theme.animationDuration
-            easing: Theme.animationEasing
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
         }
     }
 
@@ -71,8 +71,8 @@ Components.Widget {
 
         Behavior on implicitHeight {
             NumberAnimation {
-                duration: Theme.animationDuration
-                easing: Theme.animationEasing
+                duration: Theme.animDurationMedium
+                easing.type: Theme.animEasing
             }
         }
 

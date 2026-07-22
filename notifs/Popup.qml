@@ -44,15 +44,15 @@ Item {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: Theme.animationDuration
-            easing.type: Theme.animationEasing
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
         }
     }
 
     Behavior on x {
         NumberAnimation {
-            duration: Theme.animationDuration
-            easing.type: Theme.animationEasing
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
         }
     }
 }

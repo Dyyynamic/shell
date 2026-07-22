@@ -44,23 +44,23 @@ Item {
                 color: {
                     if (root.checked) {
                         if (toggleButton.pressed)
-                            return Qt.lighter(Theme.accent, Theme.accentPressMultiplier);
+                            return Qt.lighter(Theme.accent, Theme.accentPressMult);
                         if (toggleButton.hovered)
-                            return Qt.lighter(Theme.accent, Theme.accentHoverMultiplier);
+                            return Qt.lighter(Theme.accent, Theme.accentHoverMult);
                         return Theme.accent;
                     }
 
                     if (toggleButton.pressed)
-                        return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
+                        return Qt.lighter(Theme.overlay, Theme.pressMult);
                     if (toggleButton.hovered)
-                        return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                        return Qt.lighter(Theme.overlay, Theme.hoverMult);
                     return Theme.overlay;
                 }
 
                 Behavior on color {
                     ColorAnimation {
-                        duration: Theme.animationDuration
-                        easing.type: Theme.animationEasing
+                        duration: Theme.animDurationShort
+                        easing.type: Theme.animEasing
                     }
                 }
             }
@@ -146,23 +146,23 @@ Item {
                 color: {
                     if (root.checked) {
                         if (navButton.pressed)
-                            return Qt.lighter(Theme.accent, Theme.accentPressMultiplier);
+                            return Qt.lighter(Theme.accent, Theme.accentPressMult);
                         if (navButton.hovered)
-                            return Qt.lighter(Theme.accent, Theme.accentHoverMultiplier);
+                            return Qt.lighter(Theme.accent, Theme.accentHoverMult);
                         return Theme.accent;
                     }
 
                     if (navButton.pressed)
-                        return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
+                        return Qt.lighter(Theme.overlay, Theme.pressMult);
                     if (navButton.hovered)
-                        return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                        return Qt.lighter(Theme.overlay, Theme.hoverMult);
                     return Theme.overlay;
                 }
 
                 Behavior on color {
                     ColorAnimation {
-                        duration: Theme.animationDuration
-                        easing.type: Theme.animationEasing
+                        duration: Theme.animDurationShort
+                        easing.type: Theme.animEasing
                     }
                 }
             }

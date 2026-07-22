@@ -23,11 +23,11 @@ Singleton {
     readonly property color outline: colorMix(base, text, 0.1)
 
     // Multipliers
-    readonly property real hoverMultiplier: 1.25
-    readonly property real pressMultiplier: 1.5
+    readonly property real hoverMult: 1.25
+    readonly property real pressMult: 1.5
 
-    readonly property real accentHoverMultiplier: 1.075
-    readonly property real accentPressMultiplier: 1.15
+    readonly property real accentHoverMult: 1.075
+    readonly property real accentPressMult: 1.15
 
     // Text colors
     readonly property color text: Colors.md3.on_background
@@ -41,9 +41,10 @@ Singleton {
     readonly property int fontSizeTiny: 12
 
     // Animations
-    readonly property int animationDuration: 200
-    readonly property int animationDurationFast: 100
-    readonly property int animationEasing: Easing.OutCubic
+    readonly property int animDurationLong: 400
+    readonly property int animDurationMedium: 200
+    readonly property int animDurationShort: 100
+    readonly property int animEasing: Easing.OutCubic
 
     // Radii
     readonly property int radiusLarge: 20

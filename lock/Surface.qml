@@ -36,7 +36,8 @@ Item {
         property: "opacity"
         from: 1
         to: 0
-        duration: root.context.animate ? Theme.animationDuration : 0
+        duration: root.context.animate ? Theme.animDurationLong : 0
+        easing.type: Theme.animEasing
         running: true
         onFinished: root.context.animate = true
     }
@@ -47,7 +48,8 @@ Item {
         property: "opacity"
         from: 0
         to: 1
-        duration: Theme.animationDuration
+        duration: Theme.animDurationLong
+        easing.type: Theme.animEasing
         onFinished: Lock.Controller.unlock()
     }
 
@@ -162,8 +164,8 @@ Item {
 
                     ClippingRectangle {
                         Layout.alignment: Qt.AlignHCenter
-                        implicitHeight: 100
-                        implicitWidth: 100
+                        implicitHeight: 96
+                        implicitWidth: 96
                         radius: height / 2
 
                         Image {

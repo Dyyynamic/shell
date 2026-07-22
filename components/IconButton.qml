@@ -28,16 +28,16 @@ Button {
         radius: height / 2
         color: {
             if (root.pressed)
-                return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
+                return Qt.lighter(Theme.overlay, Theme.pressMult);
             if (root.hovered)
-                return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                return Qt.lighter(Theme.overlay, Theme.hoverMult);
             return Theme.overlay;
         }
 
         Behavior on color {
             ColorAnimation {
-                duration: Theme.animationDuration
-                easing.type: Theme.animationEasing
+                duration: Theme.animDurationShort
+                easing.type: Theme.animEasing
             }
         }
     }

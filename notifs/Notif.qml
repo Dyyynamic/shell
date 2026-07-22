@@ -34,16 +34,16 @@ Item {
 
         color: {
             if (mouseArea.pressed)
-                return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
+                return Qt.lighter(Theme.overlay, Theme.pressMult);
             if (mouseArea.containsMouse)
-                return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                return Qt.lighter(Theme.overlay, Theme.hoverMult);
             return Theme.overlay;
         }
 
         Behavior on color {
             ColorAnimation {
-                duration: Theme.animationDuration
-                easing.type: Theme.animationEasing
+                duration: Theme.animDurationShort
+                easing.type: Theme.animEasing
             }
         }
     }
@@ -169,17 +169,17 @@ Item {
                             background: Rectangle {
                                 color: {
                                     if (actionButton.pressed)
-                                        return Qt.lighter(Theme.overlayHigh, Theme.pressMultiplier);
+                                        return Qt.lighter(Theme.overlayHigh, Theme.pressMult);
                                     if (actionButton.hovered)
-                                        return Qt.lighter(Theme.overlayHigh, Theme.hoverMultiplier);
+                                        return Qt.lighter(Theme.overlayHigh, Theme.hoverMult);
                                     return Theme.overlayHigh;
                                 }
                                 radius: Theme.radiusTiny
 
                                 Behavior on color {
                                     ColorAnimation {
-                                        duration: Theme.animationDuration
-                                        easing.type: Theme.animationEasing
+                                        duration: Theme.animDurationShort
+                                        easing.type: Theme.animEasing
                                     }
                                 }
                             }

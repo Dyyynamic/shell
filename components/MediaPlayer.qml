@@ -37,17 +37,17 @@ Item {
             anchors.fill: parent
             color: {
                 if (root.pressed)
-                    return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
+                    return Qt.lighter(Theme.overlay, Theme.pressMult);
                 if (root.hovered)
-                    return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                    return Qt.lighter(Theme.overlay, Theme.hoverMult);
                 return Theme.overlay;
             }
             opacity: !!Players.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
 
             Behavior on color {
                 ColorAnimation {
-                    duration: Theme.animationDuration
-                    easing.type: Theme.animationEasing
+                    duration: Theme.animDurationShort
+                    easing.type: Theme.animEasing
                 }
             }
         }

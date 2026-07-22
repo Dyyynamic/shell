@@ -37,17 +37,17 @@ ClippingRectangle {
         anchors.fill: parent
         color: {
             if (root.pressed)
-                return Qt.lighter(root.backgroundColor, Theme.pressMultiplier);
+                return Qt.lighter(root.backgroundColor, Theme.pressMult);
             if (root.hovered)
-                return Qt.lighter(root.backgroundColor, Theme.hoverMultiplier);
+                return Qt.lighter(root.backgroundColor, Theme.hoverMult);
             return root.backgroundColor;
         }
         opacity: root.backgroundOpacity
 
         Behavior on color {
             ColorAnimation {
-                duration: Theme.animationDuration
-                easing.type: Theme.animationEasing
+                duration: Theme.animDurationShort
+                easing.type: Theme.animEasing
             }
         }
     }

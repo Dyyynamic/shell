@@ -42,16 +42,16 @@ Indicator {
 
                     color: {
                         if (workspaceItem.pressed)
-                            return Qt.lighter(Theme.overlay, Theme.pressMultiplier);
+                            return Qt.lighter(Theme.overlay, Theme.pressMult);
                         if (workspaceItem.hovered)
-                            return Qt.lighter(Theme.overlay, Theme.hoverMultiplier);
+                            return Qt.lighter(Theme.overlay, Theme.hoverMult);
                         return Theme.overlay;
                     }
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: Theme.animationDuration
-                            easing.type: Theme.animationEasing
+                            duration: Theme.animDurationShort
+                            easing.type: Theme.animEasing
                         }
                     }
                 }
@@ -82,8 +82,8 @@ Indicator {
 
         Behavior on x {
             NumberAnimation {
-                duration: Theme.animationDuration
-                easing.type: Theme.animationEasing
+                duration: Theme.animDurationMedium
+                easing.type: Theme.animEasing
             }
         }
 
@@ -115,8 +115,8 @@ Indicator {
 
             Behavior on x {
                 NumberAnimation {
-                    duration: Theme.animationDuration
-                    easing.type: Theme.animationEasing
+                    duration: Theme.animDurationMedium
+                    easing.type: Theme.animEasing
                 }
             }
         }

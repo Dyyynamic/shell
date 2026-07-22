@@ -75,18 +75,18 @@ PanelWindow {
 
             displaced: Transition {
                 NumberAnimation {
-                    properties: "y"
-                    duration: Theme.animationDuration
-                    easing.type: Theme.animationEasing
+                    property: "y"
+                    duration: Theme.animDurationMedium
+                    easing.type: Theme.animEasing
                 }
             }
 
             remove: Transition {
                 NumberAnimation {
-                    properties: "opacity"
+                    property: "opacity"
                     to: 0
-                    duration: Theme.animationDuration
-                    easing.type: Theme.animationEasing
+                    duration: Theme.animDurationMedium
+                    easing.type: Theme.animEasing
                 }
             }
 
