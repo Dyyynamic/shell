@@ -141,6 +141,7 @@ Item {
                         font.pixelSize: 36
                         font.weight: Font.DemiBold
                         color: Theme.text
+                        renderTypeQuality: Text.HighRenderTypeQuality
                     }
 
                     Text {
@@ -150,6 +151,7 @@ Item {
                         font.pixelSize: 144
                         font.weight: Font.Bold
                         color: Theme.text
+                        renderTypeQuality: Text.VeryHighRenderTypeQuality
                     }
                 }
 
@@ -230,10 +232,6 @@ Item {
                         Connections {
                             target: root.context
 
-                            function onPamSuccess() {
-                                exitAnimation.start();
-                            }
-
                             function onPamFailure() {
                                 passwordBox.text = "";
                             }
@@ -265,6 +263,14 @@ Item {
 
             width: sourceSize.width
             height: sourceSize.height
+        }
+    }
+
+    Connections {
+        target: root.context
+
+        function onPamSuccess() {
+            exitAnimation.start();
         }
     }
 
