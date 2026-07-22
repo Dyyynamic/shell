@@ -20,7 +20,6 @@ PanelWindow {
         left: true
         right: true
     }
-    exclusionMode: MarginTypes.Exclusive
     color: "transparent"
 
     MouseArea {

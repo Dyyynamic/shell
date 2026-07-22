@@ -1,4 +1,7 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Wayland
 import QtQuick
 import "../utils"
@@ -7,7 +10,6 @@ PanelWindow {
     id: root
     WlrLayershell.namespace: "qs-notifications"
 
-    required property var bar
     readonly property int margin: Theme.spacingSmall
 
     anchors {
@@ -15,16 +17,13 @@ PanelWindow {
         right: true
         bottom: true
     }
-    margins.top: bar.height
-    exclusionMode: ExclusionMode.Ignore
-    implicitHeight: listView.contentHeight + margin * 2
+    exclusionMode: ExclusionMode.Normal
     implicitWidth: 400 + margin * 2
     color: "transparent"
 
-    // Make everything click-through except the list-view, which scales
-    // according to its content height
+    // Make everything click-through except notifications
     mask: Region {
-        item: listView
+        item: listView.contentItem
     }
 
     function removePopup(id) {
@@ -40,7 +39,8 @@ PanelWindow {
         target: Notifications
 
         function onNotificationReceived(notification) {
-            if (Notifications.doNotDisturb) return;
+            if (Notifications.doNotDisturb)
+                return;
 
             popupModel.append({
                 notification: notification
@@ -56,18 +56,12 @@ PanelWindow {
         id: popupModel
     }
 
-    Item {
+    WrapperItem {
         anchors.fill: parent
-        anchors.margins: root.margin
+        margin: root.margin
 
         ListView {
             id: listView
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: parent.top
-            }
-            height: contentHeight
             interactive: false
             model: popupModel
 

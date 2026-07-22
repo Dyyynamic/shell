@@ -21,7 +21,6 @@ ShellRoot {
             required property var modelData
 
             Bar.Bar {
-                id: bar
                 screen: scope.modelData
             }
 
@@ -30,9 +29,7 @@ ShellRoot {
                 // show on all monitors
                 active: !root.mainMonitor || scope.modelData.name === root.mainMonitor
 
-                Notifs.PopupStack {
-                    bar: bar
-                }
+                Notifs.PopupStack {}
             }
         }
     }

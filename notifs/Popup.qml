@@ -13,8 +13,26 @@ Item {
     width: parent.width
     height: item.height
 
-    opacity: 0
-    x: width
+    ParallelAnimation {
+        NumberAnimation {
+            target: root
+            property: "opacity"
+            from: 0
+            to: 1
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
+        }
+        NumberAnimation {
+            target: root
+            property: "x"
+            from: root.width
+            to: 0
+            duration: Theme.animDurationMedium
+            easing.type: Theme.animEasing
+        }
+
+        running: true
+    }
 
     RectangularShadow {
         anchors.fill: parent
@@ -31,28 +49,9 @@ Item {
         notification: root.notification
     }
 
-    Component.onCompleted: {
-        root.opacity = 1;
-        root.x = 0;
-    }
-
     Timer {
         interval: 3000
         running: true
         onTriggered: root.expired()
-    }
-
-    Behavior on opacity {
-        NumberAnimation {
-            duration: Theme.animDurationMedium
-            easing.type: Theme.animEasing
-        }
-    }
-
-    Behavior on x {
-        NumberAnimation {
-            duration: Theme.animDurationMedium
-            easing.type: Theme.animEasing
-        }
     }
 }
