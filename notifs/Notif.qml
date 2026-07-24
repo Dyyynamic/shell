@@ -34,9 +34,9 @@ Item {
 
         color: {
             if (mouseArea.pressed)
-                return Qt.lighter(Theme.overlay, Theme.pressMult);
+                return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
             if (mouseArea.containsMouse)
-                return Qt.lighter(Theme.overlay, Theme.hoverMult);
+                return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
             return Theme.overlay;
         }
 
@@ -163,15 +163,16 @@ Item {
                             text: root.notification.hasActionIcons ? "" : modelData.text
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeTiny
+                            palette.buttonText: Theme.text
                             implicitHeight: 30
                             padding: 8
 
                             background: Rectangle {
                                 color: {
                                     if (actionButton.pressed)
-                                        return Qt.lighter(Theme.overlayHigh, Theme.pressMult);
+                                        return Theme.colorMix(Theme.overlayHigh, Theme.text, Theme.pressIntensity);
                                     if (actionButton.hovered)
-                                        return Qt.lighter(Theme.overlayHigh, Theme.hoverMult);
+                                        return Theme.colorMix(Theme.overlayHigh, Theme.text, Theme.hoverIntensity);
                                     return Theme.overlayHigh;
                                 }
                                 radius: Theme.radiusTiny

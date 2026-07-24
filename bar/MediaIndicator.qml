@@ -23,6 +23,7 @@ Indicator {
     RowLayout {
         Components.Icon {
             icon: ""
+            color: root.textColor
         }
 
         Text {
@@ -31,7 +32,7 @@ Indicator {
             font.family: Theme.fontFamily
             font.pixelSize: Theme.fontSize
             font.weight: Font.Bold
-            color: Theme.text
+            color: root.textColor
             elide: Text.ElideRight
             Layout.maximumWidth: 200
         }

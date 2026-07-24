@@ -51,9 +51,9 @@ Components.Widget {
             Components.IconButton {
                 color: {
                     if (this.pressed)
-                        return Qt.lighter(Theme.surface, Theme.pressMult);
+                        return Theme.colorMix(Theme.surface, Theme.text, Theme.pressIntensity);
                     if (this.hovered)
-                        return Qt.lighter(Theme.surface, Theme.hoverMult);
+                        return Theme.colorMix(Theme.surface, Theme.text, Theme.hoverIntensity);
                     return Theme.base;
                 }
 
@@ -66,9 +66,9 @@ Components.Widget {
             Components.IconButton {
                 color: {
                     if (this.pressed)
-                        return Qt.lighter(Theme.surface, Theme.pressMult);
+                        return Theme.colorMix(Theme.surface, Theme.text, Theme.pressIntensity);
                     if (this.hovered)
-                        return Qt.lighter(Theme.surface, Theme.hoverMult);
+                        return Theme.colorMix(Theme.surface, Theme.text, Theme.hoverIntensity);
                     return Theme.base;
                 }
                 iconText: ""
@@ -80,9 +80,9 @@ Components.Widget {
             Components.IconButton {
                 color: {
                     if (this.pressed)
-                        return Qt.lighter(Theme.surface, Theme.pressMult);
+                        return Theme.colorMix(Theme.surface, Theme.text, Theme.pressIntensity);
                     if (this.hovered)
-                        return Qt.lighter(Theme.surface, Theme.hoverMult);
+                        return Theme.colorMix(Theme.surface, Theme.text, Theme.hoverIntensity);
                     return Theme.base;
                 }
                 iconText: ""

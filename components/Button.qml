@@ -25,9 +25,9 @@ Button {
         radius: height / 2
         color: {
             if (root.pressed)
-                return Qt.lighter(root.color, Theme.pressMult);
+                return Theme.colorMix(root.color, Theme.text, Theme.pressIntensity)
             if (root.hovered)
-                return Qt.lighter(root.color, Theme.hoverMult);
+                return Theme.colorMix(root.color, Theme.text, Theme.hoverIntensity);
             return root.color;
         }
 

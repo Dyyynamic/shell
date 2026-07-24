@@ -44,16 +44,16 @@ Item {
                 color: {
                     if (root.checked) {
                         if (toggleButton.pressed)
-                            return Qt.lighter(Theme.accent, Theme.accentPressMult);
+                            return Theme.colorMix(Theme.accent, Theme.textAccent, Theme.accentPressIntensity);
                         if (toggleButton.hovered)
-                            return Qt.lighter(Theme.accent, Theme.accentHoverMult);
+                            return Theme.colorMix(Theme.accent, Theme.textAccent, Theme.accentHoverIntensity);
                         return Theme.accent;
                     }
 
                     if (toggleButton.pressed)
-                        return Qt.lighter(Theme.overlay, Theme.pressMult);
+                        return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
                     if (toggleButton.hovered)
-                        return Qt.lighter(Theme.overlay, Theme.hoverMult);
+                        return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
                     return Theme.overlay;
                 }
 
@@ -74,7 +74,7 @@ Item {
                 height: parent.height - 16
                 width: 1
 
-                color: root.checked ? Theme.textAccent : Theme.overlayHigh
+                color: root.checked ? Theme.textAccent : Theme.dividerHigh
             }
 
             RowLayout {
@@ -146,16 +146,16 @@ Item {
                 color: {
                     if (root.checked) {
                         if (navButton.pressed)
-                            return Qt.lighter(Theme.accent, Theme.accentPressMult);
+                            return Theme.colorMix(Theme.accent, Theme.textAccent, Theme.accentPressIntensity);
                         if (navButton.hovered)
-                            return Qt.lighter(Theme.accent, Theme.accentHoverMult);
+                            return Theme.colorMix(Theme.accent, Theme.textAccent, Theme.accentHoverIntensity);
                         return Theme.accent;
                     }
 
                     if (navButton.pressed)
-                        return Qt.lighter(Theme.overlay, Theme.pressMult);
+                        return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
                     if (navButton.hovered)
-                        return Qt.lighter(Theme.overlay, Theme.hoverMult);
+                        return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
                     return Theme.overlay;
                 }
 

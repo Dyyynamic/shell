@@ -37,9 +37,9 @@ Item {
             anchors.fill: parent
             color: {
                 if (root.pressed)
-                    return Qt.lighter(Theme.overlay, Theme.pressMult);
+                    return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
                 if (root.hovered)
-                    return Qt.lighter(Theme.overlay, Theme.hoverMult);
+                    return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
                 return Theme.overlay;
             }
             opacity: !!Players.lastPlayedPlayer.trackArtUrl ? 0.75 : 1

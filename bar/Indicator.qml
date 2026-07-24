@@ -14,6 +14,7 @@ ClippingRectangle {
     property int horizontalPadding: 8
     property bool clickable: false
 
+    property color textColor: Theme.text
     property color backgroundColor: Theme.overlay
     property real backgroundOpacity: 1
     property bool showBackgroundImage: true
@@ -37,9 +38,9 @@ ClippingRectangle {
         anchors.fill: parent
         color: {
             if (root.pressed)
-                return Qt.lighter(root.backgroundColor, Theme.pressMult);
+                return Theme.colorMix(root.backgroundColor, Theme.text, Theme.pressIntensity);
             if (root.hovered)
-                return Qt.lighter(root.backgroundColor, Theme.hoverMult);
+                return Theme.colorMix(root.backgroundColor, Theme.text, Theme.hoverIntensity);
             return root.backgroundColor;
         }
         opacity: root.backgroundOpacity

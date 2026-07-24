@@ -81,7 +81,7 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                color: Qt.alpha(Theme.base, 0.15)
+                color: Qt.alpha("black", 0.15)
             }
         }
 
@@ -114,8 +114,9 @@ Item {
                                     active: Players.hasActivePlayer
                                     sourceComponent: Bar.MediaIndicator {
                                         clickable: false
-                                        backgroundColor: Theme.text
+                                        backgroundColor: "#e3e3e3"
                                         backgroundOpacity: 0.15
+                                        textColor: "#e3e3e3"
                                         showBackgroundImage: false
                                     }
                                 }
@@ -123,8 +124,9 @@ Item {
                                 Bar.StatusIndicator {
                                     Layout.preferredWidth: implicitWidth + 8
                                     clickable: false
-                                    backgroundColor: Theme.text
+                                    backgroundColor: "#e3e3e3"
                                     backgroundOpacity: 0.15
+                                    textColor: "#e3e3e3"
                                 }
                             }
                         }
@@ -142,7 +144,7 @@ Item {
                         font.family: Theme.fontFamily
                         font.pixelSize: 36
                         font.weight: Font.DemiBold
-                        color: Theme.text
+                        color: "#e3e3e3"
                         renderTypeQuality: Text.HighRenderTypeQuality
                     }
 
@@ -152,7 +154,7 @@ Item {
                         font.family: Theme.fontFamily
                         font.pixelSize: 144
                         font.weight: Font.Bold
-                        color: Theme.text
+                        color: "#e3e3e3"
                         renderTypeQuality: Text.VeryHighRenderTypeQuality
                     }
                 }
@@ -180,7 +182,7 @@ Item {
                         font.family: Theme.fontFamily
                         font.pixelSize: 20
                         font.weight: Font.DemiBold
-                        color: Theme.text
+                        color: "#e3e3e3"
                     }
 
                     TextField {
@@ -191,14 +193,14 @@ Item {
                         implicitHeight: 40
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.text
+                        color: "#e3e3e3"
                         padding: Theme.spacingMedium
 
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
 
                         background: Rectangle {
-                            color: Qt.alpha(Theme.text, 0.15)
+                            color: Qt.alpha("#e3e3e3", 0.15)
                             radius: height / 2
                         }
 
@@ -207,7 +209,7 @@ Item {
                             anchors.margins: passwordBox.padding
 
                             text: passwordBox.text.length === 0 ? "Enter password" : ""
-                            color: Theme.text
+                            color: "#e3e3e3"
                             font: passwordBox.font
 
                             horizontalAlignment: Text.AlignHCenter
@@ -246,7 +248,7 @@ Item {
                         text: root.statusMessage
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.text
+                        color: "#e3e3e3"
                     }
                 }
             }

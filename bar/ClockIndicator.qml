@@ -12,6 +12,6 @@ Indicator {
         font.family: Theme.fontFamily
         font.pixelSize: Theme.fontSize
         font.weight: Font.Bold
-        color: Theme.text
+        color: root.textColor
     }
 }

@@ -16,18 +16,21 @@ Singleton {
 
     readonly property color surface: colorMix(base, text, 0.035)
     readonly property color overlay: colorMix(base, text, 0.1)
-    readonly property color overlayHigh: colorMix(base, text, 0.25)
+    readonly property color overlayHigh: colorMix(base, text, 0.18)
+
+    readonly property color outline: colorMix(base, text, 0.1)
+    readonly property color divider: colorMix(base, text, 0.18)
+    readonly property color dividerHigh: colorMix(base, text, 0.25)
 
     readonly property color accent: Colors.md3.primary
     readonly property color accentDark: colorMix(accent, base, 0.75)
-    readonly property color outline: colorMix(base, text, 0.1)
 
-    // Multipliers
-    readonly property real hoverMult: 1.25
-    readonly property real pressMult: 1.5
+    // Intensities
+    readonly property real hoverIntensity: 0.05
+    readonly property real pressIntensity: 0.1
 
-    readonly property real accentHoverMult: 1.05
-    readonly property real accentPressMult: 1.1
+    readonly property real accentHoverIntensity: 0.075
+    readonly property real accentPressIntensity: 0.15
 
     // Text colors
     readonly property color text: Colors.md3.on_background

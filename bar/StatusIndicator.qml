@@ -13,10 +13,12 @@ Indicator {
         Components.Icon {
             id: wifi
             icon: Wifi.icon(Wifi.connectedNetwork)
+            color: root.textColor
         }
 
         Components.Icon {
             icon: Audio.icon(Audio.defaultSink)
+            color: root.textColor
         }
 
         Loader {
@@ -24,6 +26,7 @@ Indicator {
 
             sourceComponent: Components.Icon {
                 icon: Battery.icon
+                color: root.textColor
             }
         }
     }
