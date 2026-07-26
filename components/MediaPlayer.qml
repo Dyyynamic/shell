@@ -25,6 +25,7 @@ Item {
     ClippingRectangle {
         anchors.fill: parent
         radius: Theme.radiusSmall
+        color: "transparent"
 
         Image {
             anchors.fill: parent
@@ -64,6 +65,7 @@ Item {
                     Layout.preferredWidth: height
 
                     radius: Theme.radiusTiny
+                    color: "transparent"
 
                     Image {
                         id: cover
