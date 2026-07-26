@@ -105,7 +105,7 @@ Components.Widget {
                     font.weight: Font.DemiBold
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    color: Theme.text
+                    color: Theme.textVariant
                 }
             }
 
@@ -145,7 +145,7 @@ Components.Widget {
                                 return Theme.textAccent;
                             if (dayItem.modelData.month === grid.month)
                                 return Theme.text;
-                            return Theme.textSecondary;
+                            return Theme.textDisabled;
                         }
                     }
                 }

@@ -83,7 +83,7 @@ Item {
                             anchors.centerIn: parent
                             icon: ""
                             size: 32
-                            color: Theme.text
+                            color: Theme.textVariant
                         }
                     }
                 }
@@ -113,7 +113,7 @@ Item {
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                             text: Players.lastPlayedPlayer.trackArtist
-                            color: Theme.text
+                            color: Theme.textVariant
                         }
                     }
 
@@ -137,7 +137,7 @@ Item {
                         Text {
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeTiny
-                            color: Theme.text
+                            color: Theme.textVariant
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
                             text: Formatters.formatTime(Players.lastPlayedPlayer.position)
@@ -201,7 +201,7 @@ Item {
                         Text {
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeTiny
-                            color: Theme.text
+                            color: Theme.textVariant
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter
                             text: Formatters.formatTime(Players.lastPlayedPlayer.length)

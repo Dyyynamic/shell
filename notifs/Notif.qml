@@ -101,14 +101,14 @@ Item {
                         }
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeTiny
-                        color: Theme.text
+                        color: Theme.textVariant
                     }
 
                     Text {
                         text: Qt.formatTime(new Date(root.notification.time), "hh:mm")
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeTiny
-                        color: Theme.text
+                        color: Theme.textVariant
                     }
 
                     Components.IconButton {

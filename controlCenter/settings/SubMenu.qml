@@ -63,7 +63,7 @@ Item {
 
                 font.family: Theme.fontFamily
                 font.pixelSize: Theme.fontSizeTiny
-                color: Theme.textSecondary
+                color: Theme.textDisabled
             }
         }
 

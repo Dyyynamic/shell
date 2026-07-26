@@ -66,7 +66,7 @@ Indicator {
                     color: {
                         if (workspaceItem.modelData.toplevels.values.length > 0)
                             return Theme.text;
-                        return Theme.textSecondary;
+                        return Theme.textDisabled;
                     }
                 }
             }

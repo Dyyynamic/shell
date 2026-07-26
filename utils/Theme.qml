@@ -34,7 +34,8 @@ Singleton {
 
     // Text colors
     readonly property color text: Colors.md3.on_background
-    readonly property color textSecondary: colorMix(text, base, 0.45)
+    readonly property color textVariant: colorMix(text, base, 0.2)
+    readonly property color textDisabled: colorMix(text, base, 0.4)
     readonly property color textAccent: Colors.md3.on_primary
 
     // Font

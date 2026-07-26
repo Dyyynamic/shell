@@ -39,7 +39,7 @@ Components.Widget {
                     Components.Icon {
                         Layout.alignment: Qt.AlignHCenter
                         icon: "󰂚"
-                        color: Theme.textSecondary
+                        color: Theme.textDisabled
                         size: 80
                     }
 
@@ -49,7 +49,7 @@ Components.Widget {
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeTiny
                         text: "No notifications"
-                        color: Theme.textSecondary
+                        color: Theme.textDisabled
                     }
                 }
             }

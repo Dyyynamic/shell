@@ -119,7 +119,7 @@ Item {
                         color: {
                             if (root.checked)
                                 return Theme.textAccent;
-                            return Theme.text;
+                            return Theme.textVariant;
                         }
                         elide: Text.ElideRight
                     }
