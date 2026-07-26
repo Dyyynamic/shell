@@ -49,9 +49,17 @@ Item {
         notification: root.notification
     }
 
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        hoverEnabled: true
+        acceptedButtons: Qt.NoButton
+    }
+
     Timer {
         interval: 3000
-        running: true
+        // Pause the timer when hovering the notification
+        running: !mouseArea.containsMouse
         onTriggered: root.expired()
     }
 }
