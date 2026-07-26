@@ -47,13 +47,16 @@ SubMenu {
                 Components.Button {
                     text: networkDelegate.modelData.connected ? "Disconnect" : "Connect"
                     textColor: Theme.textVariant
-                    color: Theme.surface
                     font.weight: Font.Normal
+
+                    backgroundColor: Theme.surface
+                    backgroundOpacity: hovered ? 1 : 0
+
                     onClicked: {
                         if (networkDelegate.modelData.connected)
-                            networkDelegate.modelData.disconnect()
+                            networkDelegate.modelData.disconnect();
                         else
-                            networkDelegate.modelData.connect()
+                            networkDelegate.modelData.connect();
                     }
                 }
             }

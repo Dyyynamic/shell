@@ -47,8 +47,11 @@ SubMenu {
                 Components.Button {
                     text: bluetoothDelegate.modelData.connected ? "Disconnect" : "Connect"
                     textColor: Theme.textVariant
-                    color: Theme.surface
                     font.weight: Font.Normal
+
+                    backgroundColor: Theme.surface
+                    backgroundOpacity: hovered ? 1 : 0
+
                     onClicked: {
                         if (bluetoothDelegate.modelData.connected)
                             bluetoothDelegate.modelData.disconnect()

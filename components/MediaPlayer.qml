@@ -154,12 +154,17 @@ Item {
                                 iconSize: 32
                                 iconText: "󰒮"
 
-                                color: {
+                                // Keep color static
+                                backgroundColor: Theme.text
+                                hoveredColor: Theme.text
+                                pressedColor: Theme.text
+
+                                backgroundOpacity: {
                                     if (pressed)
-                                        return Qt.alpha(Theme.text, 0.30);
+                                        return 0.2;
                                     if (hovered)
-                                        return Qt.alpha(Theme.text, 0.15);
-                                    return "transparent";
+                                        return 0.1;
+                                    return 0;
                                 }
 
                                 onClicked: Players.lastPlayedPlayer.previous()
@@ -173,12 +178,17 @@ Item {
                                     return "󰐊";
                                 }
 
-                                color: {
+                                // Keep color static
+                                backgroundColor: Theme.text
+                                hoveredColor: Theme.text
+                                pressedColor: Theme.text
+
+                                backgroundOpacity: {
                                     if (pressed)
-                                        return Qt.alpha(Theme.text, 0.30);
+                                        return 0.2;
                                     if (hovered)
-                                        return Qt.alpha(Theme.text, 0.15);
-                                    return "transparent";
+                                        return 0.1;
+                                    return 0;
                                 }
 
                                 onClicked: Players.lastPlayedPlayer.togglePlaying()
@@ -188,12 +198,17 @@ Item {
                                 iconSize: 32
                                 iconText: "󰒭"
 
-                                color: {
+                                // Keep color static
+                                backgroundColor: Theme.text
+                                hoveredColor: Theme.text
+                                pressedColor: Theme.text
+
+                                backgroundOpacity: {
                                     if (pressed)
-                                        return Qt.alpha(Theme.text, 0.30);
+                                        return 0.2;
                                     if (hovered)
-                                        return Qt.alpha(Theme.text, 0.15);
-                                    return "transparent";
+                                        return 0.1;
+                                    return 0;
                                 }
 
                                 onClicked: Players.lastPlayedPlayer.next()

@@ -49,13 +49,8 @@ Components.Widget {
             spacing: Theme.spacingSmall
 
             Components.IconButton {
-                color: {
-                    if (this.pressed)
-                        return Theme.colorMix(Theme.surface, Theme.text, Theme.pressIntensity);
-                    if (this.hovered)
-                        return Theme.colorMix(Theme.surface, Theme.text, Theme.hoverIntensity);
-                    return Theme.base;
-                }
+                backgroundColor: Theme.surface
+                backgroundOpacity: hovered ? 1 : 0;
 
                 iconText: ""
                 onClicked: () => {
@@ -64,13 +59,9 @@ Components.Widget {
                 }
             }
             Components.IconButton {
-                color: {
-                    if (this.pressed)
-                        return Theme.colorMix(Theme.surface, Theme.text, Theme.pressIntensity);
-                    if (this.hovered)
-                        return Theme.colorMix(Theme.surface, Theme.text, Theme.hoverIntensity);
-                    return Theme.base;
-                }
+                backgroundColor: Theme.surface
+                backgroundOpacity: hovered ? 1 : 0;
+
                 iconText: ""
                 onClicked: () => {
                     ControlCenter.Controller.close();
@@ -78,13 +69,9 @@ Components.Widget {
                 }
             }
             Components.IconButton {
-                color: {
-                    if (this.pressed)
-                        return Theme.colorMix(Theme.surface, Theme.text, Theme.pressIntensity);
-                    if (this.hovered)
-                        return Theme.colorMix(Theme.surface, Theme.text, Theme.hoverIntensity);
-                    return Theme.base;
-                }
+                backgroundColor: Theme.surface
+                backgroundOpacity: hovered ? 1 : 0;
+
                 iconText: ""
                 onClicked: () => {
                     ControlCenter.Controller.close();

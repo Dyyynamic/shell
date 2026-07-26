@@ -73,7 +73,7 @@ Item {
                 source: wallpaper
 
                 blurEnabled: true
-                blur: 1.0
+                blur: 1
                 blurMax: 64
                 blurMultiplier: 1.5
                 autoPaddingEnabled: false

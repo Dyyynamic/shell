@@ -5,9 +5,14 @@ import "../utils"
 Button {
     id: root
 
-    property alias textColor: root.palette.buttonText
     property alias radius: background.radius
-    property color color: Theme.overlay
+
+    property color backgroundColor: Theme.overlay
+    property color hoveredColor: Theme.colorMix(backgroundColor, Theme.text, Theme.hoverIntensity);
+    property color pressedColor: Theme.colorMix(backgroundColor, Theme.text, Theme.pressIntensity);
+    property alias backgroundOpacity: background.opacity
+
+    property alias textColor: root.palette.buttonText
 
     font.family: Theme.fontFamily
     font.pixelSize: Theme.fontSizeSmall
@@ -23,16 +28,24 @@ Button {
     background: Rectangle {
         id: background
         radius: height / 2
+
         color: {
             if (root.pressed)
-                return Theme.colorMix(root.color, Theme.text, Theme.pressIntensity)
+                return root.pressedColor;
             if (root.hovered)
-                return Theme.colorMix(root.color, Theme.text, Theme.hoverIntensity);
-            return root.color;
+                return root.hoveredColor;
+            return root.backgroundColor;
         }
 
         Behavior on color {
             ColorAnimation {
+                duration: Theme.animDurationShort
+                easing.type: Theme.animEasing
+            }
+        }
+
+        Behavior on opacity {
+            NumberAnimation {
                 duration: Theme.animDurationShort
                 easing.type: Theme.animEasing
             }

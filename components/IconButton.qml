@@ -6,36 +6,50 @@ import "." as Components
 Button {
     id: root
 
-    property alias iconText: icon.icon
-    property alias color: background.color
-
     property int size: 40
-    property int iconSize: 20
+
+    property color backgroundColor: Theme.overlay
+    property color hoveredColor: Theme.colorMix(backgroundColor, Theme.text, Theme.hoverIntensity);
+    property color pressedColor: Theme.colorMix(backgroundColor, Theme.text, Theme.pressIntensity);
+    property alias backgroundOpacity: background.opacity
+
+    property alias iconText: icon.icon
+    property alias iconSize: icon.size
+    property alias iconColor: icon.color
 
     implicitWidth: size
     implicitHeight: size
 
+    hoverEnabled: enabled
+    opacity: enabled > 0 ? 1 : 0.5
+
     Components.Icon {
         id: icon
         anchors.centerIn: parent
-        color: Theme.text
-        size: root.iconSize
     }
 
     background: Rectangle {
         id: background
         anchors.fill: parent
         radius: height / 2
+
         color: {
             if (root.pressed)
-                return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
+                return root.pressedColor;
             if (root.hovered)
-                return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
-            return Theme.overlay;
+                return root.hoveredColor;
+            return root.backgroundColor;
         }
 
         Behavior on color {
             ColorAnimation {
+                duration: Theme.animDurationShort
+                easing.type: Theme.animEasing
+            }
+        }
+
+        Behavior on opacity {
+            NumberAnimation {
                 duration: Theme.animDurationShort
                 easing.type: Theme.animEasing
             }

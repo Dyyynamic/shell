@@ -7,23 +7,24 @@ Item {
 
     default property alias contentData: content.data
 
-    property int contentMargin: Theme.spacingSmall
-    property int contentBottomMargin: Theme.spacingSmall
-    property color backgroundColor: Theme.surface
+    property alias contentMargin: content.margin
+    property alias contentBottomMargin: content.bottomMargin
+    property alias backgroundColor: background.color
 
     implicitWidth: content.implicitWidth
     implicitHeight: content.implicitHeight
 
     Rectangle {
+        id: background
         anchors.fill: parent
-        color: root.backgroundColor
+        color: Theme.surface
         radius: Theme.radiusMedium
     }
 
     WrapperItem {
         id: content
         anchors.fill: parent
-        margin: root.contentMargin
-        bottomMargin: root.contentBottomMargin
+        margin: Theme.spacingSmall
+        bottomMargin: Theme.spacingSmall
     }
 }

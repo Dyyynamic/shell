@@ -95,7 +95,10 @@ Item {
         Components.Button {
             id: footerButton
             text: "Settings"
-            color: Theme.surface
+
+            backgroundColor: Theme.surface
+            backgroundOpacity: hovered ? 1 : 0
+
             onClicked: {
                 ControlCenter.Controller.close();
                 root.settingsRequested();
