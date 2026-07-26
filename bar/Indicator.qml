@@ -47,8 +47,8 @@ ClippingRectangle {
 
         Behavior on color {
             ColorAnimation {
-                duration: Theme.animDurationShort
-                easing.type: Theme.animEasing
+                duration: Theme.durationFast
+                easing.type: Theme.easingStandard
             }
         }
     }

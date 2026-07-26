@@ -87,8 +87,8 @@ Slider {
 
         Behavior on width {
             NumberAnimation {
-                duration: Theme.animDurationShort
-                easing.type: Theme.animEasing
+                duration: Theme.durationFast
+                easing.type: Theme.easingStandard
             }
         }
     }

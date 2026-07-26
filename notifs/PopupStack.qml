@@ -42,7 +42,7 @@ PanelWindow {
             if (Notifications.doNotDisturb)
                 return;
 
-            popupModel.append({
+            popupModel.insert(0, {
                 notification: notification
             });
         }
@@ -70,8 +70,8 @@ PanelWindow {
             displaced: Transition {
                 NumberAnimation {
                     property: "y"
-                    duration: Theme.animDurationMedium
-                    easing.type: Theme.animEasing
+                    duration: Theme.durationMedium
+                    easing.type: Theme.easingStandard
                 }
             }
 
@@ -79,8 +79,8 @@ PanelWindow {
                 NumberAnimation {
                     property: "opacity"
                     to: 0
-                    duration: Theme.animDurationMedium
-                    easing.type: Theme.animEasing
+                    duration: Theme.durationFast
+                    easing.type: Theme.easingStandard
                 }
             }
 

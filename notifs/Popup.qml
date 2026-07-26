@@ -19,16 +19,16 @@ Item {
             property: "opacity"
             from: 0
             to: 1
-            duration: Theme.animDurationMedium
-            easing.type: Theme.animEasing
+            duration: Theme.durationMedium
+            easing.type: Theme.easingStandard
         }
         NumberAnimation {
             target: root
             property: "x"
             from: root.width
             to: 0
-            duration: Theme.animDurationMedium
-            easing.type: Theme.animEasing
+            duration: Theme.durationMedium
+            easing.type: Theme.easingStandard
         }
 
         running: true

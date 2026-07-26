@@ -8,7 +8,7 @@ Singleton {
     id: root
 
     function colorMix(color1, color2, factor) {
-        return Qt.tint(color1, Qt.rgba(color2.r, color2.g, color2.b, factor))
+        return Qt.tint(color1, Qt.rgba(color2.r, color2.g, color2.b, factor));
     }
 
     // Colors
@@ -45,10 +45,14 @@ Singleton {
     readonly property int fontSizeTiny: 12
 
     // Animations
-    readonly property int animDurationLong: 400
-    readonly property int animDurationMedium: 200
-    readonly property int animDurationShort: 100
-    readonly property int animEasing: Easing.OutCubic
+    readonly property int durationFast: 100        // Hover, press, fast fades
+    readonly property int durationMedium: 200      // Standard slides and fades
+    readonly property int durationSlideIn: 300     // Entering panels
+    readonly property int durationAtmospheric: 400 // Lockscreen
+
+    readonly property int easingStandard: Easing.OutCubic
+    readonly property int easingExpressive: Easing.OutBack
+    readonly property real overshoot: 0.7
 
     // Radii
     readonly property int radiusLarge: 20

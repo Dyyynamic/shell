@@ -50,8 +50,8 @@ Indicator {
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: Theme.animDurationShort
-                            easing.type: Theme.animEasing
+                            duration: Theme.durationFast
+                            easing.type: Theme.easingStandard
                         }
                     }
                 }
@@ -82,8 +82,8 @@ Indicator {
 
         Behavior on x {
             NumberAnimation {
-                duration: Theme.animDurationMedium
-                easing.type: Theme.animEasing
+                duration: Theme.durationMedium
+                easing.type: Theme.easingStandard
             }
         }
 
@@ -115,8 +115,8 @@ Indicator {
 
             Behavior on x {
                 NumberAnimation {
-                    duration: Theme.animDurationMedium
-                    easing.type: Theme.animEasing
+                    duration: Theme.durationMedium
+                    easing.type: Theme.easingStandard
                 }
             }
         }

@@ -36,8 +36,8 @@ Item {
         property: "opacity"
         from: 1
         to: 0
-        duration: root.context.animate ? Theme.animDurationLong : 0
-        easing.type: Theme.animEasing
+        duration: root.context.animate ? Theme.durationAtmospheric : 0
+        easing.type: Theme.easingStandard
         running: true
         onFinished: root.context.animate = true
     }
@@ -48,8 +48,8 @@ Item {
         property: "opacity"
         from: 0
         to: 1
-        duration: Theme.animDurationLong
-        easing.type: Theme.animEasing
+        duration: Theme.durationAtmospheric
+        easing.type: Theme.easingStandard
         onFinished: Lock.Controller.unlock()
     }
 

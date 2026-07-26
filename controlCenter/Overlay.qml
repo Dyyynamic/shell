@@ -34,8 +34,9 @@ PanelWindow {
             property: "opacity"
             from: 0
             to: 1
-            duration: Theme.animDurationMedium
-            easing.type: Theme.animEasing
+            duration: Theme.durationSlideIn
+            easing.type: Theme.easingExpressive
+            easing.overshoot: Theme.overshoot
         }
 
         NumberAnimation {
@@ -44,8 +45,9 @@ PanelWindow {
             property: "x"
             from: wrapperItem.width
             to: 0
-            duration: Theme.animDurationMedium
-            easing.type: Theme.animEasing
+            duration: Theme.durationSlideIn
+            easing.type: Theme.easingExpressive
+            easing.overshoot: Theme.overshoot
         }
 
         onFinished: ControlCenter.Controller.transitionFinished()
@@ -58,8 +60,8 @@ PanelWindow {
             property: "opacity"
             from: 1
             to: 0
-            duration: Theme.animDurationMedium
-            easing: Theme.animEasing
+            duration: Theme.durationMedium
+            easing.type: Theme.easingStandard
         }
 
         NumberAnimation {
@@ -68,8 +70,8 @@ PanelWindow {
             property: "x"
             from: 0
             to: wrapperItem.width
-            duration: Theme.animDurationMedium
-            easing.type: Theme.animEasing
+            duration: Theme.durationMedium
+            easing.type: Theme.easingStandard
         }
 
         onFinished: ControlCenter.Controller.transitionFinished()

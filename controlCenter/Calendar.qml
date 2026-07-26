@@ -56,8 +56,8 @@ Components.Widget {
 
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: Theme.animDurationShort
-                        easing.type: Theme.animEasing
+                        duration: Theme.durationFast
+                        easing.type: Theme.easingStandard
                     }
                 }
             }

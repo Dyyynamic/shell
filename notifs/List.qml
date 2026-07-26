@@ -1,3 +1,4 @@
+import Quickshell
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
@@ -27,8 +28,8 @@ Components.Widget {
 
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: Theme.animDurationMedium
-                        easing.type: Theme.animEasing
+                        duration: Theme.durationMedium
+                        easing.type: Theme.easingStandard
                     }
                 }
 
@@ -63,16 +64,16 @@ Components.Widget {
 
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: Theme.animDurationMedium
-                        easing.type: Theme.animEasing
+                        duration: Theme.durationMedium
+                        easing.type: Theme.easingStandard
                     }
                 }
 
                 displaced: Transition {
                     NumberAnimation {
                         property: "y"
-                        duration: Theme.animDurationMedium
-                        easing.type: Theme.animEasing
+                        duration: Theme.durationMedium
+                        easing.type: Theme.easingStandard
                     }
                 }
 
@@ -80,8 +81,8 @@ Components.Widget {
                     NumberAnimation {
                         property: "opacity"
                         to: 0
-                        duration: Theme.animDurationMedium
-                        easing.type: Theme.animEasing
+                        duration: Theme.durationFast
+                        easing.type: Theme.easingStandard
                     }
                 }
 
@@ -99,7 +100,9 @@ Components.Widget {
                     }
                 }
 
-                model: Notifications.notifications
+                model: ScriptModel {
+                    values: [...Notifications.notifications.values].reverse()
+                }
 
                 delegate: Notif {
                     required property var modelData
