@@ -12,7 +12,9 @@ Item {
 
     required property Notification notification
 
-    readonly property int radius: Theme.radiusSmall
+    readonly property alias pressed: mouseArea.pressed
+    readonly property alias hovered: mouseArea.containsMouse
+
     readonly property var defaultAction: {
         return root.notification.actions.find(action => {
             return action.identifier === "default";
@@ -30,12 +32,12 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        radius: root.radius
+        radius: Theme.radiusSmall
 
         color: {
-            if (mouseArea.pressed)
+            if (root.defaultAction && root.pressed)
                 return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
-            if (mouseArea.containsMouse)
+            if (root.defaultAction && root.hovered)
                 return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
             return Theme.overlay;
         }
@@ -52,10 +54,12 @@ Item {
         id: mouseArea
 
         anchors.fill: parent
-        enabled: !!root.defaultAction
         hoverEnabled: true
 
         onClicked: {
+            if (!root.defaultAction)
+                return;
+
             root.defaultAction.invoke();
             ControlCenter.Controller.close();
         }
