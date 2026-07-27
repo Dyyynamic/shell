@@ -24,6 +24,7 @@ Singleton {
 
     readonly property color accent: Colors.md3.primary
     readonly property color accentDark: colorMix(accent, base, 0.75)
+    readonly property color error: Colors.md3.error
 
     // Intensities
     readonly property real hoverIntensity: 0.05

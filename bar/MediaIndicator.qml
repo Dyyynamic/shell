@@ -6,6 +6,8 @@ import "../components" as Components
 Indicator {
     id: root
 
+    rightMargin: Theme.spacingMedium
+
     clickable: Players.lastPlayedPlayer.canRaise
     onClicked: Players.lastPlayedPlayer.raise()
 

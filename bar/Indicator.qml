@@ -11,7 +11,10 @@ ClippingRectangle {
     property alias pressed: mouseArea.pressed
     property alias hovered: mouseArea.containsMouse
 
-    property int horizontalPadding: 8
+    property alias margin: wrapper.margin
+    property alias leftMargin: wrapper.leftMargin
+    property alias rightMargin: wrapper.rightMargin
+
     property bool clickable: false
 
     property color textColor: Theme.text
@@ -22,7 +25,7 @@ ClippingRectangle {
     signal clicked
 
     implicitHeight: 32
-    implicitWidth: content.implicitWidth + horizontalPadding * 2
+    implicitWidth: wrapper.implicitWidth
 
     radius: height / 2
 
@@ -53,12 +56,16 @@ ClippingRectangle {
         }
     }
 
-    Item {
-        id: content
+    WrapperItem {
+        id: wrapper
         anchors.centerIn: parent
+        margin: Theme.spacingSmall
 
-        implicitHeight: childrenRect.height
-        implicitWidth: childrenRect.width
+        Item {
+            id: content
+            implicitHeight: childrenRect.height
+            implicitWidth: childrenRect.width
+        }
     }
 
     MouseArea {

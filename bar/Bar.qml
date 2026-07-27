@@ -39,6 +39,15 @@ PanelWindow {
                 spacing: Theme.spacingTiny
 
                 Loader {
+                    visible: Recording.isRecording
+                    active: Recording.isRecording
+                    sourceComponent: RecordingIndicator {
+                        onClicked: () => Recording.stop()
+                    }
+                }
+
+                Loader {
+                    visible: Players.hasActivePlayer
                     active: Players.hasActivePlayer
                     sourceComponent: MediaIndicator {}
                 }

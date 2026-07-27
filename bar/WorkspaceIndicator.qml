@@ -20,7 +20,7 @@ Indicator {
     readonly property int activeIndex: workspaces.findIndex(ws => ws.active)
     readonly property int itemWidth: 24
 
-    horizontalPadding: 4
+    margin: 4
 
     Row {
         Repeater {

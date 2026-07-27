@@ -111,6 +111,19 @@ Item {
                                 spacing: Theme.spacingTiny
 
                                 Loader {
+                                    visible: Recording.isRecording
+                                    active: Recording.isRecording
+                                    sourceComponent: Bar.RecordingIndicator {
+                                        clickable: false
+                                        backgroundColor: "#e3e3e3"
+                                        backgroundOpacity: 0.15
+                                        textColor: "#e3e3e3"
+                                        showBackgroundImage: false
+                                    }
+                                }
+
+                                Loader {
+                                    visible: Players.hasActivePlayer
                                     active: Players.hasActivePlayer
                                     sourceComponent: Bar.MediaIndicator {
                                         clickable: false

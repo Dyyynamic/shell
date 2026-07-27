@@ -4,7 +4,7 @@ import "../utils"
 Indicator {
     id: root
 
-    horizontalPadding: 12
+    margin: 12
 
     Text {
         horizontalAlignment: Text.AlignHCenter
