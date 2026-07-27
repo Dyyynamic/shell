@@ -28,7 +28,7 @@ Singleton {
         lock.locked = false;
     }
 
-    function lockWithDelay(ms = Theme.durationFast) {
+    function lockWithDelay(ms = Theme.durationMedium) {
         if (lock.locked) return;
 
         lockDelayTimer.interval = ms;
