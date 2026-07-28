@@ -1,7 +1,9 @@
+pragma ComponentBehavior: Bound
 pragma Singleton
 
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Notifications
 
 Singleton {
@@ -25,6 +27,27 @@ Singleton {
         }
     }
 
+    function send(summary, body, options = {}) {
+        const command = ["notify-send", "-a", "Arch Linux"];
+
+        command.push(summary);
+        command.push(body);
+
+        if (options.icon)
+            command.push("-i", options.icon);
+
+        for (const [name, action] of Object.entries(options.actions ?? {})) {
+            const arg = `--action=${name}=${action.text}`;
+            command.push(arg);
+        }
+
+        const process = notifyProcComponent.createObject(root, {
+            actions: options.actions ?? {},
+            command: command,
+            running: true
+        });
+    }
+
     NotificationServer {
         id: notifServer
 
@@ -38,6 +61,27 @@ Singleton {
             notif.tracked = true;
             notif.closed.connect(() => root.notificationClosed(notif));
             root.notificationReceived(notif);
+        }
+    }
+
+    Component {
+        id: notifyProcComponent
+
+        Process {
+            id: notifyProcess
+
+            property var actions: ({})
+
+            stdout: StdioCollector {
+                onStreamFinished: {
+                    const response = this.text.trim();
+                    const action = notifyProcess.actions[response];
+
+                    action?.callback();
+
+                    destroy();
+                }
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ import "bar" as Bar
 import "notifs" as Notifs
 import "controlCenter" as ControlCenter
 import "lock" as Lock
+import "capture" as Capture
 
 ShellRoot {
     id: root
@@ -37,5 +38,6 @@ ShellRoot {
     Component.onCompleted: {
         ControlCenter.Controller.init();
         Lock.Controller.init();
+        Capture.Controller.init();
     }
 }

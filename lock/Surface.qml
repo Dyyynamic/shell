@@ -111,8 +111,8 @@ Item {
                                 spacing: Theme.spacingTiny
 
                                 Loader {
-                                    visible: Recording.isRecording
-                                    active: Recording.isRecording
+                                    visible: Capture.Controller.isRecording
+                                    active: Capture.Controller.isRecording
                                     sourceComponent: Bar.RecordingIndicator {
                                         clickable: false
                                         backgroundColor: "#e3e3e3"

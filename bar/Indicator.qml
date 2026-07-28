@@ -22,6 +22,9 @@ ClippingRectangle {
     property real backgroundOpacity: 1
     property bool showBackgroundImage: true
 
+    property real pressIntensity: Theme.pressIntensity
+    property real hoverIntensity: Theme.hoverIntensity
+
     signal clicked
 
     implicitHeight: 32
@@ -41,9 +44,9 @@ ClippingRectangle {
         anchors.fill: parent
         color: {
             if (root.pressed)
-                return Theme.colorMix(root.backgroundColor, Theme.text, Theme.pressIntensity);
+                return Theme.colorMix(root.backgroundColor, root.textColor, root.pressIntensity);
             if (root.hovered)
-                return Theme.colorMix(root.backgroundColor, Theme.text, Theme.hoverIntensity);
+                return Theme.colorMix(root.backgroundColor, root.textColor, root.hoverIntensity);
             return root.backgroundColor;
         }
         opacity: root.backgroundOpacity

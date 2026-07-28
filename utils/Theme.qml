@@ -24,7 +24,7 @@ Singleton {
 
     readonly property color accent: Colors.md3.primary
     readonly property color accentDark: colorMix(accent, base, 0.75)
-    readonly property color error: Colors.md3.error
+    readonly property color error: Colors.md3.error_container
 
     // Intensities
     readonly property real hoverIntensity: 0.05
@@ -33,11 +33,15 @@ Singleton {
     readonly property real accentHoverIntensity: 0.1
     readonly property real accentPressIntensity: 0.2
 
+    readonly property real errorHoverIntensity: 0.1
+    readonly property real errorPressIntensity: 0.2
+
     // Text colors
     readonly property color text: Colors.md3.on_background
     readonly property color textVariant: colorMix(text, base, 0.2)
     readonly property color textDisabled: colorMix(text, base, 0.4)
     readonly property color textAccent: Colors.md3.on_primary
+    readonly property color textError: Colors.md3.on_error_container
 
     // Font
     readonly property string fontFamily: "NotoSans Nerd Font Propo"

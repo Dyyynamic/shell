@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import "../utils"
 import "../controlCenter" as ControlCenter
+import "../capture" as Capture
 
 PanelWindow {
     id: root
@@ -39,10 +40,10 @@ PanelWindow {
                 spacing: Theme.spacingTiny
 
                 Loader {
-                    visible: Recording.isRecording
-                    active: Recording.isRecording
+                    visible: Capture.Controller.isRecording
+                    active: Capture.Controller.isRecording
                     sourceComponent: RecordingIndicator {
-                        onClicked: () => Recording.stop()
+                        onClicked: () => Capture.Controller.stopRecording()
                     }
                 }
 
