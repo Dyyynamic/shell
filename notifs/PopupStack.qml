@@ -88,6 +88,8 @@ PanelWindow {
                 required property var modelData
                 notification: modelData
 
+                width: listView.width
+
                 onExpired: root.removePopup(notification.id)
             }
         }

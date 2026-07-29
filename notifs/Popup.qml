@@ -10,7 +10,6 @@ Item {
 
     signal expired
 
-    width: parent.width
     height: item.height
 
     ParallelAnimation {

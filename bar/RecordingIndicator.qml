@@ -17,8 +17,6 @@ Indicator {
     pressIntensity: Theme.errorPressIntensity
 
     RowLayout {
-        anchors.verticalCenter: parent.verticalCenter
-
         Components.Icon {
             icon: "󰻃"
             color: root.textColor

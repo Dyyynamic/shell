@@ -10,3 +10,4 @@ Part of my [dotfiles](https://github.com/Dyyynamic/dotfiles) setup for Hyprland 
 - Notification center
 - System controls
 - Lock screen
+- Screen capture

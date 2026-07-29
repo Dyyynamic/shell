@@ -1,3 +1,4 @@
+import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.Notifications
 import QtQuick
@@ -26,8 +27,11 @@ Item {
         });
     }
 
+    // Needed for popup shadow
+    readonly property alias radius: background.radius
+
     width: parent.width
-    implicitHeight: content.implicitHeight
+    height: content.implicitHeight
 
     Rectangle {
         id: background
@@ -68,7 +72,7 @@ Item {
     WrapperItem {
         id: content
 
-        anchors.fill: parent
+        width: parent.width
         margin: Theme.spacingMedium
 
         ColumnLayout {
@@ -110,6 +114,7 @@ Item {
             }
 
             RowLayout {
+                Layout.fillWidth: true
                 spacing: Theme.spacingMedium
 
                 ClippingRectangle {
@@ -130,7 +135,13 @@ Item {
                 }
 
                 ColumnLayout {
+                    Layout.fillWidth: true
                     spacing: Theme.spacingTiny
+
+                    // Force layout to calculate height instead of using Text's
+                    // single-line implicitWidth
+                    // Otherwise, popup notifications can overlap
+                    Layout.preferredWidth: 0
 
                     Text {
                         Layout.fillWidth: true
@@ -206,5 +217,10 @@ Item {
                 }
             }
         }
+    }
+
+    RetainableLock {
+        object: root.notification
+        locked: true
     }
 }
