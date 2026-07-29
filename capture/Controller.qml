@@ -49,7 +49,7 @@ Singleton {
 
     function openPath(path) {
         openProcess.command = ["xdg-open", path];
-        openProcess.running = true;
+        openProcess.startDetached();
     }
 
     function copyFile(file) {
