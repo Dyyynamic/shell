@@ -27,6 +27,7 @@ Singleton {
 
     property alias isRecording: recorderProcess.running
     property int recordingDuration: 0
+    property var recordingNotifProc: null
 
     property int captureType: 0
     property int captureMode: 0
@@ -106,7 +107,7 @@ Singleton {
         recorderProcess.command = command;
         recorderProcess.running = true;
 
-        Notifications.send("Recording started", "Click to stop", {
+        recordingNotifProc = Notifications.send("Recording started", "Click to stop", {
             actions: {
                 default: {
                     text: "Stop Recording",
@@ -123,6 +124,12 @@ Singleton {
 
         // Stop recording
         recorderProcess.running = false;
+
+        // Dismiss recording started notification
+        if (recordingNotifProc?.id !== -1)
+            Notifications.dismiss(recordingNotifProc.id);
+        recordingNotifProc = null;
+
         closeOverlay();
     }
 

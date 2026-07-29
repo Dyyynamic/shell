@@ -28,7 +28,7 @@ Singleton {
     }
 
     function send(summary, body, options = {}) {
-        const command = ["notify-send", "-a", "Arch Linux"];
+        const command = ["notify-send", "-p", "-a", "Arch Linux"];
 
         command.push(summary);
         command.push(body);
@@ -41,11 +41,20 @@ Singleton {
             command.push(arg);
         }
 
-        const process = notifyProcComponent.createObject(root, {
+        return notifyProcComponent.createObject(root, {
             actions: options.actions ?? {},
             command: command,
             running: true
         });
+    }
+
+    function dismiss(id) {
+        for (const notification of [...notifications.values]) {
+            if (notification.id === id) {
+                notification.dismiss();
+                return;
+            }
+        }
     }
 
     NotificationServer {
@@ -71,10 +80,17 @@ Singleton {
             id: notifyProcess
 
             property var actions: ({})
+            property int id: -1
 
-            stdout: StdioCollector {
-                onStreamFinished: {
-                    const response = this.text.trim();
+            stdout: SplitParser {
+                onRead: data => {
+                    // First line is the notification ID
+                    if (notifyProcess.id === -1) {
+                        notifyProcess.id = parseInt(data.trim())
+                        return;
+                    }
+
+                    const response = data.trim();
                     const action = notifyProcess.actions[response];
 
                     action?.callback();
