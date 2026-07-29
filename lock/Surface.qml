@@ -9,6 +9,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.Fusion
 import "../utils"
 import "../bar" as Bar
+import "../capture" as Capture
 import "." as Lock
 
 Item {
