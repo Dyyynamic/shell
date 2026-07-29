@@ -51,6 +51,11 @@ Singleton {
         openProcess.running = true;
     }
 
+    function copyFile(file) {
+        copyProcess.command = ["sh", "-c", `cat "${file}" | wl-copy`];
+        copyProcess.running = true;
+    }
+
     function createThumbnail(inputPath, outputPath) {
         const thumbnailProcess = thumbnailProcComponent.createObject();
         thumbnailProcess.thumbnailPath = outputPath;
@@ -226,6 +231,9 @@ Singleton {
             property string filePath
 
             onExited: {
+                // Copy file to clipboard
+                root.copyFile(filePath);
+
                 // Show notification after thumbnail is created
                 Notifications.send("Screenshot saved", "Image saved to " + filePath, {
                     icon: thumbnailPath,
@@ -242,6 +250,10 @@ Singleton {
 
     Process {
         id: openProcess
+    }
+
+    Process {
+        id: copyProcess
     }
 
     Process {
