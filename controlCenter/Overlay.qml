@@ -105,9 +105,9 @@ PanelWindow {
                 anchors.fill: parent
                 radius: background.radius
                 color: "black"
-                opacity: 0.75
+                opacity: 0.5
                 offset.y: 2
-                blur: 20
+                blur: 24
                 z: -1
             }
 

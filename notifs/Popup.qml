@@ -37,9 +37,9 @@ Item {
         anchors.fill: parent
         radius: item.radius
         color: "black"
-        opacity: 0.5
+        opacity: 0.35
         offset.y: 2
-        blur: 10
+        blur: 12
         z: -1
     }
 
