@@ -141,7 +141,7 @@ PanelWindow {
         y: root.bottom + Theme.spacingSmall
         text: root.w + "x" + root.h
         font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSizeSmall
+        font.pixelSize: Theme.fontSizeMedium
         color: Qt.alpha(Theme.text, 0.5)
     }
 

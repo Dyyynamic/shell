@@ -48,7 +48,7 @@ Components.Widget {
                         Layout.alignment: Qt.AlignHCenter
 
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeTiny
+                        font.pixelSize: Theme.fontSizeSmall
                         text: "No notifications"
                         color: Theme.textDisabled
                     }
@@ -120,7 +120,7 @@ Components.Widget {
                 Text {
                     text: `${Notifications.count} notification${Notifications.count !== 1 ? 's' : ''}`
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeTiny
+                    font.pixelSize: Theme.fontSizeSmall
                     color: Theme.text
                 }
             }
@@ -131,7 +131,6 @@ Components.Widget {
 
             Components.Button {
                 text: "Clear"
-                font.pixelSize: Theme.fontSizeTiny
                 enabled: Notifications.count > 0
                 implicitWidth: 72
                 onClicked: Notifications.clear()

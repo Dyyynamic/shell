@@ -43,7 +43,7 @@ Item {
                 Text {
                     id: titleText
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSize
+                    font.pixelSize: Theme.fontSizeLarge
                     font.weight: Font.Bold
                     color: Theme.text
                 }
@@ -62,7 +62,7 @@ Item {
                 anchors.centerIn: parent
 
                 font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontSizeTiny
+                font.pixelSize: Theme.fontSizeSmall
                 color: Theme.textDisabled
             }
         }
@@ -95,6 +95,7 @@ Item {
         Components.Button {
             id: footerButton
             text: "Settings"
+            font.pixelSize: Theme.fontSizeMedium
 
             backgroundColor: Theme.surface
             backgroundOpacity: hovered ? 1 : 0

@@ -10,7 +10,7 @@ Indicator {
         horizontalAlignment: Text.AlignHCenter
         text: Qt.formatDateTime(Time.date, "MMM d hh:mm")
         font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSize
+        font.pixelSize: Theme.fontSizeLarge
         font.weight: Font.Bold
         color: root.textColor
     }

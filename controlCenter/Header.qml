@@ -28,7 +28,7 @@ Components.Widget {
                     id: uptimeText
                     color: Theme.text
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeMedium
                     font.weight: Font.Medium
                 }
                 Text {
@@ -36,7 +36,7 @@ Components.Widget {
                     text: Battery.description
                     color: Theme.text
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeTiny
+                    font.pixelSize: Theme.fontSizeSmall
                 }
             }
         }
@@ -50,7 +50,7 @@ Components.Widget {
 
             Components.IconButton {
                 backgroundColor: Theme.surface
-                backgroundOpacity: hovered ? 1 : 0;
+                backgroundOpacity: hovered ? 1 : 0
 
                 iconText: ""
                 onClicked: () => {
@@ -60,17 +60,14 @@ Components.Widget {
             }
             Components.IconButton {
                 backgroundColor: Theme.surface
-                backgroundOpacity: hovered ? 1 : 0;
+                backgroundOpacity: hovered ? 1 : 0
 
                 iconText: ""
-                onClicked: () => {
-                    ControlCenter.Controller.close();
-                    Lock.Controller.lockWithDelay();
-                }
+                onClicked: () => ControlCenter.Controller.closeWithAction(Lock.Controller.lock)
             }
             Components.IconButton {
                 backgroundColor: Theme.surface
-                backgroundOpacity: hovered ? 1 : 0;
+                backgroundOpacity: hovered ? 1 : 0
 
                 iconText: ""
                 onClicked: () => {

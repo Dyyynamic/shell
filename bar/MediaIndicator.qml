@@ -32,7 +32,7 @@ Indicator {
             horizontalAlignment: Text.AlignHCenter
             text: Players.lastPlayedPlayer.trackTitle
             font.family: Theme.fontFamily
-            font.pixelSize: Theme.fontSize
+            font.pixelSize: Theme.fontSizeLarge
             font.weight: Font.Bold
             color: root.textColor
             elide: Text.ElideRight

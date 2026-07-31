@@ -90,7 +90,7 @@ Item {
                         return "Notification";
                     }
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeTiny
+                    font.pixelSize: Theme.fontSizeSmall
                     font.weight: Font.Medium
                     color: Theme.textVariant
                 }
@@ -98,7 +98,7 @@ Item {
                 Text {
                     text: Qt.formatTime(new Date(root.notification.time), "hh:mm")
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeTiny
+                    font.pixelSize: Theme.fontSizeSmall
                     color: Theme.textVariant
                 }
 
@@ -149,7 +149,7 @@ Item {
                         text: root.notification.summary
                         color: Theme.text
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
+                        font.pixelSize: Theme.fontSizeMedium
                         font.weight: Font.DemiBold
                     }
 
@@ -161,7 +161,7 @@ Item {
                         text: root.notification.body
                         color: Theme.text
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
+                        font.pixelSize: Theme.fontSizeMedium
                     }
 
                     RowLayout {
@@ -184,7 +184,7 @@ Item {
                                 icon.name: root.notification.hasActionIcons ? modelData.identifier : ""
                                 text: root.notification.hasActionIcons ? "" : modelData.text
                                 font.family: Theme.fontFamily
-                                font.pixelSize: Theme.fontSizeTiny
+                                font.pixelSize: Theme.fontSizeSmall
                                 palette.buttonText: Theme.text
                                 implicitHeight: 30
                                 padding: 8

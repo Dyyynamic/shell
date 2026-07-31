@@ -26,7 +26,7 @@ Indicator {
             horizontalAlignment: Text.AlignHCenter
             text: Formatters.formatTime(Capture.Controller.recordingDuration)
             font.family: Theme.fontFamily
-            font.pixelSize: Theme.fontSize
+            font.pixelSize: Theme.fontSizeLarge
             font.weight: Font.Bold
             color: root.textColor
         }

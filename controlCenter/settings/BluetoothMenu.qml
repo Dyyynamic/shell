@@ -38,8 +38,8 @@ SubMenu {
                     Layout.fillWidth: true
                     text: bluetoothDelegate.modelData.name
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSize
-                    font.weight: Font.Medium
+                    font.pixelSize: Theme.fontSizeMedium
+                    font.weight: Font.DemiBold
                     color: Theme.text
                     elide: Text.ElideRight
                 }
@@ -48,6 +48,7 @@ SubMenu {
                     text: bluetoothDelegate.modelData.connected ? "Disconnect" : "Connect"
                     textColor: Theme.textVariant
                     font.weight: Font.Normal
+                    font.pixelSize: Theme.fontSizeMedium
 
                     backgroundColor: Theme.surface
                     backgroundOpacity: hovered ? 1 : 0

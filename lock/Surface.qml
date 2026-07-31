@@ -65,7 +65,7 @@ Item {
             Image {
                 id: wallpaper
                 anchors.fill: parent
-                source: Colors.wallpaper
+                source: Theme.wallpaper
                 fillMode: Image.PreserveAspectCrop
             }
 
@@ -206,7 +206,7 @@ Item {
                         implicitWidth: 240
                         implicitHeight: 40
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
+                        font.pixelSize: Theme.fontSizeMedium
                         color: "#e3e3e3"
                         padding: Theme.spacingMedium
 
@@ -261,7 +261,7 @@ Item {
                         Layout.alignment: Qt.AlignHCenter
                         text: root.statusMessage
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
+                        font.pixelSize: Theme.fontSizeMedium
                         color: "#e3e3e3"
                     }
                 }

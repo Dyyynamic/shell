@@ -101,7 +101,7 @@ Item {
 
                         Text {
                             font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
+                            font.pixelSize: Theme.fontSizeMedium
                             font.weight: Font.DemiBold
                             Layout.fillWidth: true
                             elide: Text.ElideRight
@@ -111,7 +111,7 @@ Item {
 
                         Text {
                             font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeTiny
+                            font.pixelSize: Theme.fontSizeSmall
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                             text: Players.lastPlayedPlayer.trackArtist
@@ -138,7 +138,7 @@ Item {
 
                         Text {
                             font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeTiny
+                            font.pixelSize: Theme.fontSizeSmall
                             color: Theme.textVariant
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
@@ -217,7 +217,7 @@ Item {
 
                         Text {
                             font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeTiny
+                            font.pixelSize: Theme.fontSizeSmall
                             color: Theme.textVariant
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter

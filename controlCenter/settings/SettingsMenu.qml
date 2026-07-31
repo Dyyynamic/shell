@@ -1,7 +1,10 @@
+import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import "../../utils"
 import "../../components" as Components
+import "../../capture" as Capture
+import ".." as ControlCenter
 
 Item {
     id: root
@@ -58,67 +61,115 @@ Item {
             }
         }
 
-        RowLayout {
+        ColumnLayout {
             spacing: Theme.spacingSmall
 
-            Components.ToggleButton {
+            RowLayout {
                 Layout.fillWidth: true
-                iconText: Wifi.icon(Wifi.connectedNetwork)
-                iconSize: 24
-                title: "Wi-Fi"
-                subtitle: Wifi.name
-                checked: Wifi.enabled
-                onToggled: Wifi.toggle()
+                spacing: Theme.spacingSmall
 
-                navButtonVisible: true
-                onNavButtonClicked: root.wifiMenuRequested()
-            }
-            Components.ToggleButton {
-                Layout.fillWidth: true
-                iconText: "󰂯"
-                iconSize: 24
-                title: "Bluetooth"
-                subtitle: {
-                    if (Bluetooth.connectedDevices.length > 1)
-                        return `${Bluetooth.connectedDevices.length} devices`;
-                    if (Bluetooth.connectedDevices.length === 1)
-                        return Bluetooth.connectedDevices[0].name;
-                    return "";
+                Components.PanelButton {
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: 2
+                    icon: Wifi.icon(Wifi.connectedNetwork)
+                    title: "Wi-Fi"
+                    subtitle: Wifi.enabled ? (Wifi.name ? Wifi.name : "On") : "Off"
+                    checked: Wifi.enabled
+                    checkableIcon: true
+                    onToggled: Wifi.toggle()
+                    onClicked: root.wifiMenuRequested()
                 }
-                checked: Bluetooth.adapter?.enabled ?? false
-                onToggled: Bluetooth.toggle()
 
-                navButtonVisible: true
-                onNavButtonClicked: root.bluetoothMenuRequested()
-            }
-        }
-
-        RowLayout {
-            spacing: Theme.spacingSmall
-
-            Components.ToggleButton {
-                Layout.fillWidth: true
-                iconText: ""
-                iconSize: 24
-                title: "Night Light"
-                subtitle: {
-                    if (NightLight.state === "night")
-                        return "On";
-                    if (NightLight.state === "day")
+                Components.PanelButton {
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: 2
+                    icon: "󰂯"
+                    title: "Bluetooth"
+                    subtitle: {
+                        if (Bluetooth.adapter?.enabled) {
+                            if (Bluetooth.connectedDevices.length > 1)
+                                return `${Bluetooth.connectedDevices.length} devices`;
+                            if (Bluetooth.connectedDevices.length === 1)
+                                return Bluetooth.connectedDevices[0].name;
+                            return "On";
+                        }
                         return "Off";
-                    return "Auto";
+                    }
+                    checked: Bluetooth.adapter?.enabled ?? false
+                    checkableIcon: true
+                    onToggled: Bluetooth.toggle()
+                    onClicked: root.bluetoothMenuRequested()
                 }
-                checked: NightLight.state === "default" || NightLight.state === "night"
-                onToggled: NightLight.nextState()
+
+                Components.PanelButton {
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: 1
+                    icon: ""
+                    iconOnly: true
+                    onClicked: {
+                        ControlCenter.Controller.closeWithAction(() => {
+                            Theme.toggleDarkMode();
+                        });
+                    }
+                    checked: Theme.mode === "dark"
+                }
             }
-            Components.ToggleButton {
+
+            RowLayout {
                 Layout.fillWidth: true
-                iconText: Notifications.doNotDisturb ? "󰂛" : "󰂚"
-                iconSize: 24
-                title: "Do Not Disturb"
-                subtitle: Notifications.doNotDisturb ? "On" : "Off"
-                checked: Notifications.doNotDisturb
-                onToggled: Notifications.toggleDoNotDisturb()
+                spacing: Theme.spacingSmall
+
+                Components.PanelButton {
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: 2
+                    icon: ""
+                    title: "Night Light"
+                    subtitle: {
+                        if (NightLight.state === "night")
+                            return "On";
+                        if (NightLight.state === "day")
+                            return "Off";
+                        return "Auto";
+                    }
+                    checked: NightLight.state === "default" || NightLight.state === "night"
+                    onToggled: NightLight.nextState()
+                }
+
+                Components.PanelButton {
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: 1
+                    icon: ""
+                    iconOnly: true
+                    onClicked: {
+                        ControlCenter.Controller.closeWithAction(() => {
+                            Capture.Controller.request(Capture.Controller.CaptureType.Screenshot, Capture.Controller.CaptureMode.Region);
+                        });
+                    }
+                }
+
+                Components.PanelButton {
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: 1
+                    icon: "󰻃"
+                    iconOnly: true
+                    onClicked: {
+                        ControlCenter.Controller.closeWithAction(() => {
+                            Capture.Controller.request(Capture.Controller.CaptureType.Record, Capture.Controller.CaptureMode.Region);
+                        });
+                    }
+                }
+
+                Components.PanelButton {
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: 1
+                    icon: "󰈊"
+                    iconOnly: true
+                    onClicked: {
+                        ControlCenter.Controller.closeWithAction(() => {
+                            ControlCenter.Controller.startColorPicker();
+                        });
+                    }
+                }
             }
         }
     }

@@ -38,8 +38,8 @@ SubMenu {
                     Layout.fillWidth: true
                     text: volumeDelegate.modelData.properties["application.name"]
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSize
-                    font.weight: Font.Medium
+                    font.pixelSize: Theme.fontSizeMedium
+                    font.weight: Font.DemiBold
                     color: Theme.text
                     elide: Text.ElideRight
                 }

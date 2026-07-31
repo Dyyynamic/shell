@@ -5,7 +5,6 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import QtQuick
-import "../utils"
 import "." as Lock
 
 Singleton {
@@ -28,24 +27,11 @@ Singleton {
         lock.locked = false;
     }
 
-    function lockWithDelay(ms = Theme.durationMedium) {
-        if (lock.locked) return;
-
-        lockDelayTimer.interval = ms;
-        lockDelayTimer.start();
-    }
-
     function lockInstant() {
         if (lock.locked) return;
 
         lockContext.animate = false;
         screencopyCmd.running = true;
-    }
-
-    Timer {
-        id: lockDelayTimer
-        interval: Theme.durationFast
-        onTriggered: root.lock()
     }
 
     IpcHandler {

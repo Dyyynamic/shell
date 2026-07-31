@@ -1,15 +1,25 @@
 pragma Singleton
 
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import "../utils"
 
 Singleton {
     id: root
 
+    property string mode: Colors.mode
+
     function colorMix(color1, color2, factor) {
         return Qt.tint(color1, Qt.rgba(color2.r, color2.g, color2.b, factor));
     }
+
+    function toggleDarkMode() {
+        mode = mode === "dark" ? "light" : "dark";
+        matugen.running = true;
+    }
+
+    readonly property string wallpaper: Colors.wallpaper
 
     // Colors
     readonly property color base: Colors.md3.background
@@ -45,9 +55,10 @@ Singleton {
 
     // Font
     readonly property string fontFamily: "NotoSans Nerd Font Propo"
-    readonly property int fontSize: 16
-    readonly property int fontSizeSmall: 14
-    readonly property int fontSizeTiny: 12
+    readonly property int fontSizeLarge: 16
+    readonly property int fontSizeMedium: 14
+    readonly property int fontSizeSmall: 12
+    readonly property int fontSizeTiny: 11
 
     // Animations
     readonly property int durationFast: 100        // Hover, press, fast fades
@@ -70,4 +81,9 @@ Singleton {
     readonly property int spacingMedium: 12
     readonly property int spacingSmall: 8
     readonly property int spacingTiny: 4
+
+    Process {
+        id: matugen
+        command: ["matugen", "image", root.wallpaper, "--mode", root.mode, "--source-color-index", "0"]
+    }
 }

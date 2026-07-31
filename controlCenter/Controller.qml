@@ -12,6 +12,8 @@ Singleton {
     property bool isTransitioning: false
     property var bar: null
 
+    property var pendingAction: null
+
     function open() {
         root.isTransitioning = true;
         root.isOpen = true;
@@ -27,12 +29,32 @@ Singleton {
         loader.item.exitAnimation.start();
     }
 
+    function closeWithAction(action) {
+        if (!root.isOpen && pendingAction)
+            return;
+
+        pendingAction = action;
+        close();
+    }
+
+    function executePendingAction() {
+        if (!pendingAction)
+            return;
+
+        pendingAction();
+        pendingAction = null;
+    }
+
     function toggle() {
         root.isOpen ? close() : open();
     }
 
     function transitionFinished() {
         root.isTransitioning = false;
+    }
+
+    function startColorPicker() {
+        colorPicker.running = true;
     }
 
     IpcHandler {
@@ -56,6 +78,16 @@ Singleton {
         active: root.isOpen || root.isTransitioning
 
         ControlCenter.Overlay {}
+
+        onActiveChanged: {
+            if (!active)
+                root.executePendingAction();
+        }
+    }
+
+    Process {
+        id: colorPicker
+        command: ["hyprpicker"]
     }
 
     function init() {

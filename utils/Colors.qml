@@ -11,6 +11,7 @@ Singleton {
     property alias base16: jsonAdapter.base16
     property alias palette: jsonAdapter.palette
     property alias wallpaper: jsonAdapter.wallpaper
+    property alias mode: jsonAdapter.mode
 
     FileView {
         path: Quickshell.env("HOME") + "/.local/state/quickshell/generated/colors.json"
@@ -21,6 +22,7 @@ Singleton {
             id: jsonAdapter
 
             property string wallpaper: ""
+            property string mode: ""
 
             readonly property Md3 md3: Md3 {}
             readonly property Base16 base16: Base16 {}

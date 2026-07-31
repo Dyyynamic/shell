@@ -61,7 +61,7 @@ Indicator {
                     horizontalAlignment: Text.AlignHCenter
                     text: workspaceItem.index + 1
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSize
+                    font.pixelSize: Theme.fontSizeLarge
                     font.weight: Font.Bold
                     color: {
                         if (workspaceItem.modelData.toplevels.values.length > 0)
@@ -106,7 +106,7 @@ Indicator {
                         horizontalAlignment: Text.AlignHCenter
                         text: textItem.index + 1
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSize
+                        font.pixelSize: Theme.fontSizeLarge
                         font.weight: Font.Bold
                         color: Theme.textAccent
                     }
