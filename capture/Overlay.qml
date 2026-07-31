@@ -22,6 +22,7 @@ PanelWindow {
 
     property bool shiftHeld: false
     property bool inputEnabled: true
+    property bool cancelled: false
 
     readonly property int left: {
         if (shiftHeld)
@@ -98,7 +99,10 @@ PanelWindow {
 
     contentItem {
         focus: true
-        Keys.onEscapePressed: root.controller.closeOverlay()
+        Keys.onEscapePressed: {
+            root.cancelled = true;
+            root.controller.closeOverlay();
+        }
         Keys.onPressed: event => {
             if (event.key === Qt.Key_Shift)
                 root.shiftHeld = true;
@@ -167,6 +171,9 @@ PanelWindow {
         }
 
         onReleased: () => {
+            if (root.cancelled)
+                return;
+
             root.isSelecting = false;
 
             // Add screen offset
