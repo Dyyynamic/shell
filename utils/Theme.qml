@@ -22,8 +22,8 @@ Singleton {
     readonly property color divider: colorMix(base, text, 0.18)
     readonly property color dividerHigh: colorMix(base, text, 0.25)
 
-    readonly property color accent: Colors.md3.primary
-    readonly property color accentDark: colorMix(accent, base, 0.75)
+    readonly property color accent: Colors.md3.primary_fixed_dim
+    readonly property color accentDark: Colors.md3.secondary_container
     readonly property color error: Colors.md3.error_container
 
     // Intensities
@@ -40,7 +40,7 @@ Singleton {
     readonly property color text: Colors.md3.on_background
     readonly property color textVariant: colorMix(text, base, 0.2)
     readonly property color textDisabled: colorMix(text, base, 0.4)
-    readonly property color textAccent: Colors.md3.on_primary
+    readonly property color textAccent: Colors.md3.on_primary_fixed
     readonly property color textError: Colors.md3.on_error_container
 
     // Font
