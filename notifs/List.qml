@@ -114,6 +114,8 @@ Components.Widget {
         }
 
         RowLayout {
+            spacing: Theme.spacingSmall
+
             WrapperItem {
                 margin: Theme.spacingSmall
 
@@ -129,10 +131,19 @@ Components.Widget {
                 Layout.fillWidth: true
             }
 
-            Components.Button {
-                text: "Clear"
+            Components.IconButton {
+                iconText: Notifications.doNotDisturb ? "󰂛" : "󰂠"
+                size: 32
+                implicitWidth: 52
+                onClicked: Notifications.toggleDoNotDisturb()
+            }
+
+            Components.IconButton {
+                iconText: "󰎟"
                 enabled: Notifications.count > 0
-                implicitWidth: 72
+                size: 32
+                iconSize: 24 // Slightly larger because the icon is small
+                implicitWidth: 52
                 onClicked: Notifications.clear()
             }
         }
