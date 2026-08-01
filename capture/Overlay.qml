@@ -9,6 +9,8 @@ PanelWindow {
     id: root
     WlrLayershell.namespace: "qs-capture"
 
+    signal regionSelected(rect region)
+
     required property var controller
 
     property int startX: 0
@@ -51,7 +53,16 @@ PanelWindow {
     property bool isSelecting: false
     property bool hasSelection: false
 
-    signal regionSelected(rect region)
+    property real dimOpacity: root.hasSelection ? 0.2 : 0.4
+
+    Behavior on dimOpacity {
+        NumberAnimation {
+            duration: Theme.durationMedium
+            easing.type: Theme.easingStandard
+        }
+    }
+
+    onDimOpacityChanged: canvas.requestPaint()
 
     exclusionMode: ExclusionMode.Ignore
     anchors {
@@ -66,9 +77,13 @@ PanelWindow {
     // Make click-through if input is disabled
     mask: inputEnabled ? null : maskRegion
 
+    Region {
+        id: maskRegion
+    }
+
     NumberAnimation {
         id: enterAnimation
-        target: canvas
+        target: wrapper
         property: "opacity"
         from: 0
         to: 1
@@ -81,7 +96,7 @@ PanelWindow {
 
     NumberAnimation {
         id: exitAnimation
-        target: canvas
+        target: wrapper
         property: "opacity"
         from: 1
         to: 0
@@ -91,10 +106,6 @@ PanelWindow {
         // Fade out before unloading
         running: !root.controller.overlayVisible
         onFinished: root.controller.overlayLoaded = false
-    }
-
-    Region {
-        id: maskRegion
     }
 
     contentItem {
@@ -113,40 +124,51 @@ PanelWindow {
         }
     }
 
-    Canvas {
-        id: canvas
+    Item {
+        id: wrapper
         anchors.fill: parent
 
-        onPaint: {
-            var ctx = getContext("2d");
-            ctx.reset();
+        Canvas {
+            id: canvas
+            anchors.fill: parent
 
-            // Background dim
-            ctx.fillStyle = Qt.alpha(Colors.md3.background, 0.5);
-            ctx.fillRect(0, 0, root.width, root.height);
+            onPaint: {
+                var ctx = getContext("2d");
+                ctx.reset();
 
-            if (!root.hasSelection)
-                return;
+                // Background dim
+                ctx.fillStyle = Qt.rgba(0, 0, 0, root.dimOpacity);
+                ctx.fillRect(0, 0, root.width, root.height);
 
-            // Clear selected region
-            ctx.clearRect(root.left, root.top, root.w, root.h);
+                if (!root.hasSelection && !root.isSelecting)
+                    return;
 
-            // Outline
-            ctx.strokeStyle = Qt.alpha(Colors.md3.on_surface, 0.5);
-            ctx.lineWidth = 2;
-            ctx.strokeRect(root.left - 1, root.top - 1, root.w + 2, root.h + 2);
+                // Clear selected region
+                ctx.clearRect(root.left, root.top, root.w, root.h);
+
+                // Outline
+                ctx.strokeStyle = Qt.rgba(255, 255, 255, 0.5);
+                ctx.lineWidth = 2;
+                ctx.strokeRect(root.left - 1, root.top - 1, root.w + 2, root.h + 2);
+            }
         }
-    }
 
-    Text {
-        visible: root.isSelecting
+        Text {
+            opacity: root.isSelecting ? 1 : 0
+            x: root.right + Theme.spacingSmall
+            y: root.bottom + Theme.spacingSmall
+            text: root.w + "x" + root.h
+            font.family: Theme.fontFamily
+            font.pixelSize: Theme.fontSizeMedium
+            color: Qt.rgba(255, 255, 255, 0.5)
 
-        x: root.right + Theme.spacingSmall
-        y: root.bottom + Theme.spacingSmall
-        text: root.w + "x" + root.h
-        font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSizeMedium
-        color: Qt.alpha(Colors.md3.on_surface, 0.5)
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: root.hasSelection ? Theme.durationMedium : 0
+                    easing: Theme.easingStandard
+                }
+            }
+        }
     }
 
     MouseArea {
@@ -157,7 +179,6 @@ PanelWindow {
 
         onPressed: event => {
             root.isSelecting = true;
-            root.hasSelection = true;
 
             root.startX = Math.ceil(event.x);
             root.startY = Math.ceil(event.y);
@@ -174,6 +195,7 @@ PanelWindow {
             if (root.cancelled)
                 return;
 
+            root.hasSelection = true;
             root.isSelecting = false;
 
             // Add screen offset
@@ -185,6 +207,6 @@ PanelWindow {
         }
     }
 
-    onEndXChanged: () => canvas.requestPaint()
-    onEndYChanged: () => canvas.requestPaint()
+    onEndXChanged: canvas.requestPaint()
+    onEndYChanged: canvas.requestPaint()
 }
