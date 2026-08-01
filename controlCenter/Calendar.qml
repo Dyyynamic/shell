@@ -32,7 +32,7 @@ Components.Widget {
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeLarge
                     font.weight: Font.Bold
-                    color: Theme.text
+                    color: Colors.md3.on_surface
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
@@ -105,7 +105,7 @@ Components.Widget {
                     font.weight: Font.DemiBold
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    color: Theme.textVariant
+                    color: Colors.md3.on_surface_variant
                 }
             }
 
@@ -130,7 +130,7 @@ Components.Widget {
                         radius: height / 2
 
                         visible: dayItem.modelData.today
-                        color: Theme.accent
+                        color: Colors.md3.primary_fixed_dim
                     }
 
                     Text {
@@ -142,10 +142,10 @@ Components.Widget {
 
                         color: {
                             if (dayItem.modelData.today)
-                                return Theme.textAccent;
+                                return Colors.md3.on_primary_fixed;
                             if (dayItem.modelData.month === grid.month)
-                                return Theme.text;
-                            return Theme.textDisabled;
+                                return Colors.md3.on_surface;
+                            return Colors.md3.outline;
                         }
                     }
                 }

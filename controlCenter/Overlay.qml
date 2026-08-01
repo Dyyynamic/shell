@@ -115,8 +115,8 @@ PanelWindow {
                 id: background
                 anchors.fill: parent
                 radius: Theme.radiusLarge
-                color: Theme.base
-                border.color: Theme.outline
+                color: Colors.md3.background
+                border.color: Colors.md3.surface_container_highest
             }
 
             WrapperItem {

@@ -40,7 +40,7 @@ Components.Widget {
                     Components.Icon {
                         Layout.alignment: Qt.AlignHCenter
                         icon: "󰂚"
-                        color: Theme.textDisabled
+                        color: Colors.md3.outline
                         size: 80
                     }
 
@@ -50,7 +50,7 @@ Components.Widget {
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         text: "No notifications"
-                        color: Theme.textDisabled
+                        color: Colors.md3.outline
                     }
                 }
             }
@@ -123,7 +123,7 @@ Components.Widget {
                     text: `${Notifications.count} notification${Notifications.count !== 1 ? 's' : ''}`
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.text
+                    color: Colors.md3.on_surface
                 }
             }
 

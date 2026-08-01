@@ -40,17 +40,17 @@ SubMenu {
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     font.weight: Font.DemiBold
-                    color: Theme.text
+                    color: Colors.md3.on_surface
                     elide: Text.ElideRight
                 }
 
                 Components.Button {
                     text: networkDelegate.modelData.connected ? "Disconnect" : "Connect"
-                    textColor: Theme.textVariant
+                    textColor: Colors.md3.on_surface_variant
                     font.weight: Font.Normal
                     font.pixelSize: Theme.fontSizeMedium
 
-                    backgroundColor: Theme.surface
+                    backgroundColor: Colors.md3.surface_container_low
                     backgroundOpacity: hovered ? 1 : 0
 
                     onClicked: {

@@ -42,10 +42,10 @@ Indicator {
 
                     color: {
                         if (workspaceItem.pressed)
-                            return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
+                            return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.pressIntensity);
                         if (workspaceItem.hovered)
-                            return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
-                        return Theme.overlay;
+                            return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.hoverIntensity);
+                        return Colors.md3.surface_container_high;
                     }
 
                     Behavior on color {
@@ -65,8 +65,8 @@ Indicator {
                     font.weight: Font.Bold
                     color: {
                         if (workspaceItem.modelData.toplevels.values.length > 0)
-                            return Theme.text;
-                        return Theme.textDisabled;
+                            return Colors.md3.on_surface;
+                        return Colors.md3.outline;
                     }
                 }
             }
@@ -78,7 +78,7 @@ Indicator {
         width: root.itemWidth
         height: root.itemWidth
         radius: height / 2
-        color: Theme.accent
+        color: Colors.md3.primary_fixed_dim
 
         Behavior on x {
             NumberAnimation {
@@ -108,7 +108,7 @@ Indicator {
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeLarge
                         font.weight: Font.Bold
-                        color: Theme.textAccent
+                        color: Colors.md3.on_primary_fixed
                     }
                 }
             }

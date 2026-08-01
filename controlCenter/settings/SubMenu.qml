@@ -45,7 +45,7 @@ Item {
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeLarge
                     font.weight: Font.Bold
-                    color: Theme.text
+                    color: Colors.md3.on_surface
                 }
             }
         }
@@ -63,7 +63,7 @@ Item {
 
                 font.family: Theme.fontFamily
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.textDisabled
+                color: Colors.md3.outline
             }
         }
 
@@ -86,7 +86,7 @@ Item {
         Rectangle {
             Layout.fillWidth: true
             implicitHeight: 1
-            color: Theme.divider
+            color: Colors.md3.surface_container_highest
 
             Layout.leftMargin: Theme.spacingSmall
             Layout.rightMargin: Theme.spacingSmall
@@ -97,7 +97,7 @@ Item {
             text: "Settings"
             font.pixelSize: Theme.fontSizeMedium
 
-            backgroundColor: Theme.surface
+            backgroundColor: Colors.md3.surface_container_low
             backgroundOpacity: hovered ? 1 : 0
 
             onClicked: {

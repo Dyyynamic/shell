@@ -8,9 +8,9 @@ Button {
 
     property int size: 40
 
-    property color backgroundColor: Theme.overlay
-    property color hoveredColor: Theme.colorMix(backgroundColor, Theme.text, Theme.hoverIntensity);
-    property color pressedColor: Theme.colorMix(backgroundColor, Theme.text, Theme.pressIntensity);
+    property color backgroundColor: Colors.md3.surface_container_high
+    property color hoveredColor: Theme.colorMix(backgroundColor, Colors.md3.on_surface, Theme.hoverIntensity);
+    property color pressedColor: Theme.colorMix(backgroundColor, Colors.md3.on_surface, Theme.pressIntensity);
     property alias backgroundOpacity: background.opacity
 
     property alias iconText: icon.icon

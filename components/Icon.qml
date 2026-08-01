@@ -17,6 +17,6 @@ Item {
 
         font.family: Theme.fontFamily
         font.pixelSize: root.size * 0.8
-        color: Theme.text
+        color: Colors.md3.on_surface
     }
 }

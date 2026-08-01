@@ -11,7 +11,7 @@ PanelWindow {
     id: root
     WlrLayershell.namespace: "qs-bar"
 
-    color: Theme.base
+    color: Colors.md3.background
 
     anchors {
         top: true

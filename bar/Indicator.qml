@@ -17,8 +17,8 @@ ClippingRectangle {
 
     property bool clickable: false
 
-    property color textColor: Theme.text
-    property color backgroundColor: Theme.overlay
+    property color textColor: Colors.md3.on_surface
+    property color backgroundColor: Colors.md3.surface_container_high
     property real backgroundOpacity: 1
     property bool showBackgroundImage: true
 

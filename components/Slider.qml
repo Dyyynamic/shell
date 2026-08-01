@@ -47,12 +47,12 @@ Slider {
             x: 0
             width: root.handleCenter - root.handleWidth / 2 - root.handleGap
             height: parent.height
-            color: Theme.accent
+            color: Colors.md3.primary_fixed_dim
 
             Components.Icon {
                 icon: root.icon
                 size: root.iconSize
-                color: Theme.textAccent
+                color: Colors.md3.on_primary_fixed
                 x: root.width - root.trackHeight / 2 - size / 2
                 y: root.trackHeight / 2 - size / 2
             }
@@ -64,12 +64,12 @@ Slider {
             x: root.handleCenter + root.handleWidth / 2 + root.handleGap
             width: parent.width - x
             height: parent.height
-            color: Theme.accentDark
+            color: Colors.md3.secondary_container
 
             Components.Icon {
                 icon: root.icon
                 size: root.iconSize
-                color: Theme.text
+                color: Colors.md3.on_surface
                 x: rightRect.width - root.trackHeight / 2 - size / 2
                 y: root.trackHeight / 2 - size / 2
             }
@@ -83,7 +83,7 @@ Slider {
         width: root.handleWidth
         height: root.handleHeight
         radius: width / 2
-        color: Theme.accent
+        color: Colors.md3.primary_fixed_dim
 
         Behavior on width {
             NumberAnimation {

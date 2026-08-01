@@ -46,21 +46,21 @@ Item {
             color: {
                 if (panelButton.checked) {
                     if (iconButton.enabled && iconButton.hovered)
-                        return Theme.accent;
+                        return Colors.md3.primary_fixed_dim;
                     if (panelButton.pressed)
-                        return Theme.colorMix(Theme.accent, Theme.textAccent, Theme.accentPressIntensity);
+                        return Theme.colorMix(Colors.md3.primary_fixed_dim, Colors.md3.on_primary_fixed, Theme.pressIntensity);
                     if (panelButton.hovered)
-                        return Theme.colorMix(Theme.accent, Theme.textAccent, Theme.accentHoverIntensity);
-                    return Theme.accent;
+                        return Theme.colorMix(Colors.md3.primary_fixed_dim, Colors.md3.on_primary_fixed, Theme.hoverIntensity);
+                    return Colors.md3.primary_fixed_dim;
                 }
 
                 if (iconButton.enabled && iconButton.hovered)
-                    return Theme.overlay;
+                    return Colors.md3.surface_container_high;
                 if (panelButton.pressed)
-                    return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
+                    return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.pressIntensity);
                 if (panelButton.hovered)
-                    return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
-                return Theme.overlay;
+                    return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.hoverIntensity);
+                return Colors.md3.surface_container_high;
             }
 
             Behavior on color {
@@ -102,17 +102,17 @@ Item {
 
                             if (iconButton.checked) {
                                 if (iconButton.pressed)
-                                    return Theme.colorMix(Theme.accent, Theme.textAccent, Theme.accentPressIntensity);
+                                    return Theme.colorMix(Colors.md3.primary_fixed_dim, Colors.md3.on_primary_fixed, Theme.pressIntensity);
                                 if (iconButton.hovered)
-                                    return Theme.colorMix(Theme.accent, Theme.textAccent, Theme.accentHoverIntensity);
-                                return Theme.accent;
+                                    return Theme.colorMix(Colors.md3.primary_fixed_dim, Colors.md3.on_primary_fixed, Theme.hoverIntensity);
+                                return Colors.md3.primary_fixed_dim;
                             }
 
                             if (iconButton.pressed)
-                                return Theme.colorMix(Theme.overlayHigh, Theme.text, Theme.pressIntensity);
+                                return Theme.colorMix(Colors.md3.surface_container_highest, Colors.md3.on_surface, Theme.pressIntensity);
                             if (iconButton.hovered)
-                                return Theme.colorMix(Theme.overlayHigh, Theme.text, Theme.hoverIntensity);
-                            return Theme.overlayHigh;
+                                return Theme.colorMix(Colors.md3.surface_container_highest, Colors.md3.on_surface, Theme.hoverIntensity);
+                            return Colors.md3.surface_container_highest;
                         }
 
                         Behavior on color {
@@ -131,8 +131,8 @@ Item {
 
                         color: {
                             if (root.checked)
-                                return Theme.textAccent;
-                            return Theme.textVariant;
+                                return Colors.md3.on_primary_fixed;
+                            return Colors.md3.on_surface_variant;
                         }
                     }
                 }
@@ -152,8 +152,8 @@ Item {
                         font.weight: Font.Medium
                         color: {
                             if (root.checked && !root.checkableIcon)
-                                return Theme.textAccent;
-                            return Theme.text;
+                                return Colors.md3.on_primary_fixed;
+                            return Colors.md3.on_surface;
                         }
                         elide: Text.ElideRight
                     }
@@ -169,8 +169,8 @@ Item {
                         font.pixelSize: Theme.fontSizeTiny
                         color: {
                             if (root.checked && !root.checkableIcon)
-                                return Theme.textAccent;
-                            return Theme.textVariant;
+                                return Colors.md3.on_primary_fixed;
+                            return Colors.md3.on_surface_variant;
                         }
                         elide: Text.ElideRight
                     }

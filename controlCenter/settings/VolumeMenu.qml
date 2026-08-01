@@ -40,7 +40,7 @@ SubMenu {
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     font.weight: Font.DemiBold
-                    color: Theme.text
+                    color: Colors.md3.on_surface
                     elide: Text.ElideRight
                 }
 

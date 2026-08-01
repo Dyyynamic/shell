@@ -40,10 +40,10 @@ Item {
 
         color: {
             if (root.defaultAction && root.pressed)
-                return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
+                return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.pressIntensity);
             if (root.defaultAction && root.hovered)
-                return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
-            return Theme.overlay;
+                return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.hoverIntensity);
+            return Colors.md3.surface_container_high;
         }
 
         Behavior on color {
@@ -92,14 +92,14 @@ Item {
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeSmall
                     font.weight: Font.Medium
-                    color: Theme.textVariant
+                    color: Colors.md3.on_surface_variant
                 }
 
                 Text {
                     text: Qt.formatTime(new Date(root.notification.time), "hh:mm")
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.textVariant
+                    color: Colors.md3.on_surface_variant
                 }
 
                 Components.IconButton {
@@ -147,7 +147,7 @@ Item {
                         Layout.fillWidth: true
                         elide: Text.ElideRight
                         text: root.notification.summary
-                        color: Theme.text
+                        color: Colors.md3.on_surface
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         font.weight: Font.DemiBold
@@ -159,7 +159,7 @@ Item {
                         maximumLineCount: 2
                         elide: Text.ElideRight
                         text: root.notification.body
-                        color: Theme.text
+                        color: Colors.md3.on_surface
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                     }
@@ -185,17 +185,17 @@ Item {
                                 text: root.notification.hasActionIcons ? "" : modelData.text
                                 font.family: Theme.fontFamily
                                 font.pixelSize: Theme.fontSizeSmall
-                                palette.buttonText: Theme.text
+                                palette.buttonText: Colors.md3.on_surface
                                 implicitHeight: 30
                                 padding: 8
 
                                 background: Rectangle {
                                     color: {
                                         if (actionButton.pressed)
-                                            return Theme.colorMix(Theme.overlayHigh, Theme.text, Theme.pressIntensity);
+                                            return Theme.colorMix(Colors.md3.surface_container_highest, Colors.md3.on_surface, Theme.pressIntensity);
                                         if (actionButton.hovered)
-                                            return Theme.colorMix(Theme.overlayHigh, Theme.text, Theme.hoverIntensity);
-                                        return Theme.overlayHigh;
+                                            return Theme.colorMix(Colors.md3.surface_container_highest, Colors.md3.on_surface, Theme.hoverIntensity);
+                                        return Colors.md3.surface_container_highest;
                                     }
                                     radius: Theme.radiusTiny
 

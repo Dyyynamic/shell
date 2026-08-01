@@ -38,10 +38,10 @@ Item {
             anchors.fill: parent
             color: {
                 if (root.pressed)
-                    return Theme.colorMix(Theme.overlay, Theme.text, Theme.pressIntensity);
+                    return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.pressIntensity);
                 if (root.hovered)
-                    return Theme.colorMix(Theme.overlay, Theme.text, Theme.hoverIntensity);
-                return Theme.overlay;
+                    return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.hoverIntensity);
+                return Colors.md3.surface_container_high;
             }
             opacity: !!Players.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
 
@@ -77,7 +77,7 @@ Item {
 
                     Rectangle {
                         anchors.fill: parent
-                        color: Theme.surface
+                        color: Colors.md3.surface_container_low
 
                         visible: !Players.lastPlayedPlayer.trackArtUrl
 
@@ -85,7 +85,7 @@ Item {
                             anchors.centerIn: parent
                             icon: ""
                             size: 32
-                            color: Theme.textVariant
+                            color: Colors.md3.on_surface_variant
                         }
                     }
                 }
@@ -106,7 +106,7 @@ Item {
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                             text: Players.lastPlayedPlayer.trackTitle
-                            color: Theme.text
+                            color: Colors.md3.on_surface
                         }
 
                         Text {
@@ -115,7 +115,7 @@ Item {
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                             text: Players.lastPlayedPlayer.trackArtist
-                            color: Theme.textVariant
+                            color: Colors.md3.on_surface_variant
                         }
                     }
 
@@ -139,7 +139,7 @@ Item {
                         Text {
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.textVariant
+                            color: Colors.md3.on_surface_variant
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
                             text: Formatters.formatTime(Players.lastPlayedPlayer.position)
@@ -155,9 +155,9 @@ Item {
                                 iconText: "󰒮"
 
                                 // Keep color static
-                                backgroundColor: Theme.text
-                                hoveredColor: Theme.text
-                                pressedColor: Theme.text
+                                backgroundColor: Colors.md3.on_surface
+                                hoveredColor: Colors.md3.on_surface
+                                pressedColor: Colors.md3.on_surface
 
                                 backgroundOpacity: {
                                     if (pressed)
@@ -179,9 +179,9 @@ Item {
                                 }
 
                                 // Keep color static
-                                backgroundColor: Theme.text
-                                hoveredColor: Theme.text
-                                pressedColor: Theme.text
+                                backgroundColor: Colors.md3.on_surface
+                                hoveredColor: Colors.md3.on_surface
+                                pressedColor: Colors.md3.on_surface
 
                                 backgroundOpacity: {
                                     if (pressed)
@@ -199,9 +199,9 @@ Item {
                                 iconText: "󰒭"
 
                                 // Keep color static
-                                backgroundColor: Theme.text
-                                hoveredColor: Theme.text
-                                pressedColor: Theme.text
+                                backgroundColor: Colors.md3.on_surface
+                                hoveredColor: Colors.md3.on_surface
+                                pressedColor: Colors.md3.on_surface
 
                                 backgroundOpacity: {
                                     if (pressed)
@@ -218,7 +218,7 @@ Item {
                         Text {
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.textVariant
+                            color: Colors.md3.on_surface_variant
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter
                             text: Formatters.formatTime(Players.lastPlayedPlayer.length)

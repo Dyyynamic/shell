@@ -11,15 +11,15 @@ Indicator {
 
     clickable: true
 
-    textColor: Theme.textError
-    backgroundColor: Theme.error
-    hoverIntensity: Theme.errorHoverIntensity
-    pressIntensity: Theme.errorPressIntensity
+    textColor: Colors.md3.on_error_container
+    backgroundColor: Colors.md3.error_container
+    hoverIntensity: Theme.hoverIntensity
+    pressIntensity: Theme.pressIntensity
 
     RowLayout {
         Components.Icon {
             icon: "󰻃"
-            color: root.textColor
+            color: Colors.md3.on_error_container
         }
 
         Text {
@@ -28,7 +28,7 @@ Indicator {
             font.family: Theme.fontFamily
             font.pixelSize: Theme.fontSizeLarge
             font.weight: Font.Bold
-            color: root.textColor
+            color: Colors.md3.on_error_container
         }
     }
 }

@@ -17,7 +17,7 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: Theme.surface
+        color: Colors.md3.surface_container_low
         radius: Theme.radiusMedium
     }
 

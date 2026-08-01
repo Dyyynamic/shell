@@ -7,9 +7,9 @@ Button {
 
     property alias radius: background.radius
 
-    property color backgroundColor: Theme.overlay
-    property color hoveredColor: Theme.colorMix(backgroundColor, Theme.text, Theme.hoverIntensity);
-    property color pressedColor: Theme.colorMix(backgroundColor, Theme.text, Theme.pressIntensity);
+    property color backgroundColor: Colors.md3.surface_container_high
+    property color hoveredColor: Theme.colorMix(backgroundColor, Colors.md3.on_surface, Theme.hoverIntensity);
+    property color pressedColor: Theme.colorMix(backgroundColor, Colors.md3.on_surface, Theme.pressIntensity);
     property alias backgroundOpacity: background.opacity
 
     property alias textColor: root.palette.buttonText
@@ -17,7 +17,7 @@ Button {
     font.family: Theme.fontFamily
     font.pixelSize: Theme.fontSizeSmall
     font.weight: Font.Medium
-    palette.buttonText: Theme.text
+    palette.buttonText: Colors.md3.on_surface
 
     implicitHeight: 32
     horizontalPadding: Theme.spacingMedium

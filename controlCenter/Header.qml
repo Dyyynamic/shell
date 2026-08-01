@@ -26,7 +26,7 @@ Components.Widget {
                 spacing: 0
                 Text {
                     id: uptimeText
-                    color: Theme.text
+                    color: Colors.md3.on_surface
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     font.weight: Font.Medium
@@ -34,7 +34,7 @@ Components.Widget {
                 Text {
                     visible: Battery.available
                     text: Battery.description
-                    color: Theme.text
+                    color: Colors.md3.on_surface
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeSmall
                 }
@@ -49,7 +49,7 @@ Components.Widget {
             spacing: Theme.spacingSmall
 
             Components.IconButton {
-                backgroundColor: Theme.surface
+                backgroundColor: Colors.md3.surface_container_low
                 backgroundOpacity: hovered ? 1 : 0
 
                 iconText: ""
@@ -59,14 +59,14 @@ Components.Widget {
                 }
             }
             Components.IconButton {
-                backgroundColor: Theme.surface
+                backgroundColor: Colors.md3.surface_container_low
                 backgroundOpacity: hovered ? 1 : 0
 
                 iconText: ""
                 onClicked: () => ControlCenter.Controller.closeWithAction(Lock.Controller.lock)
             }
             Components.IconButton {
-                backgroundColor: Theme.surface
+                backgroundColor: Colors.md3.surface_container_low
                 backgroundOpacity: hovered ? 1 : 0
 
                 iconText: ""

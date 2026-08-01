@@ -122,7 +122,7 @@ PanelWindow {
             ctx.reset();
 
             // Background dim
-            ctx.fillStyle = Qt.alpha(Theme.base, 0.5);
+            ctx.fillStyle = Qt.alpha(Colors.md3.background, 0.5);
             ctx.fillRect(0, 0, root.width, root.height);
 
             if (!root.hasSelection)
@@ -132,7 +132,7 @@ PanelWindow {
             ctx.clearRect(root.left, root.top, root.w, root.h);
 
             // Outline
-            ctx.strokeStyle = Qt.alpha(Theme.text, 0.5);
+            ctx.strokeStyle = Qt.alpha(Colors.md3.on_surface, 0.5);
             ctx.lineWidth = 2;
             ctx.strokeRect(root.left - 1, root.top - 1, root.w + 2, root.h + 2);
         }
@@ -146,7 +146,7 @@ PanelWindow {
         text: root.w + "x" + root.h
         font.family: Theme.fontFamily
         font.pixelSize: Theme.fontSizeMedium
-        color: Qt.alpha(Theme.text, 0.5)
+        color: Qt.alpha(Colors.md3.on_surface, 0.5)
     }
 
     MouseArea {
