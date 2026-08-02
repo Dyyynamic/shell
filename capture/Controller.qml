@@ -277,7 +277,6 @@ Singleton {
         onTriggered: root.recordingDuration++
     }
 
-    // Empty function to define first reference to singleton
     function init() {
     }
 }

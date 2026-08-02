@@ -12,6 +12,8 @@ PanelWindow {
 
     readonly property int margin: Theme.spacingSmall
 
+    screen: Screens.main
+
     anchors {
         top: true
         right: true

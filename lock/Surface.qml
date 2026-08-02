@@ -18,8 +18,6 @@ Item {
     required property var context
     required property var screen
 
-    readonly property string mainMonitor: Quickshell.env("MAIN_MONITOR")
-
     property bool capsLock: false
 
     property string statusMessage: {
@@ -88,7 +86,7 @@ Item {
 
         Loader {
             anchors.fill: parent
-            active: !root.mainMonitor || root.screen?.name === root.mainMonitor
+            active: root.screen?.name === Screens.main.name
 
             sourceComponent: Item {
                 anchors.fill: parent

@@ -7,37 +7,26 @@ import "notifs" as Notifs
 import "controlCenter" as ControlCenter
 import "lock" as Lock
 import "capture" as Capture
+import "osd" as Osd
 
 ShellRoot {
     id: root
 
-    readonly property string mainMonitor: Quickshell.env("MAIN_MONITOR")
-
     Variants {
         model: Quickshell.screens
 
-        Scope {
-            id: scope
-
+        Bar.Bar {
             required property var modelData
-
-            Bar.Bar {
-                screen: scope.modelData
-            }
-
-            LazyLoader {
-                // Show on the main monitor if MAIN_MONITOR is set, otherwise
-                // show on all monitors
-                active: !root.mainMonitor || scope.modelData.name === root.mainMonitor
-
-                Notifs.PopupStack {}
-            }
+            screen: modelData
         }
     }
+
+    Notifs.PopupStack {}
 
     Component.onCompleted: {
         ControlCenter.Controller.init();
         Lock.Controller.init();
         Capture.Controller.init();
+        Osd.Controller.init();
     }
 }

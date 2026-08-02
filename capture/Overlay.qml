@@ -91,7 +91,7 @@ PanelWindow {
         easing.type: Theme.easingStandard
 
         // Run immediately
-        running: true
+        running: root.controller.overlayVisible
     }
 
     NumberAnimation {
