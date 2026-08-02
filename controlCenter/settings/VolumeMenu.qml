@@ -49,8 +49,6 @@ SubMenu {
 
                     Components.Slider {
                         handleHeight: 16
-                        from: 0
-                        to: 1
                         value: volumeDelegate.modelData.audio.volume
                         onValueChanged: {
                             volumeDelegate.modelData.audio.volume = value;

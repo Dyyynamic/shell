@@ -32,8 +32,6 @@ Item {
                 icon: Audio.icon(Audio.defaultSink)
                 Layout.fillWidth: true
 
-                from: 0
-                to: 1
                 value: Audio.defaultSink?.audio.volume ?? 0
                 onMoved: Audio.defaultSink.audio.volume = value
             }
@@ -57,7 +55,7 @@ Item {
             value: Brightness.value
 
             onMoved: {
-                Brightness.setBrightness(parseInt(value));
+                Brightness.setBrightness(value);
             }
         }
 

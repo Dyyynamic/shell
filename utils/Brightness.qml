@@ -7,17 +7,17 @@ import QtQuick
 Singleton {
     id: root
 
-    property int value: 100
+    property real value: 1
     property bool backlight: false
 
-    function setBrightness(value: int) {
+    function setBrightness(value: real) {
         root.value = value;
         setBrightness.running = true;
     }
 
     Process {
         id: setBrightness
-        command: ["brightnessctl", "--class", "backlight", "set", `${root.value}%`]
+        command: ["brightnessctl", "--class", "backlight", "set", `${Math.round(root.value * 100)}%`]
     }
 
     Process {
@@ -45,7 +45,7 @@ Singleton {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                root.value = this.text.split(",")[3].replace("%", "");
+                root.value = text.split(",")[3].replace("%", "") / 100;
             }
         }
     }

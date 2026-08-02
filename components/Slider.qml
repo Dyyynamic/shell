@@ -26,8 +26,8 @@ Slider {
     readonly property real handleCenter: handle.x + handle.width / 2
 
     from: 0
-    to: 100
-    value: 50
+    to: 1
+    value: 0.5
 
     Layout.fillWidth: true
     implicitHeight: handleHeight
