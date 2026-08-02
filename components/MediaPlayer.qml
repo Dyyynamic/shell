@@ -17,9 +17,9 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        enabled: Players.lastPlayedPlayer.canRaise
+        enabled: Players.players[0].canRaise
         hoverEnabled: true
-        onClicked: Players.lastPlayedPlayer.raise()
+        onClicked: Players.players[0].raise()
     }
 
     ClippingRectangle {
@@ -29,9 +29,9 @@ Item {
 
         Image {
             anchors.fill: parent
-            source: Players.lastPlayedPlayer.trackArtUrl
+            source: Players.players[0].trackArtUrl
             fillMode: Image.PreserveAspectCrop
-            visible: !!Players.lastPlayedPlayer.trackArtUrl
+            visible: !!Players.players[0].trackArtUrl
         }
 
         Rectangle {
@@ -43,7 +43,7 @@ Item {
                     return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.hoverIntensity);
                 return Colors.md3.surface_container_high;
             }
-            opacity: !!Players.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
+            opacity: !!Players.players[0].trackArtUrl ? 0.75 : 1
 
             Behavior on color {
                 ColorAnimation {
@@ -71,15 +71,15 @@ Item {
                         id: cover
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectCrop
-                        source: Players.lastPlayedPlayer.trackArtUrl
-                        visible: !!Players.lastPlayedPlayer.trackArtUrl
+                        source: Players.players[0].trackArtUrl
+                        visible: !!Players.players[0].trackArtUrl
                     }
 
                     Rectangle {
                         anchors.fill: parent
                         color: Colors.md3.surface_container_low
 
-                        visible: !Players.lastPlayedPlayer.trackArtUrl
+                        visible: !Players.players[0].trackArtUrl
 
                         Components.Icon {
                             anchors.centerIn: parent
@@ -105,7 +105,7 @@ Item {
                             font.weight: Font.DemiBold
                             Layout.fillWidth: true
                             elide: Text.ElideRight
-                            text: Players.lastPlayedPlayer.trackTitle
+                            text: Players.players[0].trackTitle
                             color: Colors.md3.on_surface
                         }
 
@@ -114,7 +114,7 @@ Item {
                             font.pixelSize: Theme.fontSizeSmall
                             Layout.fillWidth: true
                             elide: Text.ElideRight
-                            text: Players.lastPlayedPlayer.trackArtist
+                            text: Players.players[0].trackArtist
                             color: Colors.md3.on_surface_variant
                         }
                     }
@@ -122,12 +122,12 @@ Item {
                     Components.Slider {
                         id: progress
 
-                        to: Players.lastPlayedPlayer.length
-                        value: pressed ? value : Players.lastPlayedPlayer.position
+                        to: Players.players[0].length
+                        value: pressed ? value : Players.players[0].position
 
                         onPressedChanged: {
-                            if (!pressed && Players.lastPlayedPlayer) {
-                                Players.lastPlayedPlayer.position = value;
+                            if (!pressed && Players.players[0]) {
+                                Players.players[0].position = value;
                             }
                         }
                     }
@@ -142,7 +142,7 @@ Item {
                             color: Colors.md3.on_surface_variant
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
-                            text: Formatters.formatTime(Players.lastPlayedPlayer.position)
+                            text: Formatters.formatTime(Players.players[0].position)
                         }
 
                         RowLayout {
@@ -167,13 +167,13 @@ Item {
                                     return 0;
                                 }
 
-                                onClicked: Players.lastPlayedPlayer.previous()
+                                onClicked: Players.players[0].previous()
                             }
                             Components.IconButton {
                                 size: 32
                                 iconSize: 32
                                 iconText: {
-                                    if (Players.lastPlayedPlayer.playbackState === MprisPlaybackState.Playing)
+                                    if (Players.players[0].playbackState === MprisPlaybackState.Playing)
                                         return "󰏤";
                                     return "󰐊";
                                 }
@@ -191,7 +191,7 @@ Item {
                                     return 0;
                                 }
 
-                                onClicked: Players.lastPlayedPlayer.togglePlaying()
+                                onClicked: Players.players[0].togglePlaying()
                             }
                             Components.IconButton {
                                 size: 32
@@ -211,7 +211,7 @@ Item {
                                     return 0;
                                 }
 
-                                onClicked: Players.lastPlayedPlayer.next()
+                                onClicked: Players.players[0].next()
                             }
                         }
 
@@ -221,7 +221,7 @@ Item {
                             color: Colors.md3.on_surface_variant
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter
-                            text: Formatters.formatTime(Players.lastPlayedPlayer.length)
+                            text: Formatters.formatTime(Players.players[0].length)
                         }
                     }
                 }
@@ -230,11 +230,11 @@ Item {
     }
 
     Timer {
-        running: Players.lastPlayedPlayer.playbackState == MprisPlaybackState.Playing
+        running: Players.players[0].playbackState == MprisPlaybackState.Playing
 
         interval: 1000
         repeat: true
 
-        onTriggered: Players.lastPlayedPlayer.positionChanged()
+        onTriggered: Players.players[0].positionChanged()
     }
 }

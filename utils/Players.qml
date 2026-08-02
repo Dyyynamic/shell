@@ -9,15 +9,28 @@ import QtQml.Models
 Singleton {
     id: root
 
-    property MprisPlayer lastPlayedPlayer: null
+    // Players sorted by most recently used
+    property var players: []
 
-    readonly property var players: Mpris.players
-    readonly property int playerCount: Mpris.players.values.length
-    readonly property bool hasActivePlayer: playerCount > 0 && lastPlayedPlayer
+    function touchPlayer(player: MprisPlayer) {
+        players = [player, ...players.filter(p => p !== player)];
+    }
 
-    function updateLastPlayedPlayer(player: MprisPlayer) {
-        if (player.playbackState === MprisPlaybackState.Playing) {
-            root.lastPlayedPlayer = player;
+    function cleanupPlayers() {
+        players = players.filter(p => Mpris.players.values.includes(p));
+    }
+
+    Connections {
+        target: Mpris.players
+
+        // In objectRemovedPre object is null, so we have to manually clean up
+        // the list post-removal instead
+        function onObjectRemovedPost(object, index) {
+            root.cleanupPlayers();
+        }
+
+        function onObjectInsertedPost(object, index) {
+            root.touchPlayer(object);
         }
     }
 
@@ -26,15 +39,14 @@ Singleton {
 
         delegate: Connections {
             required property var modelData
+            readonly property MprisPlayer player: modelData
 
-            target: modelData
-
-            Component.onCompleted: {
-                root.updateLastPlayedPlayer(modelData);
-            }
+            target: player
 
             function onPlaybackStateChanged() {
-                root.updateLastPlayedPlayer(modelData);
+                if (player.playbackState === MprisPlaybackState.Playing) {
+                    root.touchPlayer(player);
+                }
             }
         }
     }

@@ -15,7 +15,7 @@ Components.Widget {
             id: content
 
             readonly property bool hasContent: {
-                return Notifications.count > 0 || Players.hasActivePlayer;
+                return Notifications.count > 0 || Players.players.length > 0;
             }
 
             Layout.fillWidth: true
@@ -86,7 +86,7 @@ Components.Widget {
                     }
                 }
 
-                header: Players.hasActivePlayer ? playerComponent : null
+                header: Players.players.length > 0 ? playerComponent : null
 
                 Component {
                     id: playerComponent

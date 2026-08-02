@@ -8,17 +8,17 @@ Indicator {
 
     rightMargin: Theme.spacingMedium
 
-    clickable: Players.lastPlayedPlayer.canRaise
-    onClicked: Players.lastPlayedPlayer.raise()
+    clickable: Players.players[0].canRaise
+    onClicked: Players.players[0].raise()
 
-    backgroundOpacity: !!Players.lastPlayedPlayer.trackArtUrl ? 0.75 : 1
+    backgroundOpacity: !!Players.players[0].trackArtUrl ? 0.75 : 1
 
     backgroundData: [
         Image {
             anchors.fill: parent
-            source: Players.lastPlayedPlayer.trackArtUrl
+            source: Players.players[0].trackArtUrl
             fillMode: Image.PreserveAspectCrop
-            visible: !!Players.lastPlayedPlayer.trackArtUrl
+            visible: !!Players.players[0].trackArtUrl
         }
     ]
 
@@ -30,7 +30,7 @@ Indicator {
 
         Text {
             horizontalAlignment: Text.AlignHCenter
-            text: Players.lastPlayedPlayer.trackTitle
+            text: Players.players[0].trackTitle
             font.family: Theme.fontFamily
             font.pixelSize: Theme.fontSizeLarge
             font.weight: Font.Bold

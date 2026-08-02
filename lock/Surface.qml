@@ -122,8 +122,8 @@ Item {
                                 }
 
                                 Loader {
-                                    visible: Players.hasActivePlayer
-                                    active: Players.hasActivePlayer
+                                    visible: Players.players.length > 0
+                                    active: Players.players.length > 0
                                     sourceComponent: Bar.MediaIndicator {
                                         clickable: false
                                         backgroundColor: "#e3e3e3"

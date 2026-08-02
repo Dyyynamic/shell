@@ -80,7 +80,7 @@ Singleton {
         target: "osd"
 
         function media(command: string) {
-            const player = Players.lastPlayedPlayer;
+            const player = Players.players[0];
 
             if (!player)
                 return;
