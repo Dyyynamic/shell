@@ -80,7 +80,7 @@ PanelWindow {
 
         Rectangle {
             anchors.fill: parent
-            color: Qt.alpha(Colors.md3.surface, 0.75)
+            color: Qt.alpha("black", 0.75)
             radius: Theme.radiusLarge
         }
 
@@ -110,7 +110,7 @@ PanelWindow {
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeLarge
                         font.weight: Font.Bold
-                        color: Colors.md3.on_surface
+                        color: "#e3e3e3"
                     }
 
                     Item {
@@ -123,7 +123,7 @@ PanelWindow {
                         Rectangle {
                             id: progressBarBackground
                             anchors.fill: parent
-                            color: Qt.alpha(Colors.md3.on_surface, 0.25)
+                            color: Qt.alpha("#e3e3e3", 0.25)
                             radius: height / 2
                         }
 
@@ -131,7 +131,7 @@ PanelWindow {
                             id: progressBarFill
                             width: parent.width * root.value
                             height: parent.height
-                            color: Colors.md3.on_surface
+                            color: "#e3e3e3"
                             radius: height / 2
                         }
                     }

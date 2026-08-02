@@ -147,7 +147,7 @@ PanelWindow {
                 ctx.clearRect(root.left, root.top, root.w, root.h);
 
                 // Outline
-                ctx.strokeStyle = Qt.rgba(255, 255, 255, 0.5);
+                ctx.strokeStyle = Qt.alpha("#e3e3e3", 0.5);
                 ctx.lineWidth = 2;
                 ctx.strokeRect(root.left - 1, root.top - 1, root.w + 2, root.h + 2);
             }
@@ -160,7 +160,7 @@ PanelWindow {
             text: root.w + "x" + root.h
             font.family: Theme.fontFamily
             font.pixelSize: Theme.fontSizeMedium
-            color: Qt.rgba(255, 255, 255, 0.5)
+            color: Qt.alpha("#e3e3e3", 0.5)
 
             Behavior on opacity {
                 NumberAnimation {

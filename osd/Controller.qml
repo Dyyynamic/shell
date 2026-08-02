@@ -20,7 +20,7 @@ Singleton {
     property bool overlayVisible: false
 
     property string icon: ""
-    property color iconColor: Colors.md3.on_surface
+    property color iconColor: "#e3e3e3"
     property string text: ""
     property real value: 0
     property int contentType: Osd.Controller.ContentType.Text
@@ -28,7 +28,7 @@ Singleton {
     function showOverlay(data) {
         contentType = data.contentType;
         icon = data.icon;
-        iconColor = data.iconColor ?? Colors.md3.on_surface;
+        iconColor = data.iconColor ?? "#e3e3e3";
         text = data.text ?? "";
         value = data.value ?? 0;
 
@@ -207,7 +207,7 @@ Singleton {
                 root.showOverlay({
                     contentType: Osd.Controller.ContentType.Text,
                     icon: "",
-                    iconColor: capsLock ? Colors.md3.on_surface : Colors.md3.outline,
+                    iconColor: capsLock ? "#e3e3e3" : Qt.alpha("#e3e3e3", 0.5),
                     text: "Caps Lock " + (capsLock ? "On" : "Off")
                 });
             }
