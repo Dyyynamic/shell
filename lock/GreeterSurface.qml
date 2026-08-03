@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
 import QtQuick
@@ -8,13 +7,11 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import QtQuick.Controls.Fusion
 import "../utils"
-import "../bar" as Bar
-import "../capture" as Capture
-import "." as Lock
 
 Item {
     id: root
 
+    required property var controller
     required property var context
     required property var screen
 
@@ -31,25 +28,24 @@ Item {
 
     NumberAnimation {
         id: enterAnimation
-        target: screencopy
+        target: blackScreen
         property: "opacity"
         from: 1
         to: 0
-        duration: root.context.animate ? Theme.durationAtmospheric : 0
+        duration: Theme.durationAtmospheric
         easing.type: Theme.easingStandard
         running: true
-        onFinished: root.context.animate = true
     }
 
     NumberAnimation {
         id: exitAnimation
-        target: screencopy
+        target: blackScreen
         property: "opacity"
         from: 0
         to: 1
         duration: Theme.durationAtmospheric
         easing.type: Theme.easingStandard
-        onFinished: Lock.Controller.unlock()
+        onFinished: root.controller.unlock()
     }
 
     Item {
@@ -63,7 +59,7 @@ Item {
             Image {
                 id: wallpaper
                 anchors.fill: parent
-                source: Theme.wallpaper
+                source: "/var/lib/greetd/wallpaper.png"
                 fillMode: Image.PreserveAspectCrop
             }
 
@@ -91,62 +87,8 @@ Item {
             sourceComponent: Item {
                 anchors.fill: parent
 
-                Item {
-                    id: fakeBar
-
-                    anchors.top: parent.top
-                    anchors.right: parent.right
-                    anchors.left: parent.left
-
-                    implicitHeight: 40
-
-                    WrapperItem {
-                        anchors.fill: parent
-                        margin: Theme.spacingTiny
-
-                        Item {
-                            RowLayout {
-                                anchors.right: parent.right
-                                spacing: Theme.spacingTiny
-
-                                Loader {
-                                    visible: Capture.Controller.isRecording
-                                    active: Capture.Controller.isRecording
-                                    sourceComponent: Bar.RecordingIndicator {
-                                        clickable: false
-                                        backgroundColor: "#e3e3e3"
-                                        backgroundOpacity: 0.15
-                                        textColor: "#e3e3e3"
-                                        showBackgroundImage: false
-                                    }
-                                }
-
-                                Loader {
-                                    visible: Players.players.length > 0
-                                    active: Players.players.length > 0
-                                    sourceComponent: Bar.MediaIndicator {
-                                        clickable: false
-                                        backgroundColor: "#e3e3e3"
-                                        backgroundOpacity: 0.15
-                                        textColor: "#e3e3e3"
-                                        showBackgroundImage: false
-                                    }
-                                }
-
-                                Bar.StatusIndicator {
-                                    Layout.preferredWidth: implicitWidth + 8
-                                    clickable: false
-                                    backgroundColor: "#e3e3e3"
-                                    backgroundOpacity: 0.15
-                                    textColor: "#e3e3e3"
-                                }
-                            }
-                        }
-                    }
-                }
-
                 ColumnLayout {
-                    y: 128
+                    y: 64
                     anchors.horizontalCenter: parent.horizontalCenter
                     spacing: 0
 
@@ -154,7 +96,7 @@ Item {
                         Layout.alignment: Qt.AlignHCenter
                         text: Qt.formatDateTime(Time.date, "dddd, MMMM d")
                         font.family: Theme.fontFamily
-                        font.pixelSize: 36
+                        font.pixelSize: 18
                         font.weight: Font.DemiBold
                         color: "#e3e3e3"
                         renderTypeQuality: Text.HighRenderTypeQuality
@@ -164,7 +106,7 @@ Item {
                         Layout.alignment: Qt.AlignHCenter
                         text: Qt.formatDateTime(Time.date, "hh:mm")
                         font.family: Theme.fontFamily
-                        font.pixelSize: 144
+                        font.pixelSize: 72
                         font.weight: Font.Bold
                         color: "#e3e3e3"
                         renderTypeQuality: Text.VeryHighRenderTypeQuality
@@ -172,25 +114,24 @@ Item {
                 }
 
                 ColumnLayout {
-                    y: parent.height - height - 80
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.centerIn: parent
                     spacing: 24
 
                     ClippingRectangle {
                         Layout.alignment: Qt.AlignHCenter
-                        implicitHeight: 96
-                        implicitWidth: 96
+                        implicitHeight: 144
+                        implicitWidth: 144
                         radius: height / 2
 
                         Image {
                             anchors.fill: parent
-                            source: Quickshell.env("HOME") + "/.dotfiles/assets/avatar.png"
+                            source: "/var/lib/greetd/avatar.png"
                         }
                     }
 
                     Text {
                         Layout.alignment: Qt.AlignHCenter
-                        text: Formatters.capitalize(Quickshell.env("USER"))
+                        text: "Dynamic"
                         font.family: Theme.fontFamily
                         font.pixelSize: 20
                         font.weight: Font.DemiBold
@@ -248,7 +189,7 @@ Item {
                         Connections {
                             target: root.context
 
-                            function onPamFailure() {
+                            function onGreetdFailure() {
                                 passwordBox.text = "";
                             }
                         }
@@ -267,25 +208,17 @@ Item {
         }
     }
 
-    Item {
-        id: screencopy
+    Rectangle {
+        id: blackScreen
+
         anchors.fill: parent
-
-        Image {
-            source: "/tmp/lock_screencopy.jpg"
-
-            x: -root.screen?.x ?? 0
-            y: -root.screen?.y ?? 0
-
-            width: sourceSize.width
-            height: sourceSize.height
-        }
+        color: "black"
     }
 
     Connections {
         target: root.context
 
-        function onPamSuccess() {
+        function onGreetdSuccess() {
             exitAnimation.start();
         }
     }

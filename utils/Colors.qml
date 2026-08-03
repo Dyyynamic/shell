@@ -14,7 +14,7 @@ Singleton {
     property alias mode: jsonAdapter.mode
 
     FileView {
-        path: Quickshell.env("HOME") + "/.local/state/quickshell/generated/colors.json"
+        path: Qt.resolvedUrl("../generated/colors.json")
         watchChanges: true
         onFileChanged: reload()
 

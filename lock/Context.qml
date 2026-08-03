@@ -8,7 +8,7 @@ Scope {
     signal pamFailure
 
     property string currentText: ""
-    property bool unlockInProgress: false
+    property bool isUnlocking: false
     property bool showFailure: false
     property bool animate: true
 
@@ -20,7 +20,7 @@ Scope {
             return;
 
         root.currentText = text;
-        root.unlockInProgress = true;
+        root.isUnlocking = true;
         pam.start();
     }
 
@@ -42,7 +42,7 @@ Scope {
                 root.pamFailure();
             }
 
-            root.unlockInProgress = false;
+            root.isUnlocking = false;
         }
     }
 }
