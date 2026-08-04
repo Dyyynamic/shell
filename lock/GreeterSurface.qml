@@ -89,8 +89,12 @@ Item {
                 anchors.fill: parent
 
                 ColumnLayout {
-                    y: 64
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors {
+                        top: parent.top
+                        topMargin: 64
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
                     spacing: 0
 
                     Text {
@@ -115,6 +119,8 @@ Item {
                 }
 
                 ColumnLayout {
+                    id: login
+
                     anchors.centerIn: parent
                     spacing: 24
 
@@ -195,15 +201,21 @@ Item {
                             }
                         }
                     }
+                }
 
-                    Text {
-                        opacity: root.showStatusMessage ? 1 : 0
-                        Layout.alignment: Qt.AlignHCenter
-                        text: root.statusMessage
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: "#e3e3e3"
+                Text {
+                    anchors {
+                        top: login.bottom
+                        topMargin: 24
+                        horizontalCenter: parent.horizontalCenter
                     }
+
+                    opacity: root.showStatusMessage ? 1 : 0
+                    Layout.alignment: Qt.AlignHCenter
+                    text: root.statusMessage
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: "#e3e3e3"
                 }
 
                 MouseArea {

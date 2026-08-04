@@ -146,8 +146,12 @@ Item {
                 }
 
                 ColumnLayout {
-                    y: 128
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors {
+                        top: parent.top
+                        topMargin: 128
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
                     spacing: 0
 
                     Text {
@@ -172,8 +176,14 @@ Item {
                 }
 
                 ColumnLayout {
-                    y: parent.height - height - 80
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    id: login
+
+                    anchors {
+                        bottom: parent.bottom
+                        bottomMargin: 128
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
                     spacing: 24
 
                     ClippingRectangle {
@@ -253,15 +263,21 @@ Item {
                             }
                         }
                     }
+                }
 
-                    Text {
-                        opacity: root.showStatusMessage ? 1 : 0
-                        Layout.alignment: Qt.AlignHCenter
-                        text: root.statusMessage
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: "#e3e3e3"
+                Text {
+                    anchors {
+                        top: login.bottom
+                        topMargin: 24
+                        horizontalCenter: parent.horizontalCenter
                     }
+
+                    opacity: root.showStatusMessage ? 1 : 0
+                    Layout.alignment: Qt.AlignHCenter
+                    text: root.statusMessage
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: "#e3e3e3"
                 }
             }
         }
