@@ -52,7 +52,7 @@ Components.Widget {
                 backgroundColor: Colors.md3.surface_container_low
                 backgroundOpacity: hovered ? 1 : 0
 
-                iconText: ""
+                iconGlyph: ""
                 onClicked: () => {
                     ControlCenter.Controller.close();
                     betterControl.startDetached();
@@ -62,24 +62,24 @@ Components.Widget {
                 backgroundColor: Colors.md3.surface_container_low
                 backgroundOpacity: hovered ? 1 : 0
 
-                iconText: ""
+                iconGlyph: ""
                 onClicked: () => ControlCenter.Controller.closeWithAction(Lock.Controller.lock)
             }
             Components.IconButton {
                 backgroundColor: Colors.md3.surface_container_low
                 backgroundOpacity: hovered ? 1 : 0
 
-                iconText: ""
+                iconGlyph: ""
                 onClicked: () => {
                     ControlCenter.Controller.close();
-                    powerMenu.running = true;
+                    systemMenu.running = true;
                 }
             }
         }
     }
 
     Process {
-        id: powerMenu
+        id: systemMenu
         command: ["walker", "--provider", "menus:system"]
     }
 

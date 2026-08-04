@@ -37,7 +37,7 @@ Item {
             }
 
             Components.IconButton {
-                iconText: ""
+                iconGlyph: ""
                 size: 32
 
                 onClicked: root.volumeMenuRequested()

@@ -47,8 +47,8 @@ SubMenu {
                 Components.Button {
                     text: bluetoothDelegate.modelData.connected ? "Disconnect" : "Connect"
                     textColor: Colors.md3.on_surface_variant
-                    font.weight: Font.Normal
-                    font.pixelSize: Theme.fontSizeMedium
+                    fontWeight: Font.Normal
+                    fontSize: Theme.fontSizeMedium
 
                     backgroundColor: Colors.md3.surface_container_low
                     backgroundOpacity: hovered ? 1 : 0

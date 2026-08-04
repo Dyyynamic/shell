@@ -132,14 +132,14 @@ Components.Widget {
             }
 
             Components.IconButton {
-                iconText: Notifications.doNotDisturb ? "󰂛" : "󰂠"
+                iconGlyph: Notifications.doNotDisturb ? "󰂛" : "󰂠"
                 size: 32
                 implicitWidth: 52
                 onClicked: Notifications.toggleDoNotDisturb()
             }
 
             Components.IconButton {
-                iconText: "󰎟"
+                iconGlyph: "󰎟"
                 enabled: Notifications.count > 0
                 size: 32
                 iconSize: 24 // Slightly larger because the icon is small

@@ -6,6 +6,7 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 import QtQuick.Controls.Fusion
+import "../components" as Components
 import "../utils"
 
 Item {
@@ -203,6 +204,42 @@ Item {
                         font.pixelSize: Theme.fontSizeMedium
                         color: "#e3e3e3"
                     }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: systemMenu.show = false
+                    enabled: systemMenu.show
+                    visible: systemMenu.show
+                }
+
+                Components.IconButton {
+                    id: powerButton
+
+                    anchors {
+                        right: parent.right
+                        bottom: parent.bottom
+                        rightMargin: 32
+                        bottomMargin: 32
+                    }
+
+                    iconGlyph: ""
+                    iconColor: "#e3e3e3"
+                    backgroundColor: "#e3e3e3"
+                    backgroundOpacity: {
+                        if (pressed)
+                            return 0.35;
+                        if (hovered)
+                            return 0.25;
+                        return 0.15;
+                    }
+
+                    onClicked: systemMenu.show = !systemMenu.show
+                }
+
+                SystemMenu {
+                    id: systemMenu
+                    powerButton: powerButton
                 }
             }
         }

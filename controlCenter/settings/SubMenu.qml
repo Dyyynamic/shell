@@ -34,7 +34,7 @@ Item {
                 spacing: Theme.spacingSmall
 
                 Components.IconButton {
-                    iconText: ""
+                    iconGlyph: ""
                     onClicked: root.backRequested()
                     size: 32
                     iconSize: 20
@@ -95,7 +95,7 @@ Item {
         Components.Button {
             id: footerButton
             text: "Settings"
-            font.pixelSize: Theme.fontSizeMedium
+            fontSize: Theme.fontSizeMedium
 
             backgroundColor: Colors.md3.surface_container_low
             backgroundOpacity: hovered ? 1 : 0

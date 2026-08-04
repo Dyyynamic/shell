@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls
 import "../utils"
 
@@ -12,12 +13,13 @@ Button {
     property color pressedColor: Theme.colorMix(backgroundColor, Colors.md3.on_surface, Theme.pressIntensity);
     property alias backgroundOpacity: background.opacity
 
-    property alias textColor: root.palette.buttonText
+    property alias textColor: textItem.color
+    property alias fontWeight: textItem.font.weight
+    property alias fontSize: textItem.font.pixelSize
+    property alias textAlignment: textItem.horizontalAlignment
 
-    font.family: Theme.fontFamily
-    font.pixelSize: Theme.fontSizeSmall
-    font.weight: Font.Medium
-    palette.buttonText: Colors.md3.on_surface
+    property string iconGlyph: ""
+    property alias iconSpacing: layout.spacing
 
     implicitHeight: 32
     horizontalPadding: Theme.spacingMedium
@@ -49,6 +51,30 @@ Button {
                 duration: Theme.durationFast
                 easing.type: Theme.easingStandard
             }
+        }
+    }
+
+    contentItem: RowLayout {
+        id: layout
+        spacing: Theme.spacingTiny
+
+        Icon {
+            visible: root.iconGlyph !== ""
+            id: icon
+            icon: root.iconGlyph
+        }
+
+        Text {
+            id: textItem
+            text: root.text
+            color: Colors.md3.on_surface
+            font.family: Theme.fontFamily
+            font.pixelSize: Theme.fontSizeSmall
+            font.weight: Font.Medium
+
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            Layout.fillWidth: true
         }
     }
 }

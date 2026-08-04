@@ -152,7 +152,7 @@ Item {
                             Components.IconButton {
                                 size: 32
                                 iconSize: 32
-                                iconText: "󰒮"
+                                iconGlyph: "󰒮"
 
                                 // Keep color static
                                 backgroundColor: Colors.md3.on_surface
@@ -172,7 +172,7 @@ Item {
                             Components.IconButton {
                                 size: 32
                                 iconSize: 32
-                                iconText: {
+                                iconGlyph: {
                                     if (Players.players[0].playbackState === MprisPlaybackState.Playing)
                                         return "󰏤";
                                     return "󰐊";
@@ -196,7 +196,7 @@ Item {
                             Components.IconButton {
                                 size: 32
                                 iconSize: 32
-                                iconText: "󰒭"
+                                iconGlyph: "󰒭"
 
                                 // Keep color static
                                 backgroundColor: Colors.md3.on_surface

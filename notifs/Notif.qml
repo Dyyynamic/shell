@@ -105,7 +105,7 @@ Item {
                 Components.IconButton {
                     id: dismissButton
 
-                    iconText: ""
+                    iconGlyph: ""
                     size: 20
                     backgroundOpacity: hovered ? 1 : 0;
 

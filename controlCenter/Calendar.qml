@@ -51,7 +51,7 @@ Components.Widget {
                 enabled: shown
 
                 size: 32
-                iconText: ""
+                iconGlyph: ""
                 onClicked: root.reset()
 
                 Behavior on opacity {
@@ -66,7 +66,7 @@ Components.Widget {
                 id: prevMonthButton
 
                 size: 32
-                iconText: ""
+                iconGlyph: ""
                 onClicked: {
                     grid.month = (grid.month - 1 + 12) % 12;
                     grid.year = grid.year - (grid.month === 11 ? 1 : 0);
@@ -77,7 +77,7 @@ Components.Widget {
                 id: nextMonthButton
 
                 size: 32
-                iconText: ""
+                iconGlyph: ""
                 onClicked: {
                     grid.month = (grid.month + 1) % 12;
                     grid.year = grid.year + (grid.month === 0 ? 1 : 0);

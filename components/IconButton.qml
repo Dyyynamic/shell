@@ -13,7 +13,7 @@ Button {
     property color pressedColor: Theme.colorMix(backgroundColor, Colors.md3.on_surface, Theme.pressIntensity);
     property alias backgroundOpacity: background.opacity
 
-    property alias iconText: icon.icon
+    property alias iconGlyph: icon.icon
     property alias iconSize: icon.size
     property alias iconColor: icon.color
 
