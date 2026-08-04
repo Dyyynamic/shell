@@ -159,6 +159,11 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
 
+                        palette {
+                            highlight: Qt.alpha(Colors.md3.primary_fixed_dim, 0.5)
+                            highlightedText: "#e3e3e3"
+                        }
+
                         background: Rectangle {
                             color: Qt.alpha("#e3e3e3", 0.15)
                             radius: height / 2
