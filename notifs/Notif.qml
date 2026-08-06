@@ -107,7 +107,7 @@ Item {
 
                     iconGlyph: ""
                     size: 20
-                    backgroundOpacity: hovered ? 1 : 0;
+                    backgroundOpacity: hovered ? 1 : 0
 
                     onClicked: root.notification.dismiss()
                 }

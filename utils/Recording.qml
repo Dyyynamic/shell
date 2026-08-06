@@ -26,7 +26,7 @@ Singleton {
         path: Quickshell.env("XDG_RUNTIME_DIR") + "/capture/recording.start"
         watchChanges: true
         blockLoading: true
-        onFileChanged: this.reload();
+        onFileChanged: this.reload()
 
         onLoadFailed: {
             root.isRecording = false;

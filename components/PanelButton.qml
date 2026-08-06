@@ -33,10 +33,10 @@ Item {
         checked: root.checked && !root.checkableIcon
 
         onClicked: {
-            root.clicked()
+            root.clicked();
 
             if (!root.checkableIcon)
-                root.toggled()
+                root.toggled();
         }
 
         background: Rectangle {

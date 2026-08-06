@@ -18,7 +18,8 @@ Singleton {
     }
 
     function lock() {
-        if (lock.locked) return;
+        if (lock.locked)
+            return;
 
         screencopyCmd.running = true;
     }
@@ -28,7 +29,8 @@ Singleton {
     }
 
     function lockInstant() {
-        if (lock.locked) return;
+        if (lock.locked)
+            return;
 
         lockContext.animate = false;
         screencopyCmd.running = true;

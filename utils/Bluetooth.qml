@@ -11,7 +11,7 @@ Singleton {
     readonly property var devices: adapter?.devices.values ?? []
 
     readonly property var connectedDevices: {
-        return devices.filter(device => device.connected) ?? []
+        return devices.filter(device => device.connected) ?? [];
     }
 
     function toggle() {
