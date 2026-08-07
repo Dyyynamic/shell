@@ -4,8 +4,8 @@ import Quickshell.Services.Pam
 
 Scope {
     id: root
-    signal pamSuccess
-    signal pamFailure
+    signal success
+    signal failure
 
     property string currentText: ""
     property bool isUnlocking: false
@@ -35,11 +35,11 @@ Scope {
 
         onCompleted: result => {
             if (result == PamResult.Success) {
-                root.pamSuccess();
+                root.success();
             } else {
                 root.currentText = "";
                 root.showFailure = true;
-                root.pamFailure();
+                root.failure();
             }
 
             root.isUnlocking = false;

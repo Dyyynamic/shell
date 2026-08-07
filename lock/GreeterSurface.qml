@@ -1,13 +1,11 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell.Io
 import Quickshell.Widgets
 import QtQuick
-import QtQuick.Effects
 import QtQuick.Layouts
-import QtQuick.Controls.Fusion
 import "../components" as Components
 import "../utils"
+import "." as Lock
 
 Item {
     id: root
@@ -16,16 +14,14 @@ Item {
     required property var context
     required property var screen
 
-    property bool capsLock: false
-
     property string statusMessage: {
         if (context.showFailure)
             return "Authentication failed";
-        if (capsLock)
+        if (capsLockMonitor.capsLock)
             return "Caps lock on";
         return "";
     }
-    property bool showStatusMessage: context.showFailure || capsLock
+    property bool showStatusMessage: context.showFailure || capsLockMonitor.capsLock
 
     NumberAnimation {
         id: enterAnimation
@@ -53,32 +49,8 @@ Item {
         id: surface
         anchors.fill: parent
 
-        Item {
-            id: background
-            anchors.fill: parent
-
-            Image {
-                id: wallpaper
-                anchors.fill: parent
-                source: "/var/lib/greetd/wallpaper.png"
-                fillMode: Image.PreserveAspectCrop
-            }
-
-            MultiEffect {
-                anchors.fill: parent
-                source: wallpaper
-
-                blurEnabled: true
-                blur: 1
-                blurMax: 64
-                blurMultiplier: 1.5
-                autoPaddingEnabled: false
-            }
-
-            Rectangle {
-                anchors.fill: parent
-                color: Qt.alpha("black", 0.15)
-            }
+        Lock.Background {
+            wallpaper: "/var/lib/greetd/wallpaper.png"
         }
 
         Loader {
@@ -145,66 +117,8 @@ Item {
                         color: "#e3e3e3"
                     }
 
-                    TextField {
-                        id: passwordBox
-                        Layout.alignment: Qt.AlignHCenter
-
-                        implicitWidth: 240
-                        implicitHeight: 40
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: "#e3e3e3"
-                        padding: Theme.spacingMedium
-
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-
-                        palette {
-                            highlight: Qt.alpha(Colors.md3.primary_fixed_dim, 0.5)
-                            highlightedText: "#e3e3e3"
-                        }
-
-                        background: Rectangle {
-                            color: Qt.alpha("#e3e3e3", 0.15)
-                            radius: height / 2
-                        }
-
-                        Text {
-                            anchors.fill: parent
-                            anchors.margins: passwordBox.padding
-
-                            text: passwordBox.text.length === 0 ? "Enter password" : ""
-                            color: "#e3e3e3"
-                            font: passwordBox.font
-
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                        }
-
-                        enabled: !root.context.isUnlocking
-
-                        echoMode: TextInput.Password
-                        inputMethodHints: Qt.ImhHiddenText
-
-                        Component.onCompleted: passwordBox.forceActiveFocus()
-
-                        onTextChanged: () => {
-                            if (text != "") {
-                                root.context.showFailure = false;
-                            }
-                        }
-
-                        onAccepted: () => {
-                            root.context.tryUnlock(text);
-                        }
-
-                        Connections {
-                            target: root.context
-
-                            function onGreetdFailure() {
-                                passwordBox.text = "";
-                            }
-                        }
+                    Lock.PasswordBox {
+                        context: root.context
                     }
                 }
 
@@ -272,27 +186,12 @@ Item {
     Connections {
         target: root.context
 
-        function onGreetdSuccess() {
+        function onSuccess() {
             exitAnimation.start();
         }
     }
 
-    // Too Expensive!
-    Process {
-        running: true
-        onRunningChanged: if (!running)
-            running = true
-
-        command: ["hyprctl", "-j", "devices"]
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const devices = JSON.parse(this.text);
-                const mainKeyboard = devices.keyboards.find(kb => {
-                    return kb.main == true;
-                });
-                root.capsLock = mainKeyboard?.capsLock;
-            }
-        }
+    CapsLockMonitor {
+        id: capsLockMonitor
     }
 }

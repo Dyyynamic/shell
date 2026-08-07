@@ -4,8 +4,8 @@ import Quickshell.Services.Greetd
 
 Scope {
     id: root
-    signal greetdSuccess
-    signal greetdFailure
+    signal success
+    signal failure
 
     property string currentText: ""
     property bool isUnlocking: false
@@ -33,12 +33,12 @@ Scope {
             root.currentText = "";
             root.showFailure = true;
             root.isUnlocking = false;
-            root.greetdFailure();
+            root.failure();
         }
 
         function onReadyToLaunch() {
             root.isUnlocking = false;
-            root.greetdSuccess();
+            root.success();
         }
     }
 }
