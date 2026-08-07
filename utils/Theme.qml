@@ -26,6 +26,7 @@ Singleton {
 
     // Font
     readonly property string fontFamily: "NotoSans Nerd Font Propo"
+    readonly property int fontSizeExtraLarge: 24
     readonly property int fontSizeLarge: 16
     readonly property int fontSizeMedium: 14
     readonly property int fontSizeSmall: 12
@@ -48,6 +49,7 @@ Singleton {
     readonly property int radiusTiny: 8
 
     // Spacing
+    readonly property int spacingExtraLarge: 32
     readonly property int spacingLarge: 16
     readonly property int spacingMedium: 12
     readonly property int spacingSmall: 8

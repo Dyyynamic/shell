@@ -7,7 +7,7 @@ import "../../components" as Components
 SubMenu {
     title: "Wi-Fi"
     placeholder: "No saved networks found"
-    model: Wifi.networks
+    model: Wifi.knownNetworks
     footerText: "Wi-Fi Settings"
 
     onSettingsRequested: wifiSettings.startDetached()

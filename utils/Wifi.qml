@@ -14,6 +14,8 @@ Singleton {
     }
 
     readonly property var networks: wifiDevice?.networks.values ?? []
+    readonly property var knownNetworks: networks.filter(network => network.known)
+    readonly property var availableNetworks: networks.filter(network => !network.known)
 
     readonly property WifiNetwork connectedNetwork: {
         return networks.find(network => network.connected) ?? null;

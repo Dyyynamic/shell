@@ -8,6 +8,7 @@ import "controlCenter" as ControlCenter
 import "lock" as Lock
 import "capture" as Capture
 import "osd" as Osd
+import "settings" as Settings
 
 ShellRoot {
     id: root
@@ -28,5 +29,6 @@ ShellRoot {
         Lock.Controller.init();
         Capture.Controller.init();
         Osd.Controller.init();
+        Settings.Controller.init();
     }
 }

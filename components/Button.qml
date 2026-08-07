@@ -18,6 +18,7 @@ Button {
     property alias fontSize: textItem.font.pixelSize
     property alias textAlignment: textItem.horizontalAlignment
 
+    property alias iconColor: icon.color
     property string iconGlyph: ""
     property alias iconSpacing: layout.spacing
 
