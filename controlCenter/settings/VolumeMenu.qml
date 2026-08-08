@@ -25,34 +25,46 @@ SubMenu {
 
             width: parent.width
 
-            spacing: Theme.spacingMedium
+            spacing: Theme.spacingLarge
 
             Components.Icon {
                 icon: ""
             }
 
             ColumnLayout {
-                spacing: Theme.spacingSmall
+                spacing: Theme.spacingTiny
 
-                Text {
-                    Layout.fillWidth: true
-                    text: volumeDelegate.modelData.properties["application.name"]
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMedium
-                    font.weight: Font.DemiBold
-                    color: Colors.md3.on_surface
-                    elide: Text.ElideRight
+                ColumnLayout {
+                    spacing: 0
+
+                    Text {
+                        Layout.fillWidth: true
+
+                        text: Formatters.capitalize(volumeDelegate.modelData.name)
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeMedium
+                        font.weight: Font.DemiBold
+                        color: Colors.md3.on_surface
+                        elide: Text.ElideRight
+                    }
+
+                    Text {
+                        Layout.fillWidth: true
+                        visible: !!volumeDelegate.modelData.properties["media.name"]
+
+                        text: volumeDelegate.modelData.properties["media.name"]
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Colors.md3.on_surface_variant
+                        elide: Text.ElideRight
+                    }
                 }
 
-                RowLayout {
-                    spacing: Theme.spacingMedium
-
-                    Components.Slider {
-                        handleHeight: 16
-                        value: volumeDelegate.modelData.audio.volume
-                        onValueChanged: {
-                            volumeDelegate.modelData.audio.volume = value;
-                        }
+                Components.Slider {
+                    handleHeight: 16
+                    value: volumeDelegate.modelData.audio.volume
+                    onValueChanged: {
+                        volumeDelegate.modelData.audio.volume = value;
                     }
                 }
             }

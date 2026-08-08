@@ -56,6 +56,8 @@ Components.Widget {
             }
 
             ListView {
+                id: listView
+
                 anchors.fill: parent
                 spacing: Theme.spacingSmall
                 clip: true
@@ -109,6 +111,15 @@ Components.Widget {
 
                     notification: modelData
                     width: ListView.view.width
+                }
+
+                Components.ScrollHint {
+                    listView: listView
+                    direction: "bottom"
+                }
+                Components.ScrollHint {
+                    listView: listView
+                    direction: "top"
                 }
             }
         }

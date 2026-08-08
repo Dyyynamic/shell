@@ -76,11 +76,20 @@ Item {
             Layout.leftMargin: Theme.spacingSmall
             Layout.rightMargin: Theme.spacingSmall
 
-            implicitHeight: Math.min(contentHeight, 200)
+            implicitHeight: Math.min(contentHeight, 150)
             interactive: contentHeight > height
 
             spacing: Theme.spacingMedium
             clip: true
+
+            Components.ScrollHint {
+                listView: listView
+                direction: "bottom"
+            }
+            Components.ScrollHint {
+                listView: listView
+                direction: "top"
+            }
         }
 
         Rectangle {
