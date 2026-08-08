@@ -25,6 +25,12 @@ Slider {
     readonly property int handleGap: 4
     readonly property real handleCenter: handle.x + handle.width / 2
 
+    property color trackColor: Colors.md3.outline_variant
+    property color fillColor: Colors.md3.primary
+
+    property color trackIconColor: Colors.md3.on_surface
+    property color fillIconColor: Colors.md3.on_primary
+
     from: 0
     to: 1
     value: 0.5
@@ -47,12 +53,12 @@ Slider {
             x: 0
             width: root.handleCenter - root.handleWidth / 2 - root.handleGap
             height: parent.height
-            color: Colors.md3.primary_fixed_dim
+            color: root.fillColor
 
             Components.Icon {
                 icon: root.icon
                 size: root.iconSize
-                color: Colors.md3.on_primary_fixed
+                color: root.fillIconColor
                 x: root.width - root.trackHeight / 2 - size / 2
                 y: root.trackHeight / 2 - size / 2
             }
@@ -64,12 +70,12 @@ Slider {
             x: root.handleCenter + root.handleWidth / 2 + root.handleGap
             width: parent.width - x
             height: parent.height
-            color: Colors.md3.secondary_container
+            color: root.trackColor
 
             Components.Icon {
                 icon: root.icon
                 size: root.iconSize
-                color: Colors.md3.on_surface
+                color: root.trackIconColor
                 x: rightRect.width - root.trackHeight / 2 - size / 2
                 y: root.trackHeight / 2 - size / 2
             }
@@ -83,7 +89,7 @@ Slider {
         width: root.handleWidth
         height: root.handleHeight
         radius: width / 2
-        color: Colors.md3.primary_fixed_dim
+        color: root.fillColor
 
         Behavior on width {
             NumberAnimation {

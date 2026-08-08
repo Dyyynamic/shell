@@ -1,6 +1,7 @@
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell.Services.Mpris
 import "../utils"
 import "." as Components
@@ -28,10 +29,21 @@ Item {
         color: "transparent"
 
         Image {
+            id: trackArtBackground
             anchors.fill: parent
             source: Players.players[0].trackArtUrl
             fillMode: Image.PreserveAspectCrop
             visible: !!Players.players[0].trackArtUrl
+        }
+
+        MultiEffect {
+            anchors.fill: parent
+            source: trackArtBackground
+
+            blurEnabled: true
+            blur: 1
+            blurMax: 32
+            autoPaddingEnabled: false
         }
 
         Rectangle {
@@ -124,6 +136,14 @@ Item {
 
                         to: Players.players[0].length
                         value: pressed ? value : Players.players[0].position
+
+                        fillColor: Colors.md3.primary
+                        trackColor: {
+                            if (!!Players.players[0].trackArtUrl)
+                                Qt.alpha(Colors.md3.on_surface, 0.15)
+                            else
+                                Colors.md3.outline_variant
+                        }
 
                         onPressedChanged: {
                             if (!pressed && Players.players[0]) {

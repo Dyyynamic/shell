@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import "../utils"
 import "../components" as Components
 
@@ -15,10 +16,20 @@ Indicator {
 
     backgroundData: [
         Image {
+            id: trackArtBackground
             anchors.fill: parent
             source: Players.players[0].trackArtUrl
             fillMode: Image.PreserveAspectCrop
             visible: !!Players.players[0].trackArtUrl
+        },
+        MultiEffect {
+            anchors.fill: parent
+            source: trackArtBackground
+
+            blurEnabled: true
+            blur: 1
+            blurMax: 32
+            autoPaddingEnabled: false
         }
     ]
 
