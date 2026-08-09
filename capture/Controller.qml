@@ -153,7 +153,10 @@ Singleton {
             openOverlay();
         else if (mode === Controller.CaptureMode.Screen) {
             const monitor = Hyprland.focusedMonitor;
-            const region = Qt.rect(monitor.x, monitor.y, monitor.width, monitor.height);
+            const screen = Quickshell.screens.find(screen => screen.name === monitor.name);
+
+            // Use Wayland screen geometry to account for monitor transformations
+            const region = Qt.rect(screen.x, screen.y, screen.width, screen.height);
 
             if (type === Controller.CaptureType.Screenshot)
                 takeScreenshot(region);
