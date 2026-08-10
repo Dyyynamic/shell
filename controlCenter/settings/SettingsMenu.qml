@@ -53,6 +53,11 @@ Item {
             trackRadius: Theme.radiusTiny
             handleHeight: 38
 
+            fillColor: Colors.md3.primary_fixed_dim
+            trackColor: Colors.md3.secondary_container
+            fillIconColor: Colors.md3.on_primary_fixed
+            trackIconColor: Colors.md3.on_secondary_container
+
             visible: Brightness.backlight
             icon: ""
             Layout.fillWidth: true
