@@ -62,6 +62,11 @@ Components.Widget {
                 }
             }
 
+            Components.Tooltip {
+                target: resetButton
+                text: "Reset"
+            }
+
             Components.IconButton {
                 id: prevMonthButton
 
@@ -73,6 +78,11 @@ Components.Widget {
                 }
             }
 
+            Components.Tooltip {
+                target: prevMonthButton
+                text: "Previous"
+            }
+
             Components.IconButton {
                 id: nextMonthButton
 
@@ -82,6 +92,11 @@ Components.Widget {
                     grid.month = (grid.month + 1) % 12;
                     grid.year = grid.year + (grid.month === 0 ? 1 : 0);
                 }
+            }
+
+            Components.Tooltip {
+                target: nextMonthButton
+                text: "Next"
             }
         }
 

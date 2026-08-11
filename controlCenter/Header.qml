@@ -49,6 +49,8 @@ Components.Widget {
             spacing: Theme.spacingSmall
 
             Components.IconButton {
+                id: settingsButton
+
                 backgroundColor: Colors.md3.surface_container_low
                 backgroundOpacity: hovered ? 1 : 0
 
@@ -58,14 +60,30 @@ Components.Widget {
                     betterControl.startDetached();
                 }
             }
+
+            Components.Tooltip {
+                target: settingsButton
+                text: "Settings"
+            }
+
             Components.IconButton {
+                id: lockButton
+
                 backgroundColor: Colors.md3.surface_container_low
                 backgroundOpacity: hovered ? 1 : 0
 
                 iconGlyph: ""
                 onClicked: () => ControlCenter.Controller.closeWithAction(Lock.Controller.lock)
             }
+
+            Components.Tooltip {
+                target: lockButton
+                text: "Lock"
+            }
+
             Components.IconButton {
+                id: systemButton
+
                 backgroundColor: Colors.md3.surface_container_low
                 backgroundOpacity: hovered ? 1 : 0
 
@@ -74,6 +92,11 @@ Components.Widget {
                     ControlCenter.Controller.close();
                     systemMenu.running = true;
                 }
+            }
+
+            Components.Tooltip {
+                target: systemButton
+                text: "System"
             }
         }
     }

@@ -143,19 +143,33 @@ Components.Widget {
             }
 
             Components.IconButton {
+                id: doNotDisturbButton
+
                 iconGlyph: Notifications.doNotDisturb ? "󰂛" : "󰂠"
                 size: 32
                 implicitWidth: 52
                 onClicked: Notifications.toggleDoNotDisturb()
             }
 
+            Components.Tooltip {
+                target: doNotDisturbButton
+                text: "Silent " + (Notifications.doNotDisturb ? "(On)" : "(Off)")
+            }
+
             Components.IconButton {
+                id: clearButton
+
                 iconGlyph: "󰎟"
                 enabled: Notifications.count > 0
                 size: 32
                 iconSize: 24 // Slightly larger because the icon is small
                 implicitWidth: 52
                 onClicked: Notifications.clear()
+            }
+
+            Components.Tooltip {
+                target: clearButton
+                text: "Clear"
             }
         }
     }

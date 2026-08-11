@@ -140,9 +140,9 @@ Item {
                         fillColor: Colors.md3.primary
                         trackColor: {
                             if (!!Players.players[0].trackArtUrl)
-                                Qt.alpha(Colors.md3.on_surface, 0.15)
+                                Qt.alpha(Colors.md3.on_surface, 0.15);
                             else
-                                Colors.md3.outline_variant
+                                Colors.md3.outline_variant;
                         }
 
                         onPressedChanged: {
@@ -162,7 +162,7 @@ Item {
                             color: Colors.md3.on_surface_variant
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
-                            text: Formatters.formatTime(Players.players[0].position)
+                            text: Formatters.formatTime(progress.value)
                         }
 
                         RowLayout {
@@ -170,6 +170,8 @@ Item {
                             spacing: Theme.spacingSmall
 
                             Components.IconButton {
+                                id: prevButton
+
                                 size: 32
                                 iconSize: 32
                                 iconGlyph: "󰒮"
@@ -189,7 +191,15 @@ Item {
 
                                 onClicked: Players.players[0].previous()
                             }
+
+                            Components.Tooltip {
+                                target: prevButton
+                                text: "Previous"
+                            }
+
                             Components.IconButton {
+                                id: playPauseButton
+
                                 size: 32
                                 iconSize: 32
                                 iconGlyph: {
@@ -213,7 +223,15 @@ Item {
 
                                 onClicked: Players.players[0].togglePlaying()
                             }
+
+                            Components.Tooltip {
+                                target: playPauseButton
+                                text: Players.players[0].playbackState === MprisPlaybackState.Playing ? "Pause" : "Play"
+                            }
+
                             Components.IconButton {
+                                id: nextButton
+
                                 size: 32
                                 iconSize: 32
                                 iconGlyph: "󰒭"
@@ -232,6 +250,11 @@ Item {
                                 }
 
                                 onClicked: Players.players[0].next()
+                            }
+
+                            Components.Tooltip {
+                                target: nextButton
+                                text: "Next"
                             }
                         }
 

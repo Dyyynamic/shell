@@ -19,6 +19,9 @@ Item {
     property bool checkableIcon: false
     property bool iconOnly: false
 
+    property alias hovered: panelButton.hovered
+    property alias pressed: panelButton.pressed
+
     signal toggled
     signal clicked
 

@@ -21,7 +21,6 @@ Item {
                     return kb.main == true;
                 });
                 root.capsLock = mainKeyboard?.capsLock;
-                console.log("capsLock", root.capsLock);
             }
         }
     }

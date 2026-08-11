@@ -24,6 +24,8 @@ Item {
             spacing: Theme.spacingSmall
 
             Components.Slider {
+                id: volumeSlider
+
                 trackHeight: 32
                 trackRadius: Theme.radiusTiny
                 handleHeight: 38
@@ -40,6 +42,14 @@ Item {
                 onMoved: Audio.defaultSink.audio.volume = value
             }
 
+            Components.Tooltip {
+                target: volumeSlider
+                anchor: volumeSlider.handle
+                showWhilePressed: true
+                side: "top"
+                text: `${Math.round(volumeSlider.value * 100)}%`
+            }
+
             Components.IconButton {
                 iconGlyph: ""
                 size: 32
@@ -49,6 +59,8 @@ Item {
         }
 
         Components.Slider {
+            id: brightnessSlider
+
             trackHeight: 32
             trackRadius: Theme.radiusTiny
             handleHeight: 38
@@ -66,6 +78,14 @@ Item {
             onMoved: {
                 Brightness.setBrightness(value);
             }
+        }
+
+        Components.Tooltip {
+            target: brightnessSlider
+            anchor: brightnessSlider.handle
+            showWhilePressed: true
+            side: "top"
+            text: `${Math.round(brightnessSlider.value * 100)}%`
         }
 
         ColumnLayout {
@@ -109,6 +129,8 @@ Item {
                 }
 
                 Components.PanelButton {
+                    id: darkModeButton
+
                     Layout.fillWidth: true
                     Layout.preferredWidth: 1
                     icon: ""
@@ -119,6 +141,11 @@ Item {
                         });
                     }
                     checked: Theme.mode === "dark"
+                }
+
+                Components.Tooltip {
+                    target: darkModeButton
+                    text: "Dark Mode " + (Theme.mode === "dark" ? "(On)" : "(Off)")
                 }
             }
 
@@ -143,6 +170,8 @@ Item {
                 }
 
                 Components.PanelButton {
+                    id: screenshotButton
+
                     Layout.fillWidth: true
                     Layout.preferredWidth: 1
                     icon: ""
@@ -154,7 +183,14 @@ Item {
                     }
                 }
 
+                Components.Tooltip {
+                    target: screenshotButton
+                    text: "Screenshot"
+                }
+
                 Components.PanelButton {
+                    id: recordButton
+
                     Layout.fillWidth: true
                     Layout.preferredWidth: 1
                     icon: "󰻃"
@@ -166,7 +202,14 @@ Item {
                     }
                 }
 
+                Components.Tooltip {
+                    target: recordButton
+                    text: "Record"
+                }
+
                 Components.PanelButton {
+                    id: colorPickerButton
+
                     Layout.fillWidth: true
                     Layout.preferredWidth: 1
                     icon: "󰈊"
@@ -176,6 +219,12 @@ Item {
                             ControlCenter.Controller.startColorPicker();
                         });
                     }
+                }
+
+                Components.Tooltip {
+                    target: colorPickerButton
+                    text: "Color Picker"
+                    gap: Theme.spacingSmall
                 }
             }
         }

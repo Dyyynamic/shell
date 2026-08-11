@@ -61,11 +61,21 @@ SubMenu {
                 }
 
                 Components.Slider {
+                    id: volumeSlider
+
                     handleHeight: 16
                     value: volumeDelegate.modelData.audio.volume
                     onValueChanged: {
                         volumeDelegate.modelData.audio.volume = value;
                     }
+                }
+
+                Components.Tooltip {
+                    target: volumeSlider
+                    anchor: volumeSlider.handle
+                    showWhilePressed: true
+                    side: "top"
+                    text: `${Math.round(volumeSlider.value * 100)}%`
                 }
             }
         }

@@ -54,7 +54,7 @@ Item {
             visible: !root.hasItems
 
             Layout.fillWidth: true
-            Layout.preferredHeight: 50
+            Layout.preferredHeight: 60
 
             Text {
                 id: placeholderText
