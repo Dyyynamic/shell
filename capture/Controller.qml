@@ -37,6 +37,12 @@ Singleton {
     readonly property string thumbnailDir: "/tmp/screenshots"
 
     function openOverlay() {
+        // If you quickly toggle the overlay before it's finished closing, you
+        // can enter a state where the region is still visible. To prevent this,
+        // we reset it explicitly first.
+        if (overlayLoaded)
+            loader.item.reset();
+
         overlayLoaded = true;
         overlayVisible = true;
         overlayInteractive = true;
@@ -134,11 +140,6 @@ Singleton {
     }
 
     function request(type, mode) {
-        if (overlayLoaded) {
-            closeOverlay();
-            return;
-        }
-
         if (isRecording) {
             // Stop recording if trying to record while already recording
             if (type === Controller.CaptureType.Record)
@@ -149,9 +150,12 @@ Singleton {
         captureType = type;
         captureMode = mode;
 
-        if (mode === Controller.CaptureMode.Region)
-            openOverlay();
-        else if (mode === Controller.CaptureMode.Screen) {
+        if (mode === Controller.CaptureMode.Region) {
+            if (overlayVisible)
+                closeOverlay();
+            else
+                openOverlay();
+        } else if (mode === Controller.CaptureMode.Screen) {
             const monitor = Hyprland.focusedMonitor;
             const screen = Quickshell.screens.find(screen => screen.name === monitor.name);
 
@@ -182,6 +186,8 @@ Singleton {
     }
 
     LazyLoader {
+        id: loader
+
         active: root.overlayLoaded
 
         Capture.Overlay {

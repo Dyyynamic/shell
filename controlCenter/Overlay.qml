@@ -27,122 +27,130 @@ PanelWindow {
         onClicked: ControlCenter.Controller.close()
     }
 
-    property var enterAnimation: ParallelAnimation {
-        NumberAnimation {
-            id: fadeIn
-            target: wrapperItem
-            property: "opacity"
-            from: 0
-            to: 1
-            duration: Theme.durationSlideIn
-            easing.type: Theme.easingExpressive
-            easing.overshoot: Theme.overshoot
+    Item {
+        // Draw everything to a layer so we can animate opacity correctly.
+        // To avoid cutting off the shadow, wrap the WrapperItem in an Item that
+        // fills the parent.
+        layer.enabled: true
+        anchors.fill: parent
+
+        opacity: ControlCenter.Controller.isOpen ? 1 : 0
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: {
+                    if (ControlCenter.Controller.isOpen)
+                        return Theme.durationSlideIn;
+                    return Theme.durationMedium;
+                }
+                easing.type: {
+                    if (ControlCenter.Controller.isOpen)
+                        return Theme.easingExpressive;
+                    return Theme.easingStandard;
+                }
+                easing.overshoot: {
+                    if (ControlCenter.Controller.isOpen)
+                        return Theme.overshoot;
+                    return 0;
+                }
+            }
         }
 
-        NumberAnimation {
-            id: slideIn
-            target: slideTransform
-            property: "x"
-            from: wrapperItem.width
-            to: 0
-            duration: Theme.durationSlideIn
-            easing.type: Theme.easingExpressive
-            easing.overshoot: Theme.overshoot
-        }
+        WrapperItem {
+            id: wrapperItem
+            width: 450
 
-        onFinished: ControlCenter.Controller.transitionFinished()
-    }
-
-    property var exitAnimation: ParallelAnimation {
-        NumberAnimation {
-            id: fadeOut
-            target: wrapperItem
-            property: "opacity"
-            from: 1
-            to: 0
-            duration: Theme.durationMedium
-            easing.type: Theme.easingStandard
-        }
-
-        NumberAnimation {
-            id: slideOut
-            target: slideTransform
-            property: "x"
-            from: 0
-            to: wrapperItem.width
-            duration: Theme.durationMedium
-            easing.type: Theme.easingStandard
-        }
-
-        onFinished: ControlCenter.Controller.transitionFinished()
-    }
-
-    WrapperItem {
-        id: wrapperItem
-        width: 450
-
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            right: parent.right
-        }
-
-        margin: root.margin
-
-        // Use a transform since x cannot be animated directly
-        transform: Translate {
-            id: slideTransform
-            x: 0
-        }
-
-        Item {
-            // Prevent clicks inside the panel from closing it
-            MouseArea {
-                anchors.fill: parent
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                right: parent.right
             }
 
-            RectangularShadow {
-                anchors.fill: parent
-                radius: background.radius
-                color: "black"
-                opacity: 0.5
-                offset.y: 2
-                blur: 24
-                z: -1
+            margin: root.margin
+
+            // Use a transform since x cannot be animated directly
+            transform: Translate {
+                x: ControlCenter.Controller.isOpen ? 0 : wrapperItem.width
+
+                Behavior on x {
+                    NumberAnimation {
+                        property: "x"
+                        duration: {
+                            if (ControlCenter.Controller.isOpen)
+                                return Theme.durationSlideIn;
+                            return Theme.durationMedium;
+                        }
+                        easing.type: {
+                            if (ControlCenter.Controller.isOpen)
+                                return Theme.easingExpressive;
+                            return Theme.easingStandard;
+                        }
+                        easing.overshoot: {
+                            if (ControlCenter.Controller.isOpen)
+                                return Theme.overshoot;
+                            return 0;
+                        }
+
+                        // Behavior animations don't emit onFinished, so we use
+                        // onRunningChanged instead
+                        onRunningChanged: {
+                            if (!running) {
+                                ControlCenter.Controller.isTransitioning = false;
+                            }
+                        }
+                    }
+                }
             }
 
-            Rectangle {
-                id: background
-                anchors.fill: parent
-                radius: Theme.radiusLarge
-                color: Colors.md3.background
-                border.color: Colors.md3.surface_container_highest
-            }
+            Item {
+                // Prevent clicks inside the panel from closing it
+                MouseArea {
+                    anchors.fill: parent
+                }
 
-            WrapperItem {
-                anchors.fill: parent
-                margin: Theme.spacingMedium
+                RectangularShadow {
+                    anchors.fill: parent
+                    radius: background.radius
+                    color: "black"
+                    opacity: 0.5
+                    offset.y: 2
+                    blur: 24
+                    z: -1
+                }
 
-                ColumnLayout {
-                    spacing: Theme.spacingMedium
-                    width: parent.width
-                    height: parent.height
+                Rectangle {
+                    id: background
+                    anchors.fill: parent
+                    radius: Theme.radiusLarge
+                    color: Colors.md3.background
+                    border.color: Colors.md3.surface_container_highest
+                }
 
-                    ControlCenter.Header {
-                        Layout.fillWidth: true
-                    }
+                WrapperItem {
+                    anchors.fill: parent
+                    margin: Theme.spacingMedium
 
-                    ControlCenter.Settings {
-                        Layout.fillWidth: true
-                    }
+                    ColumnLayout {
+                        spacing: Theme.spacingMedium
+                        width: parent.width
+                        height: parent.height
 
-                    Notifs.List {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                    }
+                        ControlCenter.Header {
+                            Layout.fillWidth: true
+                        }
 
-                    ControlCenter.Calendar {
-                        Layout.fillWidth: true
+                        ControlCenter.Settings {
+                            Layout.fillWidth: true
+                        }
+
+                        Notifs.List {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                        }
+
+                        ControlCenter.Calendar {
+                            Layout.fillWidth: true
+                        }
                     }
                 }
             }

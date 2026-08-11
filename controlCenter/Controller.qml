@@ -17,7 +17,6 @@ Singleton {
     function open() {
         root.isTransitioning = true;
         root.isOpen = true;
-        loader.item.enterAnimation.start();
     }
 
     function close() {
@@ -26,7 +25,6 @@ Singleton {
 
         root.isTransitioning = true;
         root.isOpen = false;
-        loader.item.exitAnimation.start();
     }
 
     function closeWithAction(action) {

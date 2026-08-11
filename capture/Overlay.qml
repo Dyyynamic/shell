@@ -55,6 +55,11 @@ PanelWindow {
 
     property real dimOpacity: root.hasSelection ? 0.2 : 0.4
 
+    function reset() {
+        isSelecting = false;
+        hasSelection = false;
+    }
+
     Behavior on dimOpacity {
         NumberAnimation {
             duration: Theme.durationMedium
@@ -81,33 +86,6 @@ PanelWindow {
         id: maskRegion
     }
 
-    NumberAnimation {
-        id: enterAnimation
-        target: wrapper
-        property: "opacity"
-        from: 0
-        to: 1
-        duration: Theme.durationMedium
-        easing.type: Theme.easingStandard
-
-        // Run immediately
-        running: root.controller.overlayVisible
-    }
-
-    NumberAnimation {
-        id: exitAnimation
-        target: wrapper
-        property: "opacity"
-        from: 1
-        to: 0
-        duration: Theme.durationMedium
-        easing.type: Theme.easingStandard
-
-        // Fade out before unloading
-        running: !root.controller.overlayVisible
-        onFinished: root.controller.overlayLoaded = false
-    }
-
     contentItem {
         focus: true
         Keys.onEscapePressed: {
@@ -127,6 +105,22 @@ PanelWindow {
     Item {
         id: wrapper
         anchors.fill: parent
+
+        opacity: root.controller.overlayVisible ? 1 : 0
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Theme.durationMedium
+                easing.type: Theme.easingStandard
+
+                // Behavior animations don't emit onFinished, so we use
+                // onRunningChanged instead
+                onRunningChanged: {
+                    if (!running && !root.controller.overlayVisible)
+                        root.controller.overlayLoaded = false;
+                }
+            }
+        }
 
         Canvas {
             id: canvas
