@@ -46,7 +46,7 @@ Singleton {
         showOverlay({
             contentType: Osd.Controller.ContentType.Text,
             icon,
-            text: `${player.trackArtist} - ${player.trackTitle}`
+            text: player.trackArtist ? `${player.trackArtist} - ${player.trackTitle}` : player.trackTitle
         });
     }
 
