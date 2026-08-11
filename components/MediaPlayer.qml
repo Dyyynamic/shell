@@ -108,26 +108,37 @@ Item {
 
                     spacing: Theme.spacingSmall
 
-                    ColumnLayout {
-                        spacing: 0
+                    Item {
+                        Layout.preferredHeight: 40
+                        Layout.fillWidth: true
 
-                        Text {
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeMedium
-                            font.weight: Font.DemiBold
-                            Layout.fillWidth: true
-                            elide: Text.ElideRight
-                            text: Players.players[0].trackTitle
-                            color: Colors.md3.on_surface
-                        }
+                        ColumnLayout {
+                            anchors {
+                                verticalCenter: parent.verticalCenter
+                                left: parent.left
+                                right: parent.right
+                            }
+                            spacing: 0
 
-                        Text {
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            Layout.fillWidth: true
-                            elide: Text.ElideRight
-                            text: Players.players[0].trackArtist
-                            color: Colors.md3.on_surface_variant
+                            Text {
+                                font.family: Theme.fontFamily
+                                font.pixelSize: Theme.fontSizeMedium
+                                font.weight: Font.DemiBold
+                                Layout.fillWidth: true
+                                elide: Text.ElideRight
+                                text: Players.players[0].trackTitle
+                                color: Colors.md3.on_surface
+                            }
+
+                            Text {
+                                visible: !!Players.players[0].trackArtist
+                                font.family: Theme.fontFamily
+                                font.pixelSize: Theme.fontSizeSmall
+                                Layout.fillWidth: true
+                                elide: Text.ElideRight
+                                text: Players.players[0].trackArtist
+                                color: Colors.md3.on_surface_variant
+                            }
                         }
                     }
 
