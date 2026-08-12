@@ -10,7 +10,6 @@ Singleton {
     id: root
     property bool isOpen: false
     property bool isTransitioning: false
-    property var bar: null
 
     property var pendingAction: null
 
