@@ -11,6 +11,7 @@ Item {
     required property var powerButton
     property bool show: false
 
+    layer.enabled: true
     opacity: show ? 1 : 0
     enabled: root.show
 
