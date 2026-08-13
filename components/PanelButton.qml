@@ -1,5 +1,3 @@
-import Quickshell.Widgets
-
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -74,11 +72,12 @@ Item {
             }
         }
 
-        WrapperItem {
-            margin: Theme.spacingTiny
+        Item {
             anchors.fill: parent
+            anchors.margins: Theme.spacingTiny
 
             RowLayout {
+                anchors.fill: parent
                 spacing: Theme.spacingTiny
 
                 Button {

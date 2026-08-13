@@ -1,13 +1,16 @@
 import QtQuick
+import QtQuick.Layouts
 import "../utils"
 import "../components" as Components
 
 Indicator {
     id: root
 
+    margin: 12
     clickable: true
 
-    Row {
+    RowLayout {
+        anchors.verticalCenter: parent.verticalCenter
         spacing: Theme.spacingSmall
 
         Components.Icon {
@@ -23,6 +26,7 @@ Indicator {
 
         Loader {
             active: Battery.available
+            visible: Battery.available
 
             sourceComponent: Components.Icon {
                 icon: Battery.icon

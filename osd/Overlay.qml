@@ -28,7 +28,7 @@ PanelWindow {
         right: true
         bottom: true
     }
-    implicitHeight: content.implicitHeight + 32
+    implicitHeight: osd.implicitHeight + 32
 
     color: "transparent"
 
@@ -36,7 +36,7 @@ PanelWindow {
 
     NumberAnimation {
         id: enterAnimation
-        target: content
+        target: osd
         property: "opacity"
         from: 0
         to: 1
@@ -49,7 +49,7 @@ PanelWindow {
 
     NumberAnimation {
         id: exitAnimation
-        target: content
+        target: osd
         property: "opacity"
         from: 1
         to: 0
@@ -62,13 +62,13 @@ PanelWindow {
     }
 
     Item {
-        id: content
+        id: osd
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
         }
 
-        implicitWidth: row.implicitWidth + Theme.spacingLarge * 2
+        implicitWidth: content.implicitWidth + Theme.spacingLarge * 2
         implicitHeight: 64
 
         Behavior on implicitWidth {
@@ -84,56 +84,56 @@ PanelWindow {
             radius: Theme.radiusLarge
         }
 
-        WrapperItem {
-            anchors.fill: parent
-            margin: Theme.spacingLarge
+        ClippingRectangle {
+            color: "transparent"
 
-            ClippingRectangle {
-                color: "transparent"
+            anchors {
+                fill: parent
+                leftMargin: Theme.spacingLarge
+                rightMargin: Theme.spacingLarge
+            }
 
-                RowLayout {
-                    id: row
-                    anchors.fill: parent
+            RowLayout {
+                id: content
+                anchors.fill: parent
+                spacing: Theme.spacingLarge
 
-                    spacing: Theme.spacingLarge
+                Components.Icon {
+                    icon: root.icon
+                    color: root.iconColor
+                    size: 32
+                }
 
-                    Components.Icon {
-                        icon: root.icon
-                        color: root.iconColor
-                        size: 32
+                Text {
+                    visible: root.contentType === Controller.Text
+
+                    text: root.text
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeLarge
+                    font.weight: Font.Bold
+                    color: "#e3e3e3"
+                }
+
+                Item {
+                    id: progressBar
+                    visible: root.contentType === Controller.Progress
+
+                    implicitWidth: 160
+                    implicitHeight: 8
+
+                    Rectangle {
+                        id: progressBarBackground
+                        anchors.fill: parent
+                        color: Qt.alpha("#e3e3e3", 0.25)
+                        radius: height / 2
                     }
 
-                    Text {
-                        visible: root.contentType === Controller.Text
-
-                        text: root.text
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeLarge
-                        font.weight: Font.Bold
+                    Rectangle {
+                        id: progressBarFill
+                        width: parent.width * root.value
+                        height: parent.height
                         color: "#e3e3e3"
-                    }
-
-                    Item {
-                        id: progressBar
-                        visible: root.contentType === Controller.Progress
-
-                        implicitWidth: 160
-                        implicitHeight: 8
-
-                        Rectangle {
-                            id: progressBarBackground
-                            anchors.fill: parent
-                            color: Qt.alpha("#e3e3e3", 0.25)
-                            radius: height / 2
-                        }
-
-                        Rectangle {
-                            id: progressBarFill
-                            width: parent.width * root.value
-                            height: parent.height
-                            color: "#e3e3e3"
-                            radius: height / 2
-                        }
+                        radius: height / 2
                     }
                 }
             }

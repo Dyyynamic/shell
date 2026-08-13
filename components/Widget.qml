@@ -1,4 +1,3 @@
-import Quickshell.Widgets
 import QtQuick
 import "../utils"
 
@@ -7,12 +6,16 @@ Item {
 
     default property alias contentData: content.data
 
-    property alias contentMargin: content.margin
-    property alias contentBottomMargin: content.bottomMargin
+    property alias margins: content.anchors.margins
+    property alias leftMargin: content.anchors.leftMargin
+    property alias rightMargin: content.anchors.rightMargin
+    property alias topMargin: content.anchors.bottomMargin
+    property alias bottomMargin: content.anchors.bottomMargin
+
     property alias backgroundColor: background.color
 
-    implicitWidth: content.implicitWidth
-    implicitHeight: content.implicitHeight
+    implicitWidth: content.implicitWidth + leftMargin + rightMargin
+    implicitHeight: content.implicitHeight + topMargin + bottomMargin
 
     Rectangle {
         id: background
@@ -21,10 +24,12 @@ Item {
         radius: Theme.radiusMedium
     }
 
-    WrapperItem {
+    Item {
         id: content
         anchors.fill: parent
-        margin: Theme.spacingSmall
-        bottomMargin: Theme.spacingSmall
+        anchors.margins: Theme.spacingSmall
+
+        implicitHeight: childrenRect.height
+        implicitWidth: childrenRect.width
     }
 }

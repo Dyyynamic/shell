@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import "../utils"
 import "../components" as Components
 import "settings" as Settings
@@ -66,8 +67,10 @@ Components.Widget {
     StackView {
         id: stackView
 
+        width: parent.width
+        implicitHeight: currentItem.implicitHeight
+
         clip: true
-        implicitHeight: currentItem ? currentItem.implicitHeight : 0
 
         Behavior on implicitHeight {
             NumberAnimation {

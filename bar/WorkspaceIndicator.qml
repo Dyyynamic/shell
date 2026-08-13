@@ -1,5 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import Quickshell.Hyprland
 import Quickshell.Widgets
 import "../utils"
@@ -22,7 +25,10 @@ Indicator {
 
     margin: 4
 
-    Row {
+    RowLayout {
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: 0
+
         Repeater {
             model: root.workspaces
 
@@ -33,8 +39,8 @@ Indicator {
 
                 onClicked: workspaceItem.modelData.activate()
 
-                height: root.itemWidth
-                width: root.itemWidth
+                implicitHeight: root.itemWidth
+                implicitWidth: root.itemWidth
 
                 background: Rectangle {
                     anchors.fill: parent
@@ -74,9 +80,13 @@ Indicator {
     }
 
     ClippingRectangle {
+        anchors.verticalCenter: parent.verticalCenter
+
         x: root.activeIndex * root.itemWidth
-        width: root.itemWidth
-        height: root.itemWidth
+
+        implicitHeight: root.itemWidth
+        implicitWidth: root.itemWidth
+
         radius: height / 2
         color: Colors.md3.primary_fixed_dim
 
@@ -87,7 +97,9 @@ Indicator {
             }
         }
 
-        Row {
+        RowLayout {
+            spacing: 0
+
             x: -root.activeIndex * root.itemWidth
 
             Repeater {

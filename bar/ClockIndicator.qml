@@ -7,6 +7,7 @@ Indicator {
     margin: 12
 
     Text {
+        anchors.verticalCenter: parent.verticalCenter
         horizontalAlignment: Text.AlignHCenter
         text: Qt.formatDateTime(Time.date, "MMM d hh:mm")
         font.family: Theme.fontFamily

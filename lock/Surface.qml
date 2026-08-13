@@ -71,46 +71,43 @@ Item {
 
                     implicitHeight: 40
 
-                    WrapperItem {
+                    Item {
                         anchors.fill: parent
-                        margin: Theme.spacingTiny
+                        anchors.margins: Theme.spacingTiny
 
-                        Item {
-                            RowLayout {
-                                anchors.right: parent.right
-                                spacing: Theme.spacingTiny
+                        RowLayout {
+                            anchors.right: parent.right
+                            spacing: Theme.spacingTiny
 
-                                Loader {
-                                    visible: Capture.Controller.isRecording
-                                    active: Capture.Controller.isRecording
-                                    sourceComponent: Bar.RecordingIndicator {
-                                        clickable: false
-                                        backgroundColor: "#e3e3e3"
-                                        backgroundOpacity: 0.15
-                                        textColor: "#e3e3e3"
-                                        showBackgroundImage: false
-                                    }
-                                }
-
-                                Loader {
-                                    visible: Players.players.length > 0
-                                    active: Players.players.length > 0
-                                    sourceComponent: Bar.MediaIndicator {
-                                        clickable: false
-                                        backgroundColor: "#e3e3e3"
-                                        backgroundOpacity: 0.15
-                                        textColor: "#e3e3e3"
-                                        showBackgroundImage: false
-                                    }
-                                }
-
-                                Bar.StatusIndicator {
-                                    Layout.preferredWidth: implicitWidth + 8
+                            Loader {
+                                visible: Capture.Controller.isRecording
+                                active: Capture.Controller.isRecording
+                                sourceComponent: Bar.RecordingIndicator {
                                     clickable: false
                                     backgroundColor: "#e3e3e3"
                                     backgroundOpacity: 0.15
                                     textColor: "#e3e3e3"
+                                    showBackgroundImage: false
                                 }
+                            }
+
+                            Loader {
+                                visible: Players.players.length > 0
+                                active: Players.players.length > 0
+                                sourceComponent: Bar.MediaIndicator {
+                                    clickable: false
+                                    backgroundColor: "#e3e3e3"
+                                    backgroundOpacity: 0.15
+                                    textColor: "#e3e3e3"
+                                    showBackgroundImage: false
+                                }
+                            }
+
+                            Bar.StatusIndicator {
+                                clickable: false
+                                backgroundColor: "#e3e3e3"
+                                backgroundOpacity: 0.15
+                                textColor: "#e3e3e3"
                             }
                         }
                     }

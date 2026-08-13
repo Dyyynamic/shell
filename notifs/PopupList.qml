@@ -1,16 +1,14 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell
-import Quickshell.Widgets
 import Quickshell.Wayland
 import QtQuick
+import QtQuick.Effects
 import "../utils"
 
 PanelWindow {
     id: root
     WlrLayershell.namespace: "qs-notifications"
-
-    readonly property int margin: Theme.spacingSmall
 
     screen: Screens.main
 
@@ -20,7 +18,7 @@ PanelWindow {
         bottom: true
     }
     exclusionMode: ExclusionMode.Normal
-    implicitWidth: 400 + margin * 2
+    implicitWidth: 400 + Theme.spacingSmall * 2
     color: "transparent"
 
     // Make everything click-through except notifications
@@ -58,22 +56,36 @@ PanelWindow {
         id: popupModel
     }
 
-    WrapperItem {
+    Item {
         anchors.fill: parent
-        margin: root.margin
+        anchors.margins: Theme.spacingSmall
 
         ListView {
             id: listView
+
+            anchors.fill: parent
+
             interactive: false
             model: popupModel
 
             spacing: Theme.spacingSmall
 
-            displaced: Transition {
-                NumberAnimation {
-                    property: "y"
-                    duration: Theme.durationMedium
-                    easing.type: Theme.easingStandard
+            add: Transition {
+                ParallelAnimation {
+                    NumberAnimation {
+                        property: "opacity"
+                        from: 0
+                        to: 1
+                        duration: Theme.durationMedium
+                        easing.type: Theme.easingStandard
+                    }
+                    NumberAnimation {
+                        property: "x"
+                        from: listView.width
+                        to: 0
+                        duration: Theme.durationMedium
+                        easing.type: Theme.easingStandard
+                    }
                 }
             }
 
@@ -86,13 +98,36 @@ PanelWindow {
                 }
             }
 
-            delegate: Popup {
+            displaced: Transition {
+                NumberAnimation {
+                    property: "y"
+                    duration: Theme.durationMedium
+                    easing.type: Theme.easingStandard
+                }
+            }
+
+            delegate: Notif {
+                id: notifItem
+
                 required property var modelData
                 notification: modelData
 
-                width: listView.width
+                RectangularShadow {
+                    anchors.fill: parent
+                    radius: notifItem.radius
+                    color: "black"
+                    opacity: 0.35
+                    offset.y: 2
+                    blur: 12
+                    z: -1
+                }
 
-                onExpired: root.removePopup(notification.id)
+                Timer {
+                    interval: 3000
+                    // Pause the timer when hovering the notification
+                    running: !notifItem.hovered
+                    onTriggered: root.removePopup(notifItem.notification.id)
+                }
             }
         }
     }

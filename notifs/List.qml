@@ -1,5 +1,4 @@
 import Quickshell
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import "../utils"
@@ -9,6 +8,7 @@ Components.Widget {
     id: root
 
     ColumnLayout {
+        anchors.fill: parent
         spacing: Theme.spacingSmall
 
         Item {
@@ -25,6 +25,7 @@ Components.Widget {
                 anchors.fill: parent
 
                 opacity: !content.hasContent ? 1 : 0
+                enabled: opacity > 0
 
                 Behavior on opacity {
                     NumberAnimation {
@@ -63,6 +64,7 @@ Components.Widget {
                 clip: true
 
                 opacity: content.hasContent ? 1 : 0
+                enabled: opacity > 0
 
                 Behavior on opacity {
                     NumberAnimation {
@@ -93,7 +95,7 @@ Components.Widget {
                 Component {
                     id: playerComponent
                     Item {
-                        width: parent.width
+                        width: ListView.view.width
                         height: player.height + Theme.spacingSmall
 
                         Components.MediaPlayer {
@@ -117,6 +119,7 @@ Components.Widget {
                     listView: listView
                     direction: "bottom"
                 }
+
                 Components.ScrollHint {
                     listView: listView
                     direction: "top"
@@ -125,21 +128,16 @@ Components.Widget {
         }
 
         RowLayout {
+            Layout.fillWidth: true
             spacing: Theme.spacingSmall
 
-            WrapperItem {
-                margin: Theme.spacingSmall
-
-                Text {
-                    text: `${Notifications.count} notification${Notifications.count !== 1 ? 's' : ''}`
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Colors.md3.on_surface
-                }
-            }
-
-            Item {
+            Text {
                 Layout.fillWidth: true
+                Layout.leftMargin: Theme.spacingSmall
+                text: `${Notifications.count} notification${Notifications.count !== 1 ? 's' : ''}`
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeSmall
+                color: Colors.md3.on_surface
             }
 
             Components.IconButton {

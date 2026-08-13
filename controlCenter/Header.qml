@@ -9,29 +9,37 @@ import "." as ControlCenter
 Components.Widget {
     id: root
 
-    contentBottomMargin: 0
+    bottomMargin: 0
     backgroundColor: "transparent"
 
     RowLayout {
+        width: parent.width
         spacing: Theme.spacingSmall
 
         RowLayout {
+            Layout.fillWidth: true
             spacing: Theme.spacingSmall
 
             Components.Icon {
                 icon: "󰣇"
                 size: 24
             }
+
             ColumnLayout {
+                Layout.fillWidth: true
                 spacing: 0
+
                 Text {
+                    Layout.fillWidth: true
                     id: uptimeText
                     color: Colors.md3.on_surface
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     font.weight: Font.Medium
                 }
+
                 Text {
+                    Layout.fillWidth: true
                     visible: Battery.available
                     text: Battery.description
                     color: Colors.md3.on_surface
@@ -41,12 +49,9 @@ Components.Widget {
             }
         }
 
-        Item {
-            Layout.fillWidth: true
-        }
-
         RowLayout {
             spacing: Theme.spacingSmall
+            Layout.alignment: Qt.AlignRight
 
             Components.IconButton {
                 id: settingsButton

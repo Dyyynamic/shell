@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Widgets
 import "../../utils"
 import "../../components" as Components
 import ".." as ControlCenter
@@ -27,26 +26,23 @@ Item {
         width: parent.width
         spacing: Theme.spacingMedium
 
-        WrapperItem {
-            margin: Theme.spacingTiny
+        RowLayout {
+            Layout.margins: Theme.spacingTiny
+            spacing: Theme.spacingSmall
 
-            RowLayout {
-                spacing: Theme.spacingSmall
+            Components.IconButton {
+                iconGlyph: ""
+                onClicked: root.backRequested()
+                size: 32
+                iconSize: 20
+            }
 
-                Components.IconButton {
-                    iconGlyph: ""
-                    onClicked: root.backRequested()
-                    size: 32
-                    iconSize: 20
-                }
-
-                Text {
-                    id: titleText
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeLarge
-                    font.weight: Font.Bold
-                    color: Colors.md3.on_surface
-                }
+            Text {
+                id: titleText
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeLarge
+                font.weight: Font.Bold
+                color: Colors.md3.on_surface
             }
         }
 
@@ -54,7 +50,7 @@ Item {
             visible: !root.hasItems
 
             Layout.fillWidth: true
-            Layout.preferredHeight: 60
+            implicitHeight: 60
 
             Text {
                 id: placeholderText

@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
-import Quickshell.Widgets
 import "../components" as Components
 import "../utils"
 
@@ -23,7 +22,7 @@ Item {
     }
 
     width: 240
-    height: wrapper.height
+    implicitHeight: content.implicitHeight + Theme.spacingSmall * 2
 
     anchors {
         bottom: powerButton.top
@@ -41,53 +40,50 @@ Item {
         radius: Theme.radiusMedium
     }
 
-    WrapperItem {
-        id: wrapper
+    ColumnLayout {
+        id: content
 
-        width: parent.width
-        margin: Theme.spacingSmall
+        anchors.fill: parent
+        anchors.margins: Theme.spacingSmall
+        spacing: 0
 
-        ColumnLayout {
-            spacing: 0
+        Item {
+            Layout.fillWidth: true
+            implicitHeight: 40
 
-            Item {
-                Layout.fillWidth: true
-                implicitHeight: 40
+            Text {
+                text: "System"
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeMedium
+                color: Colors.md3.on_surface
+                font.weight: Font.Bold
 
-                Text {
-                    text: "System"
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMedium
-                    color: Colors.md3.on_surface
-                    font.weight: Font.Bold
-
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        left: parent.left
-                        right: parent.right
-                        leftMargin: Theme.spacingMedium
-                        rightMargin: Theme.spacingMedium
-                    }
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: Theme.spacingMedium
+                    rightMargin: Theme.spacingMedium
                 }
             }
+        }
 
-            MenuButton {
-                text: "Power Off"
-                iconGlyph: ""
-                onClicked: powerOffProcess.running = true
-            }
+        MenuButton {
+            text: "Power Off"
+            iconGlyph: ""
+            onClicked: powerOffProcess.running = true
+        }
 
-            MenuButton {
-                text: "Reboot"
-                iconGlyph: ""
-                onClicked: rebootProcess.running = true
-            }
+        MenuButton {
+            text: "Reboot"
+            iconGlyph: ""
+            onClicked: rebootProcess.running = true
+        }
 
-            MenuButton {
-                text: "Suspend"
-                iconGlyph: ""
-                onClicked: suspendProcess.running = true
-            }
+        MenuButton {
+            text: "Suspend"
+            iconGlyph: ""
+            onClicked: suspendProcess.running = true
         }
     }
 

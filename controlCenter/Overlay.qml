@@ -1,6 +1,5 @@
 import Quickshell
 import Quickshell.Wayland
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
@@ -11,8 +10,6 @@ import "." as ControlCenter
 PanelWindow {
     id: root
     WlrLayershell.namespace: "qs-control-center"
-
-    readonly property int margin: Theme.spacingSmall
 
     anchors {
         top: true
@@ -29,7 +26,7 @@ PanelWindow {
 
     Item {
         // Draw everything to a layer so we can animate opacity correctly.
-        // To avoid cutting off the shadow, wrap the WrapperItem in an Item that
+        // To avoid cutting off the shadow, wrap the panel in an Item that
         // fills the parent.
         layer.enabled: true
         anchors.fill: parent
@@ -56,21 +53,19 @@ PanelWindow {
             }
         }
 
-        WrapperItem {
-            id: wrapperItem
-            width: 450
+        Item {
+            id: panel
 
             anchors {
                 top: parent.top
                 bottom: parent.bottom
                 right: parent.right
+                margins: Theme.spacingSmall
             }
+            width: 450
 
-            margin: root.margin
-
-            // Use a transform since x cannot be animated directly
             transform: Translate {
-                x: ControlCenter.Controller.isOpen ? 0 : wrapperItem.width
+                x: ControlCenter.Controller.isOpen ? 0 : panel.width + Theme.spacingSmall
 
                 Behavior on x {
                     NumberAnimation {
@@ -94,63 +89,60 @@ PanelWindow {
                         // Behavior animations don't emit onFinished, so we use
                         // onRunningChanged instead
                         onRunningChanged: {
-                            if (!running) {
+                            if (!running)
                                 ControlCenter.Controller.isTransitioning = false;
-                            }
                         }
                     }
                 }
             }
 
+            // Prevent clicks inside the panel from closing it
+            MouseArea {
+                anchors.fill: parent
+            }
+
+            RectangularShadow {
+                anchors.fill: parent
+                radius: background.radius
+                color: "black"
+                opacity: 0.5
+                offset.y: 2
+                blur: 24
+                z: -1
+            }
+
+            Rectangle {
+                id: background
+                anchors.fill: parent
+                radius: Theme.radiusLarge
+                color: Colors.md3.background
+                border.color: Colors.md3.surface_container_highest
+            }
+
             Item {
-                // Prevent clicks inside the panel from closing it
-                MouseArea {
+                anchors.fill: parent
+                anchors.margins: Theme.spacingMedium
+
+                ColumnLayout {
                     anchors.fill: parent
-                }
 
-                RectangularShadow {
-                    anchors.fill: parent
-                    radius: background.radius
-                    color: "black"
-                    opacity: 0.5
-                    offset.y: 2
-                    blur: 24
-                    z: -1
-                }
+                    spacing: Theme.spacingMedium
 
-                Rectangle {
-                    id: background
-                    anchors.fill: parent
-                    radius: Theme.radiusLarge
-                    color: Colors.md3.background
-                    border.color: Colors.md3.surface_container_highest
-                }
+                    ControlCenter.Header {
+                        Layout.fillWidth: true
+                    }
 
-                WrapperItem {
-                    anchors.fill: parent
-                    margin: Theme.spacingMedium
+                    ControlCenter.Settings {
+                        Layout.fillWidth: true
+                    }
 
-                    ColumnLayout {
-                        spacing: Theme.spacingMedium
-                        width: parent.width
-                        height: parent.height
+                    Notifs.List {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                    }
 
-                        ControlCenter.Header {
-                            Layout.fillWidth: true
-                        }
-
-                        ControlCenter.Settings {
-                            Layout.fillWidth: true
-                        }
-
-                        Notifs.List {
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                        }
-
-                        ControlCenter.Calendar {
-                            Layout.fillWidth: true
-                        }
+                    ControlCenter.Calendar {
+                        Layout.fillWidth: true
                     }
                 }
             }

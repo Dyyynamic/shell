@@ -21,7 +21,7 @@ ShellRoot {
         }
     }
 
-    Notifs.PopupStack {}
+    Notifs.PopupList {}
 
     Component.onCompleted: {
         ControlCenter.Controller.init();

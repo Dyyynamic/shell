@@ -11,9 +11,9 @@ ClippingRectangle {
     property alias pressed: mouseArea.pressed
     property alias hovered: mouseArea.containsMouse
 
-    property alias margin: wrapper.margin
-    property alias leftMargin: wrapper.leftMargin
-    property alias rightMargin: wrapper.rightMargin
+    property alias margin: content.anchors.margins
+    property alias leftMargin: content.anchors.leftMargin
+    property alias rightMargin: content.anchors.rightMargin
 
     property bool clickable: false
 
@@ -28,7 +28,7 @@ ClippingRectangle {
     signal clicked
 
     implicitHeight: 32
-    implicitWidth: wrapper.implicitWidth
+    implicitWidth: content.implicitWidth + leftMargin + rightMargin
 
     radius: height / 2
 
@@ -59,15 +59,19 @@ ClippingRectangle {
         }
     }
 
-    WrapperItem {
-        id: wrapper
-        anchors.centerIn: parent
-        margin: Theme.spacingSmall
+    Item {
+        id: content
 
-        Item {
-            id: content
-            implicitHeight: childrenRect.height
-            implicitWidth: childrenRect.width
+        implicitHeight: childrenRect.height
+        implicitWidth: childrenRect.width
+
+        anchors {
+            fill: parent
+            margins: Theme.spacingSmall
+
+            // Set explicitly so root.margin does not override
+            topMargin: 0
+            bottomMargin: 0
         }
     }
 

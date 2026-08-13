@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -19,27 +18,21 @@ Components.Widget {
     }
 
     ColumnLayout {
+        width: parent.width
         spacing: Theme.spacingSmall
 
         RowLayout {
             spacing: Theme.spacingSmall
 
-            WrapperItem {
-                margin: Theme.spacingSmall
-
-                Text {
-                    text: Qt.formatDate(new Date(grid.year, grid.month), "MMMM yyyy")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeLarge
-                    font.weight: Font.Bold
-                    color: Colors.md3.on_surface
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-            }
-
-            Item {
+            Text {
                 Layout.fillWidth: true
+                Layout.leftMargin: Theme.spacingSmall
+                text: Qt.formatDate(new Date(grid.year, grid.month), "MMMM yyyy")
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeLarge
+                font.weight: Font.Bold
+                color: Colors.md3.on_surface
+                verticalAlignment: Text.AlignVCenter
             }
 
             Components.IconButton {

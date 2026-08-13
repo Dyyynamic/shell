@@ -12,7 +12,7 @@ Item {
     property alias pressed: mouseArea.pressed
     property alias hovered: mouseArea.containsMouse
 
-    implicitWidth: parent.width
+    width: parent.width
     implicitHeight: 128
 
     MouseArea {
@@ -65,11 +65,12 @@ Item {
             }
         }
 
-        WrapperItem {
+        Item {
             anchors.fill: parent
-            margin: Theme.spacingMedium
+            anchors.margins: Theme.spacingMedium
 
             RowLayout {
+                anchors.fill: parent
                 spacing: Theme.spacingMedium
 
                 ClippingRectangle {
@@ -109,8 +110,8 @@ Item {
                     spacing: Theme.spacingSmall
 
                     Item {
-                        Layout.preferredHeight: 40
                         Layout.fillWidth: true
+                        implicitHeight: 40
 
                         ColumnLayout {
                             anchors {

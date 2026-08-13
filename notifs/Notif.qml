@@ -16,6 +16,9 @@ Item {
     readonly property alias pressed: mouseArea.pressed
     readonly property alias hovered: mouseArea.containsMouse
 
+    // Needed for popup shadow
+    readonly property alias radius: background.radius
+
     readonly property var defaultAction: {
         return root.notification.actions.find(action => {
             return action.identifier === "default";
@@ -27,14 +30,12 @@ Item {
         });
     }
 
-    // Needed for popup shadow
-    readonly property alias radius: background.radius
-
-    width: parent.width
-    height: content.implicitHeight
+    width: ListView.view.width
+    implicitHeight: content.implicitHeight + Theme.spacingMedium * 2
 
     Rectangle {
         id: background
+
         anchors.fill: parent
         radius: Theme.radiusSmall
 
@@ -69,148 +70,141 @@ Item {
         }
     }
 
-    WrapperItem {
+    ColumnLayout {
         id: content
 
-        width: parent.width
-        margin: Theme.spacingMedium
+        anchors.fill: parent
+        anchors.margins: Theme.spacingMedium
 
-        ColumnLayout {
-            spacing: 8
+        spacing: 8
 
-            RowLayout {
+        RowLayout {
+            spacing: Theme.spacingTiny
+
+            Text {
+                Layout.fillWidth: true
+                elide: Text.ElideRight
+                text: {
+                    if (root.notification.appName)
+                        return root.notification.appName;
+                    return "Notification";
+                }
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeSmall
+                font.weight: Font.Medium
+                color: Colors.md3.on_surface_variant
+            }
+
+            Text {
+                text: Qt.formatTime(new Date(root.notification.time), "hh:mm")
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeSmall
+                color: Colors.md3.on_surface_variant
+            }
+
+            Components.IconButton {
+                id: dismissButton
+
+                iconGlyph: ""
+                size: 20
+                backgroundOpacity: hovered ? 1 : 0
+
+                onClicked: root.notification.dismiss()
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: Theme.spacingMedium
+
+            ClippingRectangle {
+                Layout.alignment: Qt.AlignTop
+                implicitWidth: 64
+                implicitHeight: 64
+
+                radius: Theme.radiusTiny
+                color: "transparent"
+
+                visible: !!root.notification.image
+
+                Image {
+                    anchors.fill: parent
+                    source: root.notification.image
+                    fillMode: Image.PreserveAspectCrop
+                }
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
                 spacing: Theme.spacingTiny
 
                 Text {
                     Layout.fillWidth: true
                     elide: Text.ElideRight
-                    text: {
-                        if (root.notification.appName)
-                            return root.notification.appName;
-                        return "Notification";
-                    }
+                    text: root.notification.summary
+                    color: Colors.md3.on_surface
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    font.weight: Font.Medium
-                    color: Colors.md3.on_surface_variant
+                    font.pixelSize: Theme.fontSizeMedium
+                    font.weight: Font.DemiBold
                 }
 
                 Text {
-                    text: Qt.formatTime(new Date(root.notification.time), "hh:mm")
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                    maximumLineCount: 2
+                    elide: Text.ElideRight
+                    text: root.notification.body
+                    color: Colors.md3.on_surface
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Colors.md3.on_surface_variant
+                    font.pixelSize: Theme.fontSizeMedium
                 }
 
-                Components.IconButton {
-                    id: dismissButton
-
-                    iconGlyph: ""
-                    size: 20
-                    backgroundOpacity: hovered ? 1 : 0
-
-                    onClicked: root.notification.dismiss()
-                }
-            }
-
-            RowLayout {
-                Layout.fillWidth: true
-                spacing: Theme.spacingMedium
-
-                ClippingRectangle {
-                    Layout.alignment: Qt.AlignTop
-                    implicitWidth: 64
-                    implicitHeight: 64
-
-                    radius: Theme.radiusTiny
-                    color: "transparent"
-
-                    visible: !!root.notification.image
-
-                    Image {
-                        anchors.fill: parent
-                        source: root.notification.image
-                        fillMode: Image.PreserveAspectCrop
-                    }
-                }
-
-                ColumnLayout {
+                RowLayout {
                     Layout.fillWidth: true
                     spacing: Theme.spacingTiny
 
-                    // Force layout to calculate height instead of using Text's
-                    // single-line implicitWidth
-                    // Otherwise, popup notifications can overlap
-                    Layout.preferredWidth: 0
+                    visible: root.actions.length > 0
 
-                    Text {
-                        Layout.fillWidth: true
-                        elide: Text.ElideRight
-                        text: root.notification.summary
-                        color: Colors.md3.on_surface
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        font.weight: Font.DemiBold
-                    }
+                    Repeater {
+                        model: root.actions
 
-                    Text {
-                        Layout.fillWidth: true
-                        wrapMode: Text.WordWrap
-                        maximumLineCount: 2
-                        elide: Text.ElideRight
-                        text: root.notification.body
-                        color: Colors.md3.on_surface
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                    }
+                        Button {
+                            id: actionButton
 
-                    RowLayout {
-                        Layout.fillWidth: true
-                        spacing: Theme.spacingTiny
+                            required property var modelData
 
-                        visible: root.actions.length > 0
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: parent.width / root.actions.length
 
-                        Repeater {
-                            model: root.actions
+                            icon.name: root.notification.hasActionIcons ? modelData.identifier : ""
+                            text: root.notification.hasActionIcons ? "" : modelData.text
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeSmall
+                            palette.buttonText: Colors.md3.on_surface
+                            implicitHeight: 30
+                            padding: 8
 
-                            Button {
-                                id: actionButton
+                            background: Rectangle {
+                                color: {
+                                    if (actionButton.pressed)
+                                        return Theme.colorMix(Colors.md3.surface_container_highest, Colors.md3.on_surface, Theme.pressIntensity);
+                                    if (actionButton.hovered)
+                                        return Theme.colorMix(Colors.md3.surface_container_highest, Colors.md3.on_surface, Theme.hoverIntensity);
+                                    return Colors.md3.surface_container_highest;
+                                }
+                                radius: Theme.radiusTiny
 
-                                required property var modelData
-
-                                Layout.fillWidth: true
-                                Layout.preferredWidth: parent.width / root.actions.length
-
-                                icon.name: root.notification.hasActionIcons ? modelData.identifier : ""
-                                text: root.notification.hasActionIcons ? "" : modelData.text
-                                font.family: Theme.fontFamily
-                                font.pixelSize: Theme.fontSizeSmall
-                                palette.buttonText: Colors.md3.on_surface
-                                implicitHeight: 30
-                                padding: 8
-
-                                background: Rectangle {
-                                    color: {
-                                        if (actionButton.pressed)
-                                            return Theme.colorMix(Colors.md3.surface_container_highest, Colors.md3.on_surface, Theme.pressIntensity);
-                                        if (actionButton.hovered)
-                                            return Theme.colorMix(Colors.md3.surface_container_highest, Colors.md3.on_surface, Theme.hoverIntensity);
-                                        return Colors.md3.surface_container_highest;
-                                    }
-                                    radius: Theme.radiusTiny
-
-                                    Behavior on color {
-                                        ColorAnimation {
-                                            duration: Theme.durationFast
-                                            easing.type: Theme.easingStandard
-                                        }
+                                Behavior on color {
+                                    ColorAnimation {
+                                        duration: Theme.durationFast
+                                        easing.type: Theme.easingStandard
                                     }
                                 }
+                            }
 
-                                onClicked: {
-                                    modelData.invoke();
-                                    ControlCenter.Controller.close();
-                                }
+                            onClicked: {
+                                modelData.invoke();
+                                ControlCenter.Controller.close();
                             }
                         }
                     }

@@ -1,6 +1,5 @@
 import Quickshell
 import Quickshell.Wayland
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import "../utils"
@@ -21,42 +20,39 @@ PanelWindow {
 
     implicitHeight: 40
 
-    WrapperItem {
+    Item {
         anchors.fill: parent
-        margin: Theme.spacingTiny
+        anchors.margins: Theme.spacingTiny
 
-        Item {
-            WorkspaceIndicator {
-                anchors.left: parent.left
-                screen: root.screen
+        WorkspaceIndicator {
+            anchors.left: parent.left
+            screen: root.screen
+        }
+
+        ClockIndicator {
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        RowLayout {
+            anchors.right: parent.right
+            spacing: Theme.spacingTiny
+
+            Loader {
+                visible: Capture.Controller.isRecording
+                active: Capture.Controller.isRecording
+                sourceComponent: RecordingIndicator {
+                    onClicked: () => Capture.Controller.stopRecording()
+                }
             }
 
-            ClockIndicator {
-                anchors.horizontalCenter: parent.horizontalCenter
+            Loader {
+                visible: Players.players.length > 0
+                active: Players.players.length > 0
+                sourceComponent: MediaIndicator {}
             }
 
-            RowLayout {
-                anchors.right: parent.right
-                spacing: Theme.spacingTiny
-
-                Loader {
-                    visible: Capture.Controller.isRecording
-                    active: Capture.Controller.isRecording
-                    sourceComponent: RecordingIndicator {
-                        onClicked: () => Capture.Controller.stopRecording()
-                    }
-                }
-
-                Loader {
-                    visible: Players.players.length > 0
-                    active: Players.players.length > 0
-                    sourceComponent: MediaIndicator {}
-                }
-
-                StatusIndicator {
-                    Layout.preferredWidth: implicitWidth + 8
-                    onClicked: () => ControlCenter.Controller.toggle()
-                }
+            StatusIndicator {
+                onClicked: () => ControlCenter.Controller.toggle()
             }
         }
     }
