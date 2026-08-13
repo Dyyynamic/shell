@@ -110,7 +110,7 @@ Item {
                 Components.PanelButton {
                     Layout.fillWidth: true
                     Layout.preferredWidth: 2
-                    icon: "󰂯"
+                    icon: Bluetooth.adapter?.enabled ? "󰂯" : "󰂲"
                     title: "Bluetooth"
                     subtitle: {
                         if (Bluetooth.adapter?.enabled) {

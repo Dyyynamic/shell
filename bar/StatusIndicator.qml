@@ -9,12 +9,25 @@ Indicator {
     margin: 12
     clickable: true
 
+    Behavior on implicitWidth {
+        NumberAnimation {
+            duration: Theme.durationMedium
+            easing: Theme.easingStandard
+        }
+    }
+
     RowLayout {
         anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
         spacing: Theme.spacingSmall
 
         Components.Icon {
-            id: wifi
+            visible: Notifications.doNotDisturb || Notifications.notifications.values.length > 0
+            icon: Notifications.doNotDisturb ? "󰂛" : "󱅫"
+            color: root.textColor
+        }
+
+        Components.Icon {
             icon: Wifi.icon(Wifi.connectedNetwork)
             color: root.textColor
         }
@@ -24,14 +37,10 @@ Indicator {
             color: root.textColor
         }
 
-        Loader {
-            active: Battery.available
+        Components.Icon {
             visible: Battery.available
-
-            sourceComponent: Components.Icon {
-                icon: Battery.icon
-                color: root.textColor
-            }
+            icon: Battery.icon
+            color: root.textColor
         }
     }
 }
