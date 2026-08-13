@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Wayland
+import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
@@ -11,6 +12,10 @@ PanelWindow {
     id: root
     WlrLayershell.namespace: "qs-control-center"
 
+    readonly property var workspace: Hyprland.workspaces.values.find(ws => {
+        return ws.active && ws.monitor.name === root.screen.name;
+    })
+
     anchors {
         top: true
         bottom: true
@@ -18,6 +23,21 @@ PanelWindow {
         right: true
     }
     color: "transparent"
+
+    exclusionMode: {
+        if (root.workspace.hasFullscreen)
+            return ExclusionMode.Ignore;
+        return ExclusionMode.Auto;
+    }
+
+    Connections {
+        target: root.workspace
+
+        // Close on fullscreen change in the panel's workspace
+        function onHasFullscreenChanged() {
+            ControlCenter.Controller.close();
+        }
+    }
 
     MouseArea {
         anchors.fill: parent

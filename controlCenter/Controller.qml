@@ -4,6 +4,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import Quickshell.Hyprland
 import "." as ControlCenter
 
 Singleton {
@@ -67,6 +68,16 @@ Singleton {
 
         function toggle() {
             root.toggle();
+        }
+    }
+
+    Connections {
+        target: Hyprland
+
+        // Close on workspace change
+        function onRawEvent(event) {
+            if (event.name === "workspace")
+                root.close();
         }
     }
 
