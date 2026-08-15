@@ -1,14 +1,20 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
+import Quickshell.Networking
 import "../../utils"
 import "../../components" as Components
 
 SubMenu {
     title: "Wi-Fi"
-    placeholder: "No saved networks found"
+    placeholder: Wifi.enabled ? "No saved networks found" : "Wi-Fi disabled"
     model: Wifi.networks
     footerText: "Wi-Fi Settings"
+    listRightMargin: 0
+
+    hasSwitch: true
+    switchChecked: Wifi.enabled
+    onSwitchToggled: Wifi.toggle()
 
     onSettingsRequested: wifiSettings.startDetached()
 
@@ -20,19 +26,18 @@ SubMenu {
         width: parent.width
         height: networkContent.implicitHeight
 
-        ColumnLayout {
+        RowLayout {
             id: networkContent
-
             width: parent.width
+            spacing: Theme.spacingMedium
 
-            spacing: Theme.spacingSmall
+            Components.Icon {
+                icon: Wifi.icon(networkDelegate.modelData)
+            }
 
-            RowLayout {
-                spacing: Theme.spacingMedium
-
-                Components.Icon {
-                    icon: Wifi.icon(networkDelegate.modelData)
-                }
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 0
 
                 Text {
                     Layout.fillWidth: true
@@ -44,21 +49,33 @@ SubMenu {
                     elide: Text.ElideRight
                 }
 
-                Components.Button {
-                    text: networkDelegate.modelData.connected ? "Disconnect" : "Connect"
-                    textColor: Colors.md3.on_surface_variant
-                    fontWeight: Font.Normal
-                    fontSize: Theme.fontSizeMedium
+                Text {
+                    property bool isConnecting: networkDelegate.modelData.state === ConnectionState.Connecting
 
-                    backgroundColor: Colors.md3.surface_container_low
-                    backgroundOpacity: hovered ? 1 : 0
+                    visible: networkDelegate.modelData.connected || isConnecting
+                    Layout.fillWidth: true
+                    text: isConnecting ? "Connecting..." : "Connected"
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    font.weight: Font.Normal
+                    color: Colors.md3.on_surface_variant
+                }
+            }
 
-                    onClicked: {
-                        if (networkDelegate.modelData.connected)
-                            networkDelegate.modelData.disconnect();
-                        else
-                            networkDelegate.modelData.connect();
-                    }
+            Components.Button {
+                text: networkDelegate.modelData.connected ? "Disconnect" : "Connect"
+                textColor: Colors.md3.on_surface_variant
+                fontWeight: Font.Normal
+                fontSize: Theme.fontSizeMedium
+
+                backgroundColor: Colors.md3.surface_container_low
+                backgroundOpacity: hovered ? 1 : 0
+
+                onClicked: {
+                    if (networkDelegate.modelData.connected)
+                        networkDelegate.modelData.disconnect();
+                    else
+                        networkDelegate.modelData.connect();
                 }
             }
         }

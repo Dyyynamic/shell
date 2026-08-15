@@ -13,12 +13,20 @@ Item {
     property alias model: listView.model
     property alias delegate: listView.delegate
 
+    property int listMargin: Theme.spacingSmall
+    property int listLeftMargin: listMargin
+    property int listRightMargin: listMargin
+
+    property bool hasSwitch: false
+    property alias switchChecked: toggleSwitch.checked
+
     readonly property bool hasItems: listView.model && listView.count > 0
 
     implicitHeight: content.implicitHeight
 
     signal backRequested
     signal settingsRequested
+    signal switchToggled
 
     ColumnLayout {
         id: content
@@ -27,7 +35,6 @@ Item {
         spacing: Theme.spacingMedium
 
         RowLayout {
-            Layout.margins: Theme.spacingTiny
             spacing: Theme.spacingSmall
 
             Components.IconButton {
@@ -39,10 +46,17 @@ Item {
 
             Text {
                 id: titleText
+                Layout.fillWidth: true
                 font.family: Theme.fontFamily
                 font.pixelSize: Theme.fontSizeLarge
                 font.weight: Font.Bold
                 color: Colors.md3.on_surface
+            }
+
+            Components.Switch {
+                id: toggleSwitch
+                visible: root.hasSwitch
+                onClicked: root.switchToggled()
             }
         }
 
@@ -69,8 +83,8 @@ Item {
             visible: root.hasItems
 
             Layout.fillWidth: true
-            Layout.leftMargin: Theme.spacingSmall
-            Layout.rightMargin: Theme.spacingSmall
+            Layout.leftMargin: root.listLeftMargin
+            Layout.rightMargin: root.listRightMargin
 
             implicitHeight: Math.min(contentHeight, 150)
             interactive: contentHeight > height

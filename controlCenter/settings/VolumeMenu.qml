@@ -25,7 +25,7 @@ SubMenu {
 
             width: parent.width
 
-            spacing: Theme.spacingLarge
+            spacing: Theme.spacingMedium
 
             Components.Icon {
                 icon: ""

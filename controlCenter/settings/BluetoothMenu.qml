@@ -1,14 +1,20 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
-import "../../utils"
+import Quickshell.Bluetooth
+import "../../utils" as Utils
 import "../../components" as Components
 
 SubMenu {
     title: "Bluetooth"
-    placeholder: "No saved devices found"
-    model: Bluetooth.devices
+    placeholder: Utils.Bluetooth.adapter?.enabled ? "No saved devices found" : "Bluetooth disabled"
+    model: Utils.Bluetooth.devices
     footerText: "Bluetooth Settings"
+    listRightMargin: 0
+
+    hasSwitch: true
+    switchChecked: Utils.Bluetooth.adapter?.enabled
+    onSwitchToggled: Utils.Bluetooth.toggle()
 
     onSettingsRequested: bluetoothSettings.startDetached()
 
@@ -20,45 +26,56 @@ SubMenu {
         width: parent.width
         height: bluetoothContent.implicitHeight
 
-        ColumnLayout {
+        RowLayout {
             id: bluetoothContent
-
             width: parent.width
+            spacing: Utils.Theme.spacingMedium
 
-            spacing: Theme.spacingSmall
+            Components.Icon {
+                icon: "󰂯"
+            }
 
-            RowLayout {
-                spacing: Theme.spacingMedium
-
-                Components.Icon {
-                    icon: "󰂯"
-                }
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 0
 
                 Text {
                     Layout.fillWidth: true
                     text: bluetoothDelegate.modelData.name
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMedium
+                    font.family: Utils.Theme.fontFamily
+                    font.pixelSize: Utils.Theme.fontSizeMedium
                     font.weight: Font.DemiBold
-                    color: Colors.md3.on_surface
+                    color: Utils.Colors.md3.on_surface
                     elide: Text.ElideRight
                 }
 
-                Components.Button {
-                    text: bluetoothDelegate.modelData.connected ? "Disconnect" : "Connect"
-                    textColor: Colors.md3.on_surface_variant
-                    fontWeight: Font.Normal
-                    fontSize: Theme.fontSizeMedium
+                Text {
+                    property bool isConnecting: bluetoothDelegate.modelData.state === BluetoothDeviceState.Connecting
 
-                    backgroundColor: Colors.md3.surface_container_low
-                    backgroundOpacity: hovered ? 1 : 0
+                    visible: modelData.connected || isConnecting
+                    Layout.fillWidth: true
+                    text: isConnecting ? "Connecting..." : "Connected"
+                    font.family: Utils.Theme.fontFamily
+                    font.pixelSize: Utils.Theme.fontSizeSmall
+                    font.weight: Font.Normal
+                    color: Utils.Colors.md3.on_surface_variant
+                }
+            }
 
-                    onClicked: {
-                        if (bluetoothDelegate.modelData.connected)
-                            bluetoothDelegate.modelData.disconnect()
-                        else
-                            bluetoothDelegate.modelData.connect()
-                    }
+            Components.Button {
+                text: bluetoothDelegate.modelData.connected ? "Disconnect" : "Connect"
+                textColor: Utils.Colors.md3.on_surface_variant
+                fontWeight: Font.Normal
+                fontSize: Utils.Theme.fontSizeMedium
+
+                backgroundColor: Utils.Colors.md3.surface_container_low
+                backgroundOpacity: hovered ? 1 : 0
+
+                onClicked: {
+                    if (bluetoothDelegate.modelData.connected)
+                        bluetoothDelegate.modelData.disconnect();
+                    else
+                        bluetoothDelegate.modelData.connect();
                 }
             }
         }
