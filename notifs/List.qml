@@ -143,7 +143,7 @@ Components.Widget {
             Components.IconButton {
                 id: doNotDisturbButton
 
-                iconGlyph: Notifications.doNotDisturb ? "󰂛" : "󰂠"
+                iconGlyph: Notifications.doNotDisturb ? "󰂠" : "󰂞"
                 size: 32
                 implicitWidth: 52
                 onClicked: Notifications.toggleDoNotDisturb()

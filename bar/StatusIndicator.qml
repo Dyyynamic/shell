@@ -23,7 +23,7 @@ Indicator {
 
         Components.Icon {
             visible: Notifications.doNotDisturb || Notifications.notifications.values.length > 0
-            icon: Notifications.doNotDisturb ? "󰂛" : "󱅫"
+            icon: Notifications.doNotDisturb ? "󰂠" : "󱅫"
             color: root.textColor
         }
 
