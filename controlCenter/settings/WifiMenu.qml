@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Io
 import Quickshell.Networking
 import "../../utils"
@@ -8,7 +9,13 @@ import "../../components" as Components
 SubMenu {
     title: "Wi-Fi"
     placeholder: Wifi.enabled ? "No saved networks found" : "Wi-Fi disabled"
-    model: Wifi.networks
+    model: ScriptModel {
+        values: [...Wifi.networks].sort((a, b) => {
+            if (a.connected === b.connected)
+                return 0;
+            return a.connected ? -1 : 1;
+        })
+    }
     footerText: "Wi-Fi Settings"
     listRightMargin: 0
 

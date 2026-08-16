@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Io
 import Quickshell.Bluetooth
 import "../../utils" as Utils
@@ -8,7 +9,13 @@ import "../../components" as Components
 SubMenu {
     title: "Bluetooth"
     placeholder: Utils.Bluetooth.adapter?.enabled ? "No saved devices found" : "Bluetooth disabled"
-    model: Utils.Bluetooth.devices
+    model: ScriptModel {
+        values: [...Utils.Bluetooth.devices].sort((a, b) => {
+            if (a.connected === b.connected)
+                return 0;
+            return a.connected ? -1 : 1;
+        })
+    }
     footerText: "Bluetooth Settings"
     listRightMargin: 0
 
