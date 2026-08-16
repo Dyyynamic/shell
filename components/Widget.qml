@@ -9,7 +9,7 @@ Item {
     property alias margins: content.anchors.margins
     property alias leftMargin: content.anchors.leftMargin
     property alias rightMargin: content.anchors.rightMargin
-    property alias topMargin: content.anchors.bottomMargin
+    property alias topMargin: content.anchors.topMargin
     property alias bottomMargin: content.anchors.bottomMargin
 
     property alias backgroundColor: background.color
