@@ -25,27 +25,13 @@ Components.Widget {
                 size: 24
             }
 
-            ColumnLayout {
+            Text {
                 Layout.fillWidth: true
-                spacing: 0
-
-                Text {
-                    Layout.fillWidth: true
-                    id: uptimeText
-                    color: Colors.md3.on_surface
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMedium
-                    font.weight: Font.Medium
-                }
-
-                Text {
-                    Layout.fillWidth: true
-                    visible: Battery.available
-                    text: Battery.description
-                    color: Colors.md3.on_surface
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                }
+                id: uptimeText
+                color: Colors.md3.on_surface
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeMedium
+                font.weight: Font.Medium
             }
         }
 
@@ -123,10 +109,7 @@ Components.Widget {
         stdout: StdioCollector {
             onStreamFinished: {
                 let [uptime, idle] = text.split(" ");
-
-                let hours = Math.floor(uptime / 3600);
-                let minutes = Math.floor((uptime % 3600) / 60);
-                uptimeText.text = `Up ${hours}h, ${minutes}m`;
+                uptimeText.text = Formatters.formatUptime(uptime)
             }
         }
     }

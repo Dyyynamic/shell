@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Widgets
 import "../utils"
 import "../components" as Components
 
@@ -9,16 +10,8 @@ Indicator {
     margin: 12
     clickable: true
 
-    Behavior on implicitWidth {
-        NumberAnimation {
-            duration: Theme.durationMedium
-            easing: Theme.easingStandard
-        }
-    }
-
     RowLayout {
         anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
         spacing: Theme.spacingSmall
 
         Components.Icon {
@@ -37,10 +30,42 @@ Indicator {
             color: root.textColor
         }
 
-        Components.Icon {
+        ClippingRectangle {
             visible: Battery.available
-            icon: Battery.icon
-            color: root.textColor
+
+            implicitWidth: Battery.charging ? 34 : 26
+            implicitHeight: 15
+
+            color: Qt.alpha(Colors.md3.inverse_surface, 0.65)
+            radius: height / 2
+
+            Rectangle {
+                height: parent.height
+                width: Battery.percentage * parent.width
+                color: Colors.md3.inverse_surface
+            }
+
+            RowLayout {
+                anchors.centerIn: parent
+                spacing: 0
+
+                Components.Icon {
+                    visible: Battery.charging
+                    icon: "󱐋"
+                    size: 14
+                    color: Colors.md3.inverse_on_surface
+                }
+
+                Text {
+                    rightPadding: Battery.charging ? 4 : 0
+                    horizontalAlignment: Text.AlignHCenter
+                    text: Math.round(Battery.percentage * 100)
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    font.weight: Font.Bold
+                    color: Colors.md3.inverse_on_surface
+                }
+            }
         }
     }
 }
