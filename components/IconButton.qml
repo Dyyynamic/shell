@@ -21,7 +21,7 @@ Button {
     implicitHeight: size
 
     hoverEnabled: enabled
-    opacity: enabled > 0 ? 1 : 0.5
+    opacity: enabled > 0 ? 1 : 0.35
 
     Components.Icon {
         id: icon

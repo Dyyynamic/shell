@@ -31,6 +31,12 @@ Slider {
     property color trackIconColor: Colors.md3.on_surface
     property color fillIconColor: Colors.md3.on_primary
 
+    // Empty state, hide thumb and fill
+    property bool empty: false
+
+    enabled: !empty
+    hoverEnabled: enabled
+
     from: 0
     to: 1
     value: 0.5
@@ -50,6 +56,8 @@ Slider {
         ClippingRectangle {
             id: leftRect
 
+            visible: !root.empty
+
             x: 0
             width: root.handleCenter - root.handleWidth / 2 - root.handleGap
             height: parent.height
@@ -67,7 +75,7 @@ Slider {
         ClippingRectangle {
             id: rightRect
 
-            x: root.handleCenter + root.handleWidth / 2 + root.handleGap
+            x: root.empty ? 0 : root.handleCenter + root.handleWidth / 2 + root.handleGap
             width: parent.width - x
             height: parent.height
             color: root.trackColor
@@ -83,6 +91,8 @@ Slider {
     }
 
     handle: Rectangle {
+        visible: !root.empty
+
         x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
         y: root.height / 2 - height / 2
 

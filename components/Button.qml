@@ -25,7 +25,7 @@ Button {
     horizontalPadding: Theme.spacingMedium
 
     hoverEnabled: enabled
-    opacity: enabled > 0 ? 1 : 0.5
+    opacity: enabled > 0 ? 1 : 0.35
 
     background: Rectangle {
         id: background

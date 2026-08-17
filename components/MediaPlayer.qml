@@ -12,15 +12,21 @@ Item {
     property alias pressed: mouseArea.pressed
     property alias hovered: mouseArea.containsMouse
 
+    property var player: Players.players[0]
+
+    // Some live streaming services (Twitch) return an absurdly long length
+    // instead of setting lengthSupported to false
+    property bool live: !player.lengthSupported || player.length > 365 * 24 * 60 * 60
+
     width: parent.width
     implicitHeight: 128
 
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        enabled: Players.players[0].canRaise
+        enabled: root.player.canRaise
         hoverEnabled: true
-        onClicked: Players.players[0].raise()
+        onClicked: root.player.raise()
     }
 
     ClippingRectangle {
@@ -31,9 +37,9 @@ Item {
         Image {
             id: trackArtBackground
             anchors.fill: parent
-            source: Players.players[0].trackArtUrl
+            source: root.player.trackArtUrl
             fillMode: Image.PreserveAspectCrop
-            visible: !!Players.players[0].trackArtUrl
+            visible: !!root.player.trackArtUrl
         }
 
         MultiEffect {
@@ -55,7 +61,7 @@ Item {
                     return Theme.colorMix(Colors.md3.surface_container_high, Colors.md3.on_surface, Theme.hoverIntensity);
                 return Colors.md3.surface_container_high;
             }
-            opacity: !!Players.players[0].trackArtUrl ? 0.75 : 1
+            opacity: !!root.player.trackArtUrl ? 0.75 : 1
 
             Behavior on color {
                 ColorAnimation {
@@ -84,15 +90,15 @@ Item {
                         id: cover
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectCrop
-                        source: Players.players[0].trackArtUrl
-                        visible: !!Players.players[0].trackArtUrl
+                        source: root.player.trackArtUrl
+                        visible: !!root.player.trackArtUrl
                     }
 
                     Rectangle {
                         anchors.fill: parent
                         color: Colors.md3.surface_container_low
 
-                        visible: !Players.players[0].trackArtUrl
+                        visible: !root.player.trackArtUrl
 
                         Components.Icon {
                             anchors.centerIn: parent
@@ -127,17 +133,17 @@ Item {
                                 font.weight: Font.DemiBold
                                 Layout.fillWidth: true
                                 elide: Text.ElideRight
-                                text: Players.players[0].trackTitle
+                                text: root.player.trackTitle
                                 color: Colors.md3.on_surface
                             }
 
                             Text {
-                                visible: !!Players.players[0].trackArtist
+                                visible: !!root.player.trackArtist
                                 font.family: Theme.fontFamily
                                 font.pixelSize: Theme.fontSizeSmall
                                 Layout.fillWidth: true
                                 elide: Text.ElideRight
-                                text: Players.players[0].trackArtist
+                                text: root.player.trackArtist
                                 color: Colors.md3.on_surface_variant
                             }
                         }
@@ -146,20 +152,22 @@ Item {
                     Components.Slider {
                         id: progress
 
-                        to: Players.players[0].length
-                        value: pressed ? value : Players.players[0].position
+                        empty: root.live
+
+                        to: root.player.length
+                        value: pressed ? value : root.player.position
 
                         fillColor: Colors.md3.primary
                         trackColor: {
-                            if (!!Players.players[0].trackArtUrl)
+                            if (!!root.player.trackArtUrl)
                                 Qt.alpha(Colors.md3.on_surface, 0.15);
                             else
                                 Colors.md3.outline_variant;
                         }
 
                         onPressedChanged: {
-                            if (!pressed && Players.players[0]) {
-                                Players.players[0].position = value;
+                            if (!pressed && root.player) {
+                                root.player.position = value;
                             }
                         }
                     }
@@ -169,6 +177,8 @@ Item {
                         implicitHeight: 24
 
                         Text {
+                            visible: !root.live
+
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Colors.md3.on_surface_variant
@@ -183,6 +193,8 @@ Item {
 
                             Components.IconButton {
                                 id: prevButton
+
+                                enabled: root.player.canGoPrevious
 
                                 size: 32
                                 iconSize: 32
@@ -201,7 +213,7 @@ Item {
                                     return 0;
                                 }
 
-                                onClicked: Players.players[0].previous()
+                                onClicked: root.player.previous()
                             }
 
                             Components.Tooltip {
@@ -212,10 +224,12 @@ Item {
                             Components.IconButton {
                                 id: playPauseButton
 
+                                enabled: root.player.canPlay && root.player.canPause
+
                                 size: 32
                                 iconSize: 32
                                 iconGlyph: {
-                                    if (Players.players[0].playbackState === MprisPlaybackState.Playing)
+                                    if (root.player.playbackState === MprisPlaybackState.Playing)
                                         return "󰏤";
                                     return "󰐊";
                                 }
@@ -233,16 +247,18 @@ Item {
                                     return 0;
                                 }
 
-                                onClicked: Players.players[0].togglePlaying()
+                                onClicked: root.player.togglePlaying()
                             }
 
                             Components.Tooltip {
                                 target: playPauseButton
-                                text: Players.players[0].playbackState === MprisPlaybackState.Playing ? "Pause" : "Play"
+                                text: root.player.playbackState === MprisPlaybackState.Playing ? "Pause" : "Play"
                             }
 
                             Components.IconButton {
                                 id: nextButton
+
+                                enabled: root.player.canGoNext
 
                                 size: 32
                                 iconSize: 32
@@ -261,7 +277,7 @@ Item {
                                     return 0;
                                 }
 
-                                onClicked: Players.players[0].next()
+                                onClicked: root.player.next()
                             }
 
                             Components.Tooltip {
@@ -271,12 +287,14 @@ Item {
                         }
 
                         Text {
+                            visible: !root.live
+
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Colors.md3.on_surface_variant
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter
-                            text: Formatters.formatTime(Players.players[0].length)
+                            text: Formatters.formatTime(root.player.length)
                         }
                     }
                 }
@@ -285,11 +303,11 @@ Item {
     }
 
     Timer {
-        running: Players.players[0].playbackState == MprisPlaybackState.Playing
+        running: root.player.playbackState == MprisPlaybackState.Playing
 
         interval: 1000
         repeat: true
 
-        onTriggered: Players.players[0].positionChanged()
+        onTriggered: root.player.positionChanged()
     }
 }
