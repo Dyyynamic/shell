@@ -36,13 +36,13 @@ Indicator {
             implicitWidth: Battery.charging ? 34 : 26
             implicitHeight: 15
 
-            color: Qt.alpha(Colors.md3.inverse_surface, 0.65)
+            color: Qt.alpha(root.textColor, 0.65)
             radius: height / 2
 
             Rectangle {
                 height: parent.height
                 width: Battery.percentage * parent.width
-                color: Colors.md3.inverse_surface
+                color: root.textColor
             }
 
             RowLayout {
@@ -53,7 +53,7 @@ Indicator {
                     visible: Battery.charging
                     icon: "󱐋"
                     size: 14
-                    color: Colors.md3.inverse_on_surface
+                    color: root.inverseTextColor
                 }
 
                 Text {
@@ -63,7 +63,7 @@ Indicator {
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeSmall
                     font.weight: Font.Bold
-                    color: Colors.md3.inverse_on_surface
+                    color: root.inverseTextColor
                 }
             }
         }

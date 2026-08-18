@@ -108,6 +108,7 @@ Item {
                                 backgroundColor: "#e3e3e3"
                                 backgroundOpacity: 0.15
                                 textColor: "#e3e3e3"
+                                inverseTextColor: "#363636"
                             }
                         }
                     }
