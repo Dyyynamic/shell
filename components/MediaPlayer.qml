@@ -224,7 +224,7 @@ Item {
                             Components.IconButton {
                                 id: playPauseButton
 
-                                enabled: root.player.canPlay && root.player.canPause
+                                enabled: root.player.canTogglePlaying
 
                                 size: 32
                                 iconSize: 32

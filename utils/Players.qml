@@ -10,7 +10,7 @@ Singleton {
     id: root
 
     // Players sorted by most recently used
-    property var players: []
+    property var players: [...Mpris.players.values]
 
     function touchPlayer(player: MprisPlayer) {
         players = [player, ...players.filter(p => p !== player)];
