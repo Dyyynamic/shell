@@ -4,6 +4,7 @@ import Quickshell.Services.Notifications
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Effects
 import "../utils"
 import "../components" as Components
 import "../controlCenter" as ControlCenter
@@ -80,6 +81,26 @@ Item {
 
         RowLayout {
             spacing: Theme.spacingTiny
+
+            Item {
+                id: icon
+                Layout.preferredHeight: 16
+                Layout.preferredWidth: 16
+
+                IconImage {
+                    id: iconImage
+                    anchors.fill: parent
+                    source: Quickshell.iconPath(root.notification.appIcon, "application-x-executable-symbolic")
+                }
+
+                MultiEffect {
+                    anchors.fill: parent
+                    source: iconImage
+
+                    colorization: root.notification.appIcon === "" ? 1.0 : 0.0
+                    colorizationColor: Colors.md3.on_surface_variant
+                }
+            }
 
             Text {
                 Layout.fillWidth: true
