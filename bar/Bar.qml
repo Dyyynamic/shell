@@ -52,6 +52,11 @@ PanelWindow {
             }
 
             StatusIndicator {
+                backgroundColor: {
+                    if (ControlCenter.Controller.isOpen)
+                        return Colors.md3.surface_container_highest;
+                    return Colors.md3.surface_container_high;
+                }
                 onClicked: () => ControlCenter.Controller.toggle()
             }
         }
