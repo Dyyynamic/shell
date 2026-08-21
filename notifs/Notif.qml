@@ -89,15 +89,31 @@ Item {
 
                 IconImage {
                     id: iconImage
+
+                    // For some reason, appIcon is empty on the first notification
+                    // after Quickshell starts, so we resolve the icon manually
+                    property var appIcon: {
+                        const appIcon = root.notification.appIcon;
+                        const desktopEntry = root.notification.desktopEntry;
+
+                        if (appIcon !== "")
+                            return appIcon;
+
+                        if (desktopEntry !== "")
+                            return DesktopEntries.heuristicLookup(desktopEntry)?.icon ?? "";
+
+                        return "";
+                    }
+
                     anchors.fill: parent
-                    source: Quickshell.iconPath(root.notification.appIcon, "application-x-executable-symbolic")
+                    source: Quickshell.iconPath(appIcon, "application-x-executable-symbolic")
                 }
 
                 MultiEffect {
                     anchors.fill: parent
                     source: iconImage
 
-                    colorization: root.notification.appIcon === "" ? 1.0 : 0.0
+                    colorization: iconImage.appIcon === "" ? 1.0 : 0.0
                     colorizationColor: Colors.md3.on_surface_variant
                 }
             }
