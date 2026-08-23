@@ -19,8 +19,9 @@ Indicator {
             id: trackArtBackground
             anchors.fill: parent
             source: Players.players[0].trackArtUrl
+            asynchronous: true
             fillMode: Image.PreserveAspectCrop
-            visible: !!Players.players[0].trackArtUrl
+            visible: status === Image.Ready
         },
         MultiEffect {
             anchors.fill: parent

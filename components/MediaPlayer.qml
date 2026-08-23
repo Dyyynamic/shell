@@ -38,8 +38,9 @@ Item {
             id: trackArtBackground
             anchors.fill: parent
             source: root.player.trackArtUrl
+            asynchronous: true
             fillMode: Image.PreserveAspectCrop
-            visible: !!root.player.trackArtUrl
+            visible: status === Image.Ready
         }
 
         MultiEffect {
@@ -91,14 +92,14 @@ Item {
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectCrop
                         source: root.player.trackArtUrl
-                        visible: !!root.player.trackArtUrl
+                        asynchronous: true
+                        visible: status === Image.Ready
                     }
 
                     Rectangle {
                         anchors.fill: parent
                         color: Colors.md3.surface_container_low
-
-                        visible: !root.player.trackArtUrl
+                        visible: cover.status !== Image.Ready
 
                         Components.Icon {
                             anchors.centerIn: parent
