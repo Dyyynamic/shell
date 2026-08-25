@@ -11,7 +11,6 @@ Indicator {
     clickable: true
 
     RowLayout {
-        anchors.verticalCenter: parent.verticalCenter
         spacing: Theme.spacingSmall
 
         Components.Icon {

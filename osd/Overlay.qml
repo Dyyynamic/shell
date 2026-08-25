@@ -68,7 +68,7 @@ PanelWindow {
             top: parent.top
         }
 
-        implicitWidth: content.implicitWidth + Theme.spacingLarge * 2
+        implicitWidth: Math.min(content.implicitWidth + Theme.spacingLarge * 2, 600)
         implicitHeight: 64
 
         Behavior on implicitWidth {
@@ -107,11 +107,14 @@ PanelWindow {
                 Text {
                     visible: root.contentType === Controller.Text
 
+                    Layout.fillWidth: true
+
                     text: root.text
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeLarge
                     font.weight: Font.Bold
                     color: "#e3e3e3"
+                    elide: Text.ElideRight
                 }
 
                 Item {

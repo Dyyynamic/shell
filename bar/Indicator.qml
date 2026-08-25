@@ -1,5 +1,6 @@
 import Quickshell.Widgets
 import QtQuick
+import QtQuick.Layouts
 import "../utils"
 
 ClippingRectangle {
@@ -14,6 +15,7 @@ ClippingRectangle {
     property alias margin: content.anchors.margins
     property alias leftMargin: content.anchors.leftMargin
     property alias rightMargin: content.anchors.rightMargin
+    property real maximumWidth: Infinity
 
     property bool clickable: false
 
@@ -29,7 +31,7 @@ ClippingRectangle {
     signal clicked
 
     implicitHeight: 32
-    implicitWidth: content.implicitWidth + leftMargin + rightMargin
+    implicitWidth: Math.min(content.implicitWidth + leftMargin + rightMargin, maximumWidth)
 
     radius: height / 2
 
@@ -60,11 +62,10 @@ ClippingRectangle {
         }
     }
 
-    Item {
+    // Use a RowLayout to propagate available space to its children
+    RowLayout {
         id: content
-
-        implicitHeight: childrenRect.height
-        implicitWidth: childrenRect.width
+        spacing: 0
 
         anchors {
             fill: parent

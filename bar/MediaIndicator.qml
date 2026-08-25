@@ -8,6 +8,7 @@ Indicator {
     id: root
 
     rightMargin: Theme.spacingMedium
+    maximumWidth: 240
 
     clickable: Players.players[0].canRaise
     onClicked: Players.players[0].raise()
@@ -35,7 +36,7 @@ Indicator {
     ]
 
     RowLayout {
-        anchors.verticalCenter: parent.verticalCenter
+        spacing: Theme.spacingTiny
 
         Components.Icon {
             icon: ""
@@ -44,13 +45,14 @@ Indicator {
 
         Text {
             horizontalAlignment: Text.AlignHCenter
+            Layout.fillWidth: true
+
             text: Players.players[0].trackTitle
             font.family: Theme.fontFamily
             font.pixelSize: Theme.fontSizeLarge
             font.weight: Font.Bold
             color: root.textColor
             elide: Text.ElideRight
-            Layout.maximumWidth: 200
         }
     }
 }

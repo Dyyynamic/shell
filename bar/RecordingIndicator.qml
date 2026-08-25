@@ -17,8 +17,6 @@ Indicator {
     pressIntensity: Theme.pressIntensity
 
     RowLayout {
-        anchors.verticalCenter: parent.verticalCenter
-
         Components.Icon {
             icon: "󰻃"
             color: Colors.md3.on_error_container
