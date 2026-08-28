@@ -14,6 +14,8 @@ Singleton {
 
     property var pendingAction: null
 
+    property var overlayScreen: null
+
     function open() {
         root.isTransitioning = true;
         root.isOpen = true;
@@ -85,7 +87,11 @@ Singleton {
         id: loader
         active: root.isOpen || root.isTransitioning
 
-        ControlCenter.Overlay {}
+        ControlCenter.Overlay {
+            onScreenChanged: {
+                root.overlayScreen = screen;
+            }
+        }
 
         onActiveChanged: {
             if (!active)

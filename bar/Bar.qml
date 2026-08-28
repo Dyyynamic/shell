@@ -53,7 +53,7 @@ PanelWindow {
 
             StatusIndicator {
                 backgroundColor: {
-                    if (ControlCenter.Controller.isOpen)
+                    if (ControlCenter.Controller.isOpen && ControlCenter.Controller.overlayScreen === root.screen)
                         return Colors.md3.surface_container_highest;
                     return Colors.md3.surface_container_high;
                 }
