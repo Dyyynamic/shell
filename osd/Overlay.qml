@@ -16,9 +16,14 @@ PanelWindow {
 
     property string icon: ""
     property color iconColor: Colors.md3.on_surface
+
     property string text: ""
     property real value: 0
     property int contentType: Controller.Text
+
+    readonly property real maxWidth: 600
+    readonly property real iconSize: 32
+    readonly property real spacing: Theme.spacingLarge
 
     screen: Screens.main
 
@@ -68,7 +73,7 @@ PanelWindow {
             top: parent.top
         }
 
-        implicitWidth: Math.min(content.implicitWidth + Theme.spacingLarge * 2, 600)
+        implicitWidth: Math.min(content.implicitWidth + root.spacing * 2, root.maxWidth)
         implicitHeight: 64
 
         Behavior on implicitWidth {
@@ -89,25 +94,29 @@ PanelWindow {
 
             anchors {
                 fill: parent
-                leftMargin: Theme.spacingLarge
-                rightMargin: Theme.spacingLarge
+                leftMargin: root.spacing
+                rightMargin: root.spacing
             }
 
             RowLayout {
                 id: content
                 anchors.fill: parent
-                spacing: Theme.spacingLarge
+                spacing: root.spacing
 
                 Components.Icon {
                     icon: root.icon
                     color: root.iconColor
-                    size: 32
+                    size: root.iconSize
                 }
 
                 Text {
-                    visible: root.contentType === Controller.Text
+                    // Calculate final text width so ellipsis remains static
+                    // during OSD resizing
+                    readonly property real textWidth: Math.min(implicitWidth, root.maxWidth - root.spacing * 3 - root.iconSize)
 
-                    Layout.fillWidth: true
+                    Layout.preferredWidth: textWidth
+
+                    visible: root.contentType === Controller.Text
 
                     text: root.text
                     font.family: Theme.fontFamily
