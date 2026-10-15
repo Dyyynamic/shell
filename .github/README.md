@@ -1,5 +1,7 @@
 # Shell
 
+![Screenshot](assets/screenshot.png)
+
 **Custom desktop shell built with [Quickshell](https://quickshell.org)**
 
 Part of my [dotfiles](https://github.com/Dyyynamic/dotfiles) setup for Hyprland on Arch Linux.
